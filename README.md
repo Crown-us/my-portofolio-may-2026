@@ -1,36 +1,98 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# ✦ my-portofolio-may-2026
 
-First, run the development server:
+**A modern, interactive developer portfolio built with cutting-edge web technologies.**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+[![Next.js](https://img.shields.io/badge/Next.js_15-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+
+[Live Demo](#) · [Report Bug](https://github.com/Crown-us/my-portofolio-may-2026/issues) · [Request Feature](https://github.com/Crown-us/my-portofolio-may-2026/issues)
+
+</div>
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🖱️ **Custom Cursor** | Interactive cursor that morphs on hover |
+| 🌀 **Smooth Scrolling** | Premium scroll experience via Lenis |
+| 🧲 **Magnetic Effect** | Buttons & nav elements with magnetic pull |
+| ⏳ **Preloader** | Aesthetic loading animation on entry |
+| 🌗 **Theme Toggle** | Seamless Dark / Light mode switching |
+| 📱 **Responsive** | Optimized for mobile & desktop |
+| 🔊 **Sound Effects** | Subtle audio feedback on interactions |
+
+---
+
+## 🚀 Tech Stack
+
+- **Framework** — [Next.js 15](https://nextjs.org/) with App Router
+- **Language** — [TypeScript](https://www.typescriptlang.org/)
+- **Styling** — [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations** — [Framer Motion](https://www.framer.com/motion/)
+- **Smooth Scroll** — [Lenis](https://lenis.darkroom.engineering/)
+- **Theming** — [next-themes](https://github.com/pacocoursey/next-themes)
+- **Icons** — [Lucide React](https://lucide.dev/)
+- **Utilities** — `clsx`, `tailwind-merge`
+
+---
+
+## 🏗️ Project Structure
+
+```
+📦 my-portofolio-may-2026
+├── 📂 app/
+│   ├── 📂 components/     # Reusable UI components (Navbar, Hero, etc.)
+│   ├── 📂 hooks/          # Custom React hooks (e.g. useSound)
+│   └── 📂 works/[slug]/   # Dynamic project detail pages
+├── 📂 lib/                # Static data & utility functions
+└── 📂 public/             # Images, icons, audio assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚡ Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# 1. Clone the repo
+git clone https://github.com/Crown-us/my-portofolio-may-2026.git
 
-## Learn More
+# 2. Install dependencies
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+# 3. Run development server
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:3000](http://localhost:3000) in your browser. Done. 🎉
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Development Guidelines
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Components** — PascalCase (`Hero.tsx`, `Navbar.tsx`)
+- **Functions / hooks** — camelCase (`useSound.ts`)
+- **Styling** — Tailwind utility classes first, raw CSS only when necessary
+- **Performance** — Use `"use client"` only on components that truly need interactivity
+- **Accessibility** — Proper semantic tags & keyboard navigation on all interactive elements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📦 Deploy
+
+The easiest way to deploy is via **Vercel** (made by the Next.js team):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Crown-us/my-portofolio-may-2026)
+
+---
+
+<div align="center">
+
+Made with ☕ by **[Crown-us](https://github.com/Crown-us)**
+
+</div>
