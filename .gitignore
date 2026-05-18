@@ -36,6 +36,15 @@ yarn-error.log*
 # vercel
 .vercel
 
+# AI tools
+GEMINI.md
+CLAUDE.md
+AGENTS.md
+.claude/
+.gemini/
+MEMORY.md
+DEVELOPMENT_LOG.md
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

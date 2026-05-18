@@ -1,0 +1,130 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Kevin Dwi Wijaya",
+    "label": "Flutter · Next.js · Laravel · UI/UX Developer",
+    "email": "kevindwiwijaya@email.com",
+    "phone": "+62 8xx-xxxx-xxxx",
+    "url": "https://kevindwiwijaya.dev",
+    "summary": "D3 graduate from Politeknik Negeri Malang (Polinema) specializing in mobile and web development. Experienced in building cross-platform mobile apps with Flutter, full-stack web applications with Next.js and Laravel, and designing intuitive user interfaces. Passionate about building scalable digital products.",
+    "location": {
+      "city": "Kediri",
+      "region": "East Java",
+      "countryCode": "ID"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "Crown-us",
+        "url": "https://github.com/Crown-us"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "kevindwiwijaya",
+        "url": "https://www.linkedin.com/in/kevin-dwi-wijaya-95aa812b4"
+      }
+    ]
+  },
+  "education": [
+    {
+      "institution": "Politeknik Negeri Malang (Polinema)",
+      "area": "Informatics Management / Teknologi Informasi",
+      "studyType": "D3 (Diploma III)",
+      "startDate": "2021-09-01",
+      "endDate": "2024-08-01",
+      "courses": [
+        "Mobile Application Development",
+        "Web Programming",
+        "Database Management",
+        "UI/UX Design"
+      ]
+    }
+  ],
+  "work": [
+    {
+      "name": "Company Name (Internship)",
+      "position": "Mobile & Web Developer Intern",
+      "location": "Jombang, East Java",
+      "startDate": "2024-01-01",
+      "endDate": "",
+      "summary": "Currently undertaking internship focused on mobile and web development.",
+      "highlights": [
+        "Developing Flutter-based mobile applications for internal use",
+        "Building web features using Next.js and Laravel",
+        "Collaborating on UI/UX design and prototyping",
+        "Implementing REST API integrations"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Mobile Development",
+      "level": "Advanced",
+      "keywords": ["Flutter", "Dart", "State Management", "REST API", "Firebase"]
+    },
+    {
+      "name": "Web Development",
+      "level": "Advanced",
+      "keywords": ["Next.js", "React", "Laravel", "PHP", "Tailwind CSS", "TypeScript"]
+    },
+    {
+      "name": "UI/UX Design",
+      "level": "Intermediate",
+      "keywords": ["Figma", "Prototyping", "Wireframing", "Design System", "User Research"]
+    },
+    {
+      "name": "Backend & Database",
+      "level": "Intermediate",
+      "keywords": ["MySQL", "PostgreSQL", "Supabase", "RESTful API", "Eloquent ORM"]
+    },
+    {
+      "name": "Tools & DevOps",
+      "level": "Intermediate",
+      "keywords": ["Git", "GitHub", "Vercel", "VS Code", "Postman"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Flutter Mobile App",
+      "description": "Cross-platform mobile application built with Flutter and Dart, featuring clean architecture and state management.",
+      "highlights": [
+        "Implemented BLoC/Provider state management",
+        "REST API integration with Laravel backend",
+        "Custom UI components and animations"
+      ],
+      "keywords": ["Flutter", "Dart", "Laravel", "REST API"],
+      "url": "https://github.com/Crown-us"
+    },
+    {
+      "name": "Next.js Web Application",
+      "description": "Full-stack web application using Next.js App Router with Supabase backend and Tailwind CSS.",
+      "highlights": [
+        "Server-side rendering and API routes",
+        "Authentication with Supabase Auth",
+        "Responsive design with Tailwind CSS"
+      ],
+      "keywords": ["Next.js", "React", "Supabase", "Tailwind CSS"],
+      "url": "https://github.com/Crown-us"
+    }
+  ],
+  "languages": [
+    {
+      "language": "Indonesian",
+      "fluency": "Native"
+    },
+    {
+      "language": "English",
+      "fluency": "Intermediate"
+    }
+  ],
+  "interests": [
+    {
+      "name": "Building digital products",
+      "keywords": ["SaaS", "Passive Income", "Open Source"]
+    },
+    {
+      "name": "UI/UX Exploration",
+      "keywords": ["Design Systems", "Micro-interactions", "Accessibility"]
+    }
+  ]
+}
