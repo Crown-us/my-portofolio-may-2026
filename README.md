@@ -9,7 +9,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)](https://www.framer.com/motion/)
 
-[Live Demo](#) · [Report Bug](https://github.com/Crown-us/my-portofolio-may-2026/issues) · [Request Feature](https://github.com/Crown-us/my-portofolio-may-2026/issues)
+[Live Demo](https://kvndwi.com/) · [Report Bug](https://github.com/Crown-us/my-portofolio-may-2026/issues) · [Request Feature](https://github.com/Crown-us/my-portofolio-may-2026/issues)
 
 </div>
 
