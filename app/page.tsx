@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useScroll, useSpring, useVelocity, useTransform } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -11,7 +11,6 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Preloader from "./components/Preloader";
-import ThemeToggle from "./components/ThemeToggle";
 import MusicPlayer from "./components/MusicPlayer";
 
 export default function Home() {
@@ -21,74 +20,52 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time or wait for preloader to finish
-    const timer = setTimeout(() => {
+    const hasVisited = typeof window !== "undefined" && sessionStorage.getItem("portfolio-visited") === "true";
+    let timer: NodeJS.Timeout;
+    if (hasVisited) {
       setIsLoading(false);
-    }, 3500); // Matches the preloader logic roughly
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
+    } else {
+      timer = setTimeout(() => setIsLoading(false), 3500);
+    }
+    const handleMouseMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      clearTimeout(timer);
+      if (timer) clearTimeout(timer);
     };
   }, []);
 
-  const { scrollYProgress, scrollY } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  // Scroll Skew Logic
-  const scrollVelocity = useVelocity(scrollY);
-  const skewVelocity = useSpring(scrollVelocity, {
-    stiffness: 100,
-    damping: 30
-  });
-  const skew = useTransform(skewVelocity, [-1000, 1000], [-5, 5]);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   return (
-    <main className="min-h-screen flex flex-col selection:bg-accent selection:text-black cursor-none transition-colors duration-300">
+    <main className="min-h-screen flex flex-col bg-[#060606] selection:bg-accent selection:text-black cursor-none">
       <Preloader />
-      <ThemeToggle />
       <MusicPlayer />
       <CustomCursor mousePos={mousePos} isHovered={isHovered} activeText={cursorText} />
 
       {/* Progress Bar */}
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-accent origin-left z-[100]"
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[2px] bg-accent origin-left z-[100] shadow-[0_0_8px_rgba(204,255,0,0.6)]"
         style={{ scaleX }}
       />
 
       <Navbar setIsHovered={setIsHovered} />
-      
-      <motion.div style={{ skewY: skew }}>
+
+      <div>
         <Hero setIsHovered={setIsHovered} />
-        
         <About />
-        
         <Services setIsHovered={setIsHovered} />
-        
-        <Projects 
+        <Projects
           setIsHovered={(val: boolean) => {
             setIsHovered(val);
             if (!val) setCursorText("");
-          }} 
-          setCursorText={setCursorText} 
+          }}
+          setCursorText={setCursorText}
         />
-
         <Contact />
-
         <Footer setIsHovered={setIsHovered} />
-      </motion.div>
-
-      <style jsx global>{`
-        .h-1px { height: 1px; }
-      `}</style>
+      </div>
     </main>
   );
 }

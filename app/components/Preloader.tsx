@@ -21,19 +21,22 @@ export default function Preloader() {
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    if (index === words.length - 1) return;
-    const timeout = setTimeout(() => {
-      setIndex(index + 1);
-    }, index === 0 ? 1000 : index === words.length - 2 ? 800 : 200);
-    return () => clearTimeout(timeout);
-  }, [index]);
+    const hasVisited = typeof window !== "undefined" && sessionStorage.getItem("portfolio-visited") === "true";
+    if (hasVisited) {
+      setIsComplete(true);
+      setProgress(100);
+      setIndex(words.length - 1);
+      return;
+    }
 
-  useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(timer);
-          setTimeout(() => setIsComplete(true), 500);
+          setTimeout(() => {
+            setIsComplete(true);
+            sessionStorage.setItem("portfolio-visited", "true");
+          }, 500);
           return 100;
         }
         return prev + 1;
@@ -41,6 +44,15 @@ export default function Preloader() {
     }, 20);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const hasVisited = typeof window !== "undefined" && sessionStorage.getItem("portfolio-visited") === "true";
+    if (hasVisited || index === words.length - 1) return;
+    const timeout = setTimeout(() => {
+      setIndex(index + 1);
+    }, index === 0 ? 1000 : index === words.length - 2 ? 800 : 200);
+    return () => clearTimeout(timeout);
+  }, [index]);
 
   return (
     <AnimatePresence>
@@ -68,16 +80,16 @@ export default function Preloader() {
           
           <div className="absolute bottom-12 left-6 right-6 flex justify-between items-end">
             <div className="flex flex-col">
-                <span className="font-body text-xs font-bold opacity-40 uppercase tracking-widest mb-2">System Initializing</span>
-                <div className="w-48 h-1 bg-white/10 relative overflow-hidden">
-                    <motion.div 
-                        className="absolute top-0 left-0 h-full bg-white"
+                <span className="font-body text-xs font-bold opacity-30 uppercase tracking-widest mb-2">Initializing</span>
+                <div className="w-48 h-[2px] bg-white/10 relative overflow-hidden rounded-full">
+                    <motion.div
+                        className="absolute top-0 left-0 h-full bg-accent shadow-[0_0_8px_rgba(204,255,0,0.8)]"
                         initial={{ width: 0 }}
                         animate={{ width: `${progress}%` }}
                     />
                 </div>
             </div>
-            <div className="font-display text-6xl md:text-9xl font-extrabold leading-none tabular-nums">
+            <div className="font-display text-6xl md:text-9xl font-extrabold leading-none tabular-nums text-transparent bg-clip-text bg-gradient-to-b from-white to-white/30">
               {progress}%
             </div>
           </div>

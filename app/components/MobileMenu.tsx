@@ -15,6 +15,7 @@ const menuLinks = [
   { title: "WORKS", href: "#works" },
   { title: "ABOUT", href: "#about" },
   { title: "CONTACT", href: "#contact" },
+  { title: "RESUME", href: "/resume" },
 ];
 
 export default function MobileMenu({ isOpen, onClose, setIsHovered }: MobileMenuProps) {

@@ -15,8 +15,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Portofolio Kevin | Brutalist Design",
-  description: "Inspired by Dirtyline 36 Days of Type",
+  title: "Kevin Dwi Wijaya | Creative Developer & UI/UX",
+  description: "Flutter · Next.js · Laravel developer membangun pengalaman digital yang premium, interaktif, dan bertenaga tinggi.",
 };
 
 import { ThemeProvider } from "./components/ThemeProvider";
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${inter.variable} antialiased`} suppressHydrationWarning>
       <body className="antialiased selection:bg-foreground selection:text-background" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <div className="grain" aria-hidden="true" />
           <SmoothScroll>
             {children}
