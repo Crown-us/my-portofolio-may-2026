@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, CheckCircle2, Mail, ExternalLink } from "lucide-react";
+import { Send, CheckCircle2, Mail, ExternalLink, Copy } from "lucide-react";
 import { useSound } from "../hooks/useSound";
 
 export default function Contact() {
@@ -10,6 +10,7 @@ export default function Contact() {
   const { play: playClick } = useSound("/audio/click.mp3");
   const [formState, setFormState] = useState<"idle" | "submitting" | "success">("idle");
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,160 +29,152 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const copyEmail = () => {
+    navigator.clipboard.writeText("wijaya.kevinn@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
+  };
+
   const contactLinks = [
-    { icon: Mail, label: "Email", value: "wijaya.kevinn@gmail.com", href: "mailto:wijaya.kevinn@gmail.com" },
-    { icon: ExternalLink, label: "LinkedIn", value: "/in/kevin-dwi-wijaya", href: "https://www.linkedin.com/in/kevin-dwi-wijaya-95aa812b4" },
-    { icon: ExternalLink, label: "GitHub", value: "github.com/Crown-us", href: "https://github.com/Crown-us" },
+    { icon: Mail, label: "Email Direct", value: "wijaya.kevinn@gmail.com", href: "mailto:wijaya.kevinn@gmail.com" },
+    { icon: ExternalLink, label: "LinkedIn Profile", value: "kevin-dwi-wijaya", href: "https://www.linkedin.com/in/kevin-dwi-wijaya-95aa812b4" },
+    { icon: ExternalLink, label: "GitHub Code Base", value: "github.com/Crown-us", href: "https://github.com/Crown-us" },
   ];
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-[#060606] text-white relative overflow-hidden border-t border-white/5">
-      {/* Glow top line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent pointer-events-none" />
-      {/* Green glow blob */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-purple-600/5 rounded-full blur-[100px] pointer-events-none" />
+    <section id="contact" className="py-24 md:py-32 bg-background text-foreground border-t border-foreground/15 relative font-mono select-none">
+      <div className="container mx-auto px-4 md:px-8">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end pb-12 mb-12 border-b border-foreground/15 gap-4">
+          <div>
+            <span className="font-mono text-xs uppercase tracking-widest text-[#ccff00] bg-black px-2 py-0.5 font-bold mb-3 inline-block">
+              [03] INITIATE CONTACT
+            </span>
+            <h2 className="font-display text-4xl md:text-7xl font-extrabold tracking-tighter uppercase text-foreground">
+              GET IN TOUCH
+            </h2>
+          </div>
+          <div className="text-right font-mono text-xs text-foreground/60">
+            AVAILABILITY: <span className="font-bold text-foreground">OPEN FOR WORK (2026)</span>
+          </div>
+        </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
-          {/* Left Column */}
-          <div className="lg:col-span-6 flex flex-col">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-12"
-            >
-              <span className="font-body text-[10px] font-bold uppercase tracking-[0.25em] mb-4 block text-accent">
-                GET IN TOUCH
-              </span>
-              <h2 className="font-display font-extrabold tracking-[-0.04em] leading-[0.9] uppercase mb-8">
-                <span className="text-5xl sm:text-7xl block">LET&apos;S</span>
-                <span className="text-6xl sm:text-8xl block italic text-transparent bg-clip-text bg-gradient-to-r from-white to-accent py-1">BUILD</span>
-                <span className="text-4xl sm:text-6xl block text-white/80">GREAT.</span>
-              </h2>
-              <p className="font-body text-base text-white/50 max-w-sm leading-relaxed">
-                Punya ide gila atau sekedar mau diskusi? Drop pesan di sini, gue bakal bales secepat mungkin.
+          {/* Left Column: Direct Links */}
+          <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-8">
+            <div>
+              <h3 className="font-display text-3xl md:text-5xl font-extrabold uppercase mb-4 leading-tight">
+                LET&apos;S BUILD SOMETHING EXTRAORDINARY.
+              </h3>
+              <p className="text-xs md:text-sm text-foreground/70 leading-relaxed mb-6">
+                Have a project concept, design system request, or technical inquiry? Reach out directly via WhatsApp or email.
               </p>
-            </motion.div>
 
-            {/* Contact Links */}
+              {/* Instant Email Copy Button */}
+              <button
+                onClick={copyEmail}
+                className="w-full py-3 px-4 border border-foreground/30 hover:border-foreground bg-foreground/[0.04] text-xs font-mono flex items-center justify-between transition-colors mb-6"
+              >
+                <span>COPY DIRECT EMAIL: <strong className="text-foreground">wijaya.kevinn@gmail.com</strong></span>
+                <span className="text-[#ccff00] bg-foreground px-2 py-0.5 font-bold flex items-center gap-1">
+                  {copied ? "COPIED!" : <Copy size={12} />}
+                </span>
+              </button>
+            </div>
+
+            {/* Link List */}
             <div className="space-y-3">
               {contactLinks.map(({ icon: Icon, label, value, href }) => (
-                <motion.a
+                <a
                   key={label}
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  whileHover={{ x: 5 }}
-                  className="flex items-center gap-4 group glass-card p-4 rounded-xl hover:border-accent/30 transition-all"
+                  className="flex justify-between items-center p-4 border border-foreground/20 hover:border-foreground/60 bg-foreground/[0.02] text-xs transition-colors"
                   onClick={() => playClick()}
-                  onMouseEnter={() => playHover()}
                 >
-                  <div className="w-10 h-10 rounded-lg bg-white/[0.03] border border-white/[0.06] flex items-center justify-center text-white/40 group-hover:bg-accent group-hover:border-accent group-hover:text-black transition-all shrink-0">
-                    <Icon size={16} />
+                  <div className="flex items-center gap-3">
+                    <Icon size={16} className="text-[#ccff00]" />
+                    <span className="text-foreground/50 uppercase">{label}:</span>
+                    <span className="font-bold text-foreground">{value}</span>
                   </div>
-                  <div>
-                    <span className="font-display text-[10px] font-bold uppercase tracking-wider text-white/30 block">{label}</span>
-                    <span className="font-body text-sm font-semibold text-white/70 group-hover:text-white transition-colors">{value}</span>
-                  </div>
-                </motion.a>
+                  <span className="text-foreground/40">↗</span>
+                </a>
               ))}
             </div>
           </div>
 
           {/* Right Column: Form */}
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 border border-foreground/20 p-6 md:p-8 bg-foreground/[0.02]">
             <AnimatePresence mode="wait">
               {formState === "success" ? (
                 <motion.div
                   key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  className="glass-card rounded-2xl p-12 flex flex-col items-center text-center py-24"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="py-16 text-center space-y-4"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/30 flex items-center justify-center mb-6">
-                    <CheckCircle2 size={32} className="text-accent" />
-                  </div>
-                  <h3 className="font-display text-3xl font-extrabold mb-3 uppercase tracking-tight">Terkirim!</h3>
-                  <p className="font-body text-base text-white/50">Sambil nunggu balesan, mending ngopi dulu bro ☕</p>
+                  <CheckCircle2 size={40} className="mx-auto text-[#ccff00]" />
+                  <h4 className="font-display text-2xl font-bold uppercase">MESSAGE TRANSMITTED</h4>
+                  <p className="text-xs text-foreground/60">Redirecting to WhatsApp chat...</p>
                 </motion.div>
               ) : (
-                <motion.form
-                  key="form"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  onSubmit={handleSubmit}
-                  className="glass-card rounded-2xl p-8 space-y-6"
-                >
+                <form onSubmit={handleSubmit} className="space-y-4 text-xs font-mono">
                   <div className="space-y-1">
-                    <label className="font-display text-[9px] font-bold uppercase tracking-[0.2em] text-white/30">
-                      01 · Nama Kamu
-                    </label>
+                    <label className="text-[10px] text-foreground/50 font-bold uppercase">01 // YOUR NAME</label>
                     <input
                       required
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Isi nama kamu di sini..."
-                      className="w-full bg-white/[0.02] border border-white/[0.06] rounded-xl px-4 py-3 outline-none font-body text-sm text-white placeholder:text-white/20 focus:border-accent/40 focus:bg-white/[0.04] transition-all"
+                      placeholder="Enter full name..."
+                      className="w-full bg-background border border-foreground/20 p-3 outline-none focus:border-foreground text-foreground transition-colors"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-display text-[9px] font-bold uppercase tracking-[0.2em] text-white/30">
-                      02 · Email Aktif
-                    </label>
+                    <label className="text-[10px] text-foreground/50 font-bold uppercase">02 // YOUR EMAIL</label>
                     <input
                       required
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="email@kamu.com"
-                      className="w-full bg-white/[0.02] border border-white/[0.06] rounded-xl px-4 py-3 outline-none font-body text-sm text-white placeholder:text-white/20 focus:border-accent/40 focus:bg-white/[0.04] transition-all"
+                      placeholder="email@domain.com"
+                      className="w-full bg-background border border-foreground/20 p-3 outline-none focus:border-foreground text-foreground transition-colors"
                     />
                   </div>
 
                   <div className="space-y-1">
-                    <label className="font-display text-[9px] font-bold uppercase tracking-[0.2em] text-white/30">
-                      03 · Pesan
-                    </label>
+                    <label className="text-[10px] text-foreground/50 font-bold uppercase">03 // PROJECT SCOPE / MESSAGE</label>
                     <textarea
                       required
                       name="message"
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Ceritain ide project kamu..."
-                      className="w-full bg-white/[0.02] border border-white/[0.06] rounded-xl px-4 py-3 outline-none font-body text-sm text-white placeholder:text-white/20 focus:border-accent/40 focus:bg-white/[0.04] transition-all resize-none"
+                      placeholder="Describe project details or inquiry..."
+                      className="w-full bg-background border border-foreground/20 p-3 outline-none focus:border-foreground text-foreground transition-colors resize-none"
                     />
                   </div>
 
-                  <motion.button
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
+                  <button
                     type="submit"
-                    onClick={() => playClick()}
-                    onMouseEnter={() => playHover()}
                     disabled={formState === "submitting"}
-                    className="w-full bg-accent text-black py-4 rounded-xl font-display font-black text-sm tracking-wider uppercase flex items-center justify-center gap-3 hover:brightness-110 transition-all disabled:opacity-60 shadow-[0_0_20px_rgba(204,255,0,0.15)]"
+                    className="w-full py-4 bg-foreground text-background font-bold text-xs uppercase tracking-wider hover:bg-[#ccff00] hover:text-black transition-colors flex items-center justify-center gap-2"
                   >
-                    {formState === "submitting" ? "MENGIRIM..." : "KIRIM PESAN"}
-                    <Send size={16} className={formState === "submitting" ? "animate-pulse" : ""} />
-                  </motion.button>
-
-                  <p className="font-body text-[10px] text-white/20 text-center">
-                    Akan diteruskan via WhatsApp · Biasanya bales dalam 24 jam
-                  </p>
-                </motion.form>
+                    <span>{formState === "submitting" ? "SENDING..." : "SEND MESSAGE VIA WHATSAPP"}</span>
+                    <Send size={14} />
+                  </button>
+                </form>
               )}
             </AnimatePresence>
           </div>
+
         </div>
       </div>
     </section>

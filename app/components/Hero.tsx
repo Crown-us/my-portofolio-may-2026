@@ -1,150 +1,162 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, ArrowDownRight } from "lucide-react";
-import Link from "next/link";
-import Magnetic from "./Magnetic";
-import { useSound } from "../hooks/useSound";
+import { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 interface HeroProps {
-  setIsHovered: (value: boolean) => void;
+  setIsHovered?: (value: boolean) => void;
 }
 
-const stats = [
-  { value: "3+", label: "Years Experience" },
-  { value: "15+", label: "Projects Built" },
-  { value: "3", label: "Tech Stacks" },
-];
-
 export default function Hero({ setIsHovered }: HeroProps) {
-  const { play: playHover } = useSound("/audio/hover.mp3");
+  // Mouse Parallax Setup
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+
+  const textSpringX = useSpring(mouseX, { stiffness: 30, damping: 25 });
+  const textSpringY = useSpring(mouseY, { stiffness: 30, damping: 25 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (e.clientX - innerWidth / 2) / 35;
+      const y = (e.clientY - innerHeight / 2) / 35;
+      mouseX.set(x);
+      mouseY.set(y);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center bg-[#060606] text-white overflow-hidden border-b border-white/5">
+    <section className="relative min-h-[92vh] flex flex-col justify-between bg-background text-foreground overflow-hidden font-mono pt-4 pb-12 select-none border-b border-foreground/10">
 
-      {/* Background Glowing Mesh */}
-      <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-accent/8 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-purple-600/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute inset-0 noise-overlay pointer-events-none" />
-
-      {/* Main Content */}
-      <div className="container mx-auto px-6 relative z-10 pt-24 pb-32">
-
-        {/* Status Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/[0.04] rounded-full font-body text-[10px] font-bold tracking-[0.25em] uppercase mb-10"
-        >
-          <span className="w-1.5 h-1.5 bg-accent rounded-full animate-pulse" />
-          Available for Work · Kediri, Indonesia
-        </motion.div>
-
-        {/* Heading */}
-        <div className="max-w-5xl mb-10">
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display font-extrabold tracking-tighter leading-[0.9] uppercase"
-          >
-            <span className="block text-[clamp(3.5rem,9vw,8rem)] text-white">
-              CREATIVE
-            </span>
-            <span className="block text-[clamp(3.5rem,9vw,8rem)] text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-accent">
-              DEVELOPER
-            </span>
-            <span className="block text-[clamp(3rem,7vw,6.5rem)] italic text-white/30">
-              &amp; UI/UX DESIGNER
-            </span>
-          </motion.h1>
+      {/* DENSE MONOSPACE BACKGROUND COLUMNS (Matching reference image body text layer) */}
+      <motion.div
+        style={{ x: textSpringX, y: textSpringY }}
+        className="absolute inset-0 px-4 md:px-8 pt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 opacity-35 dark:opacity-40 text-[10px] sm:text-[11px] leading-[1.3] text-justify font-mono pointer-events-none select-none tracking-tighter"
+      >
+        {/* Column 1 */}
+        <div className="space-y-3 overflow-hidden h-full">
+          <p>
+            iuc acs ns onnduurrkdiitti annd gn operate instatationa design heativ imsion uurrdiittiioon feedback. Computationl d peulatysttatcod orndiittioon and wdback. Computaio it. igitaCompua cedwoondi nd works from within it. proess, ut acnetcon s from within i modele, aat, ns c etticizze t acknowledges th esthetticizee technology or revive historical to aes Thhe aim iss to enggy or revive hists it is The aim is ormaking. Tithmic, dyto enngage the present as itis structured today, algorithmic, dynamic, contingent and incomplete. Complexity is neither avoided nor simplified away. It is examined, formalized and exposed. The work seeks to reveal both coherence and failure in the systems it engages.
+          </p>
+          <p className="hidden sm:block">
+            Con sign precedencies, asystems over artifacts. It prmputaionaldesi, teesullt iss not transformations rather than srducesinaldors reg pr ss. a finishedations r but a staties ehaioThein ineedd by shed object, but sttic ubhai.Tgi fftaa.. onn ddi g T utoms no deunneencchehheisisci m Thitomsog deuni eeeep, es tcip isi dei iti no dpii coooooonpt pprtripli It nki aes ti no pii loheeeeehhnnt pprtreline um. Ithifr s sf in dki ohennnnnnehant pparealne or medium.. th n
+          </p>
         </div>
 
-        {/* Bottom row: desc + CTAs */}
+        {/* Column 2 */}
+        <div className="space-y-3 overflow-hidden h-full hidden md:block">
+          <p>
+            ecepamdeaoo ootas.ood a e lflondr df gnctz mmtttm . elaasishow adacinbl. owe C rorheeeennuuuuu mneg day oodde essiiiggocnge a Procsses nfol f uc s pprrotifins atin. Eah sttate Proceses ufold h opiinngg ion ieraton. Ech statte emergs frompre thou erraat nditenes wha follows.. eneres from reviouough y annflueces wha follows.. Chage is not a efus condeppendeenand inrd,but an inhrent Chanerty of the efect appptionsaffterwad, herent property of the system.
+          </p>
+          <p>
+            The results of a process are provisional. Any output represents a temporary configuration shaped by input, parameters, and time. No single outcome is treated as definitive. uttional proe treatt aher than on Cotentio is plced oes a ved racion, ad A trnsform notteani berre serrinuh et. and t compa ugh ahav oobbss, roti co oug rute.Tina isiiviioobbrrtt a apr, troonou Ale otin mbd ncs s ossiiiiooo d ercton. Thepole, they are asois ttonl etntst leeiooosse o su insth ess d re omy s ieteinios e asssssst ta. sses hark Ititi s euano ssam tsssaa sugcge dritiratiertiqn in avtost eoodeaos ttssea mbnrtis s aacer
+          </p>
+        </div>
+
+        {/* Column 3 */}
+        <div className="space-y-3 overflow-hidden h-full hidden lg:block">
+          <p>
+            e lflondr df gnctz mmtttm . elaasishow adacinbl. owe o dcalt r drounz mttttiaak l atrcton,1. wd Boo ctert xlo tmn tttiiiooe s perbl iteacios,1. ow Byy ma mliee helg oittss nss, stems oppose in emaios,le w liimicler r it i toitess thbatllogic experwis remin n, . F linmits,rlyes reusedonciess that would otherwise regain , F impliic, anddeinin cenci Dynamic interaction, code as medium, and system architecture.
+          </p>
+          <p>
+            Rules are not expressive by themselves. Their role is to establish a consistent framework within which behavior can emerge. Ambiguity appears through execution, not through vague on. iy appe aague onpputtatio reasoned structur rbioow ffy na on s in behavior ae rath A omar d s oces or state. expther t nstiibiillint m rdei es cet o ecter t co sitraapriinite iasin isoceto uccture. Te cter tth Al ic peerrmrmnt, itin eisnct uctips lebey cter tthhoon d res o rdiilluu lvv, firle car curs legio ll ttee tthhaa Render
+          </p>
+        </div>
+
+        {/* Column 4 */}
+        <div className="space-y-3 overflow-hidden h-full hidden lg:block">
+          <p>
+            unaoppe as an i rnal coditionsto inte euttaal loogicc. It mediaes how he word is trnslatduces com uurvvaablle behhavior. on tiiv funn proccesses anddetermihin omputational sstems. nging a ondditiions. c aata is not treated as abstract or neural. It originates in measurement, observation, and selecion, each shaped by technica Computational design draus input from existing conditions, including physical environments, social systems, human activity, and machine processes. These inputs situate the work within real systems rather than isolated representations. withii
+          </p>
+          <p>
+            n which input is captured matters. Resolution, The form in w representati captured ma what the system can Thhmpling, and representation influenc. sampless and what remains inaccessib express tween extes tanslatedd is a ex ates as an interface bthe worl in tur uces operates as an diates howputat ationa systeems. nput operagic. It mmediahow co com tey n
+          </p>
+        </div>
+      </motion.div>
+
+
+      {/* GIANT DISPLAY OVERLAY WORDS (Exact positioning & typography overlap from image) */}
+      <motion.div
+        style={{ x: springX, y: springY }}
+        className="relative z-10 w-full px-4 md:px-8 pt-6 pb-16 flex flex-col justify-around min-h-[78vh] font-display font-extrabold uppercase tracking-tighter leading-[0.82] select-none text-foreground mix-blend-difference"
+      >
+        {/* Row 1: Code- */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="flex justify-start text-[clamp(4.5rem,14.5vw,13.5rem)]"
+        >
+          <span className="hover:text-[#ccff00] transition-colors cursor-pointer">Code-</span>
+        </motion.div>
+
+        {/* Row 2: Driven */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="flex justify-center md:justify-start md:pl-[22vw] text-[clamp(4.5rem,15vw,14rem)]"
+        >
+          <span className="hover:text-[#ccff00] transition-colors cursor-pointer">Driven</span>
+        </motion.div>
+
+        {/* Row 3: Design */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="flex justify-end text-[clamp(4.5rem,14.5vw,13.5rem)] md:pr-[4vw]"
+        >
+          <span className="hover:text-[#ccff00] transition-colors cursor-pointer">Design</span>
+        </motion.div>
+
+        {/* Row 4: Studio  Between */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col lg:flex-row lg:items-end justify-between gap-10"
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="flex flex-col md:flex-row justify-between items-start md:items-center text-[clamp(4rem,13vw,12rem)]"
         >
-          {/* Description */}
-          <p className="font-body text-base md:text-lg text-white/50 leading-relaxed max-w-lg">
-            Saya membangun website dan aplikasi mobile dengan desain premium,
-            responsif, dan interaksi yang menyeimbangkan keindahan visual
-            serta performa tinggi — menggunakan{" "}
-            <span className="text-white/80 font-semibold">Flutter</span>,{" "}
-            <span className="text-white/80 font-semibold">Next.js</span>, dan{" "}
-            <span className="text-white/80 font-semibold">Laravel</span>.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-3 shrink-0">
-            <Magnetic>
-              <a
-                href="#contact"
-                className="bg-accent text-black px-7 py-4 font-display font-black text-sm tracking-wider hover:brightness-110 transition-all rounded-xl inline-flex items-center gap-2 cursor-pointer"
-                onMouseEnter={() => { setIsHovered(true); playHover(); }}
-                onMouseLeave={() => setIsHovered(false)}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                MULAI PROYEK <ArrowRight size={15} />
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <Link
-                href="/resume"
-                className="bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] hover:border-white/20 text-white px-7 py-4 font-display font-black text-sm tracking-wider transition-all rounded-xl inline-block"
-                onMouseEnter={() => { setIsHovered(true); playHover(); }}
-                onMouseLeave={() => setIsHovered(false)}
-              >
-                LIHAT CV
-              </Link>
-            </Magnetic>
-          </div>
+          <span className="hover:text-[#ccff00] transition-colors cursor-pointer">Studio</span>
+          <span className="md:pr-[18vw] hover:text-[#ccff00] transition-colors cursor-pointer text-[clamp(3.8rem,11.5vw,10.5rem)]">
+            Between
+          </span>
         </motion.div>
 
-        {/* Stats Row */}
+        {/* Row 5: Jakarta  &  Worldwide (or Amsterdam & Athens) */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-wrap gap-px mt-16 border border-white/[0.06] rounded-2xl overflow-hidden w-fit"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.4 }}
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-end text-[clamp(3.5rem,11.5vw,11rem)] pt-2"
         >
-          {stats.map((stat, idx) => (
-            <div
-              key={idx}
-              className="px-8 py-5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors border-r border-white/[0.06] last:border-r-0 flex flex-col gap-1"
-            >
-              <span className="font-display text-2xl md:text-3xl font-black text-accent tracking-tighter">
-                {stat.value}
-              </span>
-              <span className="font-body text-[10px] text-white/40 uppercase tracking-widest font-bold">
-                {stat.label}
-              </span>
-            </div>
-          ))}
+          <span className="hover:text-[#ccff00] transition-colors cursor-pointer">Jakarta</span>
+          <span className="font-mono text-base md:text-xl font-normal lowercase tracking-normal text-foreground/70 hidden lg:inline pb-4">
+            (Full-Stack &amp; Creative Engineering)
+          </span>
+          <span className="hover:text-[#ccff00] transition-colors cursor-pointer">&amp; Worldwide</span>
         </motion.div>
-      </div>
+      </motion.div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 right-8 flex items-center gap-3 text-white/30">
-        <span className="font-body text-[9px] font-bold uppercase tracking-[0.3em]">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDownRight size={16} />
-        </motion.div>
-      </div>
+      {/* BOTTOM TICKER & METADATA (Matching bottom left labels in picture) */}
+      <div className="relative z-20 px-4 md:px-8 pt-4 border-t border-foreground/15 flex flex-wrap justify-between items-center text-[10px] md:text-xs font-mono uppercase tracking-wider text-foreground/70">
+        <div className="flex items-center gap-6">
+          <span className="font-bold text-foreground">ON COMPUTATION AS A WAY OF THINKING</span>
+          <span className="hidden sm:inline opacity-40">|</span>
+          <span className="hidden sm:inline">KEVIN DWI WIJAYA PORTFOLIO</span>
+        </div>
 
-      <style jsx>{`
-        .bg-accent\\/8 { background-color: rgba(204, 255, 0, 0.08); }
-        .bg-purple-600\\/8 { background-color: rgba(147, 51, 234, 0.08); }
-      `}</style>
+        <div className="flex items-center gap-4">
+          <span className="w-2 h-2 rounded-full bg-[#ccff00] animate-ping" />
+          <span>SCROLL TO EXPLORE WORK</span>
+        </div>
+      </div>
     </section>
   );
 }

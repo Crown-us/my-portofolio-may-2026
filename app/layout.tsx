@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Syne, Inter } from "next/font/google";
+import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "./components/SmoothScroll";
+import { ThemeProvider } from "./components/ThemeProvider";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -14,12 +15,16 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Kevin Dwi Wijaya | Creative Developer & UI/UX",
-  description: "Flutter · Next.js · Laravel developer membangun pengalaman digital yang premium, interaktif, dan bertenaga tinggi.",
-};
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 
-import { ThemeProvider } from "./components/ThemeProvider";
+export const metadata: Metadata = {
+  title: "Kevin Dwi Wijaya | Code-Driven Creative Developer",
+  description: "Creative Fullstack Developer & Designer crafting high-impact digital experiences with Next.js, Flutter & Laravel.",
+};
 
 export default function RootLayout({
   children,
@@ -27,8 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${inter.variable} antialiased`} suppressHydrationWarning>
-      <body className="antialiased selection:bg-foreground selection:text-background" suppressHydrationWarning>
+    <html lang="en" className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`} suppressHydrationWarning>
+      <body className="antialiased font-mono selection:bg-foreground selection:text-background" suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <div className="grain" aria-hidden="true" />
           <SmoothScroll>

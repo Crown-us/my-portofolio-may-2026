@@ -6,93 +6,85 @@ import { ArrowUpRight } from "lucide-react";
 const services = [
   {
     num: "01",
-    title: "WEB DEVELOPMENT",
-    desc: "Membangun website modern, responsif, dan cepat menggunakan Next.js, React, dan Tailwind CSS dengan pendekatan component-driven.",
+    title: "WEB ENGINEERING",
+    desc: "Building high-performance web apps & design systems using Next.js 16, React, & Tailwind CSS with component-driven architecture.",
     tags: ["Next.js", "React", "TypeScript", "Tailwind"]
   },
   {
     num: "02",
-    title: "MOBILE DEVELOPMENT",
-    desc: "Mengembangkan aplikasi mobile cross-platform dengan Flutter dan Dart, mengintegrasikan REST API dan Firebase untuk pengalaman native.",
+    title: "MOBILE APP DEVELOPMENT",
+    desc: "Developing cross-platform native iOS & Android applications with Flutter & Dart, integrated REST APIs & Supabase/Firebase.",
     tags: ["Flutter", "Dart", "Firebase", "REST API"]
   },
   {
     num: "03",
-    title: "UI/UX DESIGN",
-    desc: "Merancang antarmuka yang intuitif dan menarik secara visual menggunakan Figma, dari wireframe hingga design system lengkap.",
-    tags: ["Figma", "Prototyping", "Design System"]
+    title: "COMPUTATIONAL UI/UX",
+    desc: "Architecting minimalist, high-impact user interfaces in Figma, establishing design tokens, micro-interactions, & wireframes.",
+    tags: ["Figma", "Design Systems", "Prototyping"]
   },
   {
     num: "04",
-    title: "BACKEND & API",
-    desc: "Membangun backend skalabel dengan Laravel dan mengintegrasikan database MySQL/PostgreSQL untuk performa tinggi.",
-    tags: ["Laravel", "MySQL", "REST API", "Supabase"]
+    title: "BACKEND & API ARCHITECTURE",
+    desc: "Engineering scalable backend systems & APIs with Laravel & Node.js, backed by PostgreSQL/MySQL databases.",
+    tags: ["Laravel", "Node.js", "PostgreSQL", "REST API"]
   },
   {
     num: "05",
-    title: "BRAND IDENTITY",
-    desc: "Membantu brand membangun identitas visual yang kuat dan konsisten, dari logo hingga panduan gaya visual lengkap.",
-    tags: ["Logo Design", "Visual Identity", "Art Direction"]
+    title: "BRAND & DIGITAL IDENTITY",
+    desc: "Crafting bold brand identity, visual style guides, and editorial typography guidelines for modern digital products.",
+    tags: ["Visual Identity", "Typography", "Art Direction"]
   },
 ];
 
 interface ServicesProps {
-  setIsHovered: (value: boolean) => void;
+  setIsHovered?: (value: boolean) => void;
 }
 
 export default function Services({ setIsHovered }: ServicesProps) {
   return (
-    <section className="py-24 md:py-32 bg-[#060606] text-white overflow-hidden border-t border-white/5 relative">
-      {/* Glow accent */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] bg-gradient-to-r from-transparent via-accent/40 to-transparent pointer-events-none" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent pointer-events-none" />
-
-      <div className="container mx-auto px-6">
+    <section className="py-24 md:py-32 bg-background text-foreground border-t border-foreground/15 relative font-mono select-none">
+      <div className="container mx-auto px-4 md:px-8">
+        
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end pb-12 mb-12 border-b border-foreground/15 gap-4">
           <div>
-            <motion.span
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="font-body text-[10px] font-bold uppercase tracking-[0.25em] mb-4 block text-accent"
-            >
-              WHAT I DO
-            </motion.span>
-            <h2 className="font-display text-5xl sm:text-7xl font-extrabold tracking-tighter leading-[0.95] uppercase">
-              SERVICES &<br />
-              <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-accent">CAPABILITIES</span>
+            <span className="font-mono text-xs uppercase tracking-widest text-[#ccff00] bg-black px-2 py-0.5 font-bold mb-3 inline-block">
+              [04] CAPABILITIES &amp; SERVICES
+            </span>
+            <h2 className="font-display text-4xl md:text-7xl font-extrabold tracking-tighter uppercase text-foreground">
+              WHAT I BUILD
             </h2>
           </div>
-          <p className="font-body text-sm text-white/50 max-w-xs leading-relaxed md:text-right">
-            Solusi digital end-to-end — dari desain UI sampai deployment production.
-          </p>
+          <div className="text-right font-mono text-xs text-foreground/60">
+            SOLUTIONS: <span className="font-bold text-foreground">END-TO-END DEVELOPMENT</span>
+          </div>
         </div>
 
         {/* Services List */}
-        <div className="divide-y divide-white/[0.06]">
+        <div className="divide-y divide-foreground/15">
           {services.map((service, idx) => (
             <motion.div
               key={service.num}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.08 }}
+              transition={{ delay: idx * 0.05 }}
               viewport={{ once: true }}
-              className="group grid grid-cols-12 items-center gap-4 py-7 md:py-9 cursor-pointer hover:bg-white/[0.015] transition-colors px-4 -mx-4 rounded-2xl"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+              className="group grid grid-cols-12 items-center gap-4 py-6 md:py-8 cursor-pointer hover:bg-foreground/[0.03] transition-colors px-2 -mx-2"
+              onMouseEnter={() => setIsHovered && setIsHovered(true)}
+              onMouseLeave={() => setIsHovered && setIsHovered(false)}
             >
               {/* Number */}
-              <span className="col-span-1 font-mono text-[10px] text-white/20 font-bold tracking-widest">
-                {service.num}
+              <span className="col-span-1 font-bold text-xs text-[#ccff00] bg-foreground px-2 py-0.5 w-fit">
+                [{service.num}]
               </span>
 
               {/* Title */}
-              <h3 className="col-span-11 md:col-span-3 font-display text-xl md:text-2xl font-extrabold tracking-tighter text-white/80 group-hover:text-white transition-colors uppercase leading-tight">
+              <h3 className="col-span-11 md:col-span-4 font-display text-xl md:text-3xl font-extrabold uppercase leading-none group-hover:text-[#ccff00] transition-colors">
                 {service.title}
               </h3>
 
-              {/* Desc — hidden on mobile, shown from md */}
-              <p className="hidden md:block col-span-4 font-body text-sm text-white/40 leading-relaxed group-hover:text-white/60 transition-colors">
+              {/* Description */}
+              <p className="hidden md:block col-span-4 text-xs text-foreground/70 leading-relaxed">
                 {service.desc}
               </p>
 
@@ -101,31 +93,19 @@ export default function Services({ setIsHovered }: ServicesProps) {
                 {service.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 py-1 border border-white/[0.06] rounded-md font-mono text-[9px] text-white/40 group-hover:border-accent/30 group-hover:text-accent/80 transition-all whitespace-nowrap"
+                    className="px-2 py-0.5 border border-foreground/20 text-[10px] text-foreground/80 group-hover:border-foreground transition-colors"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* Arrow */}
-              <div className="hidden md:flex col-span-1 justify-end">
-                <div className="w-9 h-9 border border-white/10 rounded-xl flex items-center justify-center shrink-0 group-hover:border-accent group-hover:bg-accent group-hover:text-black transition-all duration-300">
-                  <ArrowUpRight size={15} />
-                </div>
-              </div>
-
-              {/* Mobile: desc + tags below title */}
-              <div className="col-span-11 md:hidden col-start-2 space-y-3">
-                <p className="font-body text-xs text-white/40 leading-relaxed">
-                  {service.desc}
-                </p>
+              {/* Mobile Desc & Tags */}
+              <div className="col-span-11 md:hidden col-start-2 space-y-2 pt-2 text-xs">
+                <p className="text-foreground/70">{service.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-0.5 border border-white/[0.06] rounded font-mono text-[9px] text-white/40"
-                    >
+                    <span key={tag} className="px-2 py-0.5 border border-foreground/20 text-[10px]">
                       {tag}
                     </span>
                   ))}
