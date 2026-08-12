@@ -2,177 +2,191 @@
 
 import { projects } from "@/lib/projects";
 import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink, Globe, Layout, Cpu, Calendar, Tag } from "lucide-react";
+import { ArrowLeft, ExternalLink, Globe, Calendar, Tag, Cpu, Layout } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import CustomCursor from "@/app/components/CustomCursor";
-import { useState, useEffect } from "react";
+import { CursorProvider } from "@/app/context/CursorContext";
 
-export default function ProjectDetail() {
+function ProjectDetailInner() {
   const params = useParams();
   const slug = params.slug as string;
   const project = projects.find((p) => p.slug === slug);
 
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center font-display text-4xl bg-background text-foreground">
+      <div className="min-h-screen flex items-center justify-center font-display text-4xl bg-[var(--background)] text-[var(--foreground)]">
         PROJECT NOT FOUND.
       </div>
     );
   }
 
   return (
-    <main className="min-h-screen selection:bg-foreground selection:text-background cursor-none grid-background transition-colors duration-300 bg-background text-foreground">
-      <CustomCursor mousePos={mousePos} isHovered={isHovered} />
-      <Navbar setIsHovered={setIsHovered} />
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+      <CustomCursor />
+      <Navbar />
 
-      <section className="px-6 pt-32 pb-24 container mx-auto">
-        <Link 
-          href="/" 
-          className="inline-flex items-center gap-2 font-body text-sm font-bold uppercase tracking-widest hover:line-through mb-12"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <ArrowLeft size={16} /> BACK TO WORKS
-        </Link>
-
-        {/* Title Section */}
-        <div className="mb-16">
-          <motion.h1 
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="font-display text-[clamp(3rem,10vw,10rem)] leading-[0.8] font-extrabold tracking-tighter uppercase mb-4"
-          >
-            {project.title}
-          </motion.h1>
-          <div className="flex gap-4">
-            <span className="px-4 py-1 border border-foreground font-body text-xs font-bold uppercase">{project.category}</span>
-            <span className="px-4 py-1 border border-foreground font-body text-xs font-bold uppercase">{project.year}</span>
-          </div>
-        </div>
-
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+      {/* Master Centered Grid Container */}
+      <section className="w-full bg-[var(--background)]">
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 border-x border-[var(--border)] py-16 md:py-24 relative min-h-screen">
           
-          {/* Main Visual Box */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="md:col-span-8 aspect-[16/9] border-2 border-foreground overflow-hidden relative group"
+          {/* Corner dots */}
+          <div className="grid-dot top-0 -left-[3px]" />
+          <div className="grid-dot top-0 -right-[3px]" />
+
+          {/* Back link */}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 font-mono text-xs font-semibold text-[var(--muted)] hover:text-[var(--accent)] transition-colors mb-10"
           >
-            <img 
-              src={project.image} 
-              alt={project.title} 
-              className="w-full h-full object-cover grayscale brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700"
-            />
-          </motion.div>
+            <ArrowLeft className="w-4 h-4" />
+            Back to Portfolio
+          </Link>
 
-          {/* Quick Info Box */}
-          <div className="md:col-span-4 grid grid-rows-2 gap-4">
-             <div className="bg-foreground text-background p-8 flex flex-col justify-between border-2 border-foreground brutalist-shadow">
-                <Layout className="opacity-20" size={40} />
+          {/* Title */}
+          <div className="mb-12">
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="font-display text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.9] font-bold tracking-tight mb-4 text-[var(--foreground)]"
+            >
+              {project.title}
+            </motion.h1>
+            <div className="flex flex-wrap gap-2">
+              <span className="inline-flex items-center px-2.5 py-1 rounded text-xs font-mono border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)]">
+                {project.category}
+              </span>
+              <span className="inline-flex items-center px-2.5 py-1 rounded text-xs font-mono border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)]">
+                {project.year}
+              </span>
+            </div>
+          </div>
+
+          {/* Main Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+            {/* Hero image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1 }}
+              className="md:col-span-8 aspect-[16/9] border border-[var(--border)] rounded-xl overflow-hidden shadow-lg"
+            >
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
+
+            {/* Quick info */}
+            <div className="md:col-span-4 grid grid-rows-2 gap-4">
+              <div className="border border-[var(--border)] rounded-xl p-6 bg-[var(--surface)] flex flex-col justify-between">
+                <Layout className="w-6 h-6 text-[var(--accent)] mb-3" strokeWidth={1.5} />
                 <div>
-                  <h3 className="font-body text-[10px] font-bold uppercase tracking-[0.2em] mb-2 opacity-60">Services</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.services.map(s => (
-                      <span key={s} className="font-display text-xl font-bold uppercase italic">{s}</span>
+                  <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[var(--muted)] mb-2">
+                    Services
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.services.map((s) => (
+                      <span key={s} className="px-2 py-0.5 rounded text-xs font-mono border border-[var(--border)] text-[var(--muted)]">
+                        {s}
+                      </span>
                     ))}
                   </div>
                 </div>
-             </div>
-             <div className="bg-background p-8 flex flex-col justify-between border-2 border-foreground">
-                <div className="flex justify-between items-start">
-                  <Cpu className="opacity-20" size={40} />
-                  <div className="w-10 h-10 border border-foreground flex items-center justify-center rotate-45">
-                    <div className="w-2 h-2 bg-foreground" />
-                  </div>
-                </div>
+              </div>
+
+              <div className="border border-[var(--border)] rounded-xl p-6 bg-[var(--surface)] flex flex-col justify-between">
+                <Cpu className="w-6 h-6 text-[var(--accent)] mb-3" strokeWidth={1.5} />
                 <div>
-                  <h3 className="font-body text-[10px] font-bold uppercase tracking-[0.2em] mb-4 opacity-60">Tech Stack</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map(t => (
-                      <span key={t} className="px-3 py-1 bg-foreground text-background font-body text-[10px] font-bold uppercase">{t}</span>
+                  <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[var(--muted)] mb-2">
+                    Tech Stack
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.tech.map((t) => (
+                      <span key={t} className="px-2 py-0.5 rounded text-xs font-mono border border-[var(--border)] text-[var(--muted)]">
+                        {t}
+                      </span>
                     ))}
                   </div>
                 </div>
-             </div>
-          </div>
+              </div>
+            </div>
 
-          {/* Detailed Overview Box */}
-          <div className="md:col-span-6 bg-background border-2 border-foreground p-12">
-             <h2 className="font-display text-2xl font-bold uppercase mb-8 border-b-2 border-foreground pb-4 inline-block">The Challenge</h2>
-             <p className="font-body text-2xl md:text-3xl leading-[1.1] tracking-tight">
-               {project.description}
-             </p>
-             <p className="font-body text-lg mt-8 opacity-60 leading-relaxed text-foreground/70">
-               Setiap detail dipikirkan matang-matang untuk menghasilkan produk yang tidak hanya estetik secara brutalist, tetapi juga memiliki fondasi kode yang kokoh dan performa yang gahar.
-             </p>
-          </div>
-
-          {/* Live Links Box */}
-          <div className="md:col-span-3 bg-background border-2 border-foreground p-8 flex flex-col justify-center gap-6">
-             <h3 className="font-body text-[10px] font-bold uppercase tracking-[0.2em] opacity-40">Direct Access</h3>
-             <a 
-                href={project.link} 
-                target="_blank" 
-                className="flex items-center justify-between group p-6 border-2 border-foreground hover:bg-foreground hover:text-background transition-all"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+            {/* Description */}
+            <div className="md:col-span-6 border border-[var(--border)] rounded-xl p-8 bg-[var(--surface)]">
+              <h2 className="font-display text-lg font-bold mb-4 text-[var(--foreground)]">
+                Project Overview
+              </h2>
+              <p className="font-mono text-xs md:text-sm text-[var(--muted)] leading-relaxed mb-4">
+                {project.description}
+              </p>
+              <div
+                className="mt-4 p-3.5 rounded-lg text-xs font-mono font-bold"
+                style={{ background: "var(--accent-subtle)", border: "1px solid var(--accent-border)", color: "var(--accent)" }}
               >
-                <span className="font-display text-2xl font-bold uppercase">LIVE SITE</span>
-                <Globe size={24} className="group-hover:rotate-45 transition-transform" />
-              </a>
-              <a 
-                href="#" 
-                className="flex items-center justify-between group p-6 border-2 border-foreground hover:bg-foreground hover:text-background transition-all"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                {project.impact}
+              </div>
+            </div>
+
+            {/* Links */}
+            <div className="md:col-span-3 border border-[var(--border)] rounded-xl p-6 bg-[var(--surface)] flex flex-col gap-3 justify-center">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest text-[var(--muted)] mb-1">
+                Direct Access
+              </p>
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-mono font-semibold text-white transition-all hover:opacity-90"
+                style={{ background: "var(--accent)" }}
               >
-                <span className="font-display text-2xl font-bold uppercase">REPOSITORY</span>
-                <ExternalLink size={24} />
+                <Globe className="w-4 h-4" /> Live Demo
               </a>
-          </div>
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-xs font-mono font-semibold transition-all"
+                style={{ border: "1px solid var(--border)", color: "var(--foreground)", background: "transparent" }}
+              >
+                <ExternalLink className="w-4 h-4" /> Repository
+              </a>
+            </div>
 
-          {/* Secondary Stats Box */}
-          <div className="md:col-span-3 border-2 border-foreground p-8 bg-foreground/5 flex flex-col justify-between">
-             <div className="flex flex-col gap-6">
-                <div className="flex items-center gap-4 border-b border-foreground/10 pb-4">
-                  <Calendar size={20} className="opacity-40" />
-                  <div>
-                    <p className="font-body text-[10px] font-bold uppercase opacity-40">Year</p>
-                    <p className="font-display text-xl font-bold text-foreground">{project.year}</p>
-                  </div>
+            {/* Stats */}
+            <div className="md:col-span-3 border border-[var(--border)] rounded-xl p-6 bg-[var(--surface)] flex flex-col gap-4 justify-center">
+              <div className="flex items-center gap-3 pb-3 border-b border-[var(--border)]">
+                <Calendar className="w-4 h-4 text-[var(--accent)]" strokeWidth={1.5} />
+                <div>
+                  <p className="text-[10px] font-mono text-[var(--muted)] uppercase tracking-wider">Year</p>
+                  <p className="font-display font-bold text-[var(--foreground)]">{project.year}</p>
                 </div>
-                <div className="flex items-center gap-4">
-                  <Tag size={20} className="opacity-40" />
-                  <div>
-                    <p className="font-body text-[10px] font-bold uppercase opacity-40">Role</p>
-                    <p className="font-display text-xl font-bold uppercase italic text-foreground">Lead Dev</p>
-                  </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Tag className="w-4 h-4 text-[var(--accent)]" strokeWidth={1.5} />
+                <div>
+                  <p className="text-[10px] font-mono text-[var(--muted)] uppercase tracking-wider">Role</p>
+                  <p className="font-display font-bold text-[var(--foreground)]">Lead Dev</p>
                 </div>
-             </div>
-             <div className="pt-8 text-[10px] font-bold opacity-30 uppercase tracking-[0.3em] text-foreground">
-               Verified Project © 2026
-             </div>
+              </div>
+            </div>
           </div>
-
         </div>
       </section>
 
-      <Footer setIsHovered={setIsHovered} />
+      <Footer />
     </main>
+  );
+}
+
+export default function ProjectDetail() {
+  return (
+    <CursorProvider>
+      <ProjectDetailInner />
+    </CursorProvider>
   );
 }

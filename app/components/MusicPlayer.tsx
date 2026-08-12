@@ -41,10 +41,11 @@ export default function MusicPlayer() {
   return (
     <div className="fixed bottom-8 left-8 z-[70] flex items-center gap-4">
       <motion.button
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 1 }}
         onClick={togglePlay}
-        className="w-14 h-14 bg-foreground text-background flex items-center justify-center border-2 border-foreground brutalist-shadow hover:scale-110 transition-transform active:translate-x-1 active:translate-y-1 active:shadow-none"
+        className="w-10 h-10 rounded-full bg-[var(--surface)] border border-[var(--border-color)] text-[var(--foreground)] flex items-center justify-center hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
         aria-label="Toggle Music"
       >
         <AnimatePresence mode="wait">
@@ -55,7 +56,7 @@ export default function MusicPlayer() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <Pause size={24} fill="currentColor" />
+              <Pause size={16} fill="currentColor" />
             </motion.div>
           ) : (
             <motion.div
@@ -64,7 +65,7 @@ export default function MusicPlayer() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <Play size={24} className="ml-1" fill="currentColor" />
+              <Play size={16} className="ml-0.5" fill="currentColor" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -73,29 +74,27 @@ export default function MusicPlayer() {
       <AnimatePresence>
         {isPlaying && (
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            className="bg-background border-2 border-foreground px-4 py-2 flex items-center gap-3 brutalist-shadow"
+            exit={{ opacity: 0, x: -10 }}
+            className="bg-[var(--surface)] border border-[var(--border-color)] rounded-lg px-3 py-2 flex items-center gap-2"
           >
-            <div className="flex gap-1 items-end h-4">
+            <div className="flex gap-0.5 items-end h-3">
               {[1, 2, 3, 4].map((i) => (
                 <motion.div
                   key={i}
-                  animate={{
-                    height: [4, 16, 8, 14, 6],
-                  }}
+                  animate={{ height: [3, 12, 6, 10, 4] }}
                   transition={{
                     duration: 0.8,
                     repeat: Infinity,
                     delay: i * 0.1,
                     ease: "easeInOut",
                   }}
-                  className="w-1 bg-foreground"
+                  className="w-0.5 bg-[var(--accent)] rounded-full"
                 />
               ))}
             </div>
-            <span className="font-display text-[10px] font-black tracking-widest uppercase">
+            <span className="font-mono text-[10px] font-semibold text-[var(--muted-text)] uppercase tracking-wider">
               Now Playing
             </span>
           </motion.div>

@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sun, Moon, Volume2, VolumeX, Terminal, ExternalLink } from "lucide-react";
+import { Sun, Moon, Volume2, VolumeX, X } from "lucide-react";
 import { useSound } from "../hooks/useSound";
+import { siteConfig } from "@/lib/config";
 
 export default function ControlDock() {
   const { theme, setTheme } = useTheme();
@@ -24,151 +25,128 @@ export default function ControlDock() {
 
   return (
     <>
-      {/* Floating Bottom Dock (matching the reference UI bar) */}
+      {/* Floating Bottom Dock */}
       <motion.div
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6, type: "spring", stiffness: 200, damping: 20 }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[80] flex items-center gap-1.5 p-1.5 rounded-xl bg-[#1c1c1e]/90 text-white backdrop-blur-md border border-white/10 shadow-2xl font-mono text-xs select-none max-w-[92vw] overflow-x-auto scrollbar-none"
+        transition={{ delay: 0.8, type: "spring", stiffness: 200, damping: 22 }}
+        className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[80] flex items-center gap-1 p-1 rounded-xl bg-[#111111]/95 text-white backdrop-blur-xl border border-white/10 shadow-2xl font-mono text-xs select-none max-w-[92vw]"
       >
-        {/* Brand Icon / Logo Badge */}
+        {/* Brand badge */}
         <button
           onClick={() => handleAction("creator")}
-          className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white font-bold flex items-center gap-1.5"
-          title="Creator Specs"
+          className="px-2.5 py-1.5 rounded-lg bg-white/8 hover:bg-white/15 transition-colors text-white font-bold flex items-center gap-1.5 text-xs"
+          title="About this site"
         >
-          <span className="w-2 h-2 rounded-full bg-[#ccff00] animate-pulse" />
-          <span>w.</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse" />
+          {siteConfig.initials}.
         </button>
 
-        {/* Creator Info Tab */}
-        <button
-          onClick={() => handleAction("creator")}
-          className={`px-3 py-1.5 rounded-lg transition-all ${
-            activeTab === "creator"
-              ? "bg-[#ccff00] text-black font-semibold shadow"
-              : "hover:bg-white/10 text-white/80"
-          }`}
-        >
-          Creator
-        </button>
-
-        {/* Font & Color Specs */}
+        {/* Design Specs */}
         <button
           onClick={() => handleAction("specs")}
-          className={`px-3 py-1.5 rounded-lg transition-all hidden sm:block ${
-            activeTab === "specs"
-              ? "bg-[#ccff00] text-black font-semibold shadow"
-              : "hover:bg-white/10 text-white/80"
+          style={activeTab === "specs" ? { backgroundColor: "var(--accent)", color: "#fff" } : {}}
+          className={`px-2.5 py-1.5 rounded-lg transition-all hidden sm:block text-xs ${
+            activeTab === "specs" ? "font-semibold" : "hover:bg-white/10 text-white/70"
           }`}
         >
-          Font & Color
+          Design
         </button>
 
-        {/* System Details */}
-        <button
-          onClick={() => handleAction("details")}
-          className={`px-3 py-1.5 rounded-lg transition-all hidden md:block ${
-            activeTab === "details"
-              ? "bg-[#ccff00] text-black font-semibold shadow"
-              : "hover:bg-white/10 text-white/80"
-          }`}
-        >
-          Details
-        </button>
-
-        {/* Theme Toggle Button */}
+        {/* Theme toggle */}
         {mounted && (
           <button
             onClick={() => {
               if (soundEnabled) playClick();
               setTheme(theme === "dark" ? "light" : "dark");
             }}
-            className="px-3 py-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/80 flex items-center gap-1.5"
-            title="Toggle Theme"
+            className="px-2.5 py-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/70 flex items-center gap-1.5 text-xs"
+            title="Toggle theme"
           >
-            {theme === "dark" ? <Sun size={14} className="text-[#ccff00]" /> : <Moon size={14} className="text-yellow-400" />}
+            {theme === "dark" ? (
+              <Sun className="w-3.5 h-3.5 text-[var(--accent)]" />
+            ) : (
+              <Moon className="w-3.5 h-3.5 text-[var(--accent)]" />
+            )}
             <span className="hidden xs:inline">{theme === "dark" ? "Light" : "Dark"}</span>
           </button>
         )}
 
-        {/* Sound Toggle */}
+        {/* Sound toggle */}
         <button
           onClick={() => setSoundEnabled(!soundEnabled)}
-          className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/80"
+          className="p-1.5 rounded-lg hover:bg-white/10 transition-colors text-white/70"
           title="Toggle SFX"
         >
-          {soundEnabled ? <Volume2 size={14} className="text-[#ccff00]" /> : <VolumeX size={14} className="text-white/40" />}
+          {soundEnabled ? (
+            <Volume2 className="w-3.5 h-3.5 text-[var(--accent)]" />
+          ) : (
+            <VolumeX className="w-3.5 h-3.5 text-white/30" />
+          )}
         </button>
 
-        {/* Primary CTA / Visit Site Badge (Yellow highlighted pill as in picture) */}
+        {/* CTA */}
         <a
-          href="#projects"
-          className="px-3.5 py-1.5 rounded-lg bg-[#ccff00] text-black font-bold hover:bg-[#b8e600] transition-transform active:scale-95 flex items-center gap-1"
+          href="#contact"
+          style={{ backgroundColor: "var(--accent)" }}
+          className="px-3 py-1.5 rounded-lg font-bold hover:brightness-110 transition-all active:scale-95 flex items-center gap-1 text-white text-xs"
         >
-          <span>Explore</span>
-          <ExternalLink size={12} />
+          Hire Me
         </a>
       </motion.div>
 
-      {/* Pop-up Modals for Dock Options */}
+      {/* Pop-up panel */}
       <AnimatePresence>
         {activeTab && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 12, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 left-1/2 -translate-x-1/2 z-[85] w-[90vw] max-w-md p-5 rounded-2xl bg-[#121214] text-white border border-white/15 shadow-2xl font-mono text-xs"
+            exit={{ opacity: 0, y: 12, scale: 0.96 }}
+            transition={{ duration: 0.15 }}
+            className="fixed bottom-20 left-1/2 -translate-x-1/2 z-[80] p-5 rounded-xl bg-[#111111]/98 text-white border border-white/10 backdrop-blur-2xl shadow-2xl font-mono text-xs w-[90vw] max-w-sm"
           >
-            <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
-              <span className="text-[#ccff00] font-bold uppercase tracking-wider flex items-center gap-2">
-                <Terminal size={14} />
-                {activeTab === "creator" && "Creator Profile"}
-                {activeTab === "specs" && "Typography & Palette Specs"}
-                {activeTab === "details" && "Architecture & Tech"}
+            <div className="flex justify-between items-center pb-3 mb-4 border-b border-white/10">
+              <span className="font-bold uppercase tracking-wider text-[var(--accent)] text-[11px]">
+                {activeTab === "creator" ? "System Info" : "Design System"}
               </span>
               <button
                 onClick={() => setActiveTab(null)}
-                className="text-white/50 hover:text-white text-base px-1"
+                className="p-1 hover:bg-white/10 rounded-md text-white/50 hover:text-white transition-colors"
               >
-                ✕
+                <X className="w-3.5 h-3.5" />
               </button>
             </div>
 
             {activeTab === "creator" && (
-              <div className="space-y-2 text-white/80 leading-relaxed">
-                <p className="font-bold text-white text-sm">Kevin Dwi Wijaya</p>
-                <p>Full-Stack Creative Developer & UI Architect based in Jakarta, Indonesia.</p>
-                <div className="pt-2 flex flex-wrap gap-2 text-[10px]">
-                  <span className="px-2 py-0.5 rounded bg-white/10">Next.js 16</span>
-                  <span className="px-2 py-0.5 rounded bg-white/10">Flutter</span>
-                  <span className="px-2 py-0.5 rounded bg-white/10">Laravel</span>
-                  <span className="px-2 py-0.5 rounded bg-white/10">TypeScript</span>
-                </div>
+              <div className="space-y-2.5 text-white/75">
+                {[
+                  ["Name", siteConfig.name],
+                  ["Role", siteConfig.title],
+                  ["Location", siteConfig.location],
+                  ["Status", siteConfig.availabilityShort],
+                ].map(([key, val]) => (
+                  <div key={key} className="flex justify-between gap-4">
+                    <span className="text-white/40">{key}:</span>
+                    <span className="font-semibold text-white text-right">{val}</span>
+                  </div>
+                ))}
               </div>
             )}
 
             {activeTab === "specs" && (
-              <div className="space-y-2 text-white/80">
-                <div className="flex justify-between">
-                  <span className="text-white/50">Display Font:</span>
-                  <span className="font-bold text-white">Syne Bold / Extra Bold</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/50">Body & Code Font:</span>
-                  <span className="font-bold text-white">JetBrains Mono</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/50">Primary Palette:</span>
-                  <span className="font-bold text-[#ccff00]">#CCFF00 (Neon) & Off-White</span>
-                </div>
-              </div>
-            )}
-
-            {activeTab === "details" && (
-              <div className="space-y-2 text-white/80">
-                <p>Inspired by avant-garde editorial brutalism & computational design grids.</p>
-                <p className="text-[#ccff00]">Built with Turbopack, Framer Motion, Lenis Smooth Scroll.</p>
+              <div className="space-y-2.5 text-white/75">
+                {[
+                  ["Display Font", siteConfig.designSystem.displayFont],
+                  ["Mono Font", siteConfig.designSystem.monoFont],
+                  ["Dark Accent", siteConfig.designSystem.darkAccent],
+                  ["Palette", siteConfig.designSystem.palette],
+                  ["Stack", "Next.js 16 · Framer Motion · Lenis"],
+                ].map(([key, val]) => (
+                  <div key={key} className="flex justify-between gap-4">
+                    <span className="text-white/40">{key}:</span>
+                    <span className="font-semibold text-white text-right">{val}</span>
+                  </div>
+                ))}
               </div>
             )}
           </motion.div>

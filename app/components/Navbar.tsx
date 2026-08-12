@@ -1,138 +1,179 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { useSound } from "../hooks/useSound";
-import MobileMenu from "./MobileMenu";
+import { useTheme } from "next-themes";
+import { Sun, Moon, Menu, X, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { siteConfig } from "@/lib/config";
 
-interface NavbarProps {
-  setIsHovered?: (value: boolean) => void;
-}
+const navLinks = [
+  { label: "Projects", href: "#projects" },
+  { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
+  { label: "Contact", href: "#contact" },
+  { label: "Resume", href: "/resume" },
+];
 
-export default function Navbar({ setIsHovered }: NavbarProps) {
-  const { play: playHover } = useSound("/audio/hover.mp3");
-  const { play: playClick } = useSound("/audio/click.mp3");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function Navbar() {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Live Location Clocks
-  const [jktTime, setJktTime] = useState("");
-  const [amsTime, setAmsTime] = useState("");
-
   useEffect(() => {
+    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-
-    const updateClocks = () => {
-      const now = new Date();
-      // Jakarta Time (UTC+7)
-      const jktStr = now.toLocaleTimeString("en-GB", { timeZone: "Asia/Jakarta", hour: "2-digit", minute: "2-digit" });
-      // Amsterdam Time (UTC+1/2)
-      const amsStr = now.toLocaleTimeString("en-GB", { timeZone: "Europe/Amsterdam", hour: "2-digit", minute: "2-digit" });
-
-      setJktTime(jktStr.replace(":", " "));
-      setAmsTime(amsStr.replace(":", " "));
-    };
-
-    updateClocks();
-    const interval = setInterval(updateClocks, 1000);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearInterval(interval);
-    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <>
-      <nav
-        className={`px-6 py-4 flex justify-between items-center sticky top-0 z-[60] font-mono text-xs uppercase tracking-tight transition-all duration-300 ${
-          scrolled
-            ? "bg-background/90 backdrop-blur-md border-b border-foreground/10 shadow-sm"
-            : "bg-transparent border-b border-transparent"
-        }`}
-      >
-        {/* Top Left Logo / Studio Code (matching 2xA / STUDIO in reference image) */}
-        <div className="flex items-center gap-6">
-          <motion.a
-            href="#"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="font-extrabold text-sm tracking-tight text-foreground hover:opacity-70 transition-opacity"
-            onMouseEnter={() => {
-              if (setIsHovered) setIsHovered(true);
-              playHover();
-            }}
-            onMouseLeave={() => setIsHovered && setIsHovered(false)}
+      {/* Top Banner (Render/Laravel style announcement strip) */}
+      <div className="w-full bg-[var(--accent-subtle)] border-b border-[var(--border)] text-xs font-mono py-2 px-4 text-center">
+        <div className="max-w-[1200px] mx-auto flex items-center justify-center gap-2 text-[11px]" style={{ color: "var(--foreground)" }}>
+          <span className="pulse-dot" />
+          <span className="font-medium text-[var(--muted)]">
+            Open to global remote roles & contracts in 2026.
+          </span>
+          <a
+            href="#contact"
+            className="font-bold underline hover:text-[var(--accent)] transition-colors inline-flex items-center gap-0.5 ml-1"
+            style={{ color: "var(--accent)" }}
           >
-            KD / STUDIO
-          </motion.a>
+            Get in touch <ArrowUpRight className="w-3 h-3" />
+          </a>
+        </div>
+      </div>
 
-          {/* Live Location Clocks matching ATH(GR) 14 17  AMS(NL) 13 17 */}
-          <div className="hidden lg:flex items-center gap-6 text-[11px] font-mono text-foreground/60 select-none">
+      {/* Sticky Main Header */}
+      <header className="sticky top-0 z-50 w-full">
+        <div
+          className={`max-w-[1200px] mx-auto px-6 md:px-12 border-x border-b border-[var(--border)] transition-all duration-300 ${
+            scrolled
+              ? "bg-[var(--background)]/95 backdrop-blur-md shadow-sm"
+              : "bg-[var(--background)]"
+          }`}
+        >
+          <div className="flex items-center justify-between h-14">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="font-display font-extrabold text-base tracking-tight text-[var(--foreground)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"
+            >
+              <div className="w-6 h-6 rounded-none bg-[var(--accent)] text-white flex items-center justify-center text-[10px] font-mono font-black">
+                {siteConfig.initials}
+              </div>
+              <span className="font-display font-extrabold text-sm tracking-tight">
+                {siteConfig.name}
+              </span>
+            </Link>
+
+            {/* Desktop Navigation Links */}
+            <nav className="hidden md:flex items-center gap-1">
+              {navLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="px-3 py-1.5 text-xs font-mono font-medium text-[var(--muted)] hover:text-[var(--foreground)] transition-colors rounded-none hover:bg-[var(--surface)]"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* Right Actions */}
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#ccff00] animate-ping" />
-              <span>JKT(ID)</span>
-              <span className="font-bold text-foreground">{jktTime || "04 00"}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span>AMS(NL)</span>
-              <span className="font-bold text-foreground">{amsTime || "22 00"}</span>
+              {/* Theme toggle */}
+              {mounted && (
+                <button
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="p-2 rounded-none text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface)] transition-all"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                </button>
+              )}
+
+              {/* GitHub Link */}
+              <a
+                href={siteConfig.social.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-none border border-[var(--border)] text-xs font-mono font-semibold text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition-all"
+              >
+                GitHub
+              </a>
+
+              {/* Hire Me CTA Button (Render.com sharp zero-radius style) */}
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-none text-xs font-mono font-bold text-white transition-all hover:opacity-90 active:scale-95"
+                style={{ background: "var(--accent)" }}
+              >
+                Hire Me
+              </a>
+
+              {/* Mobile Toggle */}
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="md:hidden p-2 rounded-none text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface)] transition-all"
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </button>
             </div>
           </div>
         </div>
+      </header>
 
-        {/* Top Right Monospace Nav Links (ABOUT, PROJECTS, CONTACT) */}
-        <div className="hidden md:flex items-center gap-8 font-mono text-xs font-semibold tracking-wider">
-          {[
-            { label: "ABOUT", href: "#about" },
-            { label: "PROJECTS", href: "#projects" },
-            { label: "CONTACT", href: "#contact" },
-          ].map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              className="relative group py-1 text-foreground/70 hover:text-foreground transition-colors"
-              onClick={() => playClick()}
-              onMouseEnter={() => {
-                if (setIsHovered) setIsHovered(true);
-                playHover();
-              }}
-              onMouseLeave={() => setIsHovered && setIsHovered(false)}
-            >
-              {item.label}
-              <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-foreground group-hover:w-full transition-all duration-300" />
-            </a>
-          ))}
-          <Link
-            href="/resume"
-            onClick={() => playClick()}
-            onMouseEnter={() => {
-              if (setIsHovered) setIsHovered(true);
-              playHover();
-            }}
-            onMouseLeave={() => setIsHovered && setIsHovered(false)}
-            className="px-3.5 py-1.5 border border-foreground/30 hover:border-foreground rounded-none text-[11px] font-mono tracking-wider text-foreground hover:bg-foreground hover:text-background transition-all"
+      {/* Mobile Navigation Drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-40 pt-20 bg-[var(--background)]"
           >
-            [RESUME]
-          </Link>
-        </div>
-
-        {/* Mobile Menu Toggle Button */}
-        <button
-          onClick={() => setIsMenuOpen(true)}
-          className="md:hidden font-mono font-bold text-xs tracking-wider border border-foreground/30 px-3 py-1.5 rounded-none text-foreground hover:bg-foreground hover:text-background transition-all"
-        >
-          [MENU]
-        </button>
-      </nav>
-
-      <MobileMenu
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        setIsHovered={setIsHovered || (() => {})}
-      />
+            <nav className="max-w-[1200px] mx-auto px-6 flex flex-col py-8 gap-3">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  onClick={() => setMobileOpen(false)}
+                  className="py-3 text-base font-mono font-semibold text-[var(--foreground)] border-b border-[var(--border)] hover:text-[var(--accent)] transition-colors"
+                >
+                  {link.label}
+                </motion.a>
+              ))}
+              <div className="pt-4 flex gap-3">
+                <a
+                  href={siteConfig.social.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 rounded-none border border-[var(--border)] text-xs font-mono text-center flex-1"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="#contact"
+                  onClick={() => setMobileOpen(false)}
+                  className="px-4 py-2.5 rounded-none text-white text-xs font-mono text-center flex-1 font-bold"
+                  style={{ background: "var(--accent)" }}
+                >
+                  Hire Me
+                </a>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

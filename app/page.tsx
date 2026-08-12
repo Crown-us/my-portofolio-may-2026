@@ -1,67 +1,56 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useScroll, useSpring, motion } from "framer-motion";
 import CustomCursor from "./components/CustomCursor";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import StackCloud from "./components/StackCloud";
 import About from "./components/About";
-import Services from "./components/Services";
+import TechShowcase from "./components/TechShowcase";
 import Projects from "./components/Projects";
+import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Preloader from "./components/Preloader";
 import MusicPlayer from "./components/MusicPlayer";
 import ControlDock from "./components/ControlDock";
+import { CursorProvider } from "./context/CursorContext";
 
-import GenerativeCode from "./components/GenerativeCode";
-
-export default function Home() {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const [cursorText, setCursorText] = useState("");
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
+function HomeInner() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   return (
-    <main className="min-h-screen flex flex-col bg-background text-foreground selection:bg-[#ccff00] selection:text-black">
+    <main className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
       <Preloader />
       <MusicPlayer />
-      <CustomCursor mousePos={mousePos} isHovered={isHovered} activeText={cursorText} />
+      <CustomCursor />
       <ControlDock />
 
-      {/* Progress Bar */}
+      {/* Scroll progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[2px] bg-[#ccff00] origin-left z-[100]"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-[var(--accent)] origin-left z-[100]"
         style={{ scaleX }}
       />
 
-      <Navbar setIsHovered={setIsHovered} />
+      <Navbar />
 
-      <div>
-        <Hero setIsHovered={setIsHovered} />
-        <About />
-        <GenerativeCode />
-        <Services setIsHovered={setIsHovered} />
-        <Projects
-          setIsHovered={(val: boolean) => {
-            setIsHovered(val);
-            if (!val) setCursorText("");
-          }}
-          setCursorText={setCursorText}
-        />
-        <Contact />
-        <Footer setIsHovered={setIsHovered} />
-      </div>
+      <Hero />
+      <StackCloud />
+      <Projects />
+      <About />
+      <TechShowcase />
+      <Services />
+      <Contact />
+      <Footer />
     </main>
+  );
+}
+
+export default function Home() {
+  return (
+    <CursorProvider>
+      <HomeInner />
+    </CursorProvider>
   );
 }

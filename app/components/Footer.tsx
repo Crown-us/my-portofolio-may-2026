@@ -1,78 +1,98 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
+import { siteConfig } from "@/lib/config";
 
-interface FooterProps {
-  setIsHovered?: (value: boolean) => void;
-}
-
-export default function Footer({ setIsHovered }: FooterProps) {
-  const socials = [
-    { label: "Instagram", href: "https://www.instagram.com/kepsssz?igsh=dzVtdTF5Y3F5NjQ1" },
-    { label: "Twitter / X", href: "https://x.com/bu_kanan" },
-    { label: "Dribbble", href: "https://dribbble.com/kevindw" },
-    { label: "Behance", href: "https://www.behance.net/kevinwijaya7" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/kevin-dwi-wijaya-95aa812b4" },
-    { label: "Github", href: "https://github.com/Crown-us" },
+export default function Footer() {
+  const navLinks = [
+    { label: "Projects", href: "#projects" },
+    { label: "About", href: "#about" },
+    { label: "Services", href: "#services" },
+    { label: "Contact", href: "#contact" },
+    { label: "Resume", href: "/resume" },
   ];
+
+  const socials = [
+    { label: "Instagram", href: siteConfig.social.instagram },
+    { label: "Twitter / X", href: siteConfig.social.twitter },
+    { label: "Dribbble", href: siteConfig.social.dribbble },
+    { label: "Behance", href: siteConfig.social.behance },
+    { label: "LinkedIn", href: siteConfig.social.linkedin },
+    { label: "GitHub", href: siteConfig.social.github },
+  ];
+
+  const marqueeText = `${siteConfig.name.toUpperCase()} · FULL-STACK ENGINEER · OPEN TO REMOTE ·`;
+  const repeated = Array(8).fill(marqueeText);
 
   return (
     <>
-      {/* Editorial Marquee Strip */}
-      <section className="bg-[#ccff00] text-black py-4 overflow-hidden relative border-y border-black font-mono font-bold select-none">
-        <div className="flex whitespace-nowrap animate-marquee">
-          {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="flex items-center shrink-0">
-              <span className="font-display text-[8vw] md:text-[5vw] font-extrabold px-6 leading-none uppercase tracking-tighter">
-                CODE-DRIVEN DESIGN STUDIO
+      {/* Marquee strip */}
+      <div className="w-full overflow-hidden py-3.5 select-none" style={{ background: "var(--accent)" }}>
+        <div className="flex">
+          <div className="marquee-track flex items-center">
+            {repeated.map((text, i) => (
+              <span
+                key={i}
+                className="shrink-0 whitespace-nowrap px-8 text-white font-bold uppercase tracking-tight"
+                style={{ fontFamily: "var(--font-space)", fontSize: "clamp(0.9rem, 2.5vw, 1.25rem)" }}
+              >
+                {text}
               </span>
-              <div className="w-8 h-8 md:w-12 md:h-12 bg-black rounded-full mx-4 flex items-center justify-center shrink-0">
-                <ArrowUpRight className="w-5 h-5 md:w-7 md:h-7 text-[#ccff00]" />
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Editorial Monospace Footer */}
-      <footer className="px-6 py-16 bg-background text-foreground border-t border-foreground/15 font-mono select-none">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
-            
-            {/* Brand / Studio Info */}
-            <div className="md:col-span-6 space-y-4">
-              <h2 className="font-display text-3xl md:text-5xl font-extrabold uppercase tracking-tighter">
-                KD / STUDIO
+      {/* Main footer — Centered inside 1200px container */}
+      <footer
+        className="w-full bg-[var(--background)] border-t border-[var(--border)] text-[var(--foreground)]"
+      >
+        <div className="max-w-[1200px] mx-auto px-6 md:px-12 border-x border-[var(--border)] py-16 relative">
+          
+          {/* Corner dots */}
+          <div className="grid-dot -top-[3px] -left-[3px]" />
+          <div className="grid-dot -top-[3px] -right-[3px]" />
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
+            {/* Brand */}
+            <div className="md:col-span-5 flex flex-col gap-3">
+              <h2
+                className="font-bold"
+                style={{ fontFamily: "var(--font-space)", fontSize: "1.75rem", color: "var(--foreground)" }}
+              >
+                {siteConfig.initials}<span style={{ color: "var(--accent)" }}>.</span>
               </h2>
-              <p className="text-xs text-foreground/70 max-w-sm leading-relaxed">
-                Fullstack Engineering &amp; Avant-Garde Typography Systems. Based in Jakarta, Indonesia. Operating Worldwide.
+              <p className="text-xs font-mono leading-relaxed max-w-xs" style={{ color: "var(--muted)" }}>
+                {siteConfig.title}. Based in {siteConfig.location}. Building scalable digital products for global teams.
               </p>
-              <div className="pt-2 text-xs">
-                <span className="text-foreground/50">DIRECT EMAIL: </span>
-                <a href="mailto:wijaya.kevinn@gmail.com" className="font-bold underline hover:text-[#ccff00] transition-colors">
-                  wijaya.kevinn@gmail.com
+              <p className="text-xs font-mono">
+                <span style={{ color: "var(--muted)" }}>Email: </span>
+                <a
+                  href={`mailto:${siteConfig.email}`}
+                  className="font-semibold transition-colors"
+                  style={{ color: "var(--foreground)" }}
+                  onMouseEnter={e => (e.currentTarget.style.color = "var(--accent)")}
+                  onMouseLeave={e => (e.currentTarget.style.color = "var(--foreground)")}
+                >
+                  {siteConfig.email}
                 </a>
-              </div>
+              </p>
             </div>
 
-            {/* Navigation */}
-            <div className="md:col-span-3 space-y-3 text-xs">
-              <p className="font-bold uppercase tracking-wider text-[#ccff00] bg-black px-2 py-0.5 w-fit">
-                NAVIGATION
+            {/* Nav */}
+            <div className="md:col-span-3 flex flex-col gap-3">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest" style={{ color: "var(--muted)" }}>
+                Navigation
               </p>
-              <ul className="space-y-2">
-                {[
-                  { label: "PROJECTS", href: "#projects" },
-                  { label: "ABOUT", href: "#about" },
-                  { label: "CONTACT", href: "#contact" },
-                  { label: "RESUME [PDF]", href: "/resume" },
-                ].map((item) => (
+              <ul className="flex flex-col gap-2">
+                {navLinks.map(item => (
                   <li key={item.label}>
                     <a
                       href={item.href}
-                      className="text-foreground/70 hover:text-foreground hover:underline transition-colors"
-                      onMouseEnter={() => setIsHovered && setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered && setIsHovered(false)}
+                      className="text-xs font-mono transition-colors"
+                      style={{ color: "var(--muted)" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = "var(--foreground)")}
+                      onMouseLeave={e => (e.currentTarget.style.color = "var(--muted)")}
                     >
                       {item.label}
                     </a>
@@ -81,54 +101,45 @@ export default function Footer({ setIsHovered }: FooterProps) {
               </ul>
             </div>
 
-            {/* Social Channels */}
-            <div className="md:col-span-3 space-y-3 text-xs">
-              <p className="font-bold uppercase tracking-wider text-[#ccff00] bg-black px-2 py-0.5 w-fit">
-                CHANNELS
+            {/* Socials */}
+            <div className="md:col-span-4 flex flex-col gap-3">
+              <p className="text-[10px] font-mono font-bold uppercase tracking-widest" style={{ color: "var(--muted)" }}>
+                Social Channels
               </p>
-              <ul className="space-y-2">
+              <ul className="flex flex-col gap-2">
                 {socials.map(({ label, href }) => (
                   <li key={label}>
                     <a
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-foreground/70 hover:text-foreground flex items-center justify-between group transition-colors"
-                      onMouseEnter={() => setIsHovered && setIsHovered(true)}
-                      onMouseLeave={() => setIsHovered && setIsHovered(false)}
+                      className="text-xs font-mono flex items-center justify-between group transition-colors"
+                      style={{ color: "var(--muted)" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = "var(--foreground)")}
+                      onMouseLeave={e => (e.currentTarget.style.color = "var(--muted)")}
                     >
                       <span>{label}</span>
-                      <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
-
           </div>
 
-          {/* Bottom Bar */}
-          <div className="border-t border-foreground/15 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-foreground/50 gap-4">
-            <p>© 2026 KEVIN DWI WIJAYA. ALL RIGHTS RESERVED.</p>
+          {/* Bottom bar */}
+          <div
+            className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-8 text-[11px] font-mono"
+            style={{ borderTop: "1px solid var(--border)", color: "var(--muted)" }}
+          >
+            <p>© {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#ccff00] animate-pulse" />
-              <span>DESIGNED &amp; CODED IN JAKARTA, ID</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span>Designed & built in {siteConfig.location}</span>
             </div>
           </div>
         </div>
       </footer>
-
-      <style jsx global>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          display: flex;
-          width: fit-content;
-          animation: marquee 25s linear infinite;
-        }
-      `}</style>
     </>
   );
 }

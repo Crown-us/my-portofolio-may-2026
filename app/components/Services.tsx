@@ -1,120 +1,167 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
+import { siteConfig } from "@/lib/config";
 
-const services = [
-  {
-    num: "01",
-    title: "WEB ENGINEERING",
-    desc: "Building high-performance web apps & design systems using Next.js 16, React, & Tailwind CSS with component-driven architecture.",
-    tags: ["Next.js", "React", "TypeScript", "Tailwind"]
-  },
-  {
-    num: "02",
-    title: "MOBILE APP DEVELOPMENT",
-    desc: "Developing cross-platform native iOS & Android applications with Flutter & Dart, integrated REST APIs & Supabase/Firebase.",
-    tags: ["Flutter", "Dart", "Firebase", "REST API"]
-  },
-  {
-    num: "03",
-    title: "COMPUTATIONAL UI/UX",
-    desc: "Architecting minimalist, high-impact user interfaces in Figma, establishing design tokens, micro-interactions, & wireframes.",
-    tags: ["Figma", "Design Systems", "Prototyping"]
-  },
-  {
-    num: "04",
-    title: "BACKEND & API ARCHITECTURE",
-    desc: "Engineering scalable backend systems & APIs with Laravel & Node.js, backed by PostgreSQL/MySQL databases.",
-    tags: ["Laravel", "Node.js", "PostgreSQL", "REST API"]
-  },
-  {
-    num: "05",
-    title: "BRAND & DIGITAL IDENTITY",
-    desc: "Crafting bold brand identity, visual style guides, and editorial typography guidelines for modern digital products.",
-    tags: ["Visual Identity", "Typography", "Art Direction"]
-  },
-];
+export default function Services() {
+  const { services } = siteConfig;
 
-interface ServicesProps {
-  setIsHovered?: (value: boolean) => void;
-}
-
-export default function Services({ setIsHovered }: ServicesProps) {
   return (
-    <section className="py-24 md:py-32 bg-background text-foreground border-t border-foreground/15 relative font-mono select-none">
-      <div className="container mx-auto px-4 md:px-8">
+    <section id="services" className="w-full bg-[var(--background)] border-t border-[var(--border)]">
+      {/* Master Centered Container */}
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 border-x border-[var(--border)] py-20 md:py-28 relative">
         
+        {/* Corner dots */}
+        <div className="grid-dot -top-[3px] -left-[3px]" />
+        <div className="grid-dot -top-[3px] -right-[3px]" />
+
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end pb-12 mb-12 border-b border-foreground/15 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#ccff00] bg-black px-2 py-0.5 font-bold mb-3 inline-block">
-              [04] CAPABILITIES &amp; SERVICES
-            </span>
-            <h2 className="font-display text-4xl md:text-7xl font-extrabold tracking-tighter uppercase text-foreground">
-              WHAT I BUILD
+            <p className="text-[11px] font-mono font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--accent)" }}>
+              [ 04 ] SERVICES
+            </p>
+            <h2
+              className="font-bold tracking-tight"
+              style={{ fontFamily: "var(--font-space)", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--foreground)" }}
+            >
+              What I can{" "}
+              <em style={{ color: "var(--accent)", fontStyle: "italic" }}>build for you</em>
             </h2>
           </div>
-          <div className="text-right font-mono text-xs text-foreground/60">
-            SOLUTIONS: <span className="font-bold text-foreground">END-TO-END DEVELOPMENT</span>
-          </div>
+          <p className="text-xs font-mono" style={{ color: "var(--muted)" }}>
+            End-to-end engineering — design to production deployment.
+          </p>
         </div>
 
-        {/* Services List */}
-        <div className="divide-y divide-foreground/15">
-          {services.map((service, idx) => (
-            <motion.div
-              key={service.num}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              viewport={{ once: true }}
-              className="group grid grid-cols-12 items-center gap-4 py-6 md:py-8 cursor-pointer hover:bg-foreground/[0.03] transition-colors px-2 -mx-2"
-              onMouseEnter={() => setIsHovered && setIsHovered(true)}
-              onMouseLeave={() => setIsHovered && setIsHovered(false)}
-            >
-              {/* Number */}
-              <span className="col-span-1 font-bold text-xs text-[#ccff00] bg-foreground px-2 py-0.5 w-fit">
-                [{service.num}]
-              </span>
-
-              {/* Title */}
-              <h3 className="col-span-11 md:col-span-4 font-display text-xl md:text-3xl font-extrabold uppercase leading-none group-hover:text-[#ccff00] transition-colors">
-                {service.title}
-              </h3>
-
-              {/* Description */}
-              <p className="hidden md:block col-span-4 text-xs text-foreground/70 leading-relaxed">
-                {service.desc}
-              </p>
-
-              {/* Tags */}
-              <div className="hidden md:flex col-span-3 flex-wrap gap-1.5 justify-end">
-                {service.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 border border-foreground/20 text-[10px] text-foreground/80 group-hover:border-foreground transition-colors"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Mobile Desc & Tags */}
-              <div className="col-span-11 md:hidden col-start-2 space-y-2 pt-2 text-xs">
-                <p className="text-foreground/70">{service.desc}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {service.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-0.5 border border-foreground/20 text-[10px]">
-                      {tag}
-                    </span>
-                  ))}
+        {/* Service Split Sections (Laravel style) */}
+        <div className="flex flex-col rounded-xl overflow-hidden" style={{ border: "1px solid var(--border)" }}>
+          {services.map((service, i) => {
+            const isEven = i % 2 === 0;
+            return (
+              <motion.div
+                key={service.num}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.45 }}
+                className="grid grid-cols-1 md:grid-cols-2"
+                style={{ borderTop: i > 0 ? "1px solid var(--border)" : "none" }}
+              >
+                {/* Text col */}
+                <div
+                  className={`p-8 md:p-12 flex flex-col justify-between gap-6 ${!isEven ? "md:order-2" : ""}`}
+                >
+                  <div>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span
+                        className="text-[10px] font-mono font-bold px-2 py-0.5 rounded"
+                        style={{
+                          color: "var(--accent)",
+                          background: "var(--accent-subtle)",
+                          border: "1px solid var(--accent-border)",
+                        }}
+                      >
+                        {service.num}
+                      </span>
+                    </div>
+                    <h3
+                      className="font-bold mb-3 tracking-tight"
+                      style={{ fontFamily: "var(--font-space)", fontSize: "1.35rem", color: "var(--foreground)" }}
+                    >
+                      {service.title}
+                    </h3>
+                    <p className="text-xs md:text-sm font-mono leading-relaxed mb-6" style={{ color: "var(--muted)" }}>
+                      {service.description}
+                    </p>
+                    <ul className="space-y-2.5">
+                      {service.bullets.map(b => (
+                        <li key={b} className="flex items-start gap-2.5 text-xs font-mono" style={{ color: "var(--muted)" }}>
+                          <Check className="w-3.5 h-3.5 mt-0.5 shrink-0" style={{ color: "var(--accent)" }} />
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <a
+                      href={service.cta.href}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold px-4 py-2 rounded-md transition-all"
+                      style={{ color: "var(--accent)", border: "1px solid var(--accent-border)" }}
+                      onMouseEnter={e => { e.currentTarget.style.background = "var(--accent-subtle)"; }}
+                      onMouseLeave={e => { e.currentTarget.style.background = "transparent"; }}
+                    >
+                      {service.cta.label} <ArrowUpRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Visual col */}
+                <div
+                  className={`hidden md:flex items-center justify-center p-12 ${!isEven ? "md:order-1" : ""}`}
+                  style={{
+                    borderLeft: isEven ? "1px solid var(--border)" : "none",
+                    borderRight: !isEven ? "1px solid var(--border)" : "none",
+                    background: "var(--surface)",
+                  }}
+                >
+                  <ServiceVisual num={service.num} />
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
+  );
+}
+
+function ServiceVisual({ num }: { num: string }) {
+  if (num === "01") {
+    return (
+      <div
+        className="w-full max-w-[220px] rounded-lg p-4 font-mono text-[11px] leading-loose"
+        style={{ border: "1px solid var(--border)", background: "rgba(0,0,0,0.2)" }}
+      >
+        {["app/", "├── page.tsx", "├── layout.tsx", "└── components/", "    ├── Hero.tsx", "    └── Navbar.tsx"].map((l, i) => (
+          <div key={i} style={{ color: i === 0 ? "var(--accent)" : "var(--muted)" }}>{l}</div>
+        ))}
+      </div>
+    );
+  }
+  if (num === "02") {
+    return (
+      <div
+        className="relative flex flex-col items-center justify-between w-36 h-60 rounded-[22px] p-3"
+        style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
+      >
+        <div className="w-10 h-1 rounded-full" style={{ background: "var(--border)" }} />
+        <div
+          className="flex-1 w-full rounded-xl my-2 flex items-center justify-center text-[11px] font-mono font-bold"
+          style={{ background: "var(--accent-subtle)", border: "1px solid var(--accent-border)", color: "var(--accent)" }}
+        >
+          Flutter
+        </div>
+        <div className="w-8 h-8 rounded-full" style={{ border: "1px solid var(--border)" }} />
+      </div>
+    );
+  }
+  return (
+    <div className="flex flex-col gap-3 w-full max-w-[200px]">
+      <div className="h-1.5 rounded-sm w-3/4" style={{ background: "var(--accent)" }} />
+      <div className="h-1.5 rounded-sm w-full" style={{ background: "var(--border)" }} />
+      <div
+        className="flex-1 h-28 rounded-lg flex items-center justify-center text-xs font-mono font-bold"
+        style={{ border: "1px solid var(--accent-border)", background: "var(--accent-subtle)", color: "var(--accent)" }}
+      >
+        Figma
+      </div>
+      <div className="flex gap-2">
+        {["#ff443a", "#06b6d4", "#f59e0b"].map(c => (
+          <div key={c} className="w-5 h-5 rounded-full" style={{ background: c, border: "2px solid rgba(255,255,255,0.15)" }} />
+        ))}
+      </div>
+    </div>
   );
 }
