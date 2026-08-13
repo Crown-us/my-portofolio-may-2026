@@ -57,15 +57,28 @@ export default function Navbar() {
           }`}
         >
           <div className="flex items-center justify-between h-14">
-            {/* Logo */}
+            {/* Logo — Sleek Code Badge <KD /> */}
             <Link
               href="/"
-              className="font-display font-extrabold text-base tracking-tight text-[var(--foreground)] hover:text-[var(--accent)] transition-colors flex items-center gap-2"
+              className="group flex items-center gap-2.5 transition-all text-[var(--foreground)]"
             >
-              <div className="w-6 h-6 rounded-none bg-[var(--accent)] text-white flex items-center justify-center text-[10px] font-mono font-black">
-                {siteConfig.initials}
+              <div
+                className="flex items-center gap-0.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-black transition-all"
+                style={{
+                  border: "1px solid var(--accent-border)",
+                  background: "var(--accent-subtle)",
+                  color: "var(--foreground)",
+                }}
+              >
+                <span className="text-[var(--accent)] font-bold">&lt;</span>
+                <span className="tracking-widest group-hover:text-[var(--accent)] transition-colors">{siteConfig.initials}</span>
+                <span className="text-[var(--accent)] font-bold">/&gt;</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)] animate-pulse ml-0.5" />
               </div>
-              <span className="font-display font-extrabold text-sm tracking-tight">
+              <span
+                className="font-bold text-sm tracking-tight transition-colors group-hover:text-[var(--accent)] hidden xs:inline-block"
+                style={{ fontFamily: "var(--font-space)" }}
+              >
                 {siteConfig.name}
               </span>
             </Link>
