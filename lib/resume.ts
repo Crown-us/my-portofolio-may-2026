@@ -2,14 +2,14 @@ export const resumeData = {
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Kevin Dwi Wijaya",
-    "label": "Flutter · Next.js · Laravel · UI/UX Developer",
-    "email": "kevindwiwijaya@email.com",
-    "phone": "+62 8xx-xxxx-xxxx",
+    "label": "Full-Stack & Mobile Engineer (Next.js · Flutter · Laravel)",
+    "email": "wijaya.kevinn@gmail.com",
+    "phone": "+62 851-1739-4878",
     "url": "https://kevindwiwijaya.dev",
-    "summary": "Creative Developer & D3 Informatics graduate specialized in building high-performance mobile and web applications using Flutter, Next.js, and Laravel.",
+    "summary": "Full-Stack & Mobile Engineer specializing in Next.js, Flutter, and Laravel. 3+ years experience engineering scalable web platforms, cross-platform mobile apps, and robust APIs.",
     "location": {
-      "city": "Kediri",
-      "region": "East Java",
+      "city": "Jakarta",
+      "region": "DKI Jakarta",
       "countryCode": "ID"
     },
     "profiles": [
@@ -20,7 +20,7 @@ export const resumeData = {
       },
       {
         "network": "LinkedIn",
-        "username": "kevindwiwijaya",
+        "username": "kevin-dwi-wijaya",
         "url": "https://www.linkedin.com/in/kevin-dwi-wijaya-95aa812b4"
       }
     ]
@@ -34,77 +34,76 @@ export const resumeData = {
       "endDate": "2024-08-01",
       "courses": [
         "Mobile Application Development",
-        "Web Programming",
-        "Database Management",
-        "UI/UX Design"
+        "Web Programming & Architecture",
+        "Database Systems & Optimization",
+        "UI/UX Design Systems"
       ]
     }
   ],
   "work": [
     {
-      "name": "Company Name (Internship)",
-      "position": "Mobile & Web Developer Intern",
-      "location": "Jombang, East Java",
-      "startDate": "2024-01-01",
+      "name": "Software & Product Engineering",
+      "position": "Full-Stack & Mobile Software Engineer",
+      "location": "Jakarta / Remote",
+      "startDate": "2023-01-01",
       "endDate": "",
-      "summary": "Currently undertaking internship focused on mobile and web development.",
+      "summary": "Engineering production web platforms and cross-platform mobile apps.",
       "highlights": [
-        "Developing Flutter-based mobile applications for internal use",
-        "Building web features using Next.js and Laravel",
-        "Collaborating on UI/UX design and prototyping",
-        "Implementing REST API integrations"
+        "Engineered cross-platform mobile applications using Flutter & Dart with BLoC state management",
+        "Built production-ready web platforms using Next.js App Router, TypeScript, and Tailwind CSS",
+        "Architected scalable REST APIs with Laravel & Node.js, backed by PostgreSQL and Supabase",
+        "Optimized Core Web Vitals and reduced API latency by up to 45% across featured production projects"
       ]
     }
   ],
   "skills": [
     {
-      "name": "Mobile Development",
+      "name": "Mobile Engineering",
       "level": "Advanced",
-      "keywords": ["Flutter", "Dart", "State Management", "REST API", "Firebase"]
+      "keywords": ["Flutter", "Dart", "BLoC Pattern", "REST API", "Firebase", "App Publishing"]
     },
     {
-      "name": "Web Development",
+      "name": "Web Engineering",
       "level": "Advanced",
-      "keywords": ["Next.js", "React", "Laravel", "PHP", "Tailwind CSS", "TypeScript"]
+      "keywords": ["Next.js 16", "React 19", "TypeScript", "Laravel 11", "Tailwind CSS v4", "Node.js"]
     },
     {
-      "name": "UI/UX Design",
+      "name": "UI/UX & Design Systems",
       "level": "Intermediate",
-      "keywords": ["Figma", "Prototyping", "Wireframing", "Design System", "User Research"]
+      "keywords": ["Figma", "Design Tokens", "Wireframing", "WCAG Accessibility"]
     },
     {
-      "name": "Backend & Database",
+      "name": "Database & Cloud",
       "level": "Intermediate",
-      "keywords": ["MySQL", "PostgreSQL", "Supabase", "RESTful API", "Eloquent ORM"]
+      "keywords": ["PostgreSQL", "Supabase", "MySQL", "Redis", "Eloquent ORM"]
     },
     {
       "name": "Tools & DevOps",
       "level": "Intermediate",
-      "keywords": ["Git", "GitHub", "Vercel", "VS Code", "Postman"]
+      "keywords": ["Git", "GitHub Actions", "Vercel", "Docker", "VS Code", "Postman"]
     }
   ],
   "projects": [
     {
-      "name": "Flutter Mobile App",
-      "description": "Cross-platform mobile application built with Flutter and Dart, featuring clean architecture and state management.",
+      "name": "NEXUS AI SAAS",
+      "description": "Next-gen generative AI platform providing multi-modal workflow orchestration and real-time streaming analytics.",
       "highlights": [
-        "Implemented BLoC/Provider state management",
-        "REST API integration with Laravel backend",
-        "Custom UI components and animations"
+        "Achieved 45% API latency reduction with optimized server action streaming",
+        "Scaled architecture to support 10k+ active users",
+        "Built with Next.js 16, TypeScript, Tailwind CSS v4, and PostgreSQL"
       ],
-      "keywords": ["Flutter", "Dart", "Laravel", "REST API"],
-      "url": "https://github.com/Crown-us"
+      "keywords": ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
+      "url": "https://nexus-ai-demo.vercel.app"
     },
     {
-      "name": "Next.js Web Application",
-      "description": "Full-stack web application using Next.js App Router with Supabase backend and Tailwind CSS.",
+      "name": "PULSE ENGINE DASHBOARD",
+      "description": "High-throughput financial metrics dashboard processing real-time WebSocket telemetry with sub-50ms render cycles.",
       "highlights": [
-        "Server-side rendering and API routes",
-        "Authentication with Supabase Auth",
-        "Responsive design with Tailwind CSS"
+        "Handled 1M+ daily telemetry events with 99.99% uptime",
+        "Integrated Redis caching and WebSocket channels"
       ],
-      "keywords": ["Next.js", "React", "Supabase", "Tailwind CSS"],
-      "url": "https://github.com/Crown-us"
+      "keywords": ["React", "TypeScript", "Node.js", "Redis", "WebSockets"],
+      "url": "https://pulse-engine-demo.vercel.app"
     }
   ],
   "languages": [
@@ -114,17 +113,17 @@ export const resumeData = {
     },
     {
       "language": "English",
-      "fluency": "Intermediate"
+      "fluency": "Professional / Full Working"
     }
   ],
   "interests": [
     {
-      "name": "Building digital products",
-      "keywords": ["SaaS", "Passive Income", "Open Source"]
+      "name": "Building Digital Products",
+      "keywords": ["SaaS Platforms", "Mobile Apps", "Open Source"]
     },
     {
-      "name": "UI/UX Exploration",
-      "keywords": ["Design Systems", "Micro-interactions", "Accessibility"]
+      "name": "UI/UX & Performance",
+      "keywords": ["Design Systems", "Micro-interactions", "Core Web Vitals"]
     }
   ]
 };

@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section className="w-full relative bg-[var(--background)]">
       {/* Centered Master Grid Frame */}
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12 border-x border-[var(--border)] relative min-h-[calc(100vh-6rem)] flex flex-col items-center justify-center text-center py-20 overflow-hidden grid-bg-pattern">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 border-x border-[var(--border)] relative min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center text-center py-14 md:py-20 pb-28 md:pb-36 grid-bg-pattern">
 
         {/* Grid Corner Dot Accents */}
         <div className="grid-dot top-0 -left-[3px]" />
@@ -29,7 +29,7 @@ export default function Hero() {
         />
 
         {/* Content Box */}
-        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto gap-6">
+        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto gap-5 md:gap-6 w-full">
 
           {/* Availability pill (Render sharp tech badge style) */}
           <motion.div
@@ -49,12 +49,11 @@ export default function Hero() {
 
           {/* Headline */}
           <h1
-            className="font-display font-extrabold tracking-tight leading-[1.01]"
-            style={{ fontSize: "clamp(3rem, 7.5vw, 6.5rem)", fontFamily: "var(--font-space)" }}
+            className="font-display font-extrabold tracking-tight leading-[1.05] max-w-full break-words"
+            style={{ fontSize: "clamp(2.1rem, 5.2vw, 4.8rem)", fontFamily: "var(--font-space)" }}
           >
             {words.map((word, i) => {
-              const clean = word.replace(/[^a-zA-Z]/g, "");
-              const punct = word.slice(clean.length);
+              const clean = word.replace(/[^a-zA-Z-]/g, "");
               const isAccent = clean.toLowerCase() === accentWord.toLowerCase();
               return (
                 <motion.span
@@ -62,10 +61,10 @@ export default function Hero() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.25 + i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
-                  className="inline-block mr-[0.2em]"
+                  className="inline-block mr-[0.22em] max-w-full"
                   style={isAccent ? { fontStyle: "italic", color: "var(--accent)" } : { color: "var(--foreground)" }}
                 >
-                  {clean}{punct}
+                  {word}
                 </motion.span>
               );
             })}
@@ -76,13 +75,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-sm md:text-base leading-relaxed max-w-xl font-mono"
+            className="text-xs sm:text-sm md:text-base leading-relaxed max-w-xl font-mono px-2"
             style={{ color: "var(--muted)" }}
           >
             {siteConfig.subtitle}
           </motion.p>
 
-          {/* Action Buttons (Render.com sharp zero border-radius CTAs) */}
+          {/* Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,12 +106,32 @@ export default function Hero() {
             </a>
           </motion.div>
 
+          {/* HR & Recruiter Fast-Facts Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.85 }}
+            className="w-full max-w-2xl grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 p-3 rounded-lg"
+            style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
+          >
+            {siteConfig.stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center justify-center p-2 text-center">
+                <span className="text-[10px] font-mono uppercase tracking-wider" style={{ color: "var(--muted)" }}>
+                  {stat.label}
+                </span>
+                <span className="text-xs font-mono font-bold mt-0.5" style={{ color: "var(--foreground)" }}>
+                  {stat.value}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+
           {/* Location & Timezone info bar */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.95 }}
-            className="flex items-center gap-4 text-xs font-mono pt-4"
+            className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono pt-1"
             style={{ color: "var(--muted)" }}
           >
             <span className="flex items-center gap-1.5">

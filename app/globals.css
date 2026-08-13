@@ -5,16 +5,16 @@
 ──────────────────────────────────────────────────────────────*/
 :root {
   --background: #ffffff;
-  --foreground: #0d0d0d;
-  --muted: rgba(13, 13, 13, 0.6);
-  --border: rgba(13, 13, 13, 0.15);
-  --accent: #ff443a; /* Render Red/Coral Accent */
-  --accent-purple: #8b5cf6;
-  --accent-hover: #ff2d20;
-  --surface: rgba(13, 13, 13, 0.025);
-  --surface-hover: rgba(13, 13, 13, 0.05);
-  --accent-subtle: rgba(255, 68, 58, 0.06);
-  --accent-border: rgba(255, 68, 58, 0.22);
+  --foreground: #0f172a;
+  --muted: rgba(15, 23, 42, 0.62);
+  --border: rgba(15, 23, 42, 0.12);
+  --accent: #2563eb; /* Electric Cobalt Blue for Light Mode */
+  --accent-purple: #7c3aed;
+  --accent-hover: #1d4ed8;
+  --surface: rgba(37, 99, 235, 0.025);
+  --surface-hover: rgba(37, 99, 235, 0.06);
+  --accent-subtle: rgba(37, 99, 235, 0.08);
+  --accent-border: rgba(37, 99, 235, 0.25);
 }
 
 .dark {
@@ -22,7 +22,7 @@
   --foreground: #ffffff;
   --muted: rgba(255, 255, 255, 0.52);
   --border: rgba(255, 255, 255, 0.12);
-  --accent: #ff443a;
+  --accent: #ff443a; /* Render Coral Red for Dark Mode */
   --accent-purple: #a78bfa;
   --accent-hover: #ff2d20;
   --surface: rgba(255, 255, 255, 0.035);

@@ -41,18 +41,18 @@ export default function About() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
           <div>
             <p className="text-[11px] font-mono font-bold uppercase tracking-[0.1em] mb-3" style={{ color: "var(--accent)" }}>
-              [ 02 ] WHAT I DO
+              [ 02 ] EXECUTIVE SUMMARY & CAPABILITIES
             </p>
             <h2
               className="font-bold tracking-tight"
               style={{ fontFamily: "var(--font-space)", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "var(--foreground)" }}
             >
-              Built for{" "}
-              <em style={{ color: "var(--accent)", fontStyle: "italic" }}>every layer</em>
+              Engineered for scale,{" "}
+              <em style={{ color: "var(--accent)", fontStyle: "italic" }}>built for speed</em>
             </h2>
           </div>
           <div className="text-right">
-            <p className="text-xs font-mono" style={{ color: "var(--muted)" }}>{siteConfig.location} / {siteConfig.timezone}</p>
+            <p className="text-xs font-mono" style={{ color: "var(--muted)" }}>{siteConfig.location}</p>
             <p className="text-xs font-mono font-semibold mt-1" style={{ color: "var(--accent)" }}>{siteConfig.availabilityShort}</p>
           </div>
         </div>
@@ -105,16 +105,21 @@ export default function About() {
           })}
         </div>
 
-        {/* Bio strip below grid */}
+        {/* Executive Bio strip below grid */}
         <div
-          className="mt-8 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
+          className="mt-8 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
           style={{ borderTop: "1px solid var(--border)" }}
         >
-          <p className="text-xs font-mono leading-relaxed max-w-lg" style={{ color: "var(--muted)" }}>
-            D3 Informatics graduate from Politeknik Negeri Malang (Polinema). Experienced in building
-            cross-platform digital products with Next.js, Flutter, and Laravel.
-          </p>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex flex-col gap-1 max-w-xl">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[var(--accent)]">
+              Background & Education
+            </span>
+            <p className="text-xs font-mono leading-relaxed" style={{ color: "var(--muted)" }}>
+              D3 Informatics Graduate from <strong className="text-[var(--foreground)]">Politeknik Negeri Malang (Polinema)</strong>. 
+              Specialized in production-ready full-stack web and mobile engineering, clean architecture, and remote team collaboration across global timezones.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 shrink-0 p-3.5 rounded-lg border border-[var(--border)] bg-[var(--surface)]">
             <span className="pulse-dot" />
             <span className="text-xs font-mono font-semibold" style={{ color: "var(--foreground)" }}>
               {siteConfig.availability}

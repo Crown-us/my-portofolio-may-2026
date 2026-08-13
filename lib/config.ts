@@ -1,5 +1,5 @@
 // ============================================================
-// PORTFOLIO CONFIG — Edit this file to customize your portfolio
+// PORTFOLIO CONFIG — HR & Recruiter Optimized Single Source of Truth
 // All components read from this single source of truth
 // ============================================================
 
@@ -9,14 +9,22 @@ export const siteConfig = {
   shortName: "Kevin",
   initials: "KD",
   title: "Full-Stack & Mobile Engineer",
-  tagline: "Kevin builds things that matter.",
-  taglineAccent: "builds", // the word that gets italic accent styling
+  tagline: "Kevin builds high-performance web & mobile products.",
+  taglineAccent: "high-performance", // the word that gets italic accent styling
   subtitle:
-    "Full-Stack & Mobile Engineer crafting high-performance digital products with Next.js, Flutter, and Laravel.",
+    "Full-Stack & Mobile Engineer specializing in Next.js, Flutter, and Laravel. 3+ years experience engineering scalable web platforms, cross-platform mobile apps, and robust APIs.",
   location: "Jakarta, Indonesia",
-  timezone: "UTC+7",
-  availability: "Open to remote contracts & full-time roles (2026)",
-  availabilityShort: "Available for Remote",
+  timezone: "UTC+7 (Flexible for US/EU Remote)",
+  availability: "Open to Full-Time Remote Roles & Contracts (2026)",
+  availabilityShort: "🟢 Available for Remote Roles",
+
+  // ── Executive Quick Stats (HR & Recruiter Summary) ──────────
+  stats: [
+    { label: "Experience", value: "3+ Years" },
+    { label: "Core Stack", value: "Next.js · Flutter · Laravel" },
+    { label: "Education", value: "D3 Informatics (Polinema)" },
+    { label: "Work Preference", value: "Remote / Overseas Roles" },
+  ],
 
   // ── Contact ────────────────────────────────────────────────
   email: "wijaya.kevinn@gmail.com",
@@ -52,14 +60,14 @@ export const siteConfig = {
   seo: {
     title: "Kevin Dwi Wijaya — Full-Stack & Mobile Engineer",
     description:
-      "Full-Stack & Mobile Engineer from Jakarta building high-performance web and mobile apps with Next.js, Flutter, and Laravel. Open to global remote roles.",
+      "Full-Stack & Mobile Engineer from Jakarta specializing in Next.js, Flutter, and Laravel. Open for global remote roles and software engineering opportunities.",
     url: "https://kevindwiwijaya.dev",
     ogImage: "/og-image.png",
   },
 
   // ── Design System Specs (shown in ControlDock) ─────────────
   designSystem: {
-    displayFont: "Plus Jakarta Sans",
+    displayFont: "Space Grotesk",
     monoFont: "JetBrains Mono",
     darkAccent: "#ff443a",   // Render/Laravel Coral Red
     lightAccent: "#ff443a",
@@ -72,43 +80,43 @@ export const siteConfig = {
       icon: "Globe",
       label: "Web Engineering",
       description:
-        "Building high-performance web apps with Next.js, React, and Tailwind CSS. SSR, RSC, and edge-ready architectures.",
+        "Building production-grade SSR & RSC web applications with Next.js, React 19, and TypeScript. Optimized for Lighthouse 95+ and Core Web Vitals.",
       tags: ["Next.js", "React", "TypeScript"],
     },
     {
       icon: "Smartphone",
-      label: "Mobile Development",
+      label: "Mobile App Development",
       description:
-        "Cross-platform iOS & Android apps with Flutter & Dart, integrated with REST APIs, Firebase, and Supabase.",
+        "Cross-platform iOS & Android engineering with Flutter & Dart. Clean BLoC state management, offline storage, and push notifications.",
       tags: ["Flutter", "Dart", "Firebase"],
     },
     {
-      icon: "Layers",
-      label: "UI/UX Design",
-      description:
-        "Minimalist, high-impact interfaces in Figma. Design tokens, micro-interactions, and accessibility-first.",
-      tags: ["Figma", "Design Systems"],
-    },
-    {
       icon: "Server",
-      label: "Backend & API",
+      label: "Backend & API Architecture",
       description:
-        "Scalable backend systems with Laravel & Node.js, backed by PostgreSQL and MySQL with clean REST API design.",
+        "Designing scalable REST APIs and microservices with Laravel & Node.js, backed by PostgreSQL, Supabase, and Redis caching.",
       tags: ["Laravel", "Node.js", "PostgreSQL"],
     },
     {
-      icon: "Zap",
-      label: "Performance",
+      icon: "Layers",
+      label: "UI/UX & Design Systems",
       description:
-        "Obsessed with Core Web Vitals, bundle size, and render performance. Lighthouse 90+ is the baseline.",
-      tags: ["Lighthouse", "Core Web Vitals"],
+        "Translating Figma mockups into reusable component libraries with Tailwind CSS. Focus on WCAG accessibility and fluid motion.",
+      tags: ["Figma", "Design Systems", "Tailwind CSS"],
+    },
+    {
+      icon: "Zap",
+      label: "Performance & Optimization",
+      description:
+        "Refactoring bottlenecked codebases, reducing API response latency, optimizing bundle sizes, and ensuring sub-50ms interaction response.",
+      tags: ["Performance", "Core Web Vitals", "Optimization"],
     },
     {
       icon: "GitBranch",
-      label: "DevOps & Deployment",
+      label: "DevOps & CI/CD Pipelines",
       description:
-        "Git workflows, CI/CD with GitHub Actions, Vercel deployments, and cloud infrastructure on Supabase & Railway.",
-      tags: ["Vercel", "GitHub Actions", "CI/CD"],
+        "Automated deployment workflows with GitHub Actions, Vercel Edge Networks, Docker containerization, and Supabase cloud infrastructure.",
+      tags: ["Vercel", "GitHub Actions", "Docker"],
     },
   ],
 
@@ -116,41 +124,42 @@ export const siteConfig = {
   services: [
     {
       num: "01",
-      title: "Web Application Development",
+      title: "Full-Stack Web Development",
       description:
-        "From landing pages to complex SaaS dashboards — I build fast, accessible, and maintainable web applications that scale.",
+        "End-to-end web engineering from frontend architecture to backend APIs. Clean code, type safety, and fast loading speed guaranteed.",
       bullets: [
-        "Next.js App Router with SSR & RSC",
-        "TypeScript-first codebase",
-        "Component-driven with Tailwind CSS v4",
+        "Next.js App Router & Server Components",
+        "Type-safe API integrations with Zod & TypeScript",
+        "Responsive, mobile-first Tailwind CSS v4 styling",
       ],
-      cta: { label: "See Projects", href: "#projects" },
+      cta: { label: "View Web Projects", href: "#projects" },
     },
     {
       num: "02",
-      title: "Mobile App Development",
+      title: "Cross-Platform Mobile Apps",
       description:
-        "Native-quality cross-platform mobile apps for iOS and Android. Clean architecture, smooth animations, offline-first.",
+        "Production-ready mobile applications built with Flutter. Native performance on both iOS and Android with single-codebase efficiency.",
       bullets: [
-        "Flutter with BLoC/Provider state management",
-        "REST API & Supabase/Firebase integration",
-        "Published to App Store & Play Store",
+        "Clean Architecture with BLoC / Provider pattern",
+        "REST API, GraphQL, and Supabase/Firebase backends",
+        "App Store & Google Play deployment readiness",
       ],
-      cta: { label: "See Mobile Work", href: "#projects" },
+      cta: { label: "View Mobile Work", href: "#projects" },
     },
     {
       num: "03",
-      title: "UI/UX Design & Prototyping",
+      title: "Backend API Engineering",
       description:
-        "User research, wireframing, and high-fidelity prototypes in Figma. Design systems that scale across product teams.",
+        "Robust RESTful API design with Laravel & Node.js. Database schema optimization, authentication pipelines, and third-party API integrations.",
       bullets: [
-        "Design token-based systems",
-        "Interactive prototypes",
-        "WCAG accessibility audit",
+        "Laravel 11 Resource Controllers & Sanctu/JWT Auth",
+        "PostgreSQL / Supabase relational database design",
+        "High-performance caching with Redis",
       ],
-      cta: { label: "View Designs", href: "#projects" },
+      cta: { label: "Discuss Architecture", href: "#contact" },
     },
   ],
 };
 
 export type SiteConfig = typeof siteConfig;
+

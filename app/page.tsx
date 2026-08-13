@@ -11,7 +11,6 @@ import Projects from "./components/Projects";
 import Services from "./components/Services";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Preloader from "./components/Preloader";
 import MusicPlayer from "./components/MusicPlayer";
 import ControlDock from "./components/ControlDock";
 import { CursorProvider } from "./context/CursorContext";
@@ -22,7 +21,6 @@ function HomeInner() {
 
   return (
     <main className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
-      <Preloader />
       <MusicPlayer />
       <CustomCursor />
       <ControlDock />
