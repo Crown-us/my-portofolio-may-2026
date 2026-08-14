@@ -8,8 +8,8 @@ export const resumeData = {
     "url": "https://kevindwiwijaya.dev",
     "summary": "Full-Stack & Mobile Engineer specializing in Next.js, Flutter, and Laravel. 3+ years experience engineering scalable web platforms, cross-platform mobile apps, and robust APIs.",
     "location": {
-      "city": "Jakarta",
-      "region": "DKI Jakarta",
+      "city": "Kediri",
+      "region": "East Java",
       "countryCode": "ID"
     },
     "profiles": [
@@ -44,7 +44,7 @@ export const resumeData = {
     {
       "name": "Software & Product Engineering",
       "position": "Full-Stack & Mobile Software Engineer",
-      "location": "Jakarta / Remote",
+      "location": "Kediri / Remote",
       "startDate": "2023-01-01",
       "endDate": "",
       "summary": "Engineering production web platforms and cross-platform mobile apps.",

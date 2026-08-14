@@ -13,7 +13,7 @@ export const siteConfig = {
   taglineAccent: "high-performance", // the word that gets italic accent styling
   subtitle:
     "Full-Stack & Mobile Engineer specializing in Next.js, Flutter, and Laravel. 3+ years experience engineering scalable web platforms, cross-platform mobile apps, and robust APIs.",
-  location: "Jakarta, Indonesia",
+  location: "Kediri, Indonesia",
   timezone: "UTC+7 (Flexible for US/EU Remote)",
   availability: "Open to Full-Time Remote Roles & Contracts (2026)",
   availabilityShort: "🟢 Available for Remote Roles",
@@ -60,7 +60,7 @@ export const siteConfig = {
   seo: {
     title: "Kevin Dwi Wijaya — Full-Stack & Mobile Engineer",
     description:
-      "Full-Stack & Mobile Engineer from Jakarta specializing in Next.js, Flutter, and Laravel. Open for global remote roles and software engineering opportunities.",
+      "Full-Stack & Mobile Engineer from Kediri, Indonesia specializing in Next.js, Flutter, and Laravel. Open for paid internships, remote roles, and software engineering opportunities.",
     url: "https://kevindwiwijaya.dev",
     ogImage: "/og-image.png",
   },
