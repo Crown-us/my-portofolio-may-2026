@@ -19,7 +19,7 @@ export const projects: Project[] = [
     slug: "lms-westud",
     title: "WESTUD LMS",
     category: "EDTECH & LEARNING ECOSYSTEM",
-    image: "/images/projects/westud-lms.jpg",
+    image: "/images/projects/westud-lms.png",
     description: "Modern digital learning ecosystem featuring interactive course management, mentor booking system, 3D visual animations, and real-time database architecture.",
     impact: "🎓 Interactive Learning · 100% Type-Safe · 3D Visuals",
     year: "2026",
