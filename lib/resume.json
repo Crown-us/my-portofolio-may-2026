@@ -85,6 +85,18 @@
   ],
   "projects": [
     {
+      "name": "WeStud LMS (Modern Learning Platform)",
+      "description": "Modern Learning Management System built with React 19, TypeScript, Supabase, and TanStack Router featuring interactive course tracking and 3D visual animations.",
+      "highlights": [
+        "100% type-safe frontend architecture with TanStack Router",
+        "Real-time database integration with Supabase",
+        "Interactive 3D visuals and fluid animations with Three.js & Framer Motion",
+        "Responsive, high-performance UI styled with Tailwind CSS"
+      ],
+      "keywords": ["React 19", "TypeScript", "Supabase", "TanStack Router", "Tailwind CSS", "Three.js"],
+      "url": "https://lms-westud.vercel.app/"
+    },
+    {
       "name": "Flutter Mobile App",
       "description": "Cross-platform mobile application built with Flutter and Dart, featuring clean architecture and state management.",
       "highlights": [

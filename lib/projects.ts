@@ -16,17 +16,17 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
-    slug: "cosmic-ai-saas",
-    title: "NEXUS AI SAAS",
-    category: "AI PLATFORM",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop",
-    description: "Next-gen generative AI platform providing multi-modal workflow orchestration and real-time streaming analytics.",
-    impact: "⚡ 45% Latency Reduction · 10k+ Active Users",
+    slug: "lms-westud",
+    title: "WESTUD LMS",
+    category: "EDTECH & LEARNING ECOSYSTEM",
+    image: "/images/projects/westud-lms.jpg",
+    description: "Modern digital learning ecosystem featuring interactive course management, mentor booking system, 3D visual animations, and real-time database architecture.",
+    impact: "🎓 Interactive Learning · 100% Type-Safe · 3D Visuals",
     year: "2026",
-    services: ["Fullstack Architecture", "AI Integration", "API Design"],
-    tech: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Python / FastAPI", "PostgreSQL"],
-    githubUrl: "https://github.com/Crown-us",
-    demoUrl: "https://nexus-ai-demo.vercel.app"
+    services: ["Frontend Architecture", "Supabase Integration", "UI/UX & 3D Motion", "Type-Safe Routing"],
+    tech: ["React 19", "TypeScript", "Vite", "Supabase", "TanStack Router", "Tailwind CSS", "Framer Motion", "Three.js"],
+    githubUrl: "https://github.com/Crown-us/lms-westud",
+    demoUrl: "https://lms-westud.vercel.app/"
   },
   {
     id: 2,
