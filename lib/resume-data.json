@@ -109,15 +109,15 @@
       "url": "https://magang.kvndwi.my.id/"
     },
     {
-      "name": "Flutter Mobile App",
-      "description": "Cross-platform mobile application built with Flutter and Dart, featuring clean architecture and state management.",
+      "name": "RTRW Civic Ecosystem (Flutter & Laravel 11)",
+      "description": "Multi-tenant civic community management platform and Flutter mobile application featuring automated dues collection, digital letters, and complaints tracking.",
       "highlights": [
-        "Implemented BLoC/Provider state management",
-        "REST API integration with Laravel backend",
-        "Custom UI components and animations"
+        "Cross-platform Flutter mobile client for resident dues payment & letter generation",
+        "Laravel 11 multi-tenant architecture with tenant isolation & role-based dashboard",
+        "Secure OTP authentication & dual-factor verification workflow"
       ],
-      "keywords": ["Flutter", "Dart", "Laravel", "REST API"],
-      "url": "https://github.com/Crown-us"
+      "keywords": ["Flutter", "Dart", "Laravel 11", "React", "Inertia.js", "MySQL", "REST API"],
+      "url": "https://github.com/nusatama/rtrw"
     },
     {
       "name": "Next.js Web Application",

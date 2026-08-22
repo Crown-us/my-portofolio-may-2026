@@ -44,6 +44,20 @@ export const projects: Project[] = [
   },
   {
     id: 3,
+    slug: "rtrw-community-platform",
+    title: "RTRW CIVIC ECOSYSTEM",
+    category: "MOBILE APP & CIVIC SAAS",
+    image: "/images/projects/rtrw-app.png",
+    description: "All-in-one multi-tenant civic management platform and mobile app for RT/RW neighborhoods, featuring automated dues collection, digital civic letters, citizen complaints, and OTP authentication.",
+    impact: "🏘️ Multi-Tenant RT/RW SaaS · Flutter Mobile App · Automated Dues Tracking",
+    year: "2026",
+    services: ["Mobile App Engineering (Flutter)", "Laravel 11 Multi-Tenancy", "OTP Authentication", "Role & Permission System"],
+    tech: ["Flutter", "Dart", "Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "MySQL"],
+    githubUrl: "https://github.com/nusatama/rtrw",
+    demoUrl: "https://github.com/nusatama/rtrw"
+  },
+  {
+    id: 4,
     slug: "high-throughput-dashboard",
     title: "PULSE ENGINE",
     category: "DISTRIBUTED SYSTEMS",
@@ -57,7 +71,7 @@ export const projects: Project[] = [
     demoUrl: "https://pulse-engine-demo.vercel.app"
   },
   {
-    id: 4,
+    id: 5,
     slug: "cosmic-design-system",
     title: "AURA DESIGN SYSTEM",
     category: "UI/UX ARCHITECTURE",
@@ -71,7 +85,7 @@ export const projects: Project[] = [
     demoUrl: "https://aura-ds.vercel.app"
   },
   {
-    id: 5,
+    id: 6,
     slug: "e-commerce-storefront",
     title: "ORBIT STORE",
     category: "E-COMMERCE PLATFORM",

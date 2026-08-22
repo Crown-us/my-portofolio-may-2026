@@ -107,6 +107,17 @@ export const resumeData = {
       "url": "https://magang.kvndwi.my.id/"
     },
     {
+      "name": "RTRW CIVIC & DUES ECOSYSTEM",
+      "description": "Multi-tenant civic community management platform and Flutter mobile application featuring automated dues collection, digital letters, and complaints tracking.",
+      "highlights": [
+        "Cross-platform Flutter mobile client for resident dues payment & letter generation",
+        "Laravel 11 multi-tenant architecture with tenant isolation & role-based dashboard",
+        "Secure OTP authentication & dual-factor verification workflow"
+      ],
+      "keywords": ["Flutter", "Dart", "Laravel 11", "React", "Inertia.js", "MySQL"],
+      "url": "https://github.com/nusatama/rtrw"
+    },
+    {
       "name": "PULSE ENGINE DASHBOARD",
       "description": "High-throughput financial metrics dashboard processing real-time WebSocket telemetry with sub-50ms render cycles.",
       "highlights": [
