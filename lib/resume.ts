@@ -107,14 +107,14 @@ export const resumeData = {
       "url": "https://magang.kvndwi.my.id/"
     },
     {
-      "name": "RTRW CIVIC & DUES ECOSYSTEM",
-      "description": "Multi-tenant civic community management platform and Flutter mobile application featuring automated dues collection, digital letters, and complaints tracking.",
+      "name": "RTRW CIVIC MANAGEMENT PLATFORM",
+      "description": "Multi-tenant civic community web platform built with Laravel 11, Inertia.js, and React, featuring automated dues collection ledger, digital civic letters, and complaints tracking.",
       "highlights": [
-        "Cross-platform Flutter mobile client for resident dues payment & letter generation",
-        "Laravel 11 multi-tenant architecture with tenant isolation & role-based dashboard",
-        "Secure OTP authentication & dual-factor verification workflow"
+        "Full-stack web architecture with Laravel 11, Inertia.js, React, and TypeScript",
+        "Multi-tenant database schema with strict tenant isolation and role-based access control",
+        "Automated resident dues ledger, digital civic letter requests, and secure OTP 2FA login"
       ],
-      "keywords": ["Flutter", "Dart", "Laravel 11", "React", "Inertia.js", "MySQL"],
+      "keywords": ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "MySQL", "Shadcn UI"],
       "url": "https://github.com/nusatama/rtrw"
     },
     {
