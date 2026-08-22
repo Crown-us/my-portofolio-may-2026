@@ -118,17 +118,6 @@
       ],
       "keywords": ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "MySQL", "Shadcn UI"],
       "url": "https://personal-host-rt-rw-nu.vercel.app"
-    },
-    {
-      "name": "Next.js Web Application",
-      "description": "Full-stack web application using Next.js App Router with Supabase backend and Tailwind CSS.",
-      "highlights": [
-        "Server-side rendering and API routes",
-        "Authentication with Supabase Auth",
-        "Responsive design with Tailwind CSS"
-      ],
-      "keywords": ["Next.js", "React", "Supabase", "Tailwind CSS"],
-      "url": "https://github.com/Crown-us"
     }
   ],
   "languages": [

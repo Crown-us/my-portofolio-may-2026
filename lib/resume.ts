@@ -116,16 +116,6 @@ export const resumeData = {
       ],
       "keywords": ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "MySQL", "Shadcn UI"],
       "url": "https://personal-host-rt-rw-nu.vercel.app"
-    },
-    {
-      "name": "PULSE ENGINE DASHBOARD",
-      "description": "High-throughput financial metrics dashboard processing real-time WebSocket telemetry with sub-50ms render cycles.",
-      "highlights": [
-        "Handled 1M+ daily telemetry events with 99.99% uptime",
-        "Integrated Redis caching and WebSocket channels"
-      ],
-      "keywords": ["React", "TypeScript", "Node.js", "Redis", "WebSockets"],
-      "url": "https://pulse-engine-demo.vercel.app"
     }
   ],
   "languages": [
