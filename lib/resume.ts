@@ -107,15 +107,15 @@ export const resumeData = {
       "url": "https://magang.kvndwi.my.id/"
     },
     {
-      "name": "RTRW CIVIC MANAGEMENT PLATFORM",
-      "description": "Multi-tenant civic community web platform built with Laravel 11, Inertia.js, and React, featuring automated dues collection ledger, digital civic letters, and complaints tracking.",
+      "name": "RTRW DIGITAL (Kelola Warga)",
+      "description": "Platform manajemen lingkungan modern untuk RT/RW yang mengintegrasikan iuran otomatis, transparansi kas warga, permohonan surat pengantar digital, dan pusat informasi dalam satu ekosistem web terpadu.",
       "highlights": [
         "Full-stack web architecture with Laravel 11, Inertia.js, React, and TypeScript",
         "Multi-tenant database schema with strict tenant isolation and role-based access control",
         "Automated resident dues ledger, digital civic letter requests, and secure OTP 2FA login"
       ],
       "keywords": ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "MySQL", "Shadcn UI"],
-      "url": "https://github.com/Crown-us/personal-host-rt-rw"
+      "url": "https://personal-host-rt-rw-nu.vercel.app"
     },
     {
       "name": "PULSE ENGINE DASHBOARD",
