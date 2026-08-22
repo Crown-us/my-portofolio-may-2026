@@ -145,8 +145,8 @@ export default function Projects() {
           </motion.div>
         )}
 
-        {/* 3-Col Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {rest.map((project, idx) => (
             <motion.div
               key={project.id}

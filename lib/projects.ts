@@ -30,6 +30,20 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    slug: "seger-marketplace",
+    title: "SEGER MARKETPLACE",
+    category: "E-COMMERCE & ON-DEMAND LOGISTICS",
+    image: "/images/projects/seger-marketplace.png",
+    description: "Modern on-demand grocery marketplace platform for Kediri BUMD, featuring 15-minute express delivery dispatch, automated Midtrans payment gateway, interactive cart systems, and reactive UI.",
+    impact: "⚡ 15-Min Express Delivery · Midtrans Gateway · 100% Seger Guarantee",
+    year: "2026",
+    services: ["Full-Stack Architecture", "Midtrans Payment Integration", "Logistics & Dispatch System", "UI/UX Engineering"],
+    tech: ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "Midtrans Snap API", "MySQL"],
+    githubUrl: "https://github.com/Crown-us",
+    demoUrl: "https://magang.kvndwi.my.id/"
+  },
+  {
+    id: 3,
     slug: "high-throughput-dashboard",
     title: "PULSE ENGINE",
     category: "DISTRIBUTED SYSTEMS",
@@ -43,7 +57,7 @@ export const projects: Project[] = [
     demoUrl: "https://pulse-engine-demo.vercel.app"
   },
   {
-    id: 3,
+    id: 4,
     slug: "cosmic-design-system",
     title: "AURA DESIGN SYSTEM",
     category: "UI/UX ARCHITECTURE",
@@ -57,7 +71,7 @@ export const projects: Project[] = [
     demoUrl: "https://aura-ds.vercel.app"
   },
   {
-    id: 4,
+    id: 5,
     slug: "e-commerce-storefront",
     title: "ORBIT STORE",
     category: "E-COMMERCE PLATFORM",
@@ -71,4 +85,5 @@ export const projects: Project[] = [
     demoUrl: "https://orbit-store.vercel.app"
   },
 ];
+
 

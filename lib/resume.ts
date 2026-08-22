@@ -85,15 +85,26 @@ export const resumeData = {
   ],
   "projects": [
     {
-      "name": "NEXUS AI SAAS",
-      "description": "Next-gen generative AI platform providing multi-modal workflow orchestration and real-time streaming analytics.",
+      "name": "WESTUD LMS",
+      "description": "Modern digital learning ecosystem featuring interactive course management, mentor booking, 3D animations, and Supabase real-time database.",
       "highlights": [
-        "Achieved 45% API latency reduction with optimized server action streaming",
-        "Scaled architecture to support 10k+ active users",
-        "Built with Next.js 16, TypeScript, Tailwind CSS v4, and PostgreSQL"
+        "100% type-safe frontend routing and state architecture with TanStack Router",
+        "Interactive 3D visuals and fluid animations with Three.js & Framer Motion",
+        "Real-time database integration with Supabase and React 19"
       ],
-      "keywords": ["Next.js", "TypeScript", "PostgreSQL", "Tailwind CSS"],
-      "url": "https://nexus-ai-demo.vercel.app"
+      "keywords": ["React 19", "TypeScript", "Supabase", "TanStack Router", "Tailwind CSS", "Three.js"],
+      "url": "https://lms-westud.vercel.app/"
+    },
+    {
+      "name": "SEGER MARKETPLACE",
+      "description": "Modern on-demand grocery marketplace platform for Kediri BUMD, featuring 15-minute express delivery dispatch and automated Midtrans payment gateway.",
+      "highlights": [
+        "End-to-end full-stack architecture with Laravel 11, Inertia.js, and React",
+        "Automated Midtrans Snap payment gateway integration for seamless transactions",
+        "Real-time cart management, courier dispatch, and responsive order tracking UI"
+      ],
+      "keywords": ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "Midtrans Snap API"],
+      "url": "https://magang.kvndwi.my.id/"
     },
     {
       "name": "PULSE ENGINE DASHBOARD",

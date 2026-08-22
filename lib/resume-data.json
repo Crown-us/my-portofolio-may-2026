@@ -97,6 +97,18 @@
       "url": "https://lms-westud.vercel.app/"
     },
     {
+      "name": "Seger Marketplace (BUMD Regional Platform)",
+      "description": "Modern on-demand grocery marketplace platform for Kediri BUMD, featuring 15-minute express delivery dispatch, automated Midtrans payment gateway, interactive cart systems, and reactive UI.",
+      "highlights": [
+        "Full-stack web architecture with Laravel 11, Inertia.js, and React",
+        "Integrated Midtrans Snap payment gateway with automated notification webhook handling",
+        "Express 15-minute delivery courier workflow and dispatch system",
+        "Responsive product catalog, filtering, cart management, and real-time checkout pipeline"
+      ],
+      "keywords": ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "Midtrans API", "MySQL"],
+      "url": "https://magang.kvndwi.my.id/"
+    },
+    {
       "name": "Flutter Mobile App",
       "description": "Cross-platform mobile application built with Flutter and Dart, featuring clean architecture and state management.",
       "highlights": [
