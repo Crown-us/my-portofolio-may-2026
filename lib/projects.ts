@@ -53,8 +53,8 @@ export const projects: Project[] = [
     year: "2026",
     services: ["Multi-Tenant Architecture", "Laravel 11 & Inertia.js", "OTP Authentication", "Role-Based Access Control"],
     tech: ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "MySQL", "Shadcn UI"],
-    githubUrl: "https://github.com/nusatama/rtrw",
-    demoUrl: "https://github.com/nusatama/rtrw"
+    githubUrl: "https://github.com/Crown-us/personal-host-rt-rw",
+    demoUrl: "https://github.com/Crown-us/personal-host-rt-rw"
   },
   {
     id: 4,

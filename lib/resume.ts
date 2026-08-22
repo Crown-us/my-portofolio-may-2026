@@ -115,7 +115,7 @@ export const resumeData = {
         "Automated resident dues ledger, digital civic letter requests, and secure OTP 2FA login"
       ],
       "keywords": ["Laravel 11", "React", "Inertia.js", "TypeScript", "Tailwind CSS", "MySQL", "Shadcn UI"],
-      "url": "https://github.com/nusatama/rtrw"
+      "url": "https://github.com/Crown-us/personal-host-rt-rw"
     },
     {
       "name": "PULSE ENGINE DASHBOARD",
