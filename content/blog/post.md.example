@@ -1,0 +1,19 @@
+---
+title: "Your article title"
+slug: "your-article-slug"
+date: "2026-10-28"
+summary: "A short summary of your actual article."
+tags: ["web"]
+draft: true
+# coverImage: "/images/blog/your-cover.png"
+---
+
+## Start here
+
+Replace this template with your own writing. Rename the file to .md to preview it in development.
+
+## A code example
+
+```ts
+// Replace with the code you want to explain.
+```

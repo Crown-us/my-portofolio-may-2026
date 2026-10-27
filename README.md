@@ -25,7 +25,7 @@ npm run build
 npm run test:smoke
 ```
 
-Tests use Nodeâ€™s built-in runner and never send real email. Prettier is the only added development dependency, to enforce the requested formatting consistently. TypeScript checks are strict. No new runtime dependency was added.
+Tests use Nodeâ€™s built-in runner and never send real email. Prettier is the only added development dependency, to enforce the requested formatting consistently. TypeScript checks are strict. The Blog adds server-only Markdown parsing, sanitization and syntax highlighting dependencies; they are not shipped in the browser bundle.
 
 ## Content and routes
 
@@ -44,7 +44,7 @@ About and Resume share one profile source. Empty case-study sections, internship
 
 Store is intentionally empty: its navigation, teaser and routes stay hidden/404 until real products are added. Product data validates unique slugs, nonnegative IDR prices and the matching Gumroad, Trakteer or Lynk HTTPS checkout host. `null` means Free for products and Contact for quote for services. Product descriptions support safe basic Markdown: paragraphs, headings, bullet lists, bold, inline code, HTTPS links; HTML is not rendered. Images should be local files under `public/`.
 
-Global search is disabled until `hasGlobalSearch` is true AND products exist, so it can meaningfully search both projects and products. Blog and translations are deferred.
+Global search is disabled until `hasGlobalSearch` is true AND products exist, so it can meaningfully search both projects and products. Blog is available at `/blog`; translations remain deferred.
 
 ## Contact email
 
@@ -82,3 +82,15 @@ The script is never loaded in dev/test, localhost production previews or other d
 - Resend and optional Umami configuration. Do not put secrets into source files or chat.
 
 The migration removes unused dark-design components and duplicate resume data containing placeholder contacts or unsupported metrics. The approved visual baseline remains in Git history. Changes are local; publishing is a separate step.
+
+## Blog / devlog
+
+`/blog` is visible in navigation even when no posts exist. No sample article is published. To add a real post, copy `content/blog/post.md.example` to a `.md` file in the same folder and replace the template content.
+
+Required YAML frontmatter: `title`, unique kebab-case `slug`, ISO `date` (quote it, e.g. `"2026-10-28"`), `summary`, `tags` (array), and `draft` (boolean). Optional `coverImage` uses a local `/images/...` path. Put images in `public/images/blog/`.
+
+Drafts preview only with `npm run dev`; production pages, RSS and sitemap exclude them. Set `draft: false` only when ready to publish, then rebuild. Content validation fails loudly for invalid fields, dates or duplicate slugs. Published posts sort by date, with client-side tag filtering. Detail pages include reading time, heading anchors/table of contents, code highlighting, and neighbouring posts. Markdown body headings never create a second h1.
+
+The pipeline uses gray-matter for frontmatter and unified/remark/rehype for Markdown, HTML sanitization and highlighting, rather than a custom Markdown parser. Raw HTML is discarded and unsafe link protocols are stripped. All parsing/highlighting runs on the server. Supported code languages include TypeScript, JavaScript, CSS, JSON, Python and other common languages; unknown languages remain plain text.
+
+`/rss.xml` is a static RSS feed and `/sitemap.xml` includes published posts. The template `.example` extension is deliberately ignored. No CMS or database is required.

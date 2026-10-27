@@ -14,6 +14,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     { href: "/projects", label: "Projects" },
     { href: "/about", label: "About me" },
     { href: "/services", label: "Services" },
+    { href: "/blog", label: "Blog" },
     ...(products.length ? [{ href: "/store", label: "Store" }] : []),
     { href: "/contact", label: "Contact" },
     { href: "/resume", label: "Resume" },
