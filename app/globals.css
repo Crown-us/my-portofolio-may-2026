@@ -1,132 +1,38 @@
 @import "tailwindcss";
-
-/* ─────────────────────────────────────────────────────────────
-   CUSTOM CSS PROPERTIES (Design Tokens — Render.com Inspired)
-──────────────────────────────────────────────────────────────*/
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --muted: rgba(15, 23, 42, 0.62);
-  --border: rgba(15, 23, 42, 0.12);
-  --accent: #2563eb; /* Electric Cobalt Blue for Light Mode */
-  --accent-purple: #7c3aed;
-  --accent-hover: #1d4ed8;
-  --surface: rgba(37, 99, 235, 0.025);
-  --surface-hover: rgba(37, 99, 235, 0.06);
-  --accent-subtle: rgba(37, 99, 235, 0.08);
-  --accent-border: rgba(37, 99, 235, 0.25);
+  color-scheme: light;
 }
-
-.dark {
-  --background: #0d0d0d; /* Render Dark Charcoal */
-  --foreground: #ffffff;
-  --muted: rgba(255, 255, 255, 0.52);
-  --border: rgba(255, 255, 255, 0.12);
-  --accent: #ff443a; /* Render Coral Red for Dark Mode */
-  --accent-purple: #a78bfa;
-  --accent-hover: #ff2d20;
-  --surface: rgba(255, 255, 255, 0.035);
-  --surface-hover: rgba(255, 255, 255, 0.07);
-  --accent-subtle: rgba(255, 68, 58, 0.1);
-  --accent-border: rgba(255, 68, 58, 0.3);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-
-/* ─────────────────────────────────────────────────────────────
-   BASE
-──────────────────────────────────────────────────────────────*/
-*, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 155px;
+}
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-mono), "JetBrains Mono", monospace;
-  overflow-x: hidden;
+  margin: 0;
+  background: #fff;
+  color: #202124;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-
-h1, h2, h3, h4, h5, h6, .font-display {
-  font-family: var(--font-space), "Plus Jakarta Sans", system-ui, sans-serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-space), Arial, sans-serif;
   letter-spacing: -0.02em;
 }
-
 ::selection {
-  background: var(--accent);
+  background: #1967d2;
   color: #fff;
 }
-
-/* ─────────────────────────────────────────────────────────────
-   SCROLLBAR
-──────────────────────────────────────────────────────────────*/
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); }
-
-/* ─────────────────────────────────────────────────────────────
-   MARQUEE
-──────────────────────────────────────────────────────────────*/
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 35s linear infinite;
-  will-change: transform;
-}
-
-.marquee-track-slow {
-  display: flex;
-  width: max-content;
-  animation: marquee 55s linear infinite;
-  will-change: transform;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   PULSE DOT
-──────────────────────────────────────────────────────────────*/
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.8); }
-}
-
-.pulse-dot {
-  display: inline-block;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #22c55e;
-  animation: pulse-dot 2s infinite;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   GRAIN TEXTURE
-──────────────────────────────────────────────────────────────*/
-.grain-overlay {
-  position: fixed;
-  inset: -50%;
-  width: 200%; height: 200%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
-  opacity: 0.02;
-  pointer-events: none;
-  z-index: 9999;
-}
-.dark .grain-overlay { opacity: 0.04; }
-
-/* ─────────────────────────────────────────────────────────────
-   TECHNICAL GRID PATTERN
-──────────────────────────────────────────────────────────────*/
-.grid-bg-pattern {
-  background-image: radial-gradient(var(--border) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* Accent Corner Dot */
-.grid-dot {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background-color: var(--accent);
-  z-index: 10;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
