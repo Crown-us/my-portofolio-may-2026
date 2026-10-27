@@ -157,7 +157,7 @@
   line-height: 1.5;
   color: #5f6368;
 }
-.serviceCta {
+.serviceCard .serviceCta {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -172,7 +172,7 @@
     background 0.18s ease,
     transform 0.18s ease;
 }
-.serviceCta:hover {
+.serviceCard .serviceCta:hover {
   background: #1558b8;
   transform: translateY(-1px);
 }
