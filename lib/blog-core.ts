@@ -1,0 +1,152 @@
+import matter from "gray-matter";
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeSanitize from "rehype-sanitize";
+import rehypeHighlight from "rehype-highlight";
+import rehypeStringify from "rehype-stringify";
+import type { Root, Element, RootContent } from "hast";
+import { canonicalUrl } from "./domain.ts";
+export interface Post {
+  title: string;
+  slug: string;
+  date: string;
+  summary: string;
+  tags: string[];
+  draft: boolean;
+  coverImage?: string;
+  content: string;
+  readingMinutes: number;
+}
+export interface Heading {
+  id: string;
+  title: string;
+  level: number;
+}
+export function parsePost(source: string, filename: string): Post {
+  const { data, content } = matter(source);
+  const fail = (field: string): never => {
+    throw new Error(`${filename}: invalid ${field}`);
+  };
+  for (const key of ["title", "slug", "summary"])
+    if (typeof data[key] !== "string" || !data[key].trim()) fail(key);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(data.slug)) fail("slug");
+  const date = data.date;
+  if (
+    typeof date !== "string" ||
+    !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
+    !Number.isFinite(Date.parse(date)) ||
+    new Date(date).toISOString().slice(0, 10) !== date
+  )
+    fail("date (use a quoted YYYY-MM-DD string)");
+  if (typeof data.draft !== "boolean") fail("draft");
+  if (
+    !Array.isArray(data.tags) ||
+    data.tags.some((tag: unknown) => typeof tag !== "string" || !tag.trim())
+  )
+    fail("tags");
+  if (
+    data.coverImage !== undefined &&
+    (typeof data.coverImage !== "string" ||
+      !/^\/(?!\/)[^\\]+$/.test(data.coverImage))
+  )
+    fail("coverImage (use a local public path)");
+  if (!content.trim()) fail("content");
+  return {
+    title: data.title.trim(),
+    slug: data.slug,
+    date,
+    summary: data.summary.trim(),
+    tags: [...new Set<string>(data.tags)],
+    draft: data.draft,
+    coverImage: data.coverImage,
+    content,
+    readingMinutes: Math.max(1, Math.ceil(content.split(/\s+/).length / 200)),
+  };
+}
+export function selectPosts(
+  posts: Post[],
+  tag?: string,
+  includeDrafts = false,
+) {
+  const slugs = new Set<string>();
+  for (const post of posts) {
+    if (slugs.has(post.slug))
+      throw new Error(`Duplicate blog slug: ${post.slug}`);
+    slugs.add(post.slug);
+  }
+  return posts
+    .filter(
+      (post) =>
+        (includeDrafts || !post.draft) && (!tag || post.tags.includes(tag)),
+    )
+    .sort(
+      (a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug),
+    );
+}
+function textOf(node: RootContent): string {
+  return node.type === "text"
+    ? node.value
+    : "children" in node
+      ? node.children.map(textOf).join("")
+      : "";
+}
+function headingPlugin(toc: Heading[]) {
+  return () => (tree: Root) => {
+    const counts = new Map<string, number>();
+    const walk = (nodes: RootContent[]) => {
+      for (const node of nodes) {
+        if (node.type !== "element") continue;
+        if (/^h[1-6]$/.test(node.tagName)) {
+          const title = textOf(node);
+          const base =
+            title
+              .toLowerCase()
+              .replace(/[^\p{L}\p{N}]+/gu, "-")
+              .replace(/^-|-$/g, "") || "section";
+          const count = (counts.get(base) || 0) + 1;
+          counts.set(base, count);
+          const id = `post-${base}-${count}`;
+          node.properties.id = id;
+          if (node.tagName === "h1") node.tagName = "h2";
+          toc.push({ id, title, level: Number(node.tagName[1]) });
+        }
+        walk((node as Element).children);
+      }
+    };
+    walk(tree.children);
+  };
+}
+export async function renderMarkdown(content: string) {
+  const toc: Heading[] = [];
+  const result = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeSanitize)
+    .use(rehypeHighlight, { detect: false, ignoreMissing: true })
+    .use(headingPlugin(toc))
+    .use(rehypeStringify)
+    .process(content);
+  return { html: String(result), toc };
+}
+const xml = (value: string) =>
+  value.replace(
+    /[<>&"']/g,
+    (char) =>
+      ({
+        "<": "&lt;",
+        ">": "&gt;",
+        "&": "&amp;",
+        '"': "&quot;",
+        "'": "&apos;",
+      })[char]!,
+  );
+export function rssFeed(posts: Post[]) {
+  const items = selectPosts(posts)
+    .map(
+      (post) =>
+        `<item><title>${xml(post.title)}</title><link>${canonicalUrl(`/blog/${post.slug}`)}</link><guid>${canonicalUrl(`/blog/${post.slug}`)}</guid><pubDate>${new Date(post.date).toUTCString()}</pubDate><description>${xml(post.summary)}</description></item>`,
+    )
+    .join("");
+  return `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Kevin’s blog</title><link>${canonicalUrl("/blog")}</link><description>Notes on building software by Kevin Dwi Wijaya.</description><language>en</language>${items}</channel></rss>`;
+}

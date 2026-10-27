@@ -6,6 +6,7 @@ for (const path of [
   "/",
   "/projects",
   "/about",
+  "/blog",
   "/services",
   "/contact",
   "/resume",
@@ -30,6 +31,7 @@ for (const path of [
 }
 for (const path of [
   "/projects/does-not-exist",
+  "/blog/does-not-exist",
   "/store",
   "/store/does-not-exist",
 ])
@@ -69,3 +71,8 @@ assert.equal(oversized.status, 413);
 console.log(
   "PASS: routes, metadata, redirects, hidden store, OG, sitemap, robots and API guards. No email sent.",
 );
+
+const rss = await fetch(base + "/rss.xml");
+assert.equal(rss.status, 200);
+assert.ok((await rss.text()).includes("<channel>"));
+assert.ok(sitemap.includes("https://kvndwi.com/blog"));

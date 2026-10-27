@@ -1,0 +1,256 @@
+.banner {
+  background: #eaf1fd;
+  border-radius: 24px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+}
+.label {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  color: #466c9d;
+}
+.banner h2 {
+  font-size: 38px;
+  margin: 18px 0 12px;
+  line-height: 1.2;
+}
+.banner p {
+  font-size: 15px;
+  color: #5f718a;
+}
+.illustration {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 200px;
+}
+.paper {
+  background: #fff;
+  border: 1px solid #d8e4f5;
+  border-radius: 16px;
+  width: 180px;
+  padding: 22px;
+  transform: rotate(-8deg);
+  box-shadow: 12px 12px 0 #cedef7;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #1967d2;
+}
+.paper span {
+  font-size: 10px;
+  color: #76849a;
+}
+.paper i {
+  height: 4px;
+  width: 100%;
+  background: #e5ebf4;
+  border-radius: 5px;
+}
+.paper i:last-child {
+  width: 65%;
+}
+.star {
+  position: absolute;
+  right: 15%;
+  top: 8px;
+  font-size: 46px;
+  color: #7496d0;
+}
+.empty {
+  padding: 55px 20px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  gap: 16px;
+  color: #73829a;
+}
+.empty h2 {
+  font-size: 23px;
+  color: #202124;
+}
+.empty p {
+  font-size: 14px;
+  line-height: 1.9;
+}
+.empty a {
+  margin-top: 8px;
+}
+.feed {
+  border-top: 1px solid #e8eaed;
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #68717c;
+}
+.feed a {
+  color: #1967d2;
+}
+.cover {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+.meta {
+  font-size: 12px !important;
+  color: #6b778b;
+}
+.postHeader {
+  max-width: 780px;
+  margin: 10px 0 35px;
+}
+.postHeader h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin: 18px 0;
+}
+.postHeader > p {
+  font-size: 17px;
+  color: #657080;
+  line-height: 1.8;
+}
+.readingLayout {
+  display: flex;
+  gap: 50px;
+  align-items: start;
+  margin-top: 40px;
+}
+.toc {
+  width: 190px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 160px;
+  font-size: 12px;
+}
+.toc h2 {
+  font-size: 15px;
+  margin-bottom: 14px;
+}
+.toc a {
+  display: block;
+  color: #657080;
+  padding: 6px 0;
+}
+.toc a[data-level="3"] {
+  padding-left: 12px;
+}
+.prose {
+  max-width: 760px;
+  min-width: 0;
+  font-size: 16px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin: 30px 0 15px;
+  scroll-margin-top: 160px;
+}
+.prose h2 {
+  font-size: 28px;
+}
+.prose h3 {
+  font-size: 22px;
+}
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote,
+.prose pre {
+  margin: 18px 0;
+}
+.prose ul {
+  list-style: disc;
+  padding-left: 25px;
+}
+.prose ol {
+  list-style: decimal;
+  padding-left: 25px;
+}
+.prose a {
+  color: #1967d2;
+  text-decoration: underline;
+}
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+.prose blockquote {
+  padding: 8px 20px;
+  border-left: 3px solid #a1bdec;
+  background: #f5f8fd;
+}
+.prose pre {
+  padding: 22px;
+  border-radius: 14px;
+  overflow-x: auto;
+  background: #f3f6fb;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.prose code {
+  font-family: var(--font-mono), monospace;
+}
+.prose :global(.hljs-keyword),
+.prose :global(.hljs-selector-tag) {
+  color: #7a3e9d;
+}
+.prose :global(.hljs-string),
+.prose :global(.hljs-attr) {
+  color: #237045;
+}
+.prose :global(.hljs-number),
+.prose :global(.hljs-literal) {
+  color: #a25320;
+}
+.prose :global(.hljs-title) {
+  color: #1967d2;
+}
+.prose :global(.hljs-comment) {
+  color: #6a7483;
+}
+@media (max-width: 700px) {
+  .banner {
+    padding: 28px;
+    grid-template-columns: 1fr;
+  }
+  .banner h2 {
+    font-size: 30px;
+  }
+  .illustration {
+    min-height: 220px;
+  }
+  .star {
+    right: 5%;
+  }
+  .readingLayout {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .toc {
+    position: static;
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e8eaed;
+  }
+  .postHeader h1 {
+    font-size: 30px;
+  }
+  .prose {
+    font-size: 15px;
+  }
+  .feed {
+    gap: 15px;
+  }
+  .empty {
+    padding: 38px 10px;
+  }
+}
