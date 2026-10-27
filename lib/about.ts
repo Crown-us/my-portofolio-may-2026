@@ -4,6 +4,7 @@ export interface Experience {
   period: string;
   startDate: string;
   location?: string;
+  logo?: string;
   summary: string;
   highlights: string[];
 }
