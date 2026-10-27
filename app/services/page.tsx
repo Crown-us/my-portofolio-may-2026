@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { ArrowRight, Check, Globe, Server, Smartphone } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  Globe,
+  LayoutTemplate,
+  Server,
+  Smartphone,
+} from "lucide-react";
 import { services, serviceIntro, workSteps, serviceFaq } from "@/lib/services";
 import { formatPrice } from "@/lib/domain";
 import { buildSeo } from "@/lib/seo";
@@ -8,6 +15,7 @@ import ContactCta from "../components/ContactCta";
 import s from "@/lib/styles";
 
 const serviceIcons: Record<string, typeof Globe> = {
+  "landing-page": LayoutTemplate,
   "web-development": Globe,
   "mobile-development": Smartphone,
   "backend-api": Server,
@@ -20,7 +28,7 @@ export default function ServicesPage() {
     <SiteShell>
       <PageIntro title="Let’s build something useful" eyebrow="SERVICES" />
       <p className={s.lead}>{serviceIntro}</p>
-      <div className={`${s.projectGrid} ${s.section}`}>
+      <div className={`${s.serviceGrid} ${s.section}`}>
         {services.map((service, index) => {
           const Icon = serviceIcons[service.slug] ?? Globe;
           return (

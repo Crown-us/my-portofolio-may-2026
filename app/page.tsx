@@ -46,7 +46,7 @@ export default function Home() {
             </Link>
           </div>
           <div className={s.toolGrid}>
-            {services.map((service) => (
+            {services.slice(0, 3).map((service) => (
               <Link
                 className={s.serviceTeaser}
                 href={`/services#${service.slug}`}
