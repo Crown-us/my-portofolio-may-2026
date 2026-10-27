@@ -1,8 +1,46 @@
-"use client";
 import Link from "next/link";
-import { ArrowLeft, Download } from "lucide-react";
-import { resumeData as resume } from "@/lib/resume";
-import s from "../portfolio.module.css";
+import { about } from "@/lib/about";
+import { projects } from "@/lib/projects";
+import { siteConfig } from "@/lib/config";
+import { buildSeo } from "@/lib/seo";
+import SiteShell, { PageIntro } from "../components/SiteShell";
+import ProfileDetails from "../components/ProfileDetails";
+import s from "@/lib/styles";
+export const metadata = buildSeo("Resume", "/resume");
 export default function ResumePage() {
- return <main className={s.page}><article className={`${s.detail} ${s.resume}`}><div className={s.resumeNav}><Link className={s.back} href="/"><ArrowLeft size={16}/> Back to portfolio</Link><button className={s.button} onClick={()=>window.print()}><Download size={16}/> Save as PDF</button></div><p className={s.eyebrow}>RESUME</p><h1>{resume.basics.name}</h1><p>{resume.basics.label}</p><div className={s.resumeLinks}><a href={`mailto:${resume.basics.email}`}>{resume.basics.email}</a><a href={`tel:${resume.basics.phone.replace(/\s/g,"")}`}>{resume.basics.phone}</a><span>{resume.basics.location.city}, {resume.basics.location.region}</span>{resume.basics.profiles.map(p=><a key={p.network} href={p.url} target="_blank" rel="noopener noreferrer">{p.network} ↗</a>)}</div><section><h2>Profile</h2><p>{resume.basics.summary}</p></section><section><h2>Experience</h2>{resume.work.map(w=><div key={w.name}><h3>{w.position}</h3><p>{w.name} · {w.location} · {w.startDate.slice(0,4)}–{w.endDate?w.endDate.slice(0,4):"Present"}</p><p>{w.summary}</p><ul>{w.highlights.map(h=><li key={h}>{h}</li>)}</ul></div>)}</section><section><h2>Selected projects</h2>{resume.projects.map(p=><div className={s.resumeEntry} key={p.name}><h3><a href={p.url} target="_blank" rel="noopener noreferrer">{p.name} ↗</a></h3><p>{p.description}</p><ul>{p.highlights.map(h=><li key={h}>{h}</li>)}</ul></div>)}</section><section><h2>Skills</h2>{resume.skills.map(skill=><div className={s.resumeEntry} key={skill.name}><h3>{skill.name}</h3><p>{skill.keywords.join(" · ")}</p></div>)}</section><section><h2>Education</h2>{resume.education.map(e=><div key={e.institution}><h3>{e.institution}</h3><p>{e.studyType} · {e.area}</p><p>{e.startDate.slice(0,4)}–{e.endDate.slice(0,4)}</p></div>)}</section><section><h2>Languages</h2><p>{resume.languages.map(l=>`${l.language} (${l.fluency})`).join(" · ")}</p></section></article></main>;
+  return (
+    <SiteShell>
+      <PageIntro title={siteConfig.name} eyebrow="RESUME" />
+      <p className={s.lead}>{about.intro}</p>
+      <div className={s.cardLinks}>
+        <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        <a href={siteConfig.social.github}>GitHub ↗</a>
+        {about.resumePdf && (
+          <a
+            className={s.button}
+            href={about.resumePdf}
+            download
+            data-umami-event="resume-download"
+          >
+            Download CV ↓
+          </a>
+        )}
+      </div>
+      <ProfileDetails />
+      <section className={s.section}>
+        <h2>Selected projects</h2>
+        {projects.map((project) => (
+          <article className={s.panel} key={project.slug}>
+            <h3>
+              <Link href={`/projects/${project.slug}`}>{project.title} ↗</Link>
+            </h3>
+            <p>
+              {project.year} · {project.category}
+            </p>
+            <p>{project.summary}</p>
+          </article>
+        ))}
+      </section>
+    </SiteShell>
+  );
 }

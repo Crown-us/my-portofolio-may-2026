@@ -1,8 +1,26 @@
-import Portfolio from "../components/Portfolio";
-export const metadata = { title: "Projects — Kevin Dwi Wijaya" };
-export default async function ProjectsPage({ searchParams }: { searchParams: Promise<{ q?: string; category?: string }> }) {
- const params = await searchParams;
- const query = typeof params.q === "string" ? params.q : "";
- const category = typeof params.category === "string" ? params.category : "All projects";
- return <Portfolio key={`${query}:${category}`} view="projects" initialQuery={query} initialCategory={category}/>;
+import SiteShell, { PageIntro } from "../components/SiteShell";
+import ProjectLibrary from "../components/ProjectLibrary";
+import { buildSeo } from "@/lib/seo";
+export const metadata = buildSeo(
+  "Projects",
+  "/projects",
+  "Explore Kevin’s web and mobile engineering projects.",
+);
+export default async function ProjectsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category } = await searchParams;
+  return (
+    <SiteShell>
+      <PageIntro
+        title="Explore the things I’ve built."
+        eyebrow="THE PROJECT LIBRARY"
+      />
+      <ProjectLibrary
+        initialCategory={typeof category === "string" ? category : undefined}
+      />
+    </SiteShell>
+  );
 }
