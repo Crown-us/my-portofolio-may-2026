@@ -6,7 +6,12 @@
     "dev": "npx next dev",
     "build": "next build --webpack",
     "start": "npx next start",
-    "lint": "npx eslint"
+    "lint": "eslint .",
+    "test": "node --test tests/*.test.mjs",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write app lib tests docs README.md package.json tsconfig.json",
+    "format:check": "prettier --check app lib tests docs README.md package.json tsconfig.json",
+    "test:smoke": "node tests/http.smoke.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -26,6 +31,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "prettier": "^3.9.10",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

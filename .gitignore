@@ -48,3 +48,8 @@ DEVELOPMENT_LOG.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local preview artifacts
+/preview-*.png
+/preview-*.log
+!/.env.example
