@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { siteConfig } from "@/lib/config";
 
@@ -58,9 +57,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <div className="grain-overlay" aria-hidden="true" />
-          <SmoothScroll>{children}</SmoothScroll>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          {children}
         </ThemeProvider>
       </body>
     </html>
