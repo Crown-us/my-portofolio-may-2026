@@ -14,6 +14,7 @@ export default function ProfileDetails() {
                   <h3>{item.role}</h3>
                   <p>
                     {item.organization} · {item.period}
+                    {item.location && ` · ${item.location}`}
                   </p>
                   <p>{item.summary}</p>
                   {!!item.highlights.length && (

@@ -188,12 +188,12 @@ Optional public analytics settings: `NEXT_PUBLIC_UMAMI_WEBSITE_ID`, `NEXT_PUBLIC
 ## Content still needed
 
 - Confirmed profile photo and final CV PDF.
-- Three real internships: company, role, dates, responsibilities and highlights.
 - BNSP certification title, issuer, year and credential URL.
 - Project problem, actual role/timeframe/team, features, architecture, challenges, solutions and sourced outcomes.
 - Confirmation of offered services, pricing and durations.
 - Real Store products and checkout URLs.
 - Real Blog writing.
+- Case-study detail for the three projects (problem, role, timeframe, features, challenges, results) — a fill-in question sheet lives in `CONTENT_TODO.md`.
 - Resend configuration; optional Umami configuration.
 
 Existing project screenshots/stacks/links were inherited from the repository. Current external demo availability and factual claims still need owner confirmation. Empty data is intentionally hidden; do not fill it with invented evidence.
