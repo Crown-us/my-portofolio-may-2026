@@ -1,6 +1,6 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="7" fill="#0D0D0D"/>
-  <rect x="1" y="1" width="30" height="30" rx="6" stroke="#FF443A" stroke-width="1.5" stroke-opacity="0.8"/>
-  <text x="16" y="21" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="12" fill="#FFFFFF" text-anchor="middle" letter-spacing="-0.5">KD</text>
-  <circle cx="25" cy="7" r="2.5" fill="#FF443A"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <rect x="2" y="2" width="60" height="60" rx="19" fill="#245CE6"/>
+  <path d="M18 17h9v30h-9z" fill="#FFFFFF"/>
+  <path d="M29 31 41 17h11L38 32l14 15H40L29 34z" fill="#FFFFFF"/>
+  <path d="m48 8 1.7 4.3L54 14l-4.3 1.7L48 20l-1.7-4.3L42 14l4.3-1.7L48 8Z" fill="#B9F3D3"/>
 </svg>
