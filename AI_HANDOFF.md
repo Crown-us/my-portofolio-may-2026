@@ -17,9 +17,9 @@ This is a project-state snapshot for the next AI, developer, or tool. Verify cur
 
 ## Latest request and exact stopping point
 
-The user requested: **“tambahin blog dulu bro”** (add Blog first), then authorized a push.
+The user requested: **“tambahin blog dulu bro”** (add Blog first), then authorized a push, then asked for `kvndwi.com` to serve the current site instead of only the Vercel URL.
 
-Blog code is implemented, built, committed locally as `2ddc415`, and pushed to `origin/feat/portfolio-upgrade`. Unit tests, lint, typecheck and formatter checks all pass. **Browser verification of the Blog routes is still pending** — do not claim it has finished.
+Blog code is implemented, built, committed, merged into `main`, and deployed. Unit tests, lint, typecheck and formatter checks all pass. **Interactive browser verification (360px layout, empty-state visual review) is still pending** — HTTP-level verification on production has passed.
 
 Current Blog state:
 
@@ -28,18 +28,16 @@ Current Blog state:
 - Drafts are visible only in development; production detail lookup, listing, static params, RSS and sitemap exclude drafts.
 - No real article has been supplied. No invented article is published.
 - Template: `content/blog/post.md.example`; `.example` files are ignored by the loader.
-- **Blog changes are committed** as `2ddc415` on `feat/portfolio-upgrade`.
-- Latest Blog production build succeeded. **Preview process has not been restarted after that build.** Restart/recheck it before browser testing; an older Next server may be serving stale content against newly generated assets. Last verified listener on port 3001 was PID `14772`, still running the pre-Blog build.
+- **Blog changes are committed** and merged into `main` (`eedfb26`).
+- **Production is deployed and live on `https://kvndwi.com`.** Verified 2026-10-28: `/`, `/blog`, `/projects`, `/rss.xml`, `/sitemap.xml` all return 200; `/blog/<unknown>` returns 404; `www.kvndwi.com` 307-redirects to the apex domain; canonical and `og:url` resolve to `https://kvndwi.com`. The old one-page build that previously served this domain has been replaced.
 
 Next steps still outstanding:
 
-1. Restart only this project's preview process on port 3001 with the current build.
-2. Run the updated HTTP smoke test (now includes Blog/RSS).
-3. Verify Blog navigation, empty state and 360px layout in the browser. Confirm unknown post returns 404, RSS works, and no placeholder article is exposed.
-4. If testing a populated article, use a disposable test fixture or development-only draft; never leave invented published content behind.
-5. Fix any issues found, then commit follow-up fixes with a Conventional Commit.
+1. Interactive browser verification of the Blog routes on production (navigation, empty state, 360px layout, no placeholder article exposed).
+2. Restart the local preview on port 3001 with the current build before any local testing; last known listener PID `14772` was still running the pre-Blog build.
+3. Run the updated HTTP smoke test against a fresh local preview.
 
-Done already: Blog code committed as `2ddc415` and pushed to `origin/feat/portfolio-upgrade`. No merge or deployment has been requested.
+Done already: Blog committed, merged into `main` and pushed; Vercel auto-deployed `main` to production; `kvndwi.com` and `www.kvndwi.com` confirmed attached to project `my-portofolio-may-2026`.
 
 ## User preferences / product direction
 
@@ -74,7 +72,7 @@ Local commits already present:
 | `8f90fda` | Remove unused legacy components                      |
 | `637cb21` | Portfolio catalog, services, contact, optional Store |
 | `d00a422` | Tests, route/delivery/metadata verification and docs |
-| `2ddc415` | Markdown Blog, RSS and sitemap integration          |
+| `eedfb26` | Markdown Blog, RSS, sitemap, handoff docs (merged to `main`) |
 
 ## Stack and file map
 
