@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Analytics from "./components/Analytics";
+import { buildSeo } from "@/lib/seo";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { siteConfig } from "@/lib/config";
 
@@ -20,6 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  ...buildSeo(siteConfig.seo.title, "/", siteConfig.seo.description),
   title: siteConfig.seo.title,
   description: siteConfig.seo.description,
   metadataBase: new URL(siteConfig.seo.url),
@@ -31,18 +33,6 @@ export const metadata: Metadata = {
     ],
     shortcut: "/icon.png",
     apple: "/icon.png",
-  },
-  openGraph: {
-    title: siteConfig.seo.title,
-    description: siteConfig.seo.description,
-    url: siteConfig.seo.url,
-    siteName: siteConfig.name,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.seo.title,
-    description: siteConfig.seo.description,
   },
 };
 
@@ -58,9 +48,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased" suppressHydrationWarning>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <div className="grain-overlay" aria-hidden="true" />
-          <SmoothScroll>{children}</SmoothScroll>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem={false}
+        >
+          {children}
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
