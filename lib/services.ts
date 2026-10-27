@@ -73,7 +73,7 @@ export const serviceFaq = [
   {
     question: "How is pricing determined?",
     answer:
-      "Pricing depends on the agreed scope. Share your requirements through the contact form to request a quote.",
+      "Listed prices are starting points for the smallest scope. The final quote depends on features, integrations, and timeline. Share your requirements through the contact form to get an exact figure.",
   },
   {
     question: "Where should I start?",
