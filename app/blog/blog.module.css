@@ -97,6 +97,47 @@
   height: auto;
   border-radius: 16px;
 }
+.postCard {
+  position: relative;
+  cursor: pointer;
+}
+.postCard:focus-within {
+  outline: 2px solid #1967d2;
+  outline-offset: 2px;
+}
+.postTitle {
+  font-size: 17px;
+  line-height: 1.4;
+  margin-top: 6px;
+}
+.postTitle a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.postFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #eef1f5;
+}
+.readMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1967d2;
+}
+.readMore span {
+  transition: transform 0.18s ease;
+}
+.postCard:hover .readMore span {
+  transform: translateX(3px);
+}
 .meta {
   font-size: 12px !important;
   color: #6b778b;

@@ -33,7 +33,7 @@ export default function BlogLibrary({
       </div>
       <div className={s.projectGrid}>
         {visible.map((post) => (
-          <article className={s.card} key={post.slug}>
+          <article className={`${s.card} ${b.postCard}`} key={post.slug}>
             {post.coverImage && (
               <Image
                 className={b.cover}
@@ -48,7 +48,7 @@ export default function BlogLibrary({
                 <time dateTime={post.date}>{post.date}</time> ·{" "}
                 {post.readingMinutes} min read {post.draft && "· Draft"}
               </p>
-              <h3>
+              <h3 className={b.postTitle}>
                 <Link href={`/blog/${post.slug}`}>{post.title}</Link>
               </h3>
               <p>{post.summary}</p>
@@ -57,9 +57,11 @@ export default function BlogLibrary({
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
-              <Link className={s.textLink} href={`/blog/${post.slug}`}>
-                Read post →
-              </Link>
+              <div className={b.postFooter}>
+                <span className={b.readMore}>
+                  Read post <span aria-hidden="true">→</span>
+                </span>
+              </div>
             </div>
           </article>
         ))}
