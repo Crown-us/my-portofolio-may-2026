@@ -40,6 +40,7 @@ Sekarang `isAvailable: true`. Masih benar? Mau ada teks tambahan seperti "open f
 
 **1.5 Link sosial**
 Cek apakah masih benar:
+
 - GitHub: `https://github.com/Crown-us`
 - LinkedIn: `https://www.linkedin.com/in/kevin-dwi-wijaya-95aa812b4`
 
@@ -50,7 +51,7 @@ Cek apakah masih benar:
 # 2. PENGALAMAN — P1
 
 Target file: `lib/about.ts` → `experience[]`
-Sekarang **kosong**, jadi bagian pengalaman di halaman About dan Resume tidak muncul sama sekali.
+Tiga pengalaman sudah terisi di `lib/about.ts` dan tampil di About/Resume. Bagian di bawah dapat dipakai untuk koreksi atau penambahan.
 
 Untuk **tiap** pengalaman (magang / kerja / organisasi), isi 5 hal:
 
@@ -85,6 +86,7 @@ Highlight  : (2–3 poin pencapaian konkret)
 Target file: `lib/about.ts` → `certifications[]`
 
 **3.1 Sertifikat BNSP**
+
 - Nama sertifikasi (judul lengkap):
 - Lembaga penerbit:
 - Tahun:
@@ -291,6 +293,7 @@ Target file: `lib/services.ts`
 Sekarang harga `null`, durasi kosong, `idealFor` kosong.
 
 **5.1 Full-stack web development**
+
 - Mulai dari harga berapa? (atau `project-based`)
 - Estimasi durasi?
 - Cocok untuk siapa? (UMKM, startup, instansi?)
@@ -359,13 +362,13 @@ Sekarang belum ada field-nya di kode. Kalau nanti ada testimoni nyata (nama, jab
 
 # Ringkasan prioritas
 
-| # | Bagian | Prioritas | Dampak |
-| - | ------ | --------- | ------ |
-| 4 | Case study 3 project | **P1** | Paling besar — ini yang dibaca calon klien/HRD |
-| 2 | Pengalaman magang | **P1** | Halaman Resume sekarang kosong |
-| 1 | Foto + CV | **P1** | Kelengkapan profil |
-| 3 | Sertifikasi BNSP | P2 | Kredibilitas |
-| 5 | Services + harga | P2 | Konversi ke kontak |
-| 6 | Blog 2–3 artikel | P2 | Bukti kemampuan berpikir |
-| 7 | Store | P3 | Belum ada produk |
-| 8 | Testimoni | P3 | Butuh sumber nyata |
+| #   | Bagian               | Prioritas | Dampak                                         |
+| --- | -------------------- | --------- | ---------------------------------------------- |
+| 4   | Case study 3 project | **P1**    | Paling besar — ini yang dibaca calon klien/HRD |
+| 2   | Pengalaman magang    | **P1**    | Halaman Resume sekarang kosong                 |
+| 1   | Foto + CV            | **P1**    | Kelengkapan profil                             |
+| 3   | Sertifikasi BNSP     | P2        | Kredibilitas                                   |
+| 5   | Services + harga     | P2        | Konversi ke kontak                             |
+| 6   | Blog 2–3 artikel     | P2        | Bukti kemampuan berpikir                       |
+| 7   | Store                | P3        | Belum ada produk                               |
+| 8   | Testimoni            | P3        | Butuh sumber nyata                             |

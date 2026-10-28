@@ -1,96 +1,141 @@
-# Kevinâ€™s portfolio
+# Kevin Dwi Wijaya - Portfolio
 
-A Next.js App Router portfolio at https://kvndwi.com. The interface keeps the clean store-inspired design, shared sticky navigation, and light CSS interactions. No Three.js scene or animation runtime is loaded.
+Portfolio personal dengan tampilan ringan bergaya app store: navigasi sticky, kartu pastel, proyek, pengalaman, layanan, dan Blog.
 
-## Run locally
+**Website:** [kvndwi.com](https://kvndwi.com)  
+**Repository:** [Crown-us/my-portofolio-may-2026](https://github.com/Crown-us/my-portofolio-may-2026)
 
-Requires Node.js 22.18+ (Node 24 recommended) and npm.
+## Mulai lokal
+
+Gunakan Node.js 22.18+ (disarankan Node 24) dan npm.
 
 ```sh
 npm ci
 npm run dev -- --hostname 127.0.0.1 --port 3001
 ```
 
-Open http://127.0.0.1:3001. For a production preview, stop the dev process, run `npm run build`, then `npm start -- --hostname 127.0.0.1 --port 3001`. The webpack build avoids the local Turbopack font-cache problem; next/font needs access to Google Fonts during the build.
-
-## Verify
+Buka [localhost:3001](http://127.0.0.1:3001/). Untuk preview production, hentikan server proyek yang sedang memakai port itu, lalu:
 
 ```sh
-npm test
-npm run lint
-npm run typecheck
-npm run format:check
 npm run build
-# With the preview running on port 3001:
-npm run test:smoke
+npm start -- --hostname 127.0.0.1 --port 3001
 ```
 
-Tests use Nodeâ€™s built-in runner and never send real email. Prettier is the only added development dependency, to enforce the requested formatting consistently. TypeScript checks are strict. The Blog adds server-only Markdown parsing, sanitization and syntax highlighting dependencies; they are not shipped in the browser bundle.
+Build memakai webpack karena sebelumnya ada masalah cache font pada Turbopack di lingkungan lokal. `next/font` membutuhkan akses Google Fonts saat build.
 
-## Content and routes
+## Stack
 
-| File              | Content                                                                                              |
-| ----------------- | ---------------------------------------------------------------------------------------------------- |
-| `lib/projects.ts` | Single project source: featured flags, summary, status, grouped stack, case-study evidence and links |
-| `lib/about.ts`    | Profile image, internships, certifications, skill groups, PDF CV                                     |
-| `lib/services.ts` | Service areas, deliverables, prices, estimated duration, process and FAQ                             |
-| `lib/store.ts`    | Real products only, checkout platform and HTTPS checkout links                                       |
-| `lib/config.ts`   | Identity, contacts, availability and global-search flag                                              |
-| `lib/seo.ts`      | Canonical and social metadata defaults                                                               |
+Next.js 16 App Router, React 19, TypeScript strict, Tailwind CSS 4, CSS Modules, dan Lucide. Blog memakai gray-matter serta unified/remark/rehype untuk membaca Markdown, sanitasi HTML, dan syntax highlighting di server. Parser tidak dikirim ke browser.
 
-Discover shows at most three featured projects, service previews and a contact CTA. Projects is the full category-filtered library. Details live at `/projects/[slug]`; old `/works/[slug]` links redirect permanently. Unknown slugs return 404.
+Animasi lama Framer Motion, Lenis, musik latar, dan dependensi utilitas yang tidak dipakai sudah dibuang.
 
-About and Resume share one profile source. Empty case-study sections, internship and certification lists, and the PDF download are hidden. Screenshot galleries use the native dialog for focus trapping, Escape dismissal and focus restoration.
+## Halaman
 
-Store is intentionally empty: its navigation, teaser and routes stay hidden/404 until real products are added. Product data validates unique slugs, nonnegative IDR prices and the matching Gumroad, Trakteer or Lynk HTTPS checkout host. `null` means Free for products and Contact for quote for services. Product descriptions support safe basic Markdown: paragraphs, headings, bullet lists, bold, inline code, HTTPS links; HTML is not rendered. Images should be local files under `public/`.
+| Route                                     | Isi                                                                                  |
+| ----------------------------------------- | ------------------------------------------------------------------------------------ |
+| `/`                                       | Discover: proyek pilihan, preview layanan, CTA kontak                                |
+| `/projects`                               | Katalog proyek dengan filter kategori                                                |
+| `/projects/[slug]`                        | Detail proyek, stack, screenshot dan bagian case study yang sudah terisi             |
+| `/about`, `/resume`                       | Profil, tiga pengalaman magang, dan skills dari data yang sama                       |
+| `/services`                               | Empat layanan, harga mulai, estimasi waktu, alur kerja dan FAQ                       |
+| `/contact`                                | Form kontak, WhatsApp dan email langsung                                             |
+| `/blog`, `/blog/[slug]`                   | Daftar artikel dan detail Markdown; artikel edukasi pertama sudah tersedia di source          |
+| `/store`, `/store/[slug]`                 | Siap untuk produk digital; saat data kosong, route 404 dan navigasinya disembunyikan |
+| `/rss.xml`, `/sitemap.xml`, `/robots.txt` | Feed artikel dan metadata mesin pencari                                              |
 
-Global search is disabled until `hasGlobalSearch` is true AND products exist, so it can meaningfully search both projects and products. Blog is available at `/blog`; translations remain deferred.
+Link lama `/works/[slug]` redirect permanen ke `/projects/[slug]`. Slug tidak dikenal mengembalikan 404. Global search masih dinonaktifkan; tersedia jika flag diaktifkan dan ada produk untuk pencarian lintas konten. Terjemahan ID/EN belum dibuat.
 
-## Contact email
+## Struktur dan edit konten
 
-Copy `.env.example` to `.env.local` and configure:
+```text
+app/                 Halaman, API, komponen dan CSS
+lib/                 Data typed serta helper
+content/blog/        File Markdown artikel dan template
+public/              Logo, ikon dan aset konten
+tests/              Tes unit serta smoke test HTTP
+```
 
-- `RESEND_API_KEY`: server-only Resend API key.
-- `CONTACT_FROM_EMAIL`: sender on a verified Resend domain.
-- `CONTACT_TO_EMAIL`: recipient inbox.
-- `CONTACT_TRUSTED_IP_HEADER`: optional client-IP header overwritten by your trusted hosting proxy. Never trust a header that clients can forge. If unset, all requests share a conservative limit.
+| File              | Yang diubah di sini                                           |
+| ----------------- | ------------------------------------------------------------- |
+| `lib/config.ts`   | Nama, kontak, sosial, availability dan flag search            |
+| `lib/projects.ts` | Proyek, featured flag, screenshot, stack, case study dan link |
+| `lib/about.ts`    | Bio, pengalaman, foto, sertifikasi dan CV                     |
+| `lib/services.ts` | Layanan, harga, estimasi, workflow dan FAQ                    |
+| `lib/store.ts`    | Produk asli dan checkout URL                                  |
+| `lib/seo.ts`      | Judul, deskripsi, canonical dan metadata sosial               |
+| `lib/styles.ts`   | Gabungan class CSS Modules yang dipakai bersama               |
 
-The form POSTs to `/api/contact`. Client/server validation share one function; the server enforces JSON, a 32 KB body limit, origin checking, a honeypot, and five attempts per ten minutes. Email is sent as plain text via Resend with a ten-second timeout. A success response requires a provider receipt; this confirms provider acceptance, not final inbox delivery. Missing configuration returns 503 and leaves WhatsApp/direct email available. Errors never expose credentials or provider diagnostics.
+Dokumen pendamping:
 
-The rate limiter is bounded and in-memory, per server process. For multiple instances/serverless production, add a shared limiter or platform WAF rule; restarts reset the local limit. Set body/time limits at the hosting proxy too. No database, payment processing or message storage is introduced.
+- [CONTENT_TODO.md](CONTENT_TODO.md): formulir untuk melengkapi konten.
+- [AI_HANDOFF.md](AI_HANDOFF.md): konteks singkat untuk AI/developer yang melanjutkan pekerjaan.
 
-## SEO and analytics
+Konten pribadi dan hasil proyek harus berdasarkan data asli. Bagian yang belum terisi disembunyikan. Foto profil, CV PDF, detail BNSP, sebagian case study, produk Store dan tulisan Blog berikutnya masih perlu dilengkapi. Data magang serta harga/estimasi layanan sudah ada; perbarui di file data jika berubah.
 
-All public pages use canonical URLs rooted at `https://kvndwi.com`, with OG/Twitter metadata. `/opengraph-image` generates the default image; projects/products use their own cover. `/sitemap.xml` includes available routes and content; `/robots.txt` excludes `/api/`. About, projects and products emit escaped JSON-LD.
+## Menambah artikel
 
-Optional Umami setup:
+Salin `content/blog/post.md.example` menjadi file `.md`, lalu ganti seluruh isi template dengan tulisan asli.
 
-1. Register the production website in Umami.
-2. Set `NEXT_PUBLIC_UMAMI_WEBSITE_ID` and `NEXT_PUBLIC_UMAMI_SCRIPT_URL` to the supplied ID and HTTPS script URL before building.
-3. Deploy to `kvndwi.com` or `www.kvndwi.com`.
+```yaml
+---
+title: "Judul artikel asli"
+slug: "judul-artikel"
+date: "2026-10-28"
+summary: "Ringkasan singkat artikel"
+tags: ["web"]
+draft: true
+# coverImage: "/images/blog/cover.png"
+---
+```
 
-The script is never loaded in dev/test, localhost production previews or other domains. Tracking is limited to pageviews and explicitly annotated contact, buy and resume-download clicks. Query strings/hash fragments are excluded, performance tracking is off, and Do Not Track is respected. No form fields are tracked. These public environment values are not secrets. See the [Umami configuration](https://docs.umami.is/docs/tracker-configuration) and [Resend send-email API](https://resend.com/docs/api-reference/emails/send-email).
+Tanggal wajib berupa string ISO dengan tanda kutip. Slug harus unik. Cover memakai file lokal di `public/`. Draft hanya terlihat saat development; production, RSS dan sitemap mengecualikannya. Ubah `draft: false` untuk menerbitkan tulisan, lalu rebuild/deploy.
 
-## Content still needed from Kevin
+Blog mendukung filter tag, urutan terbaru, waktu baca, daftar isi, heading anchors, syntax highlighting dan navigasi antarartikel. HTML mentah dibuang dan protokol link berbahaya disaring. File `.example` tidak diterbitkan.
 
-- Confirmed profile photo and final CV PDF.
-- Three real internship records: company, role, dates, responsibilities and highlights.
-- BNSP certification title, issuer, year and credential link.
-- For each project: actual problem, role, timeframe/team, features, architecture, challenges/solutions and sourced outcomes. Existing screenshots, stacks and demo/repository links were preserved from the repository; current deployment status still needs owner confirmation.
-- Confirm offered services, real scope, pricing and estimated durations. No prices or delivery promises were invented.
-- Finished digital products with images, price and checkout URL; no placeholders are published.
-- Resend and optional Umami configuration. Do not put secrets into source files or chat.
+## Store
 
-The migration removes unused dark-design components and duplicate resume data containing placeholder contacts or unsupported metrics. The approved visual baseline remains in Git history. Changes are local; publishing is a separate step.
+Tambahkan produk yang sudah selesai ke `lib/store.ts`. Checkout hanya berupa link HTTPS ke Gumroad, Trakteer atau Lynk.id; situs ini tidak memproses pembayaran atau mengirim file produk.
 
-## Blog / devlog
+Slug dan URL checkout divalidasi. Harga produk `null` ditampilkan sebagai **Free**; harga layanan `null` berarti **Contact for quote**. Gunakan gambar lokal. Deskripsi produk mendukung Markdown dasar yang aman.
 
-`/blog` is visible in navigation even when no posts exist. No sample article is published. To add a real post, copy `content/blog/post.md.example` to a `.md` file in the same folder and replace the template content.
+## Konfigurasi kontak
 
-Required YAML frontmatter: `title`, unique kebab-case `slug`, ISO `date` (quote it, e.g. `"2026-10-28"`), `summary`, `tags` (array), and `draft` (boolean). Optional `coverImage` uses a local `/images/...` path. Put images in `public/images/blog/`.
+Salin `.env.example` ke `.env.local`. Jangan commit kredensial.
 
-Drafts preview only with `npm run dev`; production pages, RSS and sitemap exclude them. Set `draft: false` only when ready to publish, then rebuild. Content validation fails loudly for invalid fields, dates or duplicate slugs. Published posts sort by date, with client-side tag filtering. Detail pages include reading time, heading anchors/table of contents, code highlighting, and neighbouring posts. Markdown body headings never create a second h1.
+| Variabel                    | Kegunaan                                                      |
+| --------------------------- | ------------------------------------------------------------- |
+| `RESEND_API_KEY`            | API key server-only untuk Resend                              |
+| `CONTACT_FROM_EMAIL`        | Sender dari domain terverifikasi di Resend                    |
+| `CONTACT_TO_EMAIL`          | Inbox penerima pesan                                          |
+| `CONTACT_TRUSTED_IP_HEADER` | Opsional: header IP yang ditimpa oleh proxy hosting tepercaya |
 
-The pipeline uses gray-matter for frontmatter and unified/remark/rehype for Markdown, HTML sanitization and highlighting, rather than a custom Markdown parser. Raw HTML is discarded and unsafe link protocols are stripped. All parsing/highlighting runs on the server. Supported code languages include TypeScript, JavaScript, CSS, JSON, Python and other common languages; unknown languages remain plain text.
+Form memakai `/api/contact` dengan validasi bersama, honeypot, pemeriksaan origin, batas payload 32 KB dan lima percobaan per sepuluh menit. Pesan dikirim sebagai plain text. Respons sukses membutuhkan receipt dari Resend, bukan jaminan pesan masuk inbox. Tanpa konfigurasi, server mengembalikan 503 dan pengguna dapat memakai WhatsApp/email langsung.
 
-`/rss.xml` is a static RSS feed and `/sitemap.xml` includes published posts. The template `.example` extension is deliberately ignored. No CMS or database is required.
+Rate limiter berada di memori setiap proses. Jika header IP tidak diatur, limit dibagi bersama. Untuk production multi-instance/serverless, gunakan limiter bersama atau WAF hosting. Jangan mempercayai header IP yang bisa dipalsukan klien.
+
+## SEO dan analytics
+
+Canonical memakai `https://kvndwi.com`. OG default tersedia di `/opengraph-image`; proyek/produk memakai gambar masing-masing. Structured data tersedia pada profil, proyek, produk dan artikel.
+
+Umami opsional memakai `NEXT_PUBLIC_UMAMI_WEBSITE_ID` dan `NEXT_PUBLIC_UMAMI_SCRIPT_URL` (HTTPS), diisi sebelum build. Script hanya dimuat dalam production di `kvndwi.com`/`www.kvndwi.com`, bukan localhost. Tracking dibatasi ke pageview dan klik CTA kontak, beli, serta unduh CV; query/hash dan isian form tidak dilacak.
+
+## Pemeriksaan seperlunya
+
+Tidak perlu menjalankan seluruh pemeriksaan untuk setiap edit konten atau kosmetik. Pilih sesuai risiko perubahan:
+
+```sh
+npm test                 # Logika: validator, Markdown, kontak, metadata
+npm run typecheck        # Perubahan tipe/struktur kode
+npm run lint             # Pemeriksaan kode
+npm run format:check     # Format
+npm run test:smoke       # Route/API; server localhost harus berjalan
+npm run build            # Sebelum rilis atau perubahan integrasi besar
+```
+
+Tes email menggunakan mock dan tidak mengirim pesan nyata. `npm run format` merapikan source dan dokumen utama.
+
+## Catatan folder
+
+`.next/`, `node_modules/`, file `.env.local`, log preview, dan cache TypeScript adalah file lokal yang diabaikan Git. Log preview aktif dipertahankan agar proses yang berjalan tidak terganggu. Aset konten asli yang belum dipasang tetap disimpan; screenshot preview lama, gambar duplikat, ikon starter, audio lama dan dokumentasi template yang sudah kedaluwarsa dibuang.
+
+Perubahan cleanup lokal tidak otomatis melakukan push atau deployment.
