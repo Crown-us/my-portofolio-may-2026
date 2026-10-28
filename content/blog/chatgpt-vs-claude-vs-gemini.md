@@ -5,6 +5,7 @@ date: "2026-10-28"
 summary: "Perbandingan fitur resmi ChatGPT, Claude, dan Gemini untuk riset, dokumen, dan pekerjaan sehari-hari. Dilengkapi konteks paket, versi, keterbatasan, serta sumber yang diperiksa pada 28 Oktober 2026."
 tags: ["AI", "Perbandingan", "Produktivitas"]
 draft: false
+coverImage: "/images/blog/chatgpt-claude-gemini-cover.webp"
 ---
 
 Mau memilih asisten AI, tetapi setiap produk terasa mengklaim bisa melakukan semuanya?
