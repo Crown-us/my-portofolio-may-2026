@@ -44,7 +44,8 @@ export const projects: Project[] = [
     status: "live",
     summary: "A learning platform with course management and mentor booking.",
     caseStudy: {
-      problem: "",
+      problem:
+        "An LMS has to carry a student from browsing a catalog to finishing a course: enrollment, structured modules and lessons, quizzes, progress, and certification. WeStud needed that full loop to work for three roles — student, mentor, and admin — on top of a managed backend.",
       role: "",
       timeframe: "",
       teamSize: null,
@@ -54,19 +55,64 @@ export const projects: Project[] = [
           "TypeScript",
           "Vite",
           "TanStack Router",
+          "TanStack Query",
           "Tailwind CSS",
+          "Shadcn UI",
           "Framer Motion",
           "Three.js",
         ],
-        backend: [],
+        backend: ["Supabase Auth", "Postgres row-level security"],
         mobile: [],
-        database: ["Supabase"],
-        infra: [],
+        database: ["PostgreSQL"],
+        infra: ["Vercel"],
       },
-      features: [],
-      architecture: "",
+      features: [
+        {
+          title: "Role-based dashboards",
+          description:
+            "Students, mentors, and admins each land on their own dashboard; the role stored on the profile decides which screens and data they can reach.",
+        },
+        {
+          title: "Course builder",
+          description:
+            "Courses are assembled from modules and lessons, with draft, published, and archived states so unfinished material never appears in the catalog.",
+        },
+        {
+          title: "Guided learning player",
+          description:
+            "Enrolled students move through lessons in order, with progress tracked per enrollment and a discussion panel next to the video.",
+        },
+        {
+          title: "Quizzes",
+          description:
+            "Modules can carry quizzes with a passing score, multiple-choice options, and an explanation per question.",
+        },
+        {
+          title: "Mentor catalog and schedule",
+          description:
+            "Mentors are listed from the profile table with their published courses, and students manage their sessions from a calendar view.",
+        },
+      ],
+      architecture:
+        "The frontend is a React 19 single-page app built with Vite and routed by TanStack Router, with data fetched through TanStack Query. Supabase provides authentication, a Postgres database, and storage. The schema links profiles, courses, modules, lessons, enrollments, quizzes, questions, and options, while Postgres row-level security keeps each student's enrollments private and published courses public.",
       diagram: "",
-      challenges: [],
+      challenges: [
+        {
+          challenge: "Guarding nested dashboard routes",
+          solution:
+            "Each protected route checks authentication and enrollment in its route loader before rendering, redirecting to login with a return path — or back to the course page when the student is not enrolled.",
+        },
+        {
+          challenge: "Role-based access without a custom API",
+          solution:
+            "Roles live on the profile row and row-level security policies in Postgres decide what each user may read, so the client is not the only thing standing between a student and another student's data.",
+        },
+        {
+          challenge: "Repeated fetching across dashboard screens",
+          solution:
+            "Queries are declared once as reusable TanStack Query options with per-entity stale times, so moving between dashboard pages reuses cached data instead of refetching on every visit.",
+        },
+      ],
       results: [],
       screenshots: [
         {
