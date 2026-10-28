@@ -5,7 +5,7 @@ import SiteShell from "../../components/SiteShell";
 import { getPosts } from "@/lib/blog";
 import { renderMarkdown } from "@/lib/blog-core";
 import { buildSeo } from "@/lib/seo";
-import { canonicalUrl, jsonLd } from "@/lib/domain";
+import { canonicalUrl, formatPostDate, jsonLd } from "@/lib/domain";
 import s from "@/lib/styles";
 import b from "../blog.module.css";
 type Props = { params: Promise<{ slug: string }> };
@@ -36,7 +36,7 @@ export default async function PostPage({ params }: Props) {
       <article>
         <header className={b.postHeader}>
           <p className={b.meta}>
-            <time dateTime={post.date}>{post.date}</time> ·{" "}
+            <time dateTime={post.date}>{formatPostDate(post.date)}</time> ·{" "}
             {post.readingMinutes} min read {post.draft && "· Draft preview"}
           </p>
           <h1>{post.title}</h1>

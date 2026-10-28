@@ -11,6 +11,16 @@ export const BUDGET_RANGES = [
 export function canonicalUrl(path = "/") {
   return new URL(`/${path.replace(/^[\\/]+/, "")}`, SITE_URL).href;
 }
+export function formatPostDate(value: string) {
+  const date = new Date(`${value}T00:00:00Z`);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
 export function formatPrice(value: number | null, isProduct = false) {
   if (value === null) return isProduct ? "Free" : "Contact for quote";
   return new Intl.NumberFormat("id-ID", {
