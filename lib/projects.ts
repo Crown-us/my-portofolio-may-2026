@@ -21,7 +21,7 @@ export interface CaseStudy {
 export interface Project {
   isFeatured: boolean;
   summary: string;
-  status: "live" | "in-progress" | "archived" | "handed-off";
+  status: "live" | "in-progress" | "archived" | "handed-off" | "demo";
   caseStudy: CaseStudy;
   id: number;
   slug: string;
@@ -241,14 +241,15 @@ export const projects: Project[] = [
   {
     id: 3,
     isFeatured: true,
-    status: "live",
+    status: "demo",
     summary:
       "Neighborhood administration, resident dues, and community information.",
     caseStudy: {
-      problem: "",
-      role: "",
-      timeframe: "",
-      teamSize: null,
+      problem:
+        "RT/RW administration covers monthly dues, cash reporting, announcements, and letters of introduction. RTRW Digital needed to bring all four into one platform that could serve many neighbourhood units from a single deployment.",
+      role: "Solo build — product, Laravel backend, and the Inertia/React interface, including the multi-tenant data model and the dues and cash modules.",
+      timeframe: "2 months (2026)",
+      teamSize: 1,
       stack: {
         frontend: [
           "React",
@@ -260,10 +261,37 @@ export const projects: Project[] = [
         backend: ["Laravel 11"],
         mobile: [],
         database: ["MySQL"],
-        infra: [],
+        infra: ["Vercel"],
       },
-      features: [],
-      architecture: "",
+      features: [
+        {
+          title: "Dues management",
+          description:
+            "Monthly dues are billed automatically and paid through the app, so the treasurer has a record of who has paid without reconciling transfers by hand.",
+        },
+        {
+          title: "Cash transparency",
+          description:
+            "Residents can see the balance and cash flow of their RT/RW in real time instead of waiting for a monthly summary.",
+        },
+        {
+          title: "Letter administration",
+          description:
+            "Requests for letters of introduction are submitted and tracked digitally rather than by visiting the neighbourhood office.",
+        },
+        {
+          title: "Information centre",
+          description:
+            "Announcements and neighbourhood information live in one place, so residents do not have to scroll through a group chat.",
+        },
+        {
+          title: "Multi-tenant by design",
+          description:
+            "One deployment serves several RT/RW units, each with its own residents, dues, and cash book.",
+        },
+      ],
+      architecture:
+        "Laravel 11 runs the backend with MySQL holding the data, and Inertia.js renders the React interface without a separate API layer. A single deployment is multi-tenant, so every RT/RW keeps its own residents, dues, and cash records. Login uses OTP codes; the original plan was to deliver them over WhatsApp.",
       diagram: "",
       challenges: [],
       results: [],
