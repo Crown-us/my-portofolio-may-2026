@@ -21,7 +21,9 @@ export default function CaseSections({ study }: { study: CaseStudy }) {
           {study.teamSize !== null && (
             <div>
               <dt>Team</dt>
-              <dd>{study.teamSize} people</dd>
+              <dd>
+                {study.teamSize} {study.teamSize === 1 ? "person" : "people"}
+              </dd>
             </div>
           )}
         </dl>

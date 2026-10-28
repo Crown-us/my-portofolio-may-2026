@@ -46,9 +46,9 @@ export const projects: Project[] = [
     caseStudy: {
       problem:
         "An LMS has to carry a student from browsing a catalog to finishing a course: enrollment, structured modules and lessons, quizzes, progress, and certification. WeStud needed that full loop to work for three roles — student, mentor, and admin — on top of a managed backend.",
-      role: "",
-      timeframe: "",
-      teamSize: null,
+      role: "Solo build — frontend architecture, the data model, and the Supabase schema, from catalog to certification.",
+      timeframe: "1 month (2026)",
+      teamSize: 1,
       stack: {
         frontend: [
           "React 19",
