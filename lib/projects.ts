@@ -21,7 +21,7 @@ export interface CaseStudy {
 export interface Project {
   isFeatured: boolean;
   summary: string;
-  status: "live" | "in-progress" | "archived";
+  status: "live" | "in-progress" | "archived" | "handed-off";
   caseStudy: CaseStudy;
   id: number;
   slug: string;
@@ -110,22 +110,50 @@ export const projects: Project[] = [
   {
     id: 2,
     isFeatured: false,
-    status: "live",
+    status: "handed-off",
     summary: "A grocery marketplace with ordering and payment integration.",
     caseStudy: {
-      problem: "",
-      role: "",
-      timeframe: "",
-      teamSize: null,
+      problem:
+        "A Kediri regional-owned enterprise (BUMD) needed an online storefront for fresh groceries — produce, spices, protein, and eggs — with per-item stock tracking and online payment.",
+      role: "Built the Flutter Android app and the web app as an intern in a three-person team. Handed the project over to the senior developer with the commerce flow complete; the remaining work was promotional and supporting content.",
+      timeframe: "2 months (2026)",
+      teamSize: 3,
       stack: {
         frontend: ["React", "Inertia.js", "TypeScript", "Tailwind CSS"],
         backend: ["Laravel 11", "Midtrans Snap API"],
-        mobile: [],
+        mobile: ["Flutter", "Dart"],
         database: ["MySQL"],
         infra: [],
       },
-      features: [],
-      architecture: "",
+      features: [
+        {
+          title: "Category-based catalog",
+          description:
+            "Produce, spices, protein, and eggs are grouped into categories so shoppers can jump straight to the aisle they need.",
+        },
+        {
+          title: "Live stock per item",
+          description:
+            "Every product shows how many are left, and the listing marks it as sold out once the count reaches zero.",
+        },
+        {
+          title: "Cart and checkout",
+          description:
+            "Shoppers collect items in a cart and complete the order in a single checkout flow.",
+        },
+        {
+          title: "Midtrans Snap payments",
+          description:
+            "Orders are paid through Midtrans Snap, integrated into the checkout flow.",
+        },
+        {
+          title: "Android client",
+          description:
+            "The same storefront is available as an Android app built with Flutter.",
+        },
+      ],
+      architecture:
+        "Laravel 11 runs the backend, with MySQL holding catalog, stock, and order data. The web app is built on Inertia.js with React, TypeScript, and Tailwind CSS. The Android client was built separately in Flutter, and Midtrans Snap handles payment.",
       diagram: "",
       challenges: [],
       results: [],
