@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Post } from "@/lib/blog-core";
@@ -71,10 +71,35 @@ function PostCard({
   );
 }
 
+function readTag() {
+  return new URLSearchParams(window.location.search).get("tag") ?? "";
+}
+
 export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
   const [tag, setTag] = useState("");
   const tags = [...new Set(posts.flatMap((p) => p.tags))];
-  const visible = posts.filter((p) => !tag || p.tags.includes(tag));
+
+  useEffect(() => {
+    const sync = () => setTag(readTag());
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
+
+  function selectTag(value: string) {
+    setTag(value);
+    const url = new URL(window.location.href);
+    if (value) url.searchParams.set("tag", value);
+    else url.searchParams.delete("tag");
+    window.history.replaceState(
+      null,
+      "",
+      `${url.pathname}${url.search}${url.hash}`,
+    );
+  }
+
+  const active = tags.includes(tag) ? tag : "";
+  const visible = posts.filter((p) => !active || p.tags.includes(active));
   const [featured, ...rest] = visible;
   return (
     <section className={s.section}>
@@ -88,9 +113,9 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
         {["", ...tags].map((value) => (
           <button
             className={s.button}
-            aria-pressed={tag === value}
+            aria-pressed={active === value}
             key={value}
-            onClick={() => setTag(value)}
+            onClick={() => selectTag(value)}
           >
             {value || "All posts"}
           </button>

@@ -17,16 +17,14 @@ export default function BlogPage() {
     <SiteShell>
       <PageIntro title="Notes from the workbench." eyebrow="BLOG / DEVLOG" />
       <section className={b.banner}>
-        <div>
+        <div className={b.bannerText}>
           <span className={b.label}>BEHIND THE BUILD</span>
-          <h2>A place for the process.</h2>
           <p>Code, experiments, and the lessons in between.</p>
         </div>
         <div className={b.illustration} aria-hidden="true">
           <div className={b.paper}>
             <span>kevin / notes</span>
-            <BookOpen size={48} strokeWidth={1.4} />
-            <i />
+            <BookOpen size={20} strokeWidth={1.5} />
             <i />
             <i />
           </div>
