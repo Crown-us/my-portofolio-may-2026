@@ -9,45 +9,20 @@ import b from "../blog/blog.module.css";
 
 type PostMeta = Omit<Post, "content">;
 
-function PostCard({
-  post,
-  featured = false,
-}: {
-  post: PostMeta;
-  featured?: boolean;
-}) {
+function PostCard({ post }: { post: PostMeta }) {
   return (
-    <article
-      className={[s.card, b.postCard, featured ? b.featured : ""]
-        .filter(Boolean)
-        .join(" ")}
-    >
-      {post.coverImage &&
-        (featured ? (
-          <div className={b.featuredMedia}>
-            <Image
-              className={b.featuredCover}
-              src={post.coverImage}
-              alt=""
-              fill
-              sizes="(max-width: 700px) 100vw, 45vw"
-              priority
-            />
-          </div>
-        ) : (
-          <Image
-            className={b.cover}
-            src={post.coverImage}
-            alt=""
-            width={800}
-            height={450}
-          />
-        ))}
-      <div
-        className={[s.cardBody, featured ? b.featuredBody : ""]
-          .filter(Boolean)
-          .join(" ")}
-      >
+    <article className={`${s.card} ${b.postCard}`}>
+      {post.coverImage && (
+        <Image
+          className={b.cardCover}
+          src={post.coverImage}
+          alt=""
+          width={800}
+          height={450}
+          sizes="(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 550px"
+        />
+      )}
+      <div className={b.postBody}>
         <p className={b.meta}>
           <time dateTime={post.date}>{formatPostDate(post.date)}</time> ·{" "}
           {post.readingMinutes} min read {post.draft && "· Draft"}
@@ -100,7 +75,6 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
 
   const active = tags.includes(tag) ? tag : "";
   const visible = posts.filter((p) => !active || p.tags.includes(active));
-  const [featured, ...rest] = visible;
   return (
     <section className={s.section}>
       <div className={s.sectionHead}>
@@ -121,14 +95,11 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
           </button>
         ))}
       </div>
-      {featured && <PostCard post={featured} featured />}
-      {!!rest.length && (
-        <div className={s.projectGrid}>
-          {rest.map((post) => (
-            <PostCard post={post} key={post.slug} />
-          ))}
-        </div>
-      )}
+      <div className={b.postGrid}>
+        {visible.map((post) => (
+          <PostCard post={post} key={post.slug} />
+        ))}
+      </div>
     </section>
   );
 }
