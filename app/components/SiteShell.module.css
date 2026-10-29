@@ -57,6 +57,21 @@
 }
 
 @media (max-width: 700px) {
+  .nav.nav {
+    gap: 22px;
+    scrollbar-width: none;
+    scroll-padding-inline: 5vw;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav a {
+    min-height: 48px;
+    font-size: 13px;
+  }
+
   .header.header {
     min-height: 68px;
     padding-block: 12px;

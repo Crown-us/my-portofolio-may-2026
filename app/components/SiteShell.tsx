@@ -5,7 +5,7 @@ import { localePath, translate } from "@/lib/i18n";
 import Link from "@/app/components/LocalizedLink";
 import Image from "@/app/components/LocalizedImage";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { siteConfig } from "@/lib/config";
 import { products } from "@/lib/store";
 import GlobalSearch from "./GlobalSearch";
@@ -15,6 +15,19 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const rawPathname = usePathname();
   const pathname = rawPathname.replace(/^\/(id|en)(?=\/|$)/, "") || "/";
   const locale = useLocale();
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    const active = nav?.querySelector<HTMLElement>('[aria-current="page"]');
+    if (!nav || !active || nav.scrollWidth <= nav.clientWidth) return;
+    const item = active.getBoundingClientRect();
+    const container = nav.getBoundingClientRect();
+    if (item.left < container.left || item.right > container.right) {
+      nav.scrollLeft +=
+        item.left - container.left - (nav.clientWidth - item.width) / 2;
+    }
+  }, [rawPathname]);
   const links = [
     { href: "/", label: "Discover" },
     { href: "/projects", label: "Projects" },
@@ -83,6 +96,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           </div>
         </header>
         <nav
+          ref={navRef}
           className={`${s.nav} ${headerStyles.nav}`}
           aria-label={translate("Main navigation", locale)}
         >

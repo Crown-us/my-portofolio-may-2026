@@ -3,6 +3,7 @@ import Link from "@/app/components/LocalizedLink";
 import Image from "@/app/components/LocalizedImage";
 import type { Project } from "@/lib/projects";
 import s from "@/lib/styles";
+import mobile from "./ProjectCard.module.css";
 export default function ProjectCard({
   project,
   index = 0,
@@ -12,7 +13,7 @@ export default function ProjectCard({
 }) {
   const links = project.caseStudy.links;
   return (
-    <article className={s.card}>
+    <article className={`${s.card} ${mobile.card}`}>
       <Link
         className={s.cardImage}
         data-tone={index % 3}
@@ -49,7 +50,7 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
-        <div className={s.cardLinks}>
+        <div className={`${s.cardLinks} ${mobile.links}`}>
           <Link href={`/projects/${project.slug}`}>
             <T>Case study</T>
           </Link>
