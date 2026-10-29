@@ -22,9 +22,15 @@ export default function AboutPage() {
             <Image
               src={about.photo}
               alt={about.photoAlt}
-              width={150}
-              height={180}
+              width={112}
+              height={112}
               className={s.portrait}
+              style={{
+                width: "clamp(72px, 10vw, 112px)",
+                height: "clamp(72px, 10vw, 112px)",
+                borderRadius: "50%",
+                flexShrink: 0,
+              }}
             />
           ) : (
             <div className={s.profileAvatar} aria-label="Kevin Dwi Wijaya">

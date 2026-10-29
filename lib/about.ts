@@ -15,12 +15,12 @@ export interface Certification {
   credentialUrl?: string;
 }
 export const about = {
-  photo: "",
+  photo: "/images/kevin-author.png",
   photoAlt: "Kevin Dwi Wijaya",
   resumePdf: "",
   intro:
     "I’m Kevin, a full-stack and mobile engineer based in Kediri, Indonesia. I work with Next.js, Flutter, and Laravel to build interfaces and the systems behind them.",
-  // Awaiting the profile photo, BNSP certification details and CV PDF from Kevin.
+  // Awaiting BNSP certification details and CV PDF from Kevin.
   experience: [
     {
       organization: "PT. Nusatama Jaya Sakti",
