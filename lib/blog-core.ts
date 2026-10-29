@@ -162,5 +162,5 @@ export function rssFeed(posts: Post[]) {
         `<item><title>${xml(post.title)}</title><link>${canonicalUrl(`/blog/${post.slug}`)}</link><guid>${canonicalUrl(`/blog/${post.slug}`)}</guid><pubDate>${new Date(post.date).toUTCString()}</pubDate><description>${xml(post.summary)}</description></item>`,
     )
     .join("");
-  return `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Kevin’s blog</title><link>${canonicalUrl("/blog")}</link><description>Notes on building software by Kevin Dwi Wijaya.</description><language>en</language>${items}</channel></rss>`;
+  return `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Kevin’s blog</title><link>${canonicalUrl("/blog")}</link><description>Kabar AI, perbandingan tools, dan tips teknologi buat keseharian.</description><language>id</language>${items}</channel></rss>`;
 }

@@ -9,17 +9,20 @@ import b from "./blog.module.css";
 export const metadata = buildSeo(
   "Blog",
   "/blog",
-  "Notes, experiments, and lessons from building software by Kevin Dwi Wijaya.",
+  "Kabar AI, perbandingan tools, dan tips teknologi buat keseharian. Ditulis oleh Kevin Dwi Wijaya.",
 );
 export default function BlogPage() {
   const posts = getPosts();
   return (
     <SiteShell>
-      <PageIntro title="Notes from the workbench." eyebrow="BLOG / DEVLOG" />
+      <PageIntro
+        title="Teknologi, dibikin masuk akal."
+        eyebrow="BLOG / TECH & AI"
+      />
       <section className={b.banner}>
         <div className={b.bannerText}>
-          <span className={b.label}>BEHIND THE BUILD</span>
-          <p>Code, experiments, and the lessons in between.</p>
+          <span className={b.label}>KENALI TEKNOLOGI, PILIH YANG COCOK</span>
+          <p>Kabar AI, perbandingan tools, dan tips teknologi buat keseharian.</p>
         </div>
         <div className={b.illustration} aria-hidden="true">
           <div className={b.paper}>

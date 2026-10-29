@@ -78,7 +78,7 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
   return (
     <section className={s.section}>
       <div className={s.sectionHead}>
-        <h2>Latest notes</h2>
+        <h2>Artikel terbaru</h2>
         <span role="status">
           {visible.length} {visible.length === 1 ? "post" : "posts"}
         </span>
