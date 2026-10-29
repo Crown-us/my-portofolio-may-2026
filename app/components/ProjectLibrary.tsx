@@ -3,26 +3,49 @@ import { translate } from "@/lib/i18n";
 
 import { T, useLocale } from "@/app/components/LocaleProvider";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { projects } from "@/lib/projects";
 import ProjectCard from "./ProjectCard";
 import s from "@/lib/styles";
-export default function ProjectLibrary({
-  initialCategory = "All projects",
-}: {
-  initialCategory?: string;
-}) {
+
+const ALL = "All projects";
+
+function readCategory() {
+  return new URLSearchParams(window.location.search).get("category") ?? "";
+}
+
+export default function ProjectLibrary() {
   const locale = useLocale();
   const categories = [
-    "All projects",
+    ALL,
     ...new Set(projects.map((project) => project.category)),
   ];
-  const [category, setCategory] = useState(
-    categories.includes(initialCategory) ? initialCategory : "All projects",
-  );
+  const [category, setCategory] = useState(ALL);
+
+  useEffect(() => {
+    const sync = () => setCategory(readCategory());
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
+
+  const active = categories.includes(category) ? category : ALL;
   const filtered = projects.filter(
-    (project) => category === "All projects" || project.category === category,
+    (project) => active === ALL || project.category === active,
   );
+
+  function selectCategory(value: string) {
+    setCategory(value);
+    const url = new URL(window.location.href);
+    if (value === ALL) url.searchParams.delete("category");
+    else url.searchParams.set("category", value);
+    window.history.replaceState(
+      null,
+      "",
+      `${url.pathname}${url.search}${url.hash}`,
+    );
+  }
+
   return (
     <>
       <div
@@ -33,8 +56,8 @@ export default function ProjectLibrary({
           <button
             key={item}
             data-tone={index % 4}
-            aria-pressed={category === item}
-            onClick={() => setCategory(item)}
+            aria-pressed={active === item}
+            onClick={() => selectCategory(item)}
           >
             <T>{item}</T>
           </button>
@@ -46,7 +69,8 @@ export default function ProjectLibrary({
             <T>Project library</T>
           </h2>
           <span className={s.count} role="status">
-            <T>{filtered.length}</T> <T>projects</T>
+            <T>{filtered.length}</T>{" "}
+            <T>{filtered.length === 1 ? "project" : "projects"}</T>
           </span>
         </div>
         <div className={s.projectGrid}>

@@ -1,21 +1,11 @@
 import { T } from "@/app/components/LocaleProvider";
 import { siteConfig } from "@/lib/config";
-import { services } from "@/lib/services";
-import { serviceSelection } from "@/lib/domain";
 import { buildSeo, localizeSeo } from "@/lib/seo";
 import SiteShell, { PageIntro } from "@/app/components/SiteShell";
 import ContactForm from "@/app/components/ContactForm";
 import s from "@/lib/styles";
 const pageMetadata = buildSeo("Contact", "/contact");
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ service?: string | string[] }>;
-}) {
-  const selected = serviceSelection(
-    (await searchParams).service,
-    services.map((item) => item.slug),
-  );
+export default function ContactPage() {
   return (
     <SiteShell>
       <PageIntro title="Tell me what you have in mind" eyebrow="LET’S TALK" />
@@ -50,7 +40,7 @@ export default async function ContactPage({
             <T>{siteConfig.location}</T>
           </p>
         </aside>
-        <ContactForm key={selected} initialService={selected} />
+        <ContactForm />
       </div>
     </SiteShell>
   );

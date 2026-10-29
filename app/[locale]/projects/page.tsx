@@ -6,21 +6,14 @@ const pageMetadata = buildSeo(
   "/projects",
   "Explore Kevin’s web and mobile engineering projects.",
 );
-export default async function ProjectsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ category?: string }>;
-}) {
-  const { category } = await searchParams;
+export default function ProjectsPage() {
   return (
     <SiteShell>
       <PageIntro
         title="Explore the things I’ve built."
         eyebrow="THE PROJECT LIBRARY"
       />
-      <ProjectLibrary
-        initialCategory={typeof category === "string" ? category : undefined}
-      />
+      <ProjectLibrary />
     </SiteShell>
   );
 }

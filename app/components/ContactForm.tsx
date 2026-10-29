@@ -1,7 +1,7 @@
 "use client";
 import { T } from "@/app/components/LocaleProvider";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { services } from "@/lib/services";
 import {
   BUDGET_RANGES,
@@ -9,17 +9,26 @@ import {
   type ContactErrors,
 } from "@/lib/domain";
 import s from "@/lib/styles";
-export default function ContactForm({
-  initialService,
-}: {
-  initialService: string;
-}) {
+export default function ContactForm() {
   const [errors, setErrors] = useState<ContactErrors>({});
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [message, setMessage] = useState("");
+  const [service, setService] = useState("");
   const form = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    // The link may carry a preselected service, e.g. /contact?service=landing-page.
+    const applyLinkedService = () => {
+      const value = new URLSearchParams(window.location.search).get("service");
+      setService(
+        value && services.some((item) => item.slug === value) ? value : "",
+      );
+    };
+    applyLinkedService();
+  }, []);
+
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (status === "loading") return;
@@ -104,7 +113,8 @@ export default function ContactForm({
       <select
         id="service"
         name="service"
-        defaultValue={initialService}
+        value={service}
+        onChange={(event) => setService(event.target.value)}
         aria-invalid={!!errors.service}
         aria-describedby={errors.service ? "service-error" : undefined}
       >
