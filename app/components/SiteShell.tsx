@@ -10,6 +10,7 @@ import { siteConfig } from "@/lib/config";
 import { products } from "@/lib/store";
 import GlobalSearch from "./GlobalSearch";
 import s from "@/lib/styles";
+import headerStyles from "./SiteShell.module.css";
 export default function SiteShell({ children }: { children: ReactNode }) {
   const rawPathname = usePathname();
   const pathname = rawPathname.replace(/^\/(id|en)(?=\/|$)/, "") || "/";
@@ -30,64 +31,71 @@ export default function SiteShell({ children }: { children: ReactNode }) {
         <T>Skip to content</T>
       </a>
       <div className={s.stickyHeader}>
-        <header className={s.header}>
-          <Link href="/" className={s.brand}>
-            <Image
-              src="/kevin-mark.svg"
-              alt=""
-              width={44}
-              height={44}
-              className={s.brandMark}
-              priority
-            />
-            <span>
-              <T>kevin</T>
-              <span className={s.brandLight}>
-                {" "}
-                <T>/ portfolio</T>
+        <header className={`${s.header} ${headerStyles.header}`}>
+          <div className={headerStyles.identity}>
+            <Link href="/" className={s.brand}>
+              <Image
+                src="/kevin-mark.svg"
+                alt=""
+                width={44}
+                height={44}
+                className={s.brandMark}
+                priority
+              />
+              <span>
+                <T>kevin</T>
+                <span className={s.brandLight}>
+                  {" "}
+                  <T>/ portfolio</T>
+                </span>
               </span>
-            </span>
-          </Link>
-          {siteConfig.hasGlobalSearch && products.length > 0 ? (
-            <GlobalSearch />
-          ) : (
-            <span className={s.headerCaption}>
-              <T>Full-stack & mobile engineer</T>
-            </span>
-          )}
-          <div
-            className={s.languageSwitch}
-            aria-label={locale === "id" ? "Bahasa" : "Language"}
-          >
-            {(["id", "en"] as const).map((language) => (
-              <a
-                key={language}
-                href={localePath(pathname, language)}
-                lang={language}
-                hrefLang={language}
-                aria-label={language === "id" ? "Bahasa Indonesia" : "English"}
-                aria-current={locale === language ? "true" : undefined}
-                onClick={(event) => {
-                  event.currentTarget.href =
-                    localePath(pathname, language) +
-                    window.location.search +
-                    window.location.hash;
-                }}
-              >
-                {language.toUpperCase()}
-              </a>
-            ))}
+            </Link>
+            {!(siteConfig.hasGlobalSearch && products.length > 0) && (
+              <span className={`${s.headerCaption} ${headerStyles.caption}`}>
+                <T>Full-stack & mobile engineer</T>
+              </span>
+            )}
           </div>
-          <Link
-            className={s.avatar}
-            href="/about"
-            aria-label={translate("About Kevin", locale)}
-          >
-            <T>K</T>
-          </Link>
+          {siteConfig.hasGlobalSearch && products.length > 0 && (
+            <GlobalSearch />
+          )}
+          <div className={headerStyles.actions}>
+            <div
+              className={s.languageSwitch}
+              aria-label={locale === "id" ? "Bahasa" : "Language"}
+            >
+              {(["id", "en"] as const).map((language) => (
+                <a
+                  key={language}
+                  href={localePath(pathname, language)}
+                  lang={language}
+                  hrefLang={language}
+                  aria-label={
+                    language === "id" ? "Bahasa Indonesia" : "English"
+                  }
+                  aria-current={locale === language ? "true" : undefined}
+                  onClick={(event) => {
+                    event.currentTarget.href =
+                      localePath(pathname, language) +
+                      window.location.search +
+                      window.location.hash;
+                  }}
+                >
+                  {language.toUpperCase()}
+                </a>
+              ))}
+            </div>
+            <Link
+              className={s.avatar}
+              href="/about"
+              aria-label={translate("About Kevin", locale)}
+            >
+              <T>K</T>
+            </Link>
+          </div>
         </header>
         <nav
-          className={s.nav}
+          className={`${s.nav} ${headerStyles.nav}`}
           aria-label={translate("Main navigation", locale)}
         >
           {links.map((link) => {
