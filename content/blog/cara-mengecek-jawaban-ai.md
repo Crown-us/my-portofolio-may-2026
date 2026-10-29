@@ -6,8 +6,8 @@ summary: Lima kebiasaan sederhana untuk memeriksa sumber, tanggal, angka, dan
   konteks sebelum memakai jawaban AI.
 tags:
   - AI
-draft: true
 coverImage: /images/blog/cek-jawaban-ai-cover.webp
+draft: true
 ---
 Jawaban AI bisa rapi dan terdengar yakin, tetapi tetap keliru. OpenAI menjelaskan bahwa ChatGPT dapat menghasilkan fakta, kutipan, atau referensi yang salah. Nada percaya diri bukan bukti kebenaran. ([Sumber resmi](https://help.openai.com/en/articles/8313428-does-chatgpt-tell-the-truth))
 
@@ -43,3 +43,4 @@ Prompt ini membantu menyusun pemeriksaan, tetapi hasilnya tetap perlu kamu cek.
 
 - [OpenAI Help Center — Does ChatGPT tell the truth?](https://help.openai.com/en/articles/8313428-does-chatgpt-tell-the-truth), diperiksa 29 Oktober 2026.
 - Langkah dan contoh di atas merupakan saran editorial, bukan hasil benchmark atau jaminan bahwa sebuah jawaban AI akan selalu benar.
+
