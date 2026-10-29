@@ -13,11 +13,14 @@ const nextConfig: NextConfig = {
         "blog",
         "store",
         "works",
-      ].map((route) => ({
-        source: `/${route}/:path*`,
-        destination: `/id/${route}/:path*`,
-        permanent: true,
-      })),
+      ].flatMap((route) => [
+        { source: `/${route}`, destination: `/id/${route}`, permanent: true },
+        {
+          source: `/${route}/:path*`,
+          destination: `/id/${route}/:path*`,
+          permanent: true,
+        },
+      ]),
     ];
   },
 };
