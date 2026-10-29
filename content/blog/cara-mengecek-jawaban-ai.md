@@ -7,7 +7,7 @@ summary: Lima kebiasaan sederhana untuk memeriksa sumber, tanggal, angka, dan
 tags:
   - AI
 coverImage: /images/blog/cek-jawaban-ai-cover.webp
-draft: true
+draft: false
 ---
 Jawaban AI bisa rapi dan terdengar yakin, tetapi tetap keliru. OpenAI menjelaskan bahwa ChatGPT dapat menghasilkan fakta, kutipan, atau referensi yang salah. Nada percaya diri bukan bukti kebenaran. ([Sumber resmi](https://help.openai.com/en/articles/8313428-does-chatgpt-tell-the-truth))
 
