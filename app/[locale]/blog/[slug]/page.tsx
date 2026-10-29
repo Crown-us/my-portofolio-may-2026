@@ -3,6 +3,7 @@ import Link from "@/app/components/LocalizedLink";
 import Image from "@/app/components/LocalizedImage";
 import { notFound } from "next/navigation";
 import SiteShell from "@/app/components/SiteShell";
+import ArticleAuthor from "@/app/components/ArticleAuthor";
 import { getPosts } from "@/lib/blog";
 import { renderMarkdown } from "@/lib/blog-core";
 import { buildSeo, localizeSeo } from "@/lib/seo";
@@ -50,6 +51,7 @@ export default async function PostPage({ params }: Props) {
           </p>
           <h1 lang="id">{post.title}</h1>
           <p>{post.summary}</p>
+          <ArticleAuthor locale={locale} compact />
           <div className={s.tags}>
             {post.tags.map((tag) => (
               <span key={tag}>{tag}</span>
@@ -92,6 +94,7 @@ export default async function PostPage({ params }: Props) {
             dangerouslySetInnerHTML={{ __html: rendered.html }}
           />
         </div>
+        <ArticleAuthor locale={locale} />
       </article>
       <nav
         className={s.pageNeighbours}
