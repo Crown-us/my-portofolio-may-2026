@@ -64,6 +64,13 @@ test("unquoted YAML dates cannot normalize an impossible date", () => {
   );
 });
 
+test("CMS article can be parsed repeatedly during static generation", () => {
+  const cms = source().replace('"2026-10-28"', "2026-10-28");
+  for (let i = 0; i < 3; i++) {
+    assert.equal(parsePost(cms, "cms-repeat.md").date, "2026-10-28");
+  }
+});
+
 test("CMS dates and cleared optional covers remain readable", () => {
   for (const cover of ['coverImage: ""\n', "coverImage: null\n"]) {
     const post = parsePost(

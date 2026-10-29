@@ -24,7 +24,11 @@ export interface Heading {
   level: number;
 }
 export function parsePost(source: string, filename: string): Post {
-  const { data, content, matter: frontmatter } = matter(source);
+  // Explicit options bypass gray-matter's cache, which drops the
+  // non-enumerable raw frontmatter needed to validate plain YAML dates.
+  const { data, content, matter: frontmatter } = matter(source, {
+    language: "yaml",
+  });
   const fail = (field: string): never => {
     throw new Error(`${filename}: invalid ${field}`);
   };
