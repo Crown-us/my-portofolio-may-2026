@@ -33,12 +33,12 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       <div className={s.stickyHeader}>
         <header className={`${s.header} ${headerStyles.header}`}>
           <div className={headerStyles.identity}>
-            <Link href="/" className={s.brand}>
+            <Link href="/" className={`${s.brand} ${headerStyles.brand}`}>
               <Image
                 src="/kevin-mark.svg"
                 alt=""
-                width={44}
-                height={44}
+                width={36}
+                height={36}
                 className={s.brandMark}
                 priority
               />
@@ -50,18 +50,13 @@ export default function SiteShell({ children }: { children: ReactNode }) {
                 </span>
               </span>
             </Link>
-            {!(siteConfig.hasGlobalSearch && products.length > 0) && (
-              <span className={`${s.headerCaption} ${headerStyles.caption}`}>
-                <T>Full-stack & mobile engineer</T>
-              </span>
-            )}
           </div>
           {siteConfig.hasGlobalSearch && products.length > 0 && (
             <GlobalSearch />
           )}
           <div className={headerStyles.actions}>
             <div
-              className={s.languageSwitch}
+              className={`${s.languageSwitch} ${headerStyles.languageSwitch}`}
               aria-label={locale === "id" ? "Bahasa" : "Language"}
             >
               {(["id", "en"] as const).map((language) => (
@@ -85,13 +80,6 @@ export default function SiteShell({ children }: { children: ReactNode }) {
                 </a>
               ))}
             </div>
-            <Link
-              className={s.avatar}
-              href="/about"
-              aria-label={translate("About Kevin", locale)}
-            >
-              <T>K</T>
-            </Link>
           </div>
         </header>
         <nav

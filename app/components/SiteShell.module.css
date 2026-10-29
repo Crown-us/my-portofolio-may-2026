@@ -1,6 +1,7 @@
 .header.header {
   max-width: 1280px;
-  padding: 20px 5% 16px;
+  min-height: 72px;
+  padding: 14px 5%;
   gap: 24px;
   flex-wrap: nowrap;
 }
@@ -8,14 +9,31 @@
 .identity {
   display: flex;
   align-items: center;
-  gap: 24px;
   min-width: 0;
 }
 
-.caption {
-  border-left: 1px solid #e4e7ec;
-  padding-left: 24px;
-  line-height: 1.5;
+.brand.brand {
+  gap: 10px;
+  font-size: 20px;
+}
+
+.brand.brand > img {
+  width: 36px;
+  height: 36px;
+}
+
+.languageSwitch.languageSwitch {
+  padding: 3px;
+  border-color: #edf0f5;
+  background: #fafbfc;
+}
+
+.languageSwitch a {
+  min-width: 34px;
+  min-height: 34px;
+  display: grid;
+  place-items: center;
+  padding: 6px 9px;
 }
 
 .actions {
@@ -38,23 +56,14 @@
   }
 }
 
-@media (max-width: 800px) {
-  .caption.caption {
-    display: none;
-  }
-}
-
 @media (max-width: 700px) {
   .header.header {
-    padding-block: 16px;
+    min-height: 68px;
+    padding-block: 12px;
     gap: 12px;
   }
 
   .actions {
     gap: 12px;
-  }
-
-  .actions > a {
-    display: none;
   }
 }
