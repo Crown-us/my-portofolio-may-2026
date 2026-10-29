@@ -32,7 +32,10 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     { href: "/", label: "Discover" },
     { href: "/projects", label: "Projects" },
     { href: "/about", label: "About me" },
-    { href: "/services", label: "Services" },
+    {
+      href: "/services",
+      label: locale === "id" ? "Kolaborasi" : "Collaboration",
+    },
     { href: "/blog", label: "Blog" },
     ...(products.length ? [{ href: "/store", label: "Store" }] : []),
     { href: "/contact", label: "Contact" },
@@ -55,13 +58,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
                 className={s.brandMark}
                 priority
               />
-              <span>
-                <T>kevin</T>
-                <span className={s.brandLight}>
-                  {" "}
-                  <T>/ portfolio</T>
-                </span>
-              </span>
+              <span className={headerStyles.wordmark}>{siteConfig.name}</span>
             </Link>
           </div>
           {siteConfig.hasGlobalSearch && products.length > 0 && (

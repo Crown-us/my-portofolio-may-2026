@@ -44,10 +44,10 @@ export default async function Home({
               href: "/blog",
             },
             {
-              title: "Build a website or app",
+              title: "Have a project in mind?",
               description:
-                "Explore services for business websites, web applications, and mobile apps.",
-              action: "View services",
+                "See where I can contribute to a web or mobile project, with examples of my work.",
+              action: "Explore collaboration",
               href: "/services",
             },
             {
@@ -86,10 +86,10 @@ export default async function Home({
               href: "/blog",
             },
             {
-              title: "Butuh website atau aplikasi",
+              title: "Punya proyek untuk dikerjakan?",
               description:
-                "Lihat layanan untuk website usaha, aplikasi web, dan aplikasi mobile.",
-              action: "Lihat layanan",
+                "Lihat bidang yang bisa saya bantu dalam proyek web atau mobile, beserta contoh karyanya.",
+              action: "Bahas kolaborasi",
               href: "/services",
             },
             {

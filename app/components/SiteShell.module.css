@@ -13,8 +13,14 @@
 }
 
 .brand.brand {
-  gap: 10px;
-  font-size: 20px;
+  gap: 12px;
+  font-size: 19px;
+  letter-spacing: -0.6px;
+  font-weight: 600;
+}
+.wordmark {
+  line-height: 1.2;
+  white-space: normal;
 }
 
 .brand.brand > img {
@@ -80,5 +86,13 @@
 
   .actions {
     gap: 12px;
+  }
+  .brand.brand {
+    gap: 8px;
+    font-size: 16px;
+  }
+  .brand.brand > img {
+    width: 28px;
+    height: 28px;
   }
 }
