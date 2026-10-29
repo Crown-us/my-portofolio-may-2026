@@ -1,11 +1,13 @@
 "use client";
-import { T } from "@/app/components/LocaleProvider";
+import { T, useLocale } from "@/app/components/LocaleProvider";
+import { translate } from "@/lib/i18n";
 
 import { useEffect, useState } from "react";
 import BlogPostCard from "./BlogPostCard";
 import type { Post } from "@/lib/blog-core";
 import s from "@/lib/styles";
 import b from "../blog/blog.module.css";
+import f from "./BlogLibrary.module.css";
 
 type PostMeta = Omit<Post, "content">;
 
@@ -15,6 +17,7 @@ function readTag() {
 
 export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
   const [tag, setTag] = useState("");
+  const locale = useLocale();
   const tags = [...new Set(posts.flatMap((p) => p.tags))];
 
   useEffect(() => {
@@ -40,26 +43,30 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
   const visible = posts.filter((p) => !active || p.tags.includes(active));
   return (
     <section className={s.section}>
-      <div className={s.sectionHead}>
+      <div className={`${s.sectionHead} ${f.toolbar}`}>
         <h2>
           <T>Artikel terbaru</T>
         </h2>
-        <span role="status">
-          <T>{visible.length}</T>{" "}
-          <T>{visible.length === 1 ? "post" : "posts"}</T>
-        </span>
-      </div>
-      <div className={s.filters}>
-        {["", ...tags].map((value) => (
-          <button
-            className={s.button}
-            aria-pressed={active === value}
-            key={value}
-            onClick={() => selectTag(value)}
-          >
-            <T>{value || "All posts"}</T>
-          </button>
-        ))}
+        <div className={f.controls}>
+          <label className={f.filter}>
+            <span>{locale === "id" ? "Topik" : "Topic"}</span>
+            <select
+              value={active}
+              onChange={(event) => selectTag(event.target.value)}
+            >
+              <option value="">{translate("All posts", locale)}</option>
+              {tags.map((value) => (
+                <option key={value} value={value}>
+                  {translate(value, locale)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <span role="status" className={f.count}>
+            <T>{visible.length}</T>{" "}
+            <T>{visible.length === 1 ? "post" : "posts"}</T>
+          </span>
+        </div>
       </div>
       <div className={b.postGrid}>
         {visible.map((post) => (
