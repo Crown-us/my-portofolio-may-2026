@@ -2,13 +2,11 @@ import { T } from "@/app/components/LocaleProvider";
 import Link from "@/app/components/LocalizedLink";
 import SiteShell from "@/app/components/SiteShell";
 import Image from "@/app/components/LocalizedImage";
-import ProjectCard from "@/app/components/ProjectCard";
+import { BookOpen, AppWindow, BriefcaseBusiness } from "lucide-react";
 import BlogPostCard from "@/app/components/BlogPostCard";
 import { getPosts } from "@/lib/blog";
 import b from "@/app/blog/blog.module.css";
-import { projects } from "@/lib/projects";
 import { products } from "@/lib/store";
-import { getFeatured } from "@/lib/domain";
 import { buildSeo, localizeSeo } from "@/lib/seo";
 import s from "@/lib/styles";
 import h from "./discover.module.css";
@@ -35,9 +33,31 @@ export default async function Home({
           language: "Article in Indonesian",
           learn: "Read & learn",
           learnIntro: "Practical ideas about tech and AI, for everyday use.",
-          built: "Built by Kevin",
-          builtIntro:
-            "Real projects, the problems they solve, and how I built them.",
+          needs: "Start with what you need",
+          needsIntro: "Choose what brings you here.",
+          paths: [
+            {
+              title: "Learn about AI",
+              description:
+                "Understand everyday AI tools, compare your options, and learn to check their answers.",
+              action: "Explore the blog",
+              href: "/blog",
+            },
+            {
+              title: "Build a website or app",
+              description:
+                "Explore services for business websites, web applications, and mobile apps.",
+              action: "View services",
+              href: "/services",
+            },
+            {
+              title: "Find a developer",
+              description:
+                "Take a look at my experience, technical skills, and resume for your team or project.",
+              action: "View my resume",
+              href: "/resume",
+            },
+          ],
           together: "About & collaboration",
           togetherIntro:
             "Get to know my background, explore my experience, or tell me what you'd like to build.",
@@ -55,16 +75,38 @@ export default async function Home({
           language: "Artikel berbahasa Indonesia",
           learn: "Baca & pelajari",
           learnIntro: "Ide praktis seputar teknologi dan AI untuk keseharian.",
-          built: "Dibangun oleh Kevin",
-          builtIntro:
-            "Proyek nyata, masalah yang diselesaikan, dan proses pembuatannya.",
+          needs: "Mulai dari kebutuhanmu",
+          needsIntro: "Pilih yang sesuai dengan tujuanmu ke sini.",
+          paths: [
+            {
+              title: "Mau belajar AI",
+              description:
+                "Kenali alat AI untuk keseharian, bandingkan pilihannya, dan pelajari cara mengecek jawabannya.",
+              action: "Jelajahi blog",
+              href: "/blog",
+            },
+            {
+              title: "Butuh website atau aplikasi",
+              description:
+                "Lihat layanan untuk website usaha, aplikasi web, dan aplikasi mobile.",
+              action: "Lihat layanan",
+              href: "/services",
+            },
+            {
+              title: "Sedang cari developer",
+              description:
+                "Lihat pengalaman, keahlian teknis, dan CV saya untuk kebutuhan tim atau proyekmu.",
+              action: "Lihat CV saya",
+              href: "/resume",
+            },
+          ],
           together: "Tentang & kolaborasi",
           togetherIntro:
             "Kenali latar belakang saya, lihat pengalaman saya, atau ceritakan apa yang ingin kamu bangun.",
           resume: "Lihat CV saya",
           contact: "Mari ngobrol",
         };
-  const featured = getFeatured(projects);
+  const pathIcons = [BookOpen, AppWindow, BriefcaseBusiness];
   const latestPosts = getPosts(false).slice(0, 2);
   const spotlight = latestPosts[0];
   return (
@@ -130,24 +172,32 @@ export default async function Home({
           </div>
         </section>
       )}
-      {featured.length > 0 && (
-        <section className={s.section}>
-          <div className={s.sectionHead}>
-            <div>
-              <h2>{copy.built}</h2>
-              <p>{copy.builtIntro}</p>
-            </div>
-            <Link href="/projects" className={s.textLink}>
-              <T>View all projects →</T>
-            </Link>
+      <section className={s.section} aria-labelledby="needs-heading">
+        <div className={s.sectionHead}>
+          <div>
+            <h2 id="needs-heading">{copy.needs}</h2>
+            <p>{copy.needsIntro}</p>
           </div>
-          <div className={s.highlights}>
-            {featured.map((project, index) => (
-              <ProjectCard key={project.slug} project={project} index={index} />
-            ))}
-          </div>
-        </section>
-      )}
+        </div>
+        <div className={h.pathGrid}>
+          {copy.paths.map((path, index) => {
+            const Icon = pathIcons[index];
+            return (
+              <Link href={path.href} key={path.href} className={h.pathCard}>
+                <span className={h.pathIcon} data-tone={index}>
+                  <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
+                </span>
+                <h3>{path.title}</h3>
+                <p>{path.description}</p>
+                <span className={h.pathAction}>
+                  {path.action}
+                  <span aria-hidden="true">↗</span>
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
       {products.length > 0 && (
         <section className={s.discoverNote}>
           <div>
@@ -176,9 +226,9 @@ export default async function Home({
           <Link href="/resume" className={h.secondary}>
             {copy.resume} ↗
           </Link>
-            <Link href="/contact" className={h.primary}>
-              {copy.contact} →
-            </Link>
+          <Link href="/contact" className={h.primary}>
+            {copy.contact} →
+          </Link>
         </div>
       </section>
     </SiteShell>
