@@ -9,6 +9,13 @@ tags:
 type: news
 coverImage: /images/blog/chatgpt-icloud-cover.webp
 draft: false
+sources:
+  - name: OpenAI — ChatGPT release notes, entri 27 Oktober 2026
+    url: https://help.openai.com/en/articles/6825453-chatgpt-release-notes
+  - name: OpenAI — Connected apps in ChatGPT
+    url: https://help.openai.com/en/articles/11487775-connected-apps-in-chatgpt
+  - name: OpenAI — Connecting and managing app accounts in ChatGPT
+    url: https://help.openai.com/en/articles/20001494-connecting-and-managing-app-accounts-in-chatgpt
 ---
 
 Pengguna iCloud punya pilihan baru untuk mencari email dan mengatur jadwal lewat ChatGPT. Dalam catatan rilis **27 Oktober 2026**, OpenAI mengumumkan dukungan plugin iCloud Mail dan Calendar. Fungsinya mencakup menemukan email, mengikuti isi kotak masuk, memeriksa jadwal, dan memperbarui acara kalender. ([Catatan rilis OpenAI](https://help.openai.com/en/articles/6825453-chatgpt-release-notes))
@@ -63,11 +70,5 @@ Saran saya: mulai dari permintaan membaca jadwal atau mencari satu email. Sebelu
 Menurut saya, koneksi ini paling relevan bagi pengguna yang memang memakai iCloud Mail atau Calendar setiap hari. Coba satu kebutuhan kecil terlebih dahulu, lalu nilai apakah hasilnya membantu. Pengumuman fitur belum membuktikan bahwa alur kerjanya cocok untuk semua orang.
 
 Untuk kebiasaan memeriksa hasil AI, lanjut baca [Jawaban AI Meyakinkan? Cek 5 Hal Ini Dulu](/id/blog/cara-mengecek-jawaban-ai). Jika masih memilih asisten AI, lihat [perbandingan ChatGPT, Claude, dan Gemini](/id/blog/chatgpt-vs-claude-vs-gemini).
-
-## Sumber resmi
-
-- [OpenAI — ChatGPT release notes, entri 27 Oktober 2026](https://help.openai.com/en/articles/6825453-chatgpt-release-notes).
-- [OpenAI — Connected apps in ChatGPT](https://help.openai.com/en/articles/11487775-connected-apps-in-chatgpt).
-- [OpenAI — Connecting and managing app accounts in ChatGPT](https://help.openai.com/en/articles/20001494-connecting-and-managing-app-accounts-in-chatgpt).
 
 Semua sumber diperiksa 30 Oktober 2026. Ketersediaan dan tampilan pengaturan dapat berubah setelah tanggal pemeriksaan. Contoh prompt dan penilaian kegunaan merupakan saran editorial.

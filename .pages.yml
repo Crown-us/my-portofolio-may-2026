@@ -37,6 +37,13 @@ content:
           time: false
           format: yyyy-MM-dd
         description: Tanggal tampilan, bukan jadwal terbit otomatis.
+      - name: updated
+        label: Tanggal pembaruan
+        type: date
+        options:
+          time: false
+          format: yyyy-MM-dd
+        description: Opsional. Isi saat informasi artikel berubah, tidak boleh sebelum tanggal terbit.
       - name: summary
         label: Ringkasan
         type: text
@@ -72,6 +79,23 @@ content:
         type: boolean
         default: true
         description: Aktif berarti belum terbit. Matikan lalu simpan untuk menerbitkan setelah deploy selesai.
+      - name: sources
+        label: Sumber resmi
+        type: object
+        list: true
+        description: Opsional. Tampil otomatis di akhir artikel. Cantumkan sumber yang mendukung klaim; tautan kutipan dalam isi tetap boleh dipakai.
+        fields:
+          - name: name
+            label: Nama sumber
+            type: string
+            required: true
+          - name: url
+            label: Tautan sumber
+            type: string
+            required: true
+            pattern:
+              regex: "^https?://[^\\s]+$"
+              message: Gunakan URL lengkap berawalan https:// atau http://.
       - name: body
         label: Isi artikel
         type: rich-text

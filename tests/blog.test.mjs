@@ -36,6 +36,52 @@ test("article types stay separate from topic tags and support older entries", ()
   assert.deepEqual(legacy.tags, ["AI"]);
   assert.throws(() => parsePost(source("type: invalid\n"), "bad.md"), /type/);
 });
+test("optional updates and sources accept CMS values and reject unsafe input", () => {
+  const legacy = parsePost(source(), "legacy.md");
+  assert.equal(legacy.updated, undefined);
+  assert.deepEqual(legacy.sources, []);
+  const article = parsePost(
+    source(
+      "updated: 2026-10-30\nsources:\n  - name: Official announcement\n    url: https://example.com/news\n",
+    ),
+    "updated.md",
+  );
+  assert.equal(article.updated, "2026-10-30");
+  assert.equal(article.sources[0].url, "https://example.com/news");
+  const cleared = parsePost(
+    source("updated: null\nsources: null\n"),
+    "cleared.md",
+  );
+  assert.equal(cleared.updated, undefined);
+  assert.deepEqual(cleared.sources, []);
+  for (const date of ["2026-02-30", "2026-10-27", "not-a-date"])
+    assert.throws(
+      () => parsePost(source(`updated: ${date}\n`), "bad.md"),
+      /updated/,
+    );
+  for (const url of [
+    "javascript:alert(1)",
+    "ftp://example.com",
+    "not-a-url",
+    "https://user:pass@example.com",
+  ])
+    assert.throws(
+      () =>
+        parsePost(
+          source(`sources:\n  - name: Source\n    url: ${url}\n`),
+          "bad-source.md",
+        ),
+      /sources/,
+    );
+  assert.throws(
+    () =>
+      parsePost(
+        source("sources:\n  - url: https://example.com\n"),
+        "unnamed.md",
+      ),
+    /sources/,
+  );
+});
 test("published posts sorted newest first, filtered by tag, without drafts", () => {
   const p = parsePost(source(), "a");
   const older = { ...p, slug: "older", date: "2025-01-01", tags: ["mobile"] };

@@ -12,6 +12,8 @@ export interface Post {
   title: string;
   slug: string;
   date: string;
+  updated?: string;
+  sources: { name: string; url: string }[];
   summary: string;
   tags: string[];
   type: PostType;
@@ -57,6 +59,45 @@ export function parsePost(source: string, filename: string): Post {
   )
     fail("date (use YYYY-MM-DD)");
   if (typeof data.draft !== "boolean") fail("draft");
+  const updated =
+    data.updated instanceof Date
+      ? frontmatter.match(
+          /^updated:[ \t]*(\d{4}-\d{2}-\d{2})[ \t]*(?:#.*)?$/m,
+        )?.[1]
+      : data.updated;
+  const hasUpdated =
+    data.updated !== undefined && data.updated !== null && data.updated !== "";
+  if (
+    hasUpdated &&
+    (typeof updated !== "string" ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(updated) ||
+      !Number.isFinite(Date.parse(updated)) ||
+      new Date(updated).toISOString().slice(0, 10) !== updated ||
+      updated < date)
+  )
+    fail("updated (use YYYY-MM-DD, on or after publication)");
+  const sources = data.sources ?? [];
+  if (!Array.isArray(sources)) fail("sources");
+  for (const item of sources) {
+    if (
+      !item ||
+      typeof item.name !== "string" ||
+      !item.name.trim() ||
+      typeof item.url !== "string"
+    )
+      fail("sources (name and URL required)");
+    try {
+      const url = new URL(item.url);
+      if (
+        !["https:", "http:"].includes(url.protocol) ||
+        url.username ||
+        url.password
+      )
+        fail("sources (use a public http or https URL)");
+    } catch {
+      fail("sources (use a public http or https URL)");
+    }
+  }
   if (
     !Array.isArray(data.tags) ||
     data.tags.some((tag: unknown) => typeof tag !== "string" || !tag.trim())
@@ -85,6 +126,11 @@ export function parsePost(source: string, filename: string): Post {
     title: data.title.trim(),
     slug: data.slug,
     date,
+    updated: hasUpdated ? updated : undefined,
+    sources: sources.map((item: { name: string; url: string }) => ({
+      name: item.name.trim(),
+      url: item.url.trim(),
+    })),
     summary: data.summary.trim(),
     tags: [...new Set<string>(data.tags)].filter(
       (tag) => tag !== "Berita" && tag !== "Perbandingan",

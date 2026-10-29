@@ -6,6 +6,10 @@ summary: "A short summary of your actual article."
 type: guide # news, guide, or comparison
 tags: ["web"]
 draft: true
+# updated: "2026-10-30" # Optional: actual information updates only.
+# sources:
+#   - name: Official announcement
+#     url: https://example.com/announcement
 # coverImage: "/images/blog/your-cover.png"
 ---
 

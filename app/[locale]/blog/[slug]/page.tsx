@@ -4,6 +4,7 @@ import Image from "@/app/components/LocalizedImage";
 import { notFound } from "next/navigation";
 import SiteShell from "@/app/components/SiteShell";
 import ArticleAuthor from "@/app/components/ArticleAuthor";
+import ArticleSources from "@/app/components/ArticleSources";
 import { getPosts } from "@/lib/blog";
 import { renderMarkdown } from "@/lib/blog-core";
 import { buildSeo, localizeSeo } from "@/lib/seo";
@@ -49,6 +50,14 @@ export default async function PostPage({ params }: Props) {
             <T>Article in Indonesian</T>
             <T>{post.draft && "· Draft preview"}</T>
           </p>
+          {post.updated && (
+            <p className={b.meta}>
+              {locale === "en" ? "Updated" : "Diperbarui"}{" "}
+              <time dateTime={post.updated}>
+                <PostDate value={post.updated} />
+              </time>
+            </p>
+          )}
           <h1 lang="id">{post.title}</h1>
           <p>{post.summary}</p>
           <ArticleAuthor locale={locale} compact />
@@ -94,6 +103,7 @@ export default async function PostPage({ params }: Props) {
             dangerouslySetInnerHTML={{ __html: rendered.html }}
           />
         </div>
+        <ArticleSources sources={post.sources} locale={locale} />
         <ArticleAuthor locale={locale} />
       </article>
       <nav
@@ -123,6 +133,10 @@ export default async function PostPage({ params }: Props) {
               headline: post.title,
               description: post.summary,
               datePublished: post.date,
+              ...(post.updated ? { dateModified: post.updated } : {}),
+              ...(post.sources.length
+                ? { citation: post.sources.map((source) => source.url) }
+                : {}),
               url: canonicalUrl(`/${locale}/blog/${post.slug}`),
               author: {
                 "@type": "Person",
