@@ -1,16 +1,23 @@
 "use client";
-import Image from "next/image";
+import { translate } from "@/lib/i18n";
+
+import { T, useLocale } from "@/app/components/LocaleProvider";
+
+import Image from "@/app/components/LocalizedImage";
 import { useRef, useState } from "react";
 import s from "@/lib/styles";
 type Shot = { src: string; alt: string; caption: string };
 export default function Gallery({ images }: { images: Shot[] }) {
+  const locale = useLocale();
   const dialog = useRef<HTMLDialogElement>(null);
   const [index, setIndex] = useState(0);
   if (!images.length) return null;
   const shot = images[index];
   return (
     <section className={s.section}>
-      <h2>Screenshots</h2>
+      <h2>
+        <T>Screenshots</T>
+      </h2>
       <div className={s.gallery}>
         {images.map((image, i) => (
           <figure key={image.src}>
@@ -28,24 +35,30 @@ export default function Gallery({ images }: { images: Shot[] }) {
                 height={650}
               />
             </button>
-            {image.caption && <figcaption>{image.caption}</figcaption>}
+            {image.caption && (
+              <figcaption>
+                <T>{image.caption}</T>
+              </figcaption>
+            )}
           </figure>
         ))}
       </div>
       <dialog
         ref={dialog}
         className={s.lightbox}
-        aria-label="Screenshot viewer"
+        aria-label={translate("Screenshot viewer", locale)}
       >
         <button
           autoFocus
           className={s.button}
           onClick={() => dialog.current?.close()}
         >
-          Close
+          <T>Close</T>
         </button>
         <Image src={shot.src} alt={shot.alt} width={1600} height={1000} />
-        <p>{shot.caption}</p>
+        <p>
+          <T>{shot.caption}</T>
+        </p>
         {images.length > 1 && (
           <div className={s.cardLinks}>
             <button
@@ -53,13 +66,13 @@ export default function Gallery({ images }: { images: Shot[] }) {
                 setIndex((index + images.length - 1) % images.length)
               }
             >
-              Previous
+              <T>Previous</T>
             </button>
             <span>
-              {index + 1} / {images.length}
+              <T>{index + 1}</T> / <T>{images.length}</T>
             </span>
             <button onClick={() => setIndex((index + 1) % images.length)}>
-              Next
+              <T>Next</T>
             </button>
           </div>
         )}

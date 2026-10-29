@@ -1,7 +1,7 @@
-import SiteShell, { PageIntro } from "../components/SiteShell";
-import ProjectLibrary from "../components/ProjectLibrary";
-import { buildSeo } from "@/lib/seo";
-export const metadata = buildSeo(
+import SiteShell, { PageIntro } from "@/app/components/SiteShell";
+import ProjectLibrary from "@/app/components/ProjectLibrary";
+import { buildSeo, localizeSeo } from "@/lib/seo";
+const pageMetadata = buildSeo(
   "Projects",
   "/projects",
   "Explore Kevin’s web and mobile engineering projects.",
@@ -23,4 +23,12 @@ export default async function ProjectsPage({
       />
     </SiteShell>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  return localizeSeo(pageMetadata, (await params).locale);
 }

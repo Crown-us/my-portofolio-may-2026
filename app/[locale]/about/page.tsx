@@ -1,13 +1,14 @@
-import Image from "next/image";
+import { T } from "@/app/components/LocaleProvider";
+import Image from "@/app/components/LocalizedImage";
 import { about } from "@/lib/about";
 import { siteConfig } from "@/lib/config";
-import { buildSeo } from "@/lib/seo";
+import { buildSeo, localizeSeo } from "@/lib/seo";
 import { canonicalUrl, jsonLd } from "@/lib/domain";
-import SiteShell, { PageIntro } from "../components/SiteShell";
-import ContactCta from "../components/ContactCta";
-import ProfileDetails from "../components/ProfileDetails";
+import SiteShell, { PageIntro } from "@/app/components/SiteShell";
+import ContactCta from "@/app/components/ContactCta";
+import ProfileDetails from "@/app/components/ProfileDetails";
 import s from "@/lib/styles";
-export const metadata = buildSeo("About me", "/about");
+const pageMetadata = buildSeo("About me", "/about");
 export default function AboutPage() {
   return (
     <SiteShell>
@@ -26,18 +27,27 @@ export default function AboutPage() {
               className={s.portrait}
             />
           ) : (
-            <div className={s.profileAvatar} aria-label="Kevin’s initials">
-              K<span>✦</span>
+            <div className={s.profileAvatar} aria-label="Kevin Dwi Wijaya">
+              <T>K</T>
+              <span>✦</span>
             </div>
           )}
           <div>
-            <h2>{siteConfig.name}</h2>
-            <span>{siteConfig.location}</span>
+            <h2>
+              <T>{siteConfig.name}</T>
+            </h2>
+            <span>
+              <T>{siteConfig.location}</T>
+            </span>
           </div>
         </div>
         <div>
-          <h3>Interfaces, apps, and the systems behind them.</h3>
-          <p>{about.intro}</p>
+          <h3>
+            <T>Interfaces, apps, and the systems behind them.</T>
+          </h3>
+          <p>
+            <T>{about.intro}</T>
+          </p>
           {about.resumePdf && (
             <a
               className={s.button}
@@ -45,7 +55,7 @@ export default function AboutPage() {
               download
               data-umami-event="resume-download"
             >
-              Download CV ↓
+              <T>Download CV ↓</T>
             </a>
           )}
         </div>
@@ -68,4 +78,12 @@ export default function AboutPage() {
       />
     </SiteShell>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  return localizeSeo(pageMetadata, (await params).locale);
 }

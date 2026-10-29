@@ -1,27 +1,31 @@
-import Image from "next/image";
-import Link from "next/link";
+import { T } from "@/app/components/LocaleProvider";
+import Image from "@/app/components/LocalizedImage";
+import Link from "@/app/components/LocalizedLink";
 import { notFound } from "next/navigation";
 import { projects } from "@/lib/projects";
-import { buildSeo } from "@/lib/seo";
+import { buildSeo, localizeSeo } from "@/lib/seo";
 import { canonicalUrl, jsonLd } from "@/lib/domain";
-import SiteShell, { PageIntro } from "../../components/SiteShell";
-import Gallery from "../../components/Gallery";
-import ContactCta from "../../components/ContactCta";
-import CaseSections from "../../components/CaseSections";
+import SiteShell, { PageIntro } from "@/app/components/SiteShell";
+import Gallery from "@/app/components/Gallery";
+import ContactCta from "@/app/components/ContactCta";
+import CaseSections from "@/app/components/CaseSections";
 import s from "@/lib/styles";
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ slug: string; locale: string }> };
 export function generateStaticParams() {
   return projects.map(({ slug }) => ({ slug }));
 }
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const item = projects.find((p) => p.slug === slug);
   return item
-    ? buildSeo(item.title, `/projects/${slug}`, item.summary, item.image)
+    ? localizeSeo(
+        buildSeo(item.title, `/projects/${slug}`, item.summary, item.image),
+        locale,
+      )
     : { title: "Project not found", robots: { index: false } };
 }
 export default async function ProjectPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const index = projects.findIndex((p) => p.slug === slug);
   if (index < 0) notFound();
   const project = projects[index],
@@ -29,13 +33,15 @@ export default async function ProjectPage({ params }: Props) {
   return (
     <SiteShell>
       <Link className={s.back} href="/projects">
-        ← All projects
+        <T>← All projects</T>
       </Link>
       <PageIntro
         title={project.title}
         eyebrow={`${project.category} / ${project.year} / ${project.status}`}
       />
-      <p className={s.lead}>{project.summary}</p>
+      <p className={s.lead}>
+        <T>{project.summary}</T>
+      </p>
       <div className={s.cardLinks}>
         {Object.entries(study.links)
           .filter(([, url]) => url)
@@ -47,12 +53,14 @@ export default async function ProjectPage({ params }: Props) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {label === "repo"
-                ? "GitHub"
-                : label === "demo"
-                  ? "Live demo"
-                  : "Documentation"}{" "}
-              ↗
+              <T>
+                {label === "repo"
+                  ? "GitHub"
+                  : label === "demo"
+                    ? "Live demo"
+                    : "Documentation"}
+              </T>
+              <T> </T>↗
             </a>
           ))}
       </div>
@@ -66,17 +74,20 @@ export default async function ProjectPage({ params }: Props) {
       />
       <CaseSections study={study} />
       <Gallery images={study.screenshots} />
-      <nav className={s.pageNeighbours} aria-label="Other projects">
+      <nav
+        className={s.pageNeighbours}
+        aria-label={locale === "id" ? "Proyek lainnya" : "Other projects"}
+      >
         {index > 0 ? (
           <Link href={`/projects/${projects[index - 1].slug}`}>
-            ← {projects[index - 1].title}
+            ← <T>{projects[index - 1].title}</T>
           </Link>
         ) : (
           <span />
         )}
         {index < projects.length - 1 && (
           <Link href={`/projects/${projects[index + 1].slug}`}>
-            {projects[index + 1].title} →
+            <T>{projects[index + 1].title}</T> →
           </Link>
         )}
       </nav>
@@ -89,12 +100,12 @@ export default async function ProjectPage({ params }: Props) {
             "@type": "CreativeWork",
             name: project.title,
             description: project.summary,
-            url: canonicalUrl(`/projects/${slug}`),
+            url: canonicalUrl(`/${locale}/projects/${slug}`),
             image: canonicalUrl(project.image),
             author: {
               "@type": "Person",
               name: "Kevin Dwi Wijaya",
-              url: canonicalUrl("/about"),
+              url: canonicalUrl(`/${locale}/about`),
             },
           }),
         }}

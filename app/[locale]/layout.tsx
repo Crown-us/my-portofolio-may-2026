@@ -1,9 +1,12 @@
+import { notFound } from "next/navigation";
+import { isLocale, locales } from "@/lib/i18n";
+import { LocaleProvider } from "@/app/components/LocaleProvider";
 import type { Metadata } from "next";
-import Analytics from "./components/Analytics";
+import Analytics from "@/app/components/Analytics";
 import { buildSeo } from "@/lib/seo";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "./components/ThemeProvider";
+import "@/app/globals.css";
+import { ThemeProvider } from "@/app/components/ThemeProvider";
 import { siteConfig } from "@/lib/config";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -36,14 +39,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
   return (
     <html
-      lang="en"
+      lang={locale === "en" ? "en" : "id"}
       className={`${plusJakartaSans.variable} ${jetbrainsMono.variable} antialiased`}
       suppressHydrationWarning
     >
@@ -53,10 +60,14 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem={false}
         >
-          {children}
+          <LocaleProvider locale={locale}>{children}</LocaleProvider>
           <Analytics />
         </ThemeProvider>
       </body>
     </html>
   );
+}
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
 }

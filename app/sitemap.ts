@@ -1,3 +1,4 @@
+import { locales, localePath } from "@/lib/i18n";
 import { getPosts } from "@/lib/blog";
 import type { MetadataRoute } from "next";
 import { projects } from "@/lib/projects";
@@ -8,7 +9,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...sitemapPaths(projects, products),
     "/blog",
     ...getPosts(false).map((post) => `/blog/${post.slug}`),
-  ].map((path) => ({
-    url: canonicalUrl(path),
-  }));
+  ].flatMap((path) =>
+    locales.map((locale) => ({
+      url: canonicalUrl(localePath(path, locale)),
+      alternates: {
+        languages: {
+          id: canonicalUrl(localePath(path, "id")),
+          en: canonicalUrl(localePath(path, "en")),
+        },
+      },
+    })),
+  );
 }

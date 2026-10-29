@@ -1,6 +1,9 @@
 "use client";
-import Link from "next/link";
-import Image from "next/image";
+import { T, useLocale } from "@/app/components/LocaleProvider";
+import { localePath, translate } from "@/lib/i18n";
+
+import Link from "@/app/components/LocalizedLink";
+import Image from "@/app/components/LocalizedImage";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { siteConfig } from "@/lib/config";
@@ -8,7 +11,9 @@ import { products } from "@/lib/store";
 import GlobalSearch from "./GlobalSearch";
 import s from "@/lib/styles";
 export default function SiteShell({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname.replace(/^\/(id|en)(?=\/|$)/, "") || "/";
+  const locale = useLocale();
   const links = [
     { href: "/", label: "Discover" },
     { href: "/projects", label: "Projects" },
@@ -22,7 +27,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   return (
     <div className={s.page}>
       <a className={s.skip} href="#main-content">
-        Skip to content
+        <T>Skip to content</T>
       </a>
       <div className={s.stickyHeader}>
         <header className={s.header}>
@@ -36,21 +41,55 @@ export default function SiteShell({ children }: { children: ReactNode }) {
               priority
             />
             <span>
-              kevin<span className={s.brandLight}> / portfolio</span>
+              <T>kevin</T>
+              <span className={s.brandLight}>
+                {" "}
+                <T>/ portfolio</T>
+              </span>
             </span>
           </Link>
           {siteConfig.hasGlobalSearch && products.length > 0 ? (
             <GlobalSearch />
           ) : (
             <span className={s.headerCaption}>
-              Full-stack & mobile engineer
+              <T>Full-stack & mobile engineer</T>
             </span>
           )}
-          <Link className={s.avatar} href="/about" aria-label="About Kevin">
-            K
+          <div
+            className={s.languageSwitch}
+            aria-label={locale === "id" ? "Bahasa" : "Language"}
+          >
+            {(["id", "en"] as const).map((language) => (
+              <a
+                key={language}
+                href={localePath(pathname, language)}
+                lang={language}
+                hrefLang={language}
+                aria-label={language === "id" ? "Bahasa Indonesia" : "English"}
+                aria-current={locale === language ? "true" : undefined}
+                onClick={(event) => {
+                  event.currentTarget.href =
+                    localePath(pathname, language) +
+                    window.location.search +
+                    window.location.hash;
+                }}
+              >
+                {language.toUpperCase()}
+              </a>
+            ))}
+          </div>
+          <Link
+            className={s.avatar}
+            href="/about"
+            aria-label={translate("About Kevin", locale)}
+          >
+            <T>K</T>
           </Link>
         </header>
-        <nav className={s.nav} aria-label="Main navigation">
+        <nav
+          className={s.nav}
+          aria-label={translate("Main navigation", locale)}
+        >
           {links.map((link) => {
             const isActive =
               link.href === "/"
@@ -63,7 +102,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
                 className={isActive ? s.active : undefined}
                 aria-current={isActive ? "page" : undefined}
               >
-                {link.label}
+                <T>{link.label}</T>
               </Link>
             );
           })}
@@ -74,12 +113,18 @@ export default function SiteShell({ children }: { children: ReactNode }) {
       </main>
       <footer className={`${s.content} ${s.siteFooter}`}>
         <span>
-          © {new Date().getFullYear()} {siteConfig.name}
+          © <T>{new Date().getFullYear()}</T> <T>{siteConfig.name}</T>
         </span>
         <div>
-          <a href={siteConfig.social.github}>GitHub ↗</a>
-          <a href={siteConfig.social.linkedin}>LinkedIn ↗</a>
-          <Link href="/contact">Contact</Link>
+          <a href={siteConfig.social.github}>
+            <T>GitHub ↗</T>
+          </a>
+          <a href={siteConfig.social.linkedin}>
+            <T>LinkedIn ↗</T>
+          </a>
+          <Link href="/contact">
+            <T>Contact</T>
+          </Link>
         </div>
       </footer>
     </div>
@@ -95,12 +140,16 @@ export function PageIntro({
   return (
     <div className={s.intro}>
       <div>
-        <p className={s.eyebrow}>{eyebrow}</p>
-        <h1>{title}</h1>
+        <p className={s.eyebrow}>
+          <T>{eyebrow}</T>
+        </p>
+        <h1>
+          <T>{title}</T>
+        </h1>
       </div>
       {siteConfig.isAvailable && (
         <span className={s.available}>
-          <i /> Open to opportunities
+          <i /> <T>Open to opportunities</T>
         </span>
       )}
     </div>

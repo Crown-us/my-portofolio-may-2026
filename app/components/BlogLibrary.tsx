@@ -1,4 +1,6 @@
 "use client";
+import { T } from "@/app/components/LocaleProvider";
+
 import { useEffect, useState } from "react";
 import BlogPostCard from "./BlogPostCard";
 import type { Post } from "@/lib/blog-core";
@@ -39,9 +41,12 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
   return (
     <section className={s.section}>
       <div className={s.sectionHead}>
-        <h2>Artikel terbaru</h2>
+        <h2>
+          <T>Artikel terbaru</T>
+        </h2>
         <span role="status">
-          {visible.length} {visible.length === 1 ? "post" : "posts"}
+          <T>{visible.length}</T>{" "}
+          <T>{visible.length === 1 ? "post" : "posts"}</T>
         </span>
       </div>
       <div className={s.filters}>
@@ -52,7 +57,7 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
             key={value}
             onClick={() => selectTag(value)}
           >
-            {value || "All posts"}
+            <T>{value || "All posts"}</T>
           </button>
         ))}
       </div>

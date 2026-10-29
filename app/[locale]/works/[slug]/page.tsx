@@ -3,9 +3,9 @@ import { projects } from "@/lib/projects";
 export default async function LegacyProject({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   if (!projects.some((project) => project.slug === slug)) notFound();
-  permanentRedirect(`/projects/${slug}`);
+  permanentRedirect(`/${locale}/projects/${slug}`);
 }

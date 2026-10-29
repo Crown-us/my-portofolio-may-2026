@@ -1,5 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
+import { T } from "@/app/components/LocaleProvider";
+import Link from "@/app/components/LocalizedLink";
+import Image from "@/app/components/LocalizedImage";
 import type { Project } from "@/lib/projects";
 import s from "@/lib/styles";
 export default function ProjectCard({
@@ -29,29 +30,37 @@ export default function ProjectCard({
         <div className={s.cardTitle}>
           <div>
             <h3>
-              <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+              <Link href={`/projects/${project.slug}`}>
+                <T>{project.title}</T>
+              </Link>
             </h3>
             <span>
-              {project.category} · {project.year}
+              <T>{project.category}</T> · <T>{project.year}</T>
             </span>
           </div>
         </div>
-        <p>{project.summary}</p>
+        <p>
+          <T>{project.summary}</T>
+        </p>
         <div className={s.tags}>
           {project.tech.slice(0, 3).map((tech) => (
-            <span key={tech}>{tech}</span>
+            <span key={tech}>
+              <T>{tech}</T>
+            </span>
           ))}
         </div>
         <div className={s.cardLinks}>
-          <Link href={`/projects/${project.slug}`}>Case study</Link>
+          <Link href={`/projects/${project.slug}`}>
+            <T>Case study</T>
+          </Link>
           {links.demo && (
             <a href={links.demo} target="_blank" rel="noopener noreferrer">
-              Live demo ↗
+              <T>Live demo ↗</T>
             </a>
           )}
           {links.repo && (
             <a href={links.repo} target="_blank" rel="noopener noreferrer">
-              GitHub ↗
+              <T>GitHub ↗</T>
             </a>
           )}
         </div>

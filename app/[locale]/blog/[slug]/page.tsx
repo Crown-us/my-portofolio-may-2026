@@ -1,28 +1,32 @@
-import Link from "next/link";
-import Image from "next/image";
+import { T, PostDate } from "@/app/components/LocaleProvider";
+import Link from "@/app/components/LocalizedLink";
+import Image from "@/app/components/LocalizedImage";
 import { notFound } from "next/navigation";
-import SiteShell from "../../components/SiteShell";
+import SiteShell from "@/app/components/SiteShell";
 import { getPosts } from "@/lib/blog";
 import { renderMarkdown } from "@/lib/blog-core";
-import { buildSeo } from "@/lib/seo";
-import { canonicalUrl, formatPostDate, jsonLd } from "@/lib/domain";
+import { buildSeo, localizeSeo } from "@/lib/seo";
+import { canonicalUrl, jsonLd } from "@/lib/domain";
 import s from "@/lib/styles";
-import b from "../blog.module.css";
-type Props = { params: Promise<{ slug: string }> };
+import b from "@/app/blog/blog.module.css";
+type Props = { params: Promise<{ slug: string; locale: string }> };
 export function generateStaticParams() {
   return getPosts().map(({ slug }) => ({ slug }));
 }
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const post = getPosts().find((p) => p.slug === slug);
   if (!post) return { title: "Post not found", robots: { index: false } };
   return {
-    ...buildSeo(post.title, `/blog/${slug}`, post.summary, post.coverImage),
+    ...localizeSeo(
+      buildSeo(post.title, `/blog/${slug}`, post.summary, post.coverImage),
+      locale,
+    ),
     ...(post.draft ? { robots: { index: false, follow: false } } : {}),
   };
 }
 export default async function PostPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const posts = getPosts();
   const index = posts.findIndex((p) => p.slug === slug);
   if (index < 0) notFound();
@@ -31,15 +35,20 @@ export default async function PostPage({ params }: Props) {
   return (
     <SiteShell>
       <Link className={s.back} href="/blog">
-        ← All notes
+        <T>← All notes</T>
       </Link>
       <article>
         <header className={b.postHeader}>
           <p className={b.meta}>
-            <time dateTime={post.date}>{formatPostDate(post.date)}</time> ·{" "}
-            {post.readingMinutes} min read {post.draft && "· Draft preview"}
+            <time dateTime={post.date}>
+              <PostDate value={post.date} />
+            </time>{" "}
+            ·<T> </T>
+            <T>{post.readingMinutes}</T> <T>min read </T> ·{" "}
+            <T>Article in Indonesian</T>
+            <T>{post.draft && "· Draft preview"}</T>
           </p>
-          <h1>{post.title}</h1>
+          <h1 lang="id">{post.title}</h1>
           <p>{post.summary}</p>
           <div className={s.tags}>
             {post.tags.map((tag) => (
@@ -59,8 +68,13 @@ export default async function PostPage({ params }: Props) {
         )}
         <div className={b.readingLayout}>
           {!!rendered.toc.length && (
-            <nav className={b.toc} aria-label="Table of contents">
-              <h2>In this note</h2>
+            <nav
+              className={b.toc}
+              aria-label={locale === "id" ? "Daftar isi" : "Table of contents"}
+            >
+              <h2>
+                <T>In this note</T>
+              </h2>
               {rendered.toc.map((heading) => (
                 <a
                   href={`#${heading.id}`}
@@ -74,21 +88,25 @@ export default async function PostPage({ params }: Props) {
           )}
           <div
             className={b.prose}
+            lang="id"
             dangerouslySetInnerHTML={{ __html: rendered.html }}
           />
         </div>
       </article>
-      <nav className={s.pageNeighbours} aria-label="Other posts">
+      <nav
+        className={s.pageNeighbours}
+        aria-label={locale === "id" ? "Artikel lainnya" : "Other posts"}
+      >
         {index > 0 ? (
           <Link href={`/blog/${posts[index - 1].slug}`}>
-            ← {posts[index - 1].title}
+            ← <T>{posts[index - 1].title}</T>
           </Link>
         ) : (
           <span />
         )}
         {index < posts.length - 1 && (
           <Link href={`/blog/${posts[index + 1].slug}`}>
-            {posts[index + 1].title} →
+            <T>{posts[index + 1].title}</T> →
           </Link>
         )}
       </nav>
@@ -102,11 +120,11 @@ export default async function PostPage({ params }: Props) {
               headline: post.title,
               description: post.summary,
               datePublished: post.date,
-              url: canonicalUrl(`/blog/${post.slug}`),
+              url: canonicalUrl(`/${locale}/blog/${post.slug}`),
               author: {
                 "@type": "Person",
                 name: "Kevin Dwi Wijaya",
-                url: canonicalUrl("/about"),
+                url: canonicalUrl(`/${locale}/about`),
               },
             }),
           }}

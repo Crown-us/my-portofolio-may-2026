@@ -155,3 +155,12 @@ Konfigurasi `.pages.yml` menyediakan form artikel dan upload gambar, tanpa datab
 Tanggal hanya metadata, bukan penjadwalan otomatis. Pertahankan slug artikel yang sudah terbit agar link lama tetap berfungsi. Untuk berita AI, tulis tanggal pengecekan dan tautan sumber resmi langsung di isi artikel. Cover landscape WebP sekitar 1400 px sudah cukup; CMS tidak otomatis mengompres gambar.
 
 Setup repository tidak otomatis menghubungkan akun GitHub: login dan pemasangan aplikasi dilakukan pemilik akun. Setelah mengedit melalui CMS, jalankan `git pull --ff-only` sebelum melanjutkan edit lokal. Jika deploy gagal, periksa log Vercel dan koreksi artikel melalui CMS.
+
+
+## Bahasa ID / EN
+
+Halaman portofolio tersedia di `/id` dan `/en`, dengan Bahasa Indonesia sebagai tujuan link lama tanpa awalan bahasa. Menu ID/EN mempertahankan halaman, query filter, dan anchor. Halaman ada di `app/[locale]`; komponen bersama tetap di `app/components`.
+
+Terjemahan disimpan di `lib/translations.json` (teks Inggris sebagai key, Bahasa Indonesia sebagai value). Gunakan `<T>` untuk teks tampilan dan `LocalizedLink` untuk tautan internal. Nilai API/form, slug proyek, nama teknologi, dan nama perusahaan tidak diubah. Canonical, hreflang, sitemap, dan atribut HTML mengikuti bahasa halaman.
+
+Artikel CMS tetap dalam bahasa aslinya (artikel saat ini Bahasa Indonesia), dengan label bahasa di kartu dan halaman artikel. ID/EN belum membuat salinan terjemahan artikel. Draft tetap disembunyikan di production dan bagian artikel terbaru Discover. Publish CMS memicu rebuild kedua bahasa lewat Vercel.

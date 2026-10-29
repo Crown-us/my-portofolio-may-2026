@@ -727,3 +727,26 @@
     box-shadow: none;
   }
 }
+
+.languageSwitch {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid #dce3ef;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+.languageSwitch a {
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #5f6368;
+}
+.languageSwitch a[aria-current="true"] {
+  background: #eaf1fd;
+  color: #1967d2;
+  font-weight: 700;
+}
+.languageSwitch a:focus-visible {
+  outline: 2px solid #1967d2;
+}

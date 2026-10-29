@@ -1,4 +1,6 @@
 "use client";
+import { T } from "@/app/components/LocaleProvider";
+
 import { useState, useRef } from "react";
 import { services } from "@/lib/services";
 import {
@@ -55,7 +57,7 @@ export default function ContactForm({
   const error = (name: keyof ContactErrors) =>
     errors[name] && (
       <span id={`${name}-error`} className={s.fieldError}>
-        {errors[name]}
+        <T>{errors[name]}</T>
       </span>
     );
   return (
@@ -66,7 +68,9 @@ export default function ContactForm({
       className={s.contactForm}
       aria-busy={status === "loading"}
     >
-      <label htmlFor="name">Name *</label>
+      <label htmlFor="name">
+        <T>Name *</T>
+      </label>
       <input
         id="name"
         name="name"
@@ -77,7 +81,9 @@ export default function ContactForm({
         aria-describedby={errors.name ? "name-error" : undefined}
       />
       {error("name")}
-      <label htmlFor="email">Email *</label>
+      <label htmlFor="email">
+        <T>Email *</T>
+      </label>
       <input
         id="email"
         name="email"
@@ -90,7 +96,10 @@ export default function ContactForm({
       />
       {error("email")}
       <label htmlFor="service">
-        Service <span>(optional)</span>
+        <T>Service </T>
+        <span>
+          <T>(optional)</T>
+        </span>
       </label>
       <select
         id="service"
@@ -99,16 +108,21 @@ export default function ContactForm({
         aria-invalid={!!errors.service}
         aria-describedby={errors.service ? "service-error" : undefined}
       >
-        <option value="">Choose a service</option>
+        <option value="">
+          <T>Choose a service</T>
+        </option>
         {services.map((item) => (
           <option key={item.slug} value={item.slug}>
-            {item.title}
+            <T>{item.title}</T>
           </option>
         ))}
       </select>
       {error("service")}
       <label htmlFor="budget">
-        Budget <span>(optional)</span>
+        <T>Budget </T>
+        <span>
+          <T>(optional)</T>
+        </span>
       </label>
       <select
         id="budget"
@@ -116,13 +130,19 @@ export default function ContactForm({
         aria-invalid={!!errors.budget}
         aria-describedby={errors.budget ? "budget-error" : undefined}
       >
-        <option value="">Choose a range</option>
+        <option value="">
+          <T>Choose a range</T>
+        </option>
         {BUDGET_RANGES.map((value) => (
-          <option key={value}>{value}</option>
+          <option key={value} value={value}>
+            <T>{value}</T>
+          </option>
         ))}
       </select>
       {error("budget")}
-      <label htmlFor="message">Message *</label>
+      <label htmlFor="message">
+        <T>Message *</T>
+      </label>
       <textarea
         id="message"
         name="message"
@@ -135,21 +155,23 @@ export default function ContactForm({
       />
       {error("message")}
       <div className={s.honeypot} aria-hidden="true">
-        <label htmlFor="website">Leave empty</label>
+        <label htmlFor="website">
+          <T>Leave empty</T>
+        </label>
         <input id="website" name="website" tabIndex={-1} autoComplete="off" />
       </div>
       <p className={s.formNote}>
-        Your details are used only to respond to your inquiry.
+        <T>Your details are used only to respond to your inquiry.</T>
       </p>
       <button className={s.submitButton} disabled={status === "loading"}>
-        {status === "loading" ? "Sending…" : "Send message ↗"}
+        <T>{status === "loading" ? "Sending…" : "Send message ↗"}</T>
       </button>
       <p
         role="status"
         aria-live="polite"
         className={status === "error" ? s.fieldError : s.success}
       >
-        {message}
+        <T>{message}</T>
       </p>
     </form>
   );

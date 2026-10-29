@@ -1,3 +1,4 @@
+import { T } from "@/app/components/LocaleProvider";
 import { Fragment } from "react";
 import { isHttpsUrl } from "@/lib/domain";
 function inline(text: string) {
@@ -5,9 +6,17 @@ function inline(text: string) {
     .split(/(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\(https:\/\/[^)]+\))/g)
     .map((part, index) => {
       if (part.startsWith("**") && part.endsWith("**"))
-        return <strong key={index}>{part.slice(2, -2)}</strong>;
+        return (
+          <strong key={index}>
+            <T>{part.slice(2, -2)}</T>
+          </strong>
+        );
       if (part.startsWith("`") && part.endsWith("`"))
-        return <code key={index}>{part.slice(1, -1)}</code>;
+        return (
+          <code key={index}>
+            <T>{part.slice(1, -1)}</T>
+          </code>
+        );
       const link = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
       if (link && isHttpsUrl(link[2]))
         return (
@@ -17,10 +26,14 @@ function inline(text: string) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {link[1]}
+            <T>{link[1]}</T>
           </a>
         );
-      return <Fragment key={index}>{part}</Fragment>;
+      return (
+        <Fragment key={index}>
+          <T>{part}</T>
+        </Fragment>
+      );
     });
 }
 export default function ProductDescription({ text }: { text: string }) {

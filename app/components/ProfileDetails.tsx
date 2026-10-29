@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { T } from "@/app/components/LocaleProvider";
+import Image from "@/app/components/LocalizedImage";
 import { Check, MapPin } from "lucide-react";
 import { about } from "@/lib/about";
 import s from "@/lib/styles";
@@ -20,7 +21,9 @@ export default function ProfileDetails() {
     <>
       {!!about.experience.length && (
         <section className={s.section}>
-          <h2>Experience</h2>
+          <h2>
+            <T>Experience</T>
+          </h2>
           <ol className={s.experienceList}>
             {[...about.experience]
               .sort((a, b) => b.startDate.localeCompare(a.startDate))
@@ -44,28 +47,38 @@ export default function ProfileDetails() {
                         data-tone={index % 4}
                         aria-hidden="true"
                       >
-                        {initials(item.organization)}
+                        <T>{initials(item.organization)}</T>
                       </span>
                     )}
                     <div className={s.expHead}>
-                      <h3>{item.role}</h3>
-                      <p className={s.expOrg}>{item.organization}</p>
+                      <h3>
+                        <T>{item.role}</T>
+                      </h3>
+                      <p className={s.expOrg}>
+                        <T>{item.organization}</T>
+                      </p>
                     </div>
-                    <span className={s.expBadge}>{item.period}</span>
+                    <span className={s.expBadge}>
+                      <T>{item.period}</T>
+                    </span>
                   </div>
                   {item.location && (
                     <p className={s.expMeta}>
                       <MapPin size={14} aria-hidden="true" />
-                      {item.location}
+                      <T>{item.location}</T>
                     </p>
                   )}
-                  <p className={s.expSummary}>{item.summary}</p>
+                  <p className={s.expSummary}>
+                    <T>{item.summary}</T>
+                  </p>
                   {!!item.highlights.length && (
                     <ul className={s.expHighlights}>
                       {item.highlights.map((text) => (
                         <li key={text}>
                           <Check size={16} aria-hidden="true" />
-                          <span>{text}</span>
+                          <span>
+                            <T>{text}</T>
+                          </span>
                         </li>
                       ))}
                     </ul>
@@ -77,12 +90,16 @@ export default function ProfileDetails() {
       )}
       {!!about.certifications.length && (
         <section className={s.section}>
-          <h2>Certifications</h2>
+          <h2>
+            <T>Certifications</T>
+          </h2>
           {about.certifications.map((cert) => (
             <article className={s.panel} key={cert.name}>
-              <h3>{cert.name}</h3>
+              <h3>
+                <T>{cert.name}</T>
+              </h3>
               <p>
-                {cert.issuer} · {cert.year}
+                <T>{cert.issuer}</T> · <T>{cert.year}</T>
               </p>
               {cert.credentialUrl && (
                 <a
@@ -91,7 +108,7 @@ export default function ProfileDetails() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  View credential ↗
+                  <T>View credential ↗</T>
                 </a>
               )}
             </article>
@@ -99,16 +116,22 @@ export default function ProfileDetails() {
         </section>
       )}
       <section className={s.section}>
-        <h2>My toolkit</h2>
+        <h2>
+          <T>My toolkit</T>
+        </h2>
         <div className={s.toolGrid}>
           {about.skills
             .filter((group) => group.items.length)
             .map((group) => (
               <div className={s.panel} key={group.area}>
-                <h3>{group.area}</h3>
+                <h3>
+                  <T>{group.area}</T>
+                </h3>
                 <div className={s.tags}>
                   {group.items.map((item) => (
-                    <span key={item}>{item}</span>
+                    <span key={item}>
+                      <T>{item}</T>
+                    </span>
                   ))}
                 </div>
               </div>

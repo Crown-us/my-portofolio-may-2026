@@ -1,4 +1,8 @@
 "use client";
+import { translate } from "@/lib/i18n";
+
+import { T, useLocale } from "@/app/components/LocaleProvider";
+
 import { useState } from "react";
 import { projects } from "@/lib/projects";
 import ProjectCard from "./ProjectCard";
@@ -8,6 +12,7 @@ export default function ProjectLibrary({
 }: {
   initialCategory?: string;
 }) {
+  const locale = useLocale();
   const categories = [
     "All projects",
     ...new Set(projects.map((project) => project.category)),
@@ -20,7 +25,10 @@ export default function ProjectLibrary({
   );
   return (
     <>
-      <div className={s.categories} aria-label="Project categories">
+      <div
+        className={s.categories}
+        aria-label={translate("Project categories", locale)}
+      >
         {categories.map((item, index) => (
           <button
             key={item}
@@ -28,15 +36,17 @@ export default function ProjectLibrary({
             aria-pressed={category === item}
             onClick={() => setCategory(item)}
           >
-            {item}
+            <T>{item}</T>
           </button>
         ))}
       </div>
       <section className={s.section}>
         <div className={s.sectionHead}>
-          <h2>Project library</h2>
+          <h2>
+            <T>Project library</T>
+          </h2>
           <span className={s.count} role="status">
-            {filtered.length} projects
+            <T>{filtered.length}</T> <T>projects</T>
           </span>
         </div>
         <div className={s.projectGrid}>
@@ -44,7 +54,11 @@ export default function ProjectLibrary({
             <ProjectCard project={project} index={index} key={project.slug} />
           ))}
         </div>
-        {!filtered.length && <p>No projects in this category.</p>}
+        {!filtered.length && (
+          <p>
+            <T>No projects in this category.</T>
+          </p>
+        )}
       </section>
     </>
   );

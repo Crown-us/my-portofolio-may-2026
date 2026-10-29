@@ -1,18 +1,19 @@
-import Link from "next/link";
-import SiteShell, { PageIntro } from "./components/SiteShell";
-import FeaturedCarousel from "./components/FeaturedCarousel";
-import ProjectCard from "./components/ProjectCard";
-import ContactCta from "./components/ContactCta";
-import BlogPostCard from "./components/BlogPostCard";
+import { T } from "@/app/components/LocaleProvider";
+import Link from "@/app/components/LocalizedLink";
+import SiteShell, { PageIntro } from "@/app/components/SiteShell";
+import FeaturedCarousel from "@/app/components/FeaturedCarousel";
+import ProjectCard from "@/app/components/ProjectCard";
+import ContactCta from "@/app/components/ContactCta";
+import BlogPostCard from "@/app/components/BlogPostCard";
 import { getPosts } from "@/lib/blog";
-import b from "./blog/blog.module.css";
+import b from "@/app/blog/blog.module.css";
 import { projects } from "@/lib/projects";
 import { services } from "@/lib/services";
 import { products } from "@/lib/store";
 import { getFeatured } from "@/lib/domain";
-import { buildSeo } from "@/lib/seo";
+import { buildSeo, localizeSeo } from "@/lib/seo";
 import s from "@/lib/styles";
-export const metadata = buildSeo(
+const pageMetadata = buildSeo(
   "Kevin Dwi Wijaya — Full-Stack & Mobile Engineer",
   "/",
 );
@@ -29,9 +30,11 @@ export default function Home() {
       {featured.length > 0 && (
         <section className={s.section}>
           <div className={s.sectionHead}>
-            <h2>Selected highlights</h2>
+            <h2>
+              <T>Selected highlights</T>
+            </h2>
             <Link href="/projects" className={s.textLink}>
-              View all projects →
+              <T>View all projects →</T>
             </Link>
           </div>
           <div className={s.highlights}>
@@ -44,9 +47,11 @@ export default function Home() {
       {services.length > 0 && (
         <section className={s.section}>
           <div className={s.sectionHead}>
-            <h2>What can we build together?</h2>
+            <h2>
+              <T>What can we build together?</T>
+            </h2>
             <Link href="/services" className={s.textLink}>
-              Explore services →
+              <T>Explore services →</T>
             </Link>
           </div>
           <div className={s.toolGrid}>
@@ -56,8 +61,12 @@ export default function Home() {
                 href={`/services#${service.slug}`}
                 key={service.slug}
               >
-                <h3>{service.title}</h3>
-                <p>{service.summary}</p>
+                <h3>
+                  <T>{service.title}</T>
+                </h3>
+                <p>
+                  <T>{service.summary}</T>
+                </p>
               </Link>
             ))}
           </div>
@@ -66,20 +75,26 @@ export default function Home() {
       {products.length > 0 && (
         <section className={s.discoverNote}>
           <div>
-            <h2>Ready-made tools</h2>
-            <p>Explore my digital products.</p>
+            <h2>
+              <T>Ready-made tools</T>
+            </h2>
+            <p>
+              <T>Explore my digital products.</T>
+            </p>
           </div>
           <Link href="/store" className={s.button}>
-            Visit the store →
+            <T>Visit the store →</T>
           </Link>
         </section>
       )}
       {latestPosts.length > 0 && (
         <section className={s.section} aria-labelledby="latest-blog-heading">
           <div className={s.sectionHead}>
-            <h2 id="latest-blog-heading">Terbaru di Blog</h2>
+            <h2 id="latest-blog-heading">
+              <T>Terbaru di Blog</T>
+            </h2>
             <Link href="/blog" className={s.textLink}>
-              Lihat semua artikel →
+              <T>Lihat semua artikel →</T>
             </Link>
           </div>
           <div className={b.postGrid}>
@@ -92,4 +107,12 @@ export default function Home() {
       <ContactCta />
     </SiteShell>
   );
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  return localizeSeo(pageMetadata, (await params).locale);
 }

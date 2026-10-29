@@ -1,7 +1,11 @@
 "use client";
+import { translate } from "@/lib/i18n";
+
+import { T, useLocale } from "@/app/components/LocaleProvider";
+
 import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import Link from "@/app/components/LocalizedLink";
+import Image from "@/app/components/LocalizedImage";
 import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import type { Project } from "@/lib/projects";
 import s from "@/lib/styles";
@@ -10,6 +14,7 @@ export default function FeaturedCarousel({
 }: {
   projects: Project[];
 }) {
+  const locale = useLocale();
   const [index, setIndex] = useState(0);
   const project = projects[index];
   if (!project) return null;
@@ -17,14 +22,22 @@ export default function FeaturedCarousel({
     <section
       className={s.banner}
       data-tone={index % 3}
-      aria-label="Featured project"
+      aria-label={translate("Featured project", locale)}
     >
       <div className={s.bannerCopy} aria-live="polite">
-        <span className={s.badge}>Featured project · {project.category}</span>
-        <h2>{project.title}</h2>
-        <p>{project.summary}</p>
+        <span className={s.badge}>
+          <T>Featured project · </T>
+          <T>{project.category}</T>
+        </span>
+        <h2>
+          <T>{project.title}</T>
+        </h2>
+        <p>
+          <T>{project.summary}</T>
+        </p>
         <Link className={s.button} href={`/projects/${project.slug}`}>
-          Explore project <ArrowRight size={16} />
+          <T>Explore project </T>
+          <ArrowRight size={16} />
         </Link>
       </div>
       <div className={s.bannerArt}>
@@ -32,7 +45,9 @@ export default function FeaturedCarousel({
         <div className={s.browser}>
           <div className={s.browserBar}>
             <span>● ● ●</span>
-            <span>{project.title.toLowerCase()}</span>
+            <span>
+              <T>{project.title.toLowerCase()}</T>
+            </span>
           </div>
           <Image
             src={project.image}
@@ -47,7 +62,7 @@ export default function FeaturedCarousel({
       {projects.length > 1 && (
         <div className={s.carousel}>
           <button
-            aria-label="Previous featured project"
+            aria-label={translate("Previous featured project", locale)}
             onClick={() =>
               setIndex((index + projects.length - 1) % projects.length)
             }
@@ -55,10 +70,10 @@ export default function FeaturedCarousel({
             <ChevronLeft size={20} />
           </button>
           <span>
-            {index + 1} / {projects.length}
+            <T>{index + 1}</T> / <T>{projects.length}</T>
           </span>
           <button
-            aria-label="Next featured project"
+            aria-label={translate("Next featured project", locale)}
             onClick={() => setIndex((index + 1) % projects.length)}
           >
             <ChevronRight size={20} />

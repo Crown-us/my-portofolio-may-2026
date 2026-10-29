@@ -1,5 +1,6 @@
-import Image from "next/image";
-import Link from "next/link";
+import { T } from "@/app/components/LocaleProvider";
+import Image from "@/app/components/LocalizedImage";
+import Link from "@/app/components/LocalizedLink";
 import type { Product } from "@/lib/store";
 import { formatPrice } from "@/lib/domain";
 import s from "@/lib/styles";
@@ -16,12 +17,20 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
       <div className={s.cardBody}>
         <h3>
-          <Link href={`/store/${product.slug}`}>{product.title}</Link>
+          <Link href={`/store/${product.slug}`}>
+            <T>{product.title}</T>
+          </Link>
         </h3>
-        <p>{product.tagline}</p>
+        <p>
+          <T>{product.tagline}</T>
+        </p>
         <div className={s.cardLinks}>
-          <span>{product.category}</span>
-          <strong>{formatPrice(product.price, true)}</strong>
+          <span>
+            <T>{product.category}</T>
+          </span>
+          <strong>
+            <T>{formatPrice(product.price, true)}</T>
+          </strong>
         </div>
       </div>
     </article>

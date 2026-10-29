@@ -1,26 +1,30 @@
-import Image from "next/image";
-import Link from "next/link";
+import { T } from "@/app/components/LocaleProvider";
+import Image from "@/app/components/LocalizedImage";
+import Link from "@/app/components/LocalizedLink";
 import { notFound } from "next/navigation";
 import { products } from "@/lib/store";
-import { buildSeo } from "@/lib/seo";
+import { buildSeo, localizeSeo } from "@/lib/seo";
 import { canonicalUrl, formatPrice, jsonLd } from "@/lib/domain";
-import SiteShell, { PageIntro } from "../../components/SiteShell";
-import Gallery from "../../components/Gallery";
-import ProductDescription from "../../components/ProductDescription";
+import SiteShell, { PageIntro } from "@/app/components/SiteShell";
+import Gallery from "@/app/components/Gallery";
+import ProductDescription from "@/app/components/ProductDescription";
 import s from "@/lib/styles";
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ slug: string; locale: string }> };
 export function generateStaticParams() {
   return products.map(({ slug }) => ({ slug }));
 }
 export async function generateMetadata({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const p = products.find((p) => p.slug === slug);
   return p
-    ? buildSeo(p.title, `/store/${slug}`, p.tagline, p.coverImage)
+    ? localizeSeo(
+        buildSeo(p.title, `/store/${slug}`, p.tagline, p.coverImage),
+        locale,
+      )
     : { title: "Product not found", robots: { index: false } };
 }
 export default async function ProductPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const product = products.find((p) => p.slug === slug);
   if (!product) notFound();
   const platform = {
@@ -31,10 +35,12 @@ export default async function ProductPage({ params }: Props) {
   return (
     <SiteShell>
       <Link className={s.back} href="/store">
-        ← All products
+        <T>← All products</T>
       </Link>
       <PageIntro title={product.title} eyebrow={product.category} />
-      <p className={s.lead}>{product.tagline}</p>
+      <p className={s.lead}>
+        <T>{product.tagline}</T>
+      </p>
       <Image
         className={s.detailImage}
         src={product.coverImage}
@@ -55,10 +61,14 @@ export default async function ProductPage({ params }: Props) {
               Array.isArray(items) &&
               !!items.length && (
                 <section className={s.section} key={String(title)}>
-                  <h2>{String(title)}</h2>
+                  <h2>
+                    <T>{String(title)}</T>
+                  </h2>
                   <ul>
                     {items.map((item) => (
-                      <li key={item}>{item}</li>
+                      <li key={item}>
+                        <T>{item}</T>
+                      </li>
                     ))}
                   </ul>
                 </section>
@@ -66,13 +76,20 @@ export default async function ProductPage({ params }: Props) {
           )}
           <div className={s.tags}>
             {product.techStack.map((tech) => (
-              <span key={tech}>{tech}</span>
+              <span key={tech}>
+                <T>{tech}</T>
+              </span>
             ))}
           </div>
         </div>
         <aside className={s.panel}>
-          <h2>{formatPrice(product.price, true)}</h2>
-          <p>Checkout through {platform}.</p>
+          <h2>
+            <T>{formatPrice(product.price, true)}</T>
+          </h2>
+          <p>
+            <T>Checkout through </T>
+            <T>{platform}</T>.
+          </p>
           <a
             className={s.button}
             href={product.checkoutUrl}
@@ -80,7 +97,8 @@ export default async function ProductPage({ params }: Props) {
             rel="noopener noreferrer"
             data-umami-event="buy-click"
           >
-            {product.price === null ? "Get" : "Buy"} on {platform} ↗
+            <T>{product.price === null ? "Get" : "Buy"}</T> <T>on </T>
+            <T>{platform}</T> ↗
           </a>
           {product.demoUrl && (
             <p>
@@ -90,11 +108,16 @@ export default async function ProductPage({ params }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Preview demo ↗
+                <T>Preview demo ↗</T>
               </a>
             </p>
           )}
-          {product.updatedAt && <p>Updated {product.updatedAt}</p>}
+          {product.updatedAt && (
+            <p>
+              <T>Updated </T>
+              <T>{product.updatedAt}</T>
+            </p>
+          )}
         </aside>
       </div>
       <Gallery images={product.gallery} />
@@ -107,7 +130,7 @@ export default async function ProductPage({ params }: Props) {
             name: product.title,
             description: product.tagline,
             image: canonicalUrl(product.coverImage),
-            url: canonicalUrl(`/store/${slug}`),
+            url: canonicalUrl(`/${locale}/store/${slug}`),
             offers: {
               "@type": "Offer",
               price: product.price ?? 0,

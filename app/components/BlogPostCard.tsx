@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+import { T, PostDate } from "@/app/components/LocaleProvider";
+import Image from "@/app/components/LocalizedImage";
+import Link from "@/app/components/LocalizedLink";
 import type { Post } from "@/lib/blog-core";
-import { formatPostDate } from "@/lib/domain";
 import s from "@/lib/styles";
 import b from "../blog/blog.module.css";
 
@@ -22,8 +22,13 @@ export default function BlogPostCard({ post }: { post: PostMeta }) {
       )}
       <div className={b.postBody}>
         <p className={b.meta}>
-          <time dateTime={post.date}>{formatPostDate(post.date)}</time> ·{" "}
-          {post.readingMinutes} min read {post.draft && "· Draft"}
+          <time dateTime={post.date}>
+            <PostDate value={post.date} />
+          </time>{" "}
+          ·<T> </T>
+          <T>{post.readingMinutes}</T> <T>min read </T> ·{" "}
+          <T>Article in Indonesian</T>
+          <T>{post.draft && "· Draft"}</T>
         </p>
         <h3 className={b.postTitle}>
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
@@ -36,7 +41,8 @@ export default function BlogPostCard({ post }: { post: PostMeta }) {
         </div>
         <div className={b.postFooter}>
           <span className={b.readMore}>
-            Read post <span aria-hidden="true">→</span>
+            <T>Read post </T>
+            <span aria-hidden="true">→</span>
           </span>
         </div>
       </div>

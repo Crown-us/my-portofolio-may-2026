@@ -1,6 +1,8 @@
 "use client";
+import { T } from "@/app/components/LocaleProvider";
+
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import Link from "@/app/components/LocalizedLink";
 import { projects } from "@/lib/projects";
 import { products } from "@/lib/store";
 import s from "@/lib/styles";
@@ -34,7 +36,7 @@ export default function GlobalSearch() {
   return (
     <div className={s.globalSearch}>
       <label>
-        Search portfolio
+        <T>Search portfolio</T>
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
@@ -43,10 +45,12 @@ export default function GlobalSearch() {
       </label>
       {debounced && (
         <div className={s.searchResults}>
-          <p role="status">{matches.length} results</p>
+          <p role="status">
+            <T>{matches.length}</T> <T>results</T>
+          </p>
           {matches.map((item) => (
             <Link onClick={() => setQuery("")} key={item.href} href={item.href}>
-              {item.title}
+              <T>{item.title}</T>
             </Link>
           ))}
         </div>

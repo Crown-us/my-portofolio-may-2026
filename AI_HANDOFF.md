@@ -66,3 +66,8 @@ The user switched the Blog toward AI developments and sourced comparisons, autho
 ## Pages CMS — 2026-10-29
 
 Added root `.pages.yml` for the existing Markdown blog: rich-text body, draft default true, date picker, tags and local cover uploads. No new dependencies. Parser accepts valid unquoted CMS dates without permitting impossible date rollover, and treats cleared optional covers as absent. Account login/GitHub App authorization and an actual CMS save still require the owner; do not claim end-to-end activation until observed. README contains setup and publishing steps.
+
+
+## Bilingual portfolio — 2026-10-29
+
+Routes now live under `app/[locale]` for `/id` and `/en`. Root layout is locale-scoped so server HTML language is correct. Legacy paths redirect to `/id`; API, assets, RSS and sitemap stay unprefixed. Shared LocaleProvider/T and LocalizedLink preserve language; translations are in `lib/translations.json`. Blog article body/title stay original Indonesian with a visible language label. Do not auto-publish the digital-file organization draft. See README language section for maintenance.

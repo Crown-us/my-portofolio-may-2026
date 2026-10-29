@@ -1,10 +1,15 @@
 "use client";
+import { translate } from "@/lib/i18n";
+
+import { T, useLocale } from "@/app/components/LocaleProvider";
+
 import { useState } from "react";
 import { products } from "@/lib/store";
 import { getFeatured } from "@/lib/domain";
 import ProductCard from "./ProductCard";
 import s from "@/lib/styles";
 export default function StoreLibrary() {
+  const locale = useLocale();
   const [category, setCategory] = useState("All");
   const featured = getFeatured(products);
   const visible = products.filter(
@@ -14,7 +19,9 @@ export default function StoreLibrary() {
     <>
       {!!featured.length && (
         <section className={s.section}>
-          <h2>Featured products</h2>
+          <h2>
+            <T>Featured products</T>
+          </h2>
           <div className={s.projectGrid}>
             {featured.map((product) => (
               <ProductCard key={product.slug} product={product} />
@@ -23,8 +30,13 @@ export default function StoreLibrary() {
         </section>
       )}
       <section className={s.section}>
-        <h2>Browse products</h2>
-        <div className={s.filters} aria-label="Product categories">
+        <h2>
+          <T>Browse products</T>
+        </h2>
+        <div
+          className={s.filters}
+          aria-label={translate("Product categories", locale)}
+        >
           {["All", ...new Set(products.map((p) => p.category))].map((value) => (
             <button
               className={s.button}
@@ -32,11 +44,13 @@ export default function StoreLibrary() {
               onClick={() => setCategory(value)}
               key={value}
             >
-              {value}
+              <T>{value}</T>
             </button>
           ))}
         </div>
-        <p role="status">{visible.length} products</p>
+        <p role="status">
+          <T>{visible.length}</T> <T>products</T>
+        </p>
         <div className={s.projectGrid}>
           {visible.map((product) => (
             <ProductCard key={product.slug} product={product} />
