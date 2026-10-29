@@ -88,7 +88,7 @@ draft: true
 ---
 ```
 
-Tanggal wajib berupa string ISO dengan tanda kutip. Slug harus unik. Cover memakai file lokal di `public/`. Draft hanya terlihat saat development; production, RSS dan sitemap mengecualikannya. Ubah `draft: false` untuk menerbitkan tulisan, lalu rebuild/deploy.
+Tanggal memakai format YYYY-MM-DD; tanggal YAML tanpa tanda kutip dari CMS juga diterima. Slug harus unik. Cover memakai file lokal di `public/`. Draft hanya terlihat saat development; production, RSS dan sitemap mengecualikannya. Ubah `draft: false` untuk menerbitkan tulisan, lalu rebuild/deploy.
 
 Blog mendukung filter tag, urutan terbaru, waktu baca, daftar isi, heading anchors, syntax highlighting dan navigasi antarartikel. HTML mentah dibuang dan protokol link berbahaya disaring. File `.example` tidak diterbitkan.
 
@@ -139,3 +139,19 @@ Tes email menggunakan mock dan tidak mengirim pesan nyata. `npm run format` mera
 `.next/`, `node_modules/`, file `.env.local`, log preview, dan cache TypeScript adalah file lokal yang diabaikan Git. Log preview aktif dipertahankan agar proses yang berjalan tidak terganggu. Aset konten asli yang belum dipasang tetap disimpan; screenshot preview lama, gambar duplikat, ikon starter, audio lama dan dokumentasi template yang sudah kedaluwarsa dibuang.
 
 Perubahan cleanup lokal tidak otomatis melakukan push atau deployment.
+
+
+## Menulis lewat Pages CMS (tanpa ngoding)
+
+Konfigurasi `.pages.yml` menyediakan form artikel dan upload gambar, tanpa database atau dependency tambahan. Mengikuti [dokumentasi Pages CMS](https://pagescms.org/docs/quick-start/).
+
+1. Buka https://app.pagescms.org dan login GitHub.
+2. Saat diminta, install GitHub App Pages CMS dan berikan akses ke repository `Crown-us/my-portofolio-may-2026`.
+3. Pilih repository tersebut dan branch `main`, lalu buka **Artikel Blog**.
+4. Buat artikel: isi judul, alamat artikel (slug unik), tanggal, ringkasan, tag, cover opsional, dan isi. Upload gambar disimpan di `public/images/blog`.
+5. Biarkan **Simpan sebagai draft** aktif selama menulis. Draft tidak muncul di situs production, tetapi file tetap tersimpan di repository; jangan isi data rahasia.
+6. Untuk menerbitkan, matikan draft lalu simpan. Pages CMS membuat commit; integrasi GitHub–Vercel yang sudah ada akan menjalankan deploy. Tunggu deploy sukses sebelum mengecek situs.
+
+Tanggal hanya metadata, bukan penjadwalan otomatis. Pertahankan slug artikel yang sudah terbit agar link lama tetap berfungsi. Untuk berita AI, tulis tanggal pengecekan dan tautan sumber resmi langsung di isi artikel. Cover landscape WebP sekitar 1400 px sudah cukup; CMS tidak otomatis mengompres gambar.
+
+Setup repository tidak otomatis menghubungkan akun GitHub: login dan pemasangan aplikasi dilakukan pemilik akun. Setelah mengedit melalui CMS, jalankan `git pull --ff-only` sebelum melanjutkan edit lokal. Jika deploy gagal, periksa log Vercel dan koreksi artikel melalui CMS.

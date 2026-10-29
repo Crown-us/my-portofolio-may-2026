@@ -24,31 +24,41 @@ export interface Heading {
   level: number;
 }
 export function parsePost(source: string, filename: string): Post {
-  const { data, content } = matter(source);
+  const { data, content, matter: frontmatter } = matter(source);
   const fail = (field: string): never => {
     throw new Error(`${filename}: invalid ${field}`);
   };
   for (const key of ["title", "slug", "summary"])
     if (typeof data[key] !== "string" || !data[key].trim()) fail(key);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(data.slug)) fail("slug");
-  const date = data.date;
+  // CMS serializers may emit a plain YAML date. Validate its original text
+  // instead of accepting YAML's automatic rollover of impossible dates.
+  const date =
+    data.date instanceof Date
+      ? frontmatter.match(
+          /^date:[ \t]*(\d{4}-\d{2}-\d{2})[ \t]*(?:#.*)?$/m,
+        )?.[1]
+      : data.date;
   if (
     typeof date !== "string" ||
     !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
     !Number.isFinite(Date.parse(date)) ||
     new Date(date).toISOString().slice(0, 10) !== date
   )
-    fail("date (use a quoted YYYY-MM-DD string)");
+    fail("date (use YYYY-MM-DD)");
   if (typeof data.draft !== "boolean") fail("draft");
   if (
     !Array.isArray(data.tags) ||
     data.tags.some((tag: unknown) => typeof tag !== "string" || !tag.trim())
   )
     fail("tags");
+  const coverImage =
+    data.coverImage === "" || data.coverImage === null
+      ? undefined
+      : data.coverImage;
   if (
-    data.coverImage !== undefined &&
-    (typeof data.coverImage !== "string" ||
-      !/^\/(?!\/)[^\\]+$/.test(data.coverImage))
+    coverImage !== undefined &&
+    (typeof coverImage !== "string" || !/^\/(?!\/)[^\\]+$/.test(coverImage))
   )
     fail("coverImage (use a local public path)");
   if (!content.trim()) fail("content");
@@ -59,7 +69,7 @@ export function parsePost(source: string, filename: string): Post {
     summary: data.summary.trim(),
     tags: [...new Set<string>(data.tags)],
     draft: data.draft,
-    coverImage: data.coverImage,
+    coverImage,
     content,
     readingMinutes: Math.max(1, Math.ceil(content.split(/\s+/).length / 200)),
   };

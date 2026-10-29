@@ -45,7 +45,7 @@ During the preceding read-only review: 28 unit tests and TypeScript passed. Publ
 - Contact rate limiting is per-process memory. Production multi-instance hosting needs shared limiting/WAF and trusted proxy header configuration.
 - Preserve the origin regression fix: Next can see localhost internally while the browser Host is 127.0.0.1.
 - Umami is optional and gated to production kvndwi.com/www.kvndwi.com; no dev/localhost tracking.
-- Blog dates must be quoted ISO strings. Drafts are dev-only; public feeds and sitemap exclude them.
+- Blog dates use YYYY-MM-DD; quoted strings and plain YAML dates are accepted, with calendar validation. Drafts are dev-only; public feeds and sitemap exclude them.
 - CSS class maps combine shared modules through `lib/styles.ts`.
 - Do not remove personal/content assets merely because they have not been wired into a page yet.
 - Inspect the actual command line before stopping any preview process. Do not kill unrelated Node processes.
@@ -61,3 +61,8 @@ User correction: the first article should be non-coding but still about technolo
 ## Current editorial direction
 
 The user switched the Blog toward AI developments and sourced comparisons, authorizing a ChatGPT vs Claude vs Gemini article with valid data. Added `content/blog/chatgpt-vs-claude-vs-gemini.md` with `draft: false`, checked 2026-10-28 against seven official product/support pages. It compares consumer app workflows, distinguishes model/plan context, and explicitly does not claim hands-on benchmark results. The previous digital-file article is retained as a draft. No build, test suite, push or deployment was performed for this content change.
+
+
+## Pages CMS — 2026-10-29
+
+Added root `.pages.yml` for the existing Markdown blog: rich-text body, draft default true, date picker, tags and local cover uploads. No new dependencies. Parser accepts valid unquoted CMS dates without permitting impossible date rollover, and treats cleared optional covers as absent. Account login/GitHub App authorization and an actual CMS save still require the owner; do not claim end-to-end activation until observed. README contains setup and publishing steps.

@@ -1,0 +1,65 @@
+media:
+  input: public/images/blog
+  output: /images/blog
+  extensions: [webp, jpg, jpeg, png, avif]
+
+content:
+  - name: blog
+    label: Artikel Blog
+    type: collection
+    path: content/blog
+    format: yaml-frontmatter
+    subfolders: false
+    exclude: [post.md.example]
+    filename: "{fields.slug}.md"
+    view:
+      primary: title
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Judul
+        type: string
+        required: true
+      - name: slug
+        label: Alamat artikel
+        type: string
+        required: true
+        description: "Harus unik, contoh: cara-memilih-ai. Jangan ubah setelah artikel terbit."
+        pattern:
+          regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          message: Gunakan huruf kecil, angka, dan tanda hubung.
+      - name: date
+        label: Tanggal artikel
+        type: date
+        required: true
+        options:
+          time: false
+          format: yyyy-MM-dd
+        description: Tanggal tampilan, bukan jadwal terbit otomatis.
+      - name: summary
+        label: Ringkasan
+        type: text
+        required: true
+        description: Satu atau dua kalimat untuk kartu artikel dan mesin pencari.
+      - name: tags
+        label: Tag
+        type: string
+        list: true
+        required: true
+        default: [AI]
+        description: "Contoh: AI, Perbandingan, Produktivitas."
+      - name: coverImage
+        label: Gambar cover
+        type: image
+        description: Gunakan gambar landscape. WebP disarankan agar ringan.
+      - name: draft
+        label: Simpan sebagai draft
+        type: boolean
+        default: true
+        description: Aktif berarti belum terbit. Matikan lalu simpan untuk menerbitkan setelah deploy selesai.
+      - name: body
+        label: Isi artikel
+        type: rich-text
+        required: true
+        description: Gunakan heading untuk subjudul. Cantumkan link sumber resmi dan tanggal pengecekan untuk berita atau perbandingan AI.

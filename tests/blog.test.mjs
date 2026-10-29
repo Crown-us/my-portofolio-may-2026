@@ -63,3 +63,14 @@ test("unquoted YAML dates cannot normalize an impossible date", () => {
     /date/,
   );
 });
+
+test("CMS dates and cleared optional covers remain readable", () => {
+  for (const cover of ['coverImage: ""\n', "coverImage: null\n"]) {
+    const post = parsePost(
+      source(cover).replace('"2026-10-28"', "2026-10-28"),
+      "cms.md",
+    );
+    assert.equal(post.date, "2026-10-28");
+    assert.equal(post.coverImage, undefined);
+  }
+});
