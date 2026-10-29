@@ -3,6 +3,9 @@ import SiteShell, { PageIntro } from "./components/SiteShell";
 import FeaturedCarousel from "./components/FeaturedCarousel";
 import ProjectCard from "./components/ProjectCard";
 import ContactCta from "./components/ContactCta";
+import BlogPostCard from "./components/BlogPostCard";
+import { getPosts } from "@/lib/blog";
+import b from "./blog/blog.module.css";
 import { projects } from "@/lib/projects";
 import { services } from "@/lib/services";
 import { products } from "@/lib/store";
@@ -15,6 +18,7 @@ export const metadata = buildSeo(
 );
 export default function Home() {
   const featured = getFeatured(projects);
+  const latestPosts = getPosts(false).slice(0, 2);
   return (
     <SiteShell>
       <PageIntro
@@ -68,6 +72,21 @@ export default function Home() {
           <Link href="/store" className={s.button}>
             Visit the store →
           </Link>
+        </section>
+      )}
+      {latestPosts.length > 0 && (
+        <section className={s.section} aria-labelledby="latest-blog-heading">
+          <div className={s.sectionHead}>
+            <h2 id="latest-blog-heading">Terbaru di Blog</h2>
+            <Link href="/blog" className={s.textLink}>
+              Lihat semua artikel →
+            </Link>
+          </div>
+          <div className={b.postGrid}>
+            {latestPosts.map((post) => (
+              <BlogPostCard key={post.slug} post={post} />
+            ))}
+          </div>
         </section>
       )}
       <ContactCta />
