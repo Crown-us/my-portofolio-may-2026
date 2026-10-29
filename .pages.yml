@@ -42,13 +42,27 @@ content:
         type: text
         required: true
         description: Satu atau dua kalimat untuk kartu artikel dan mesin pencari.
+      - name: type
+        label: Jenis konten
+        type: select
+        required: true
+        default: guide
+        options:
+          values:
+            - name: news
+              label: Berita
+            - name: guide
+              label: Panduan
+            - name: comparison
+              label: Perbandingan
+        description: Pilih satu bentuk tulisan. Topik seperti AI tetap diisi pada tag.
       - name: tags
-        label: Tag
+        label: Tag topik
         type: string
         list: true
         required: true
         default: [AI]
-        description: "Contoh: AI, Perbandingan, Produktivitas."
+        description: "Contoh: AI, Produktivitas, Digital Life. Jangan isi Berita, Panduan, atau Perbandingan di sini."
       - name: coverImage
         label: Gambar cover
         type: image

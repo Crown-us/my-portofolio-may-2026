@@ -5,8 +5,8 @@ date: 2026-10-30
 summary: "ChatGPT menambahkan koneksi iCloud Mail dan Calendar. Simak manfaat, ketersediaan, cara menghubungkan, dan izin akses yang perlu diperiksa."
 tags:
   - AI
-  - Berita
   - Produktivitas
+type: news
 coverImage: /images/blog/chatgpt-icloud-cover.webp
 draft: false
 ---

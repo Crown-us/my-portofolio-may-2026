@@ -23,6 +23,19 @@ test("frontmatter validates actual date and required fields", () => {
     /tags/,
   );
 });
+test("article types stay separate from topic tags and support older entries", () => {
+  assert.equal(parsePost(source(), "old.md").type, "guide");
+  const news = parsePost(source("type: news\n"), "news.md");
+  assert.equal(news.type, "news");
+  assert.deepEqual(news.tags, ["web"]);
+  const legacy = parsePost(
+    source().replace("tags: [web]", "tags: [AI, Perbandingan]"),
+    "legacy.md",
+  );
+  assert.equal(legacy.type, "comparison");
+  assert.deepEqual(legacy.tags, ["AI"]);
+  assert.throws(() => parsePost(source("type: invalid\n"), "bad.md"), /type/);
+});
 test("published posts sorted newest first, filtered by tag, without drafts", () => {
   const p = parsePost(source(), "a");
   const older = { ...p, slug: "older", date: "2025-01-01", tags: ["mobile"] };

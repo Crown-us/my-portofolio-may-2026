@@ -7,12 +7,14 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeStringify from "rehype-stringify";
 import type { Root, Element, RootContent } from "hast";
 import { canonicalUrl } from "./domain.ts";
+import { isPostType, type PostType } from "./blog-taxonomy.ts";
 export interface Post {
   title: string;
   slug: string;
   date: string;
   summary: string;
   tags: string[];
+  type: PostType;
   draft: boolean;
   coverImage?: string;
   content: string;
@@ -26,7 +28,11 @@ export interface Heading {
 export function parsePost(source: string, filename: string): Post {
   // Explicit options bypass gray-matter's cache, which drops the
   // non-enumerable raw frontmatter needed to validate plain YAML dates.
-  const { data, content, matter: frontmatter } = matter(source, {
+  const {
+    data,
+    content,
+    matter: frontmatter,
+  } = matter(source, {
     language: "yaml",
   });
   const fail = (field: string): never => {
@@ -66,12 +72,24 @@ export function parsePost(source: string, filename: string): Post {
   )
     fail("coverImage (use a local public path)");
   if (!content.trim()) fail("content");
+  // Older articles remain readable until their CMS entry is saved with a type.
+  const type =
+    data.type ??
+    (data.tags.includes("Berita")
+      ? "news"
+      : data.tags.includes("Perbandingan")
+        ? "comparison"
+        : "guide");
+  if (!isPostType(type)) fail("type (use news, guide, or comparison)");
   return {
     title: data.title.trim(),
     slug: data.slug,
     date,
     summary: data.summary.trim(),
-    tags: [...new Set<string>(data.tags)],
+    tags: [...new Set<string>(data.tags)].filter(
+      (tag) => tag !== "Berita" && tag !== "Perbandingan",
+    ),
+    type,
     draft: data.draft,
     coverImage,
     content,

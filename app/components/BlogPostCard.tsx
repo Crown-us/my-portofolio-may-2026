@@ -1,4 +1,6 @@
-import { T, PostDate } from "@/app/components/LocaleProvider";
+"use client";
+import { T, PostDate, useLocale } from "@/app/components/LocaleProvider";
+import { postTypeLabels } from "@/lib/blog-taxonomy";
 import Image from "@/app/components/LocalizedImage";
 import Link from "@/app/components/LocalizedLink";
 import type { Post } from "@/lib/blog-core";
@@ -8,6 +10,7 @@ import b from "../blog/blog.module.css";
 type PostMeta = Omit<Post, "content">;
 
 export default function BlogPostCard({ post }: { post: PostMeta }) {
+  const locale = useLocale();
   return (
     <article className={`${s.card} ${b.postCard}`}>
       {post.coverImage && (
@@ -35,6 +38,7 @@ export default function BlogPostCard({ post }: { post: PostMeta }) {
         </h3>
         <p>{post.summary}</p>
         <div className={s.tags}>
+          <span>{postTypeLabels[locale][post.type]}</span>
           {post.tags.map((tag) => (
             <span key={tag}>{tag}</span>
           ))}

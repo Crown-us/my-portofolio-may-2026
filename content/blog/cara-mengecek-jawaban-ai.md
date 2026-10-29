@@ -4,6 +4,7 @@ slug: cara-mengecek-jawaban-ai
 date: 2026-10-29
 summary: Lima kebiasaan sederhana untuk memeriksa sumber, tanggal, angka, dan
   konteks sebelum memakai jawaban AI.
+type: guide
 tags:
   - AI
 coverImage: /images/blog/cek-jawaban-ai-cover.webp

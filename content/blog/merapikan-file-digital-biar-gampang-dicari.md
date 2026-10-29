@@ -3,6 +3,7 @@ title: "File Banyak, Susah Dicari? Rapikan Tanpa Ribet"
 slug: "merapikan-file-digital-biar-gampang-dicari"
 date: "2026-10-28"
 summary: "Cara sederhana menata file, memberi nama dokumen, dan membedakan sinkronisasi dengan backup supaya ruang digital lebih mudah dipakai."
+type: guide
 tags: ["Digital Life", "Produktivitas", "Tips Tech"]
 draft: true
 ---

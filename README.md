@@ -148,7 +148,8 @@ Konfigurasi `.pages.yml` menyediakan form artikel dan upload gambar, tanpa datab
 1. Buka https://app.pagescms.org dan login GitHub.
 2. Saat diminta, install GitHub App Pages CMS dan berikan akses ke repository `Crown-us/my-portofolio-may-2026`.
 3. Pilih repository tersebut dan branch `main`, lalu buka **Artikel Blog**.
-4. Buat artikel: isi judul, alamat artikel (slug unik), tanggal, ringkasan, tag, cover opsional, dan isi. Upload gambar disimpan di `public/images/blog`.
+4. Buat artikel: isi judul, alamat artikel (slug unik), tanggal, ringkasan, jenis konten, tag topik, cover opsional, dan isi. Upload gambar disimpan di `public/images/blog`.
+   Jenis konten dipilih satu: **Berita** (`news`), **Panduan** (`guide`), atau **Perbandingan** (`comparison`). Tag berisi topik seperti AI dan Produktivitas, bukan jenis tulisan. Filter blog dapat menggabungkan `?type=news&tag=AI`; tautan lama `?tag=Berita` dan `?tag=Perbandingan` tetap dikenali. Artikel lama tanpa jenis masih dibaca sebagai Panduan, atau mengikuti tag jenis lamanya.
 5. Biarkan **Simpan sebagai draft** aktif selama menulis. Draft tidak muncul di situs production, tetapi file tetap tersimpan di repository; jangan isi data rahasia.
 6. Untuk menerbitkan, matikan draft lalu simpan. Pages CMS membuat commit; integrasi GitHub–Vercel yang sudah ada akan menjalankan deploy. Tunggu deploy sukses sebelum mengecek situs.
 

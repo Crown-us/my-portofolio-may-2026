@@ -3,6 +3,7 @@ title: "Your article title"
 slug: "your-article-slug"
 date: "2026-10-28"
 summary: "A short summary of your actual article."
+type: guide # news, guide, or comparison
 tags: ["web"]
 draft: true
 # coverImage: "/images/blog/your-cover.png"
