@@ -34,7 +34,9 @@ export default function BlogPostCard({ post }: { post: PostMeta }) {
           <T>{post.draft && "· Draft"}</T>
         </p>
         <h3 className={b.postTitle}>
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <Link href={`/blog/${post.slug}`} contentLocale="id">
+            {post.title}
+          </Link>
         </h3>
         <p>{post.summary}</p>
         <div className={s.tags}>

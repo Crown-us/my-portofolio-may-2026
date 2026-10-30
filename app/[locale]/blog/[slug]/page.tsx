@@ -1,13 +1,13 @@
 import { T, PostDate } from "@/app/components/LocaleProvider";
 import Link from "@/app/components/LocalizedLink";
 import Image from "@/app/components/LocalizedImage";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import SiteShell from "@/app/components/SiteShell";
 import ArticleAuthor from "@/app/components/ArticleAuthor";
 import ArticleSources from "@/app/components/ArticleSources";
 import { getPosts } from "@/lib/blog";
 import { renderMarkdown } from "@/lib/blog-core";
-import { buildSeo, localizeSeo } from "@/lib/seo";
+import { articlePath, articleSeo } from "@/lib/blog-seo";
 import { canonicalUrl, jsonLd } from "@/lib/domain";
 import s from "@/lib/styles";
 import b from "@/app/blog/blog.module.css";
@@ -16,22 +16,17 @@ export function generateStaticParams() {
   return getPosts().map(({ slug }) => ({ slug }));
 }
 export async function generateMetadata({ params }: Props) {
-  const { slug, locale } = await params;
+  const { slug } = await params;
   const post = getPosts().find((p) => p.slug === slug);
   if (!post) return { title: "Post not found", robots: { index: false } };
-  return {
-    ...localizeSeo(
-      buildSeo(post.title, `/blog/${slug}`, post.summary, post.coverImage),
-      locale,
-    ),
-    ...(post.draft ? { robots: { index: false, follow: false } } : {}),
-  };
+  return articleSeo(post);
 }
 export default async function PostPage({ params }: Props) {
   const { slug, locale } = await params;
   const posts = getPosts();
   const index = posts.findIndex((p) => p.slug === slug);
   if (index < 0) notFound();
+  if (locale === "en") permanentRedirect(articlePath(slug));
   const post = posts[index];
   const rendered = await renderMarkdown(post.content);
   return (
@@ -133,6 +128,11 @@ export default async function PostPage({ params }: Props) {
               headline: post.title,
               description: post.summary,
               datePublished: post.date,
+              inLanguage: "id",
+              mainEntityOfPage: canonicalUrl(articlePath(post.slug)),
+              ...(post.coverImage
+                ? { image: canonicalUrl(post.coverImage) }
+                : {}),
               ...(post.updated ? { dateModified: post.updated } : {}),
               ...(post.sources.length
                 ? { citation: post.sources.map((source) => source.url) }

@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      { source: "/en/blog/:slug", destination: "/id/blog/:slug", permanent: true },
       { source: "/", destination: "/id", permanent: true },
       ...[
         "about",

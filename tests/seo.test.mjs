@@ -1,6 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { buildSeo } from "../lib/seo.ts";
+import { articlePath, articleSeo } from "../lib/blog-seo.ts";
+import { parsePost } from "../lib/blog-core.ts";
 import {
   canonicalUrl,
   DEFAULT_DESCRIPTION,
@@ -18,6 +20,23 @@ test("SEO includes canonical, fallback, social image", () => {
     "https://kvndwi.com/opengraph-image",
   );
   assert.equal(seo.twitter.card, "summary_large_image");
+});
+test("Indonesian articles have one canonical, article OG, and no English alternate", () => {
+  const post = parsePost(
+    "---\ntitle: Artikel\nslug: artikel\ndate: 2026-10-28\nupdated: 2026-10-30\nsummary: Ringkasan\ntags: [AI]\ndraft: false\ncoverImage: /images/blog/cover.webp\n---\nIsi artikel.",
+    "article.md",
+  );
+  const meta = articleSeo(post);
+  assert.equal(articlePath(post.slug), "/id/blog/artikel");
+  assert.equal(meta.alternates.canonical, "https://kvndwi.com/id/blog/artikel");
+  assert.equal(meta.alternates.languages.en, undefined);
+  assert.equal(meta.openGraph.type, "article");
+  assert.equal(meta.openGraph.locale, "id_ID");
+  assert.equal(meta.openGraph.modifiedTime, "2026-10-30");
+  assert.equal(
+    meta.openGraph.images[0].url,
+    "https://kvndwi.com/images/blog/cover.webp",
+  );
 });
 test("canonical paths cannot override production origin", () => {
   assert.equal(

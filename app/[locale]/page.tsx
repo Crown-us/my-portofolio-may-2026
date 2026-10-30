@@ -107,8 +107,9 @@ export default async function Home({
           contact: "Mari ngobrol",
         };
   const pathIcons = [BookOpen, AppWindow, BriefcaseBusiness];
-  const latestPosts = getPosts(false).slice(0, 2);
-  const spotlight = latestPosts[0];
+  const publishedPosts = getPosts(false);
+  const spotlight = publishedPosts[0];
+  const latestPosts = publishedPosts.slice(1, 3);
   return (
     <SiteShell>
       <section className={h.hero} aria-labelledby="discover-title">
@@ -128,7 +129,11 @@ export default async function Home({
           </div>
         </div>
         {spotlight && (
-          <Link href={`/blog/${spotlight.slug}`} className={h.spotlight}>
+          <Link
+            href={`/blog/${spotlight.slug}`}
+            contentLocale="id"
+            className={h.spotlight}
+          >
             <div className={h.spotlightImage}>
               {spotlight.coverImage && (
                 <Image

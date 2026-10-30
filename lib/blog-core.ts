@@ -223,7 +223,7 @@ export function rssFeed(posts: Post[]) {
   const items = selectPosts(posts)
     .map(
       (post) =>
-        `<item><title>${xml(post.title)}</title><link>${canonicalUrl(`/blog/${post.slug}`)}</link><guid>${canonicalUrl(`/blog/${post.slug}`)}</guid><pubDate>${new Date(post.date).toUTCString()}</pubDate><description>${xml(post.summary)}</description></item>`,
+        `<item><title>${xml(post.title)}</title><link>${canonicalUrl(`/id/blog/${post.slug}`)}</link><guid>${canonicalUrl(`/id/blog/${post.slug}`)}</guid><pubDate>${new Date(post.date).toUTCString()}</pubDate><description>${xml(post.summary)}</description></item>`,
     )
     .join("");
   return `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Kevin’s blog</title><link>${canonicalUrl("/blog")}</link><description>Kabar AI, perbandingan tools, dan tips teknologi buat keseharian.</description><language>id</language>${items}</channel></rss>`;

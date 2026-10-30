@@ -15,6 +15,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   const rawPathname = usePathname();
   const pathname = rawPathname.replace(/^\/(id|en)(?=\/|$)/, "") || "/";
   const locale = useLocale();
+  const isArticle = /^\/blog\/[^/]+\/?$/.test(pathname);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -72,7 +73,10 @@ export default function SiteShell({ children }: { children: ReactNode }) {
               {(["id", "en"] as const).map((language) => (
                 <a
                   key={language}
-                  href={localePath(pathname, language)}
+                  href={localePath(
+                    isArticle && language === "en" ? "/blog" : pathname,
+                    language,
+                  )}
                   lang={language}
                   hrefLang={language}
                   aria-label={
@@ -81,7 +85,10 @@ export default function SiteShell({ children }: { children: ReactNode }) {
                   aria-current={locale === language ? "true" : undefined}
                   onClick={(event) => {
                     event.currentTarget.href =
-                      localePath(pathname, language) +
+                      localePath(
+                        isArticle && language === "en" ? "/blog" : pathname,
+                        language,
+                      ) +
                       window.location.search +
                       window.location.hash;
                   }}

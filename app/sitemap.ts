@@ -5,10 +5,9 @@ import { projects } from "@/lib/projects";
 import { products } from "@/lib/store";
 import { sitemapPaths, canonicalUrl } from "@/lib/domain";
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const pages: MetadataRoute.Sitemap = [
     ...sitemapPaths(projects, products),
     "/blog",
-    ...getPosts(false).map((post) => `/blog/${post.slug}`),
   ].flatMap((path) =>
     locales.map((locale) => ({
       url: canonicalUrl(localePath(path, locale)),
@@ -20,4 +19,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     })),
   );
+  return [
+    ...pages,
+    ...getPosts(false).map((post) => ({
+      url: canonicalUrl(`/id/blog/${post.slug}`),
+      lastModified: post.updated ?? post.date,
+      alternates: {
+        languages: {
+          id: canonicalUrl(`/id/blog/${post.slug}`),
+          "x-default": canonicalUrl(`/id/blog/${post.slug}`),
+        },
+      },
+    })),
+  ];
 }
