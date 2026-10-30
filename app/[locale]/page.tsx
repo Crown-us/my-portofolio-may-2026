@@ -13,25 +13,31 @@ const copyFor = (locale: string) =>
         latest: "Latest articles",
         all: "View all articles →",
 
-        bio: "A web and mobile developer based in Kediri, Indonesia. I write about AI and technology for everyday use.",
+        greeting: "Hi, I’m Kevin.",
+        role: "A web and mobile developer based in Kediri, Indonesia.",
+        bio: "I build web applications with React and Laravel, and mobile apps with Flutter. My projects include a learning platform, a marketplace, and a community management app.",
+        writing: "This is where I share what I’m building and learning, along with notes on AI and technology for everyday use.",
         work: "Explore my work",
         about: "Get to know me",
         empty: "Articles are on the way.",
-        seoTitle: "Kevin Dwi Wijaya — AI News, Guides & Projects",
+        seoTitle: "Kevin Dwi Wijaya — Web & Mobile Developer",
         seoDescription:
-          "AI news, practical technology guides, and comparisons by Kevin Dwi Wijaya. Explore the writing, projects, and background of a web and mobile developer.",
+          "Kevin Dwi Wijaya, a web and mobile developer in Kediri, Indonesia. Explore React, Laravel, and Flutter projects, plus articles on AI and everyday technology.",
       }
     : {
         latest: "Artikel terbaru",
         all: "Lihat semua artikel →",
 
-        bio: "Pengembang web dan aplikasi mobile dari Kediri. Menulis tentang AI dan teknologi untuk keseharian.",
+        greeting: "Halo, saya Kevin.",
+        role: "Pengembang web dan aplikasi mobile dari Kediri.",
+        bio: "Saya membangun aplikasi web dengan React dan Laravel, serta aplikasi mobile dengan Flutter. Proyek yang saya kerjakan antara lain platform belajar, marketplace, dan aplikasi pengelolaan lingkungan RT/RW.",
+        writing: "Di sini saya berbagi apa yang sedang saya bangun dan pelajari, juga catatan tentang AI dan teknologi untuk keseharian.",
         work: "Lihat karya saya",
         about: "Kenalan dengan saya",
         empty: "Artikel sedang disiapkan.",
-        seoTitle: "Kevin Dwi Wijaya — Berita AI, Panduan & Karya",
+        seoTitle: "Kevin Dwi Wijaya — Pengembang Web & Mobile",
         seoDescription:
-          "Berita AI, panduan teknologi praktis, dan perbandingan dari Kevin Dwi Wijaya. Temukan tulisan, proyek, dan pengalaman pengembang web serta aplikasi mobile.",
+          "Kevin Dwi Wijaya, pengembang web dan aplikasi mobile dari Kediri. Jelajahi proyek React, Laravel, dan Flutter, serta tulisan tentang AI dan teknologi sehari-hari.",
       };
 
 export default async function Home({ params }: Props) {
@@ -49,10 +55,12 @@ export default async function Home({ params }: Props) {
           className={h.portrait}
         />
         <div>
-          <p id="home-author-heading" className={h.name}>
-            Kevin Dwi Wijaya
-          </p>
+          <h1 id="home-author-heading" className={h.name}>
+            {copy.greeting}
+          </h1>
+          <p className={h.bio}>{copy.role}</p>
           <p className={h.bio}>{copy.bio}</p>
+          <p className={h.bio}>{copy.writing}</p>
           <div className={h.links}>
             <Link href="/projects">{copy.work} ↗</Link>
             <Link href="/about">{copy.about} →</Link>
@@ -60,7 +68,7 @@ export default async function Home({ params }: Props) {
         </div>
       </section>
       <section className={h.feed} aria-labelledby="latest-blog-heading">
-        <h1 id="latest-blog-heading">{copy.latest}</h1>
+        <h2 id="latest-blog-heading">{copy.latest}</h2>
         {latestPosts.length ? (
           <ArticleList posts={latestPosts} locale={locale} />
         ) : (

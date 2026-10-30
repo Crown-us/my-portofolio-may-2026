@@ -45,7 +45,7 @@ a.allArticles:hover {
 .feed {
   max-width: 880px;
 }
-.feed h1 {
+.feed > h2 {
   font-size: 23px;
   padding-bottom: 12px;
   border-bottom: 1px solid #e8eaed;
