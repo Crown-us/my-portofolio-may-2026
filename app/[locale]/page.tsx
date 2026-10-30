@@ -13,15 +13,13 @@ type Props = { params: Promise<{ locale: string }> };
 const copyFor = (locale: string) =>
   locale === "en"
     ? {
-        label: "KEVIN'S NOTES / AI & TECHNOLOGY",
-        intro: "AI news, practical guides, and comparisons for everyday use.",
         featured: "Featured read",
         read: "Read the article",
         language: "Article in Indonesian",
         latest: "More to read",
         all: "View all articles →",
-        author: "Behind the articles",
-        bio: "I'm Kevin, a web and mobile developer based in Kediri, Indonesia. Here I share notes about technology and AI alongside the things I build.",
+
+        bio: "A web and mobile developer based in Kediri, Indonesia. I write about AI and technology for everyday use.",
         work: "Explore my work",
         about: "Get to know me",
         empty: "Articles are on the way.",
@@ -30,15 +28,13 @@ const copyFor = (locale: string) =>
           "AI news, practical technology guides, and comparisons by Kevin Dwi Wijaya. Explore the writing, projects, and background of a web and mobile developer.",
       }
     : {
-        label: "CATATAN KEVIN / AI & TEKNOLOGI",
-        intro: "Berita AI, panduan praktis, dan perbandingan untuk keseharian.",
         featured: "Bacaan utama",
         read: "Baca artikelnya",
         language: "Artikel berbahasa Indonesia",
         latest: "Artikel lainnya",
         all: "Lihat semua artikel →",
-        author: "Di balik tulisan",
-        bio: "Saya Kevin, pengembang web dan aplikasi mobile dari Kediri, Indonesia. Di sini saya berbagi catatan teknologi dan AI, sekaligus karya yang saya bangun.",
+
+        bio: "Pengembang web dan aplikasi mobile dari Kediri. Menulis tentang AI dan teknologi untuk keseharian.",
         work: "Lihat karya saya",
         about: "Kenalan dengan saya",
         empty: "Artikel sedang disiapkan.",
@@ -54,10 +50,25 @@ export default async function Home({ params }: Props) {
   const latestPosts = otherPosts.slice(0, 2);
   return (
     <SiteShell>
-      <div className={h.intro}>
-        <p className={s.eyebrow}>{copy.label}</p>
-        <p>{copy.intro}</p>
-      </div>
+      <section className={h.author} aria-labelledby="home-author-heading">
+        <Image
+          src="/images/kevin-author.png"
+          alt="Kevin Dwi Wijaya"
+          width={72}
+          height={72}
+          className={h.portrait}
+        />
+        <div>
+          <p id="home-author-heading" className={h.name}>
+            Kevin Dwi Wijaya
+          </p>
+          <p className={h.bio}>{copy.bio}</p>
+          <div className={h.links}>
+            <Link href="/projects">{copy.work} ↗</Link>
+            <Link href="/about">{copy.about} →</Link>
+          </div>
+        </div>
+      </section>
       {spotlight ? (
         <section aria-label={copy.featured}>
           <Link
@@ -114,24 +125,6 @@ export default async function Home({ params }: Props) {
           </div>
         </section>
       )}
-      <section className={h.author} aria-labelledby="home-author-heading">
-        <Image
-          src="/images/kevin-author.png"
-          alt="Kevin Dwi Wijaya"
-          width={72}
-          height={72}
-          className={h.portrait}
-        />
-        <div>
-          <p className={s.eyebrow}>{copy.author}</p>
-          <h2 id="home-author-heading">Kevin Dwi Wijaya</h2>
-          <p className={h.bio}>{copy.bio}</p>
-          <div className={h.links}>
-            <Link href="/projects">{copy.work} ↗</Link>
-            <Link href="/about">{copy.about} →</Link>
-          </div>
-        </div>
-      </section>
     </SiteShell>
   );
 }
