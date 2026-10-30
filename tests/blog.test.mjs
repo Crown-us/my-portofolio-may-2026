@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { relatedPosts } from "../lib/blog-related.ts";
 import {
   parsePost,
   selectPosts,
@@ -104,6 +105,25 @@ test("Markdown highlights code and builds unique safe heading anchors", async ()
   assert.ok(!rendered.html.includes("<h1"));
   assert.ok(!rendered.html.includes("javascript:"));
   assert.ok(!rendered.html.includes("<script>"));
+});
+test("related articles prioritize topics, fall back to newest, and omit self/drafts", () => {
+  const current = parsePost(source(), "a");
+  const match = { ...current, slug: "match", date: "2020-01-01" };
+  const recent = {
+    ...current,
+    slug: "recent",
+    date: "2026-10-29",
+    tags: ["other"],
+  };
+  const older = { ...recent, slug: "older", date: "2025-01-01" };
+  const draft = { ...match, slug: "draft", draft: true };
+  const input = [current, older, draft, recent, match];
+  assert.deepEqual(
+    relatedPosts(input, current).map((p) => p.slug),
+    ["match", "recent"],
+  );
+  assert.equal(input[0], current);
+  assert.deepEqual(relatedPosts([current, draft], current), []);
 });
 test("RSS escapes XML and omits drafts", () => {
   const p = parsePost(source(), "a");

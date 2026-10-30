@@ -1,22 +1,16 @@
-import { PostDate } from "@/app/components/LocaleProvider";
 import Link from "@/app/components/LocalizedLink";
 import SiteShell from "@/app/components/SiteShell";
 import Image from "@/app/components/LocalizedImage";
-import BlogPostCard from "@/app/components/BlogPostCard";
+import ArticleList from "@/app/components/ArticleList";
 import { getPosts } from "@/lib/blog";
 import { buildSeo, localizeSeo } from "@/lib/seo";
-import b from "@/app/blog/blog.module.css";
-import s from "@/lib/styles";
 import h from "./discover.module.css";
 
 type Props = { params: Promise<{ locale: string }> };
 const copyFor = (locale: string) =>
   locale === "en"
     ? {
-        featured: "Featured read",
-        read: "Read the article",
-        language: "Article in Indonesian",
-        latest: "More to read",
+        latest: "Latest articles",
         all: "View all articles →",
 
         bio: "A web and mobile developer based in Kediri, Indonesia. I write about AI and technology for everyday use.",
@@ -28,10 +22,7 @@ const copyFor = (locale: string) =>
           "AI news, practical technology guides, and comparisons by Kevin Dwi Wijaya. Explore the writing, projects, and background of a web and mobile developer.",
       }
     : {
-        featured: "Bacaan utama",
-        read: "Baca artikelnya",
-        language: "Artikel berbahasa Indonesia",
-        latest: "Artikel lainnya",
+        latest: "Artikel terbaru",
         all: "Lihat semua artikel →",
 
         bio: "Pengembang web dan aplikasi mobile dari Kediri. Menulis tentang AI dan teknologi untuk keseharian.",
@@ -46,8 +37,7 @@ const copyFor = (locale: string) =>
 export default async function Home({ params }: Props) {
   const { locale } = await params;
   const copy = copyFor(locale);
-  const [spotlight, ...otherPosts] = getPosts(false);
-  const latestPosts = otherPosts.slice(0, 2);
+  const latestPosts = getPosts(false).slice(0, 5);
   return (
     <SiteShell>
       <section className={h.author} aria-labelledby="home-author-heading">
@@ -69,62 +59,17 @@ export default async function Home({ params }: Props) {
           </div>
         </div>
       </section>
-      {spotlight ? (
-        <section aria-label={copy.featured}>
-          <Link
-            href={`/blog/${spotlight.slug}`}
-            contentLocale="id"
-            className={`${h.featured} ${!spotlight.coverImage ? h.textOnly : ""}`}
-          >
-            {spotlight.coverImage && (
-              <div className={h.cover}>
-                <Image
-                  src={spotlight.coverImage}
-                  alt=""
-                  width={1000}
-                  height={650}
-                  sizes="(max-width:700px) 90vw, 55vw"
-                  priority
-                />
-              </div>
-            )}
-            <div className={h.featuredCopy}>
-              <p className={s.eyebrow}>{copy.featured}</p>
-              <h1 lang="id">{spotlight.title}</h1>
-              <p className={h.summary} lang="id">
-                {spotlight.summary}
-              </p>
-              <p className={h.meta}>
-                <time dateTime={spotlight.date}>
-                  <PostDate value={spotlight.date} />
-                </time>
-                {locale === "en" && <span> · {copy.language}</span>}
-              </p>
-              <span className={h.read}>
-                {copy.read}
-                <span aria-hidden="true">→</span>
-              </span>
-            </div>
-          </Link>
-        </section>
-      ) : (
-        <h1 className={h.empty}>{copy.empty}</h1>
-      )}
-      {latestPosts.length > 0 && (
-        <section className={s.section} aria-labelledby="latest-blog-heading">
-          <div className={s.sectionHead}>
-            <h2 id="latest-blog-heading">{copy.latest}</h2>
-            <Link href="/blog" className={s.textLink}>
-              {copy.all}
-            </Link>
-          </div>
-          <div className={b.postGrid}>
-            {latestPosts.map((post) => (
-              <BlogPostCard post={post} key={post.slug} />
-            ))}
-          </div>
-        </section>
-      )}
+      <section className={h.feed} aria-labelledby="latest-blog-heading">
+        <h1 id="latest-blog-heading">{copy.latest}</h1>
+        {latestPosts.length ? (
+          <ArticleList posts={latestPosts} locale={locale} />
+        ) : (
+          <p>{copy.empty}</p>
+        )}
+        <Link href="/blog" className={h.allArticles}>
+          {copy.all}
+        </Link>
+      </section>
     </SiteShell>
   );
 }

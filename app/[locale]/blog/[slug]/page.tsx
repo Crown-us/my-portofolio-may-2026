@@ -5,6 +5,8 @@ import { notFound, permanentRedirect } from "next/navigation";
 import SiteShell from "@/app/components/SiteShell";
 import ArticleAuthor from "@/app/components/ArticleAuthor";
 import ArticleSources from "@/app/components/ArticleSources";
+import ArticleList from "@/app/components/ArticleList";
+import { relatedPosts } from "@/lib/blog-related";
 import { getPosts } from "@/lib/blog";
 import { renderMarkdown } from "@/lib/blog-core";
 import { articlePath, articleSeo } from "@/lib/blog-seo";
@@ -36,15 +38,9 @@ export default async function PostPage({ params }: Props) {
       </Link>
       <article>
         <header className={b.postHeader}>
-          <p className={b.meta}>
-            <time dateTime={post.date}>
-              <PostDate value={post.date} />
-            </time>{" "}
-            ·<T> </T>
-            <T>{post.readingMinutes}</T> <T>min read </T> ·{" "}
-            <T>Article in Indonesian</T>
-            <T>{post.draft && "· Draft preview"}</T>
-          </p>
+          <h1 lang="id">{post.title}</h1>
+          <p>{post.summary}</p>
+          <ArticleAuthor locale={locale} compact post={post} />
           {post.updated && (
             <p className={b.meta}>
               {locale === "en" ? "Updated" : "Diperbarui"}{" "}
@@ -53,9 +49,11 @@ export default async function PostPage({ params }: Props) {
               </time>
             </p>
           )}
-          <h1 lang="id">{post.title}</h1>
-          <p>{post.summary}</p>
-          <ArticleAuthor locale={locale} compact />
+          {post.draft && (
+            <p className={b.meta}>
+              <T>Draft preview</T>
+            </p>
+          )}
           <div className={s.tags}>
             {post.tags.map((tag) => (
               <span key={tag}>{tag}</span>
@@ -101,23 +99,21 @@ export default async function PostPage({ params }: Props) {
         <ArticleSources sources={post.sources} locale={locale} />
         <ArticleAuthor locale={locale} />
       </article>
-      <nav
-        className={s.pageNeighbours}
-        aria-label={locale === "id" ? "Artikel lainnya" : "Other posts"}
-      >
-        {index > 0 ? (
-          <Link href={`/blog/${posts[index - 1].slug}`}>
-            ← <T>{posts[index - 1].title}</T>
-          </Link>
-        ) : (
-          <span />
-        )}
-        {index < posts.length - 1 && (
-          <Link href={`/blog/${posts[index + 1].slug}`}>
-            <T>{posts[index + 1].title}</T> →
-          </Link>
-        )}
-      </nav>
+      {relatedPosts(posts, post).length > 0 && (
+        <section
+          className={s.section}
+          aria-labelledby="related-articles-heading"
+        >
+          <h2 id="related-articles-heading">
+            {locale === "en" ? "Read next" : "Baca selanjutnya"}
+          </h2>
+          <ArticleList
+            posts={relatedPosts(posts, post)}
+            locale={locale}
+            related
+          />
+        </section>
+      )}
       {!post.draft && (
         <script
           type="application/ld+json"
