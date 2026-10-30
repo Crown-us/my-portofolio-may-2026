@@ -1,249 +1,142 @@
-import { T } from "@/app/components/LocaleProvider";
+import { PostDate } from "@/app/components/LocaleProvider";
 import Link from "@/app/components/LocalizedLink";
 import SiteShell from "@/app/components/SiteShell";
 import Image from "@/app/components/LocalizedImage";
-import { BookOpen, AppWindow, BriefcaseBusiness } from "lucide-react";
 import BlogPostCard from "@/app/components/BlogPostCard";
 import { getPosts } from "@/lib/blog";
-import b from "@/app/blog/blog.module.css";
-import { products } from "@/lib/store";
 import { buildSeo, localizeSeo } from "@/lib/seo";
+import b from "@/app/blog/blog.module.css";
 import s from "@/lib/styles";
 import h from "./discover.module.css";
-const pageMetadata = buildSeo(
-  "Kevin Dwi Wijaya — Full-Stack & Mobile Engineer",
-  "/",
-);
-export default async function Home({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+
+type Props = { params: Promise<{ locale: string }> };
+const copyFor = (locale: string) =>
+  locale === "en"
+    ? {
+        label: "KEVIN'S NOTES / AI & TECHNOLOGY",
+        intro: "AI news, practical guides, and comparisons for everyday use.",
+        featured: "Featured read",
+        read: "Read the article",
+        language: "Article in Indonesian",
+        latest: "More to read",
+        all: "View all articles →",
+        author: "Behind the articles",
+        bio: "I'm Kevin, a web and mobile developer based in Kediri, Indonesia. Here I share notes about technology and AI alongside the things I build.",
+        work: "Explore my work",
+        about: "Get to know me",
+        empty: "Articles are on the way.",
+        seoTitle: "Kevin Dwi Wijaya — AI News, Guides & Projects",
+        seoDescription:
+          "AI news, practical technology guides, and comparisons by Kevin Dwi Wijaya. Explore the writing, projects, and background of a web and mobile developer.",
+      }
+    : {
+        label: "CATATAN KEVIN / AI & TEKNOLOGI",
+        intro: "Berita AI, panduan praktis, dan perbandingan untuk keseharian.",
+        featured: "Bacaan utama",
+        read: "Baca artikelnya",
+        language: "Artikel berbahasa Indonesia",
+        latest: "Artikel lainnya",
+        all: "Lihat semua artikel →",
+        author: "Di balik tulisan",
+        bio: "Saya Kevin, pengembang web dan aplikasi mobile dari Kediri, Indonesia. Di sini saya berbagi catatan teknologi dan AI, sekaligus karya yang saya bangun.",
+        work: "Lihat karya saya",
+        about: "Kenalan dengan saya",
+        empty: "Artikel sedang disiapkan.",
+        seoTitle: "Kevin Dwi Wijaya — Berita AI, Panduan & Karya",
+        seoDescription:
+          "Berita AI, panduan teknologi praktis, dan perbandingan dari Kevin Dwi Wijaya. Temukan tulisan, proyek, dan pengalaman pengembang web serta aplikasi mobile.",
+      };
+
+export default async function Home({ params }: Props) {
   const { locale } = await params;
-  const copy =
-    locale === "en"
-      ? {
-          title: "Bringing technology closer to everyday life.",
-          intro:
-            "I'm Kevin, a full-stack and mobile developer. I build web and mobile apps, share what I learn about AI, and create useful digital products.",
-          work: "Explore my work",
-          about: "Get to know me",
-          pick: "Worth a read",
-          read: "Read the article",
-          language: "Article in Indonesian",
-          learn: "Read & learn",
-          learnIntro: "Practical ideas about tech and AI, for everyday use.",
-          needs: "Start with what you need",
-          needsIntro: "Choose what brings you here.",
-          paths: [
-            {
-              title: "Learn about AI",
-              description:
-                "Understand everyday AI tools, compare your options, and learn to check their answers.",
-              action: "Explore the blog",
-              href: "/blog",
-            },
-            {
-              title: "Have a project in mind?",
-              description:
-                "See where I can contribute to a web or mobile project, with examples of my work.",
-              action: "Explore collaboration",
-              href: "/services",
-            },
-            {
-              title: "Find a developer",
-              description:
-                "Take a look at my experience, technical skills, and resume for your team or project.",
-              action: "View my resume",
-              href: "/resume",
-            },
-          ],
-          together: "About & collaboration",
-          togetherIntro:
-            "Get to know my background, explore my experience, or tell me what you'd like to build.",
-          resume: "View my resume",
-          contact: "Let's talk",
-        }
-      : {
-          title: "Bikin teknologi lebih dekat dengan keseharian.",
-          intro:
-            "Saya Kevin, pengembang web dan aplikasi mobile. Saya membangun aplikasi, berbagi pengetahuan AI, dan membuat produk digital yang berguna.",
-          work: "Jelajahi karya",
-          about: "Kenalan dengan saya",
-          pick: "Pilihan bacaan",
-          read: "Baca artikelnya",
-          language: "Artikel berbahasa Indonesia",
-          learn: "Baca & pelajari",
-          learnIntro: "Ide praktis seputar teknologi dan AI untuk keseharian.",
-          needs: "Mulai dari kebutuhanmu",
-          needsIntro: "Pilih yang sesuai dengan tujuanmu ke sini.",
-          paths: [
-            {
-              title: "Mau belajar AI",
-              description:
-                "Kenali alat AI untuk keseharian, bandingkan pilihannya, dan pelajari cara mengecek jawabannya.",
-              action: "Jelajahi blog",
-              href: "/blog",
-            },
-            {
-              title: "Punya proyek untuk dikerjakan?",
-              description:
-                "Lihat bidang yang bisa saya bantu dalam proyek web atau mobile, beserta contoh karyanya.",
-              action: "Bahas kolaborasi",
-              href: "/services",
-            },
-            {
-              title: "Sedang cari developer",
-              description:
-                "Lihat pengalaman, keahlian teknis, dan CV saya untuk kebutuhan tim atau proyekmu.",
-              action: "Lihat CV saya",
-              href: "/resume",
-            },
-          ],
-          together: "Tentang & kolaborasi",
-          togetherIntro:
-            "Kenali latar belakang saya, lihat pengalaman saya, atau ceritakan apa yang ingin kamu bangun.",
-          resume: "Lihat CV saya",
-          contact: "Mari ngobrol",
-        };
-  const pathIcons = [BookOpen, AppWindow, BriefcaseBusiness];
-  const publishedPosts = getPosts(false);
-  const spotlight = publishedPosts[0];
-  const latestPosts = publishedPosts.slice(1, 3);
+  const copy = copyFor(locale);
+  const [spotlight, ...otherPosts] = getPosts(false);
+  const latestPosts = otherPosts.slice(0, 2);
   return (
     <SiteShell>
-      <section className={h.hero} aria-labelledby="discover-title">
-        <div className={h.heroCopy}>
-          <p className={s.eyebrow}>KEVIN DWI WIJAYA</p>
-          <h1 id="discover-title">{copy.title}</h1>
-          <p className={h.description}>{copy.intro}</p>
-          <div className={h.actions}>
-            <Link href="/projects" className={h.primary}>
-              {copy.work}
-              <span aria-hidden="true">↗</span>
-            </Link>
-            <Link href="/about" className={h.secondary}>
-              {copy.about}
-              <span aria-hidden="true">→</span>
-            </Link>
-          </div>
-        </div>
-        {spotlight && (
+      <div className={h.intro}>
+        <p className={s.eyebrow}>{copy.label}</p>
+        <p>{copy.intro}</p>
+      </div>
+      {spotlight ? (
+        <section aria-label={copy.featured}>
           <Link
             href={`/blog/${spotlight.slug}`}
             contentLocale="id"
-            className={h.spotlight}
+            className={`${h.featured} ${!spotlight.coverImage ? h.textOnly : ""}`}
           >
-            <div className={h.spotlightImage}>
-              {spotlight.coverImage && (
+            {spotlight.coverImage && (
+              <div className={h.cover}>
                 <Image
                   src={spotlight.coverImage}
                   alt=""
-                  width={720}
-                  height={405}
-                  sizes="(max-width: 700px) 90vw, 40vw"
+                  width={1000}
+                  height={650}
+                  sizes="(max-width:700px) 90vw, 55vw"
                   priority
                 />
-              )}
-            </div>
-            <div className={h.spotlightCopy}>
-              <span className={s.eyebrow}>
-                {copy.pick}
-                {locale === "en" && ` · ${copy.language}`}
-              </span>
-              <h2 lang="id">{spotlight.title}</h2>
+              </div>
+            )}
+            <div className={h.featuredCopy}>
+              <p className={s.eyebrow}>{copy.featured}</p>
+              <h1 lang="id">{spotlight.title}</h1>
+              <p className={h.summary} lang="id">
+                {spotlight.summary}
+              </p>
+              <p className={h.meta}>
+                <time dateTime={spotlight.date}>
+                  <PostDate value={spotlight.date} />
+                </time>
+                {locale === "en" && <span> · {copy.language}</span>}
+              </p>
               <span className={h.read}>
-                {copy.read} <span aria-hidden="true">→</span>
+                {copy.read}
+                <span aria-hidden="true">→</span>
               </span>
             </div>
           </Link>
-        )}
-      </section>
+        </section>
+      ) : (
+        <h1 className={h.empty}>{copy.empty}</h1>
+      )}
       {latestPosts.length > 0 && (
         <section className={s.section} aria-labelledby="latest-blog-heading">
           <div className={s.sectionHead}>
-            <div>
-              <h2 id="latest-blog-heading">{copy.learn}</h2>
-              <p>{copy.learnIntro}</p>
-            </div>
+            <h2 id="latest-blog-heading">{copy.latest}</h2>
             <Link href="/blog" className={s.textLink}>
-              <T>Lihat semua artikel →</T>
+              {copy.all}
             </Link>
           </div>
           <div className={b.postGrid}>
             {latestPosts.map((post) => (
-              <BlogPostCard key={post.slug} post={post} />
+              <BlogPostCard post={post} key={post.slug} />
             ))}
           </div>
         </section>
       )}
-      <section className={s.section} aria-labelledby="needs-heading">
-        <div className={s.sectionHead}>
-          <div>
-            <h2 id="needs-heading">{copy.needs}</h2>
-            <p>{copy.needsIntro}</p>
-          </div>
-        </div>
-        <div className={h.pathGrid}>
-          {copy.paths.map((path, index) => {
-            const Icon = pathIcons[index];
-            return (
-              <Link href={path.href} key={path.href} className={h.pathCard}>
-                <span className={h.pathIcon} data-tone={index}>
-                  <Icon size={22} strokeWidth={1.6} aria-hidden="true" />
-                </span>
-                <h3>{path.title}</h3>
-                <p>{path.description}</p>
-                <span className={h.pathAction}>
-                  {path.action}
-                  <span aria-hidden="true">↗</span>
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-      {products.length > 0 && (
-        <section className={s.discoverNote}>
-          <div>
-            <h2>
-              <T>Ready-made tools</T>
-            </h2>
-            <p>
-              <T>Explore my digital products.</T>
-            </p>
-          </div>
-          <Link href="/store" className={s.button}>
-            <T>Visit the store →</T>
-          </Link>
-        </section>
-      )}
-      <section className={h.about}>
+      <section className={h.author} aria-labelledby="home-author-heading">
+        <Image
+          src="/images/kevin-author.png"
+          alt="Kevin Dwi Wijaya"
+          width={72}
+          height={72}
+          className={h.portrait}
+        />
         <div>
-          <p className={s.eyebrow}>{copy.together}</p>
-          <h2>Kevin Dwi Wijaya</h2>
-          <p>{copy.togetherIntro}</p>
-        </div>
-        <div className={h.actions}>
-          <Link href="/about" className={h.secondary}>
-            {copy.about} →
-          </Link>
-          <Link href="/resume" className={h.secondary}>
-            {copy.resume} ↗
-          </Link>
-          <Link href="/contact" className={h.primary}>
-            {copy.contact} →
-          </Link>
+          <p className={s.eyebrow}>{copy.author}</p>
+          <h2 id="home-author-heading">Kevin Dwi Wijaya</h2>
+          <p className={h.bio}>{copy.bio}</p>
+          <div className={h.links}>
+            <Link href="/projects">{copy.work} ↗</Link>
+            <Link href="/about">{copy.about} →</Link>
+          </div>
         </div>
       </section>
     </SiteShell>
   );
 }
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  return localizeSeo(pageMetadata, (await params).locale);
+export async function generateMetadata({ params }: Props) {
+  const { locale } = await params;
+  const copy = copyFor(locale);
+  return localizeSeo(buildSeo(copy.seoTitle, "/", copy.seoDescription), locale);
 }

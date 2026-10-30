@@ -30,14 +30,14 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     }
   }, [rawPathname]);
   const links = [
-    { href: "/", label: "Discover" },
+    { href: "/", label: locale === "id" ? "Beranda" : "Home" },
+    { href: "/blog", label: "Blog" },
     { href: "/projects", label: "Projects" },
     { href: "/about", label: "About me" },
     {
       href: "/services",
       label: locale === "id" ? "Kolaborasi" : "Collaboration",
     },
-    { href: "/blog", label: "Blog" },
     ...(products.length ? [{ href: "/store", label: "Store" }] : []),
     { href: "/contact", label: "Contact" },
     { href: "/resume", label: "Resume" },
