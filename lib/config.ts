@@ -5,7 +5,7 @@ export const siteConfig = {
   title: "Full-Stack & Mobile Engineer",
   location: "Kediri, Indonesia",
   email: "wijaya.kevinn@gmail.com",
-  whatsapp: "6285117394878",
+  whatsapp: "6287898303967",
   social: {
     github: "https://github.com/Crown-us",
     linkedin: "https://www.linkedin.com/in/kevin-dwi-wijaya-95aa812b4",
