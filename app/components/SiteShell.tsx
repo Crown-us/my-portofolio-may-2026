@@ -161,11 +161,6 @@ export function PageIntro({
           <T>{title}</T>
         </h1>
       </div>
-      {siteConfig.isAvailable && (
-        <span className={s.available}>
-          <i /> <T>Open to opportunities</T>
-        </span>
-      )}
     </div>
   );
 }
