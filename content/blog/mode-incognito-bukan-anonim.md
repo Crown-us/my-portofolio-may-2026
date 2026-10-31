@@ -7,7 +7,7 @@ type: guide
 tags:
   - Privasi
   - Tips Tech
-coverImage: /images/blog/incognito-bukan-anonim.webp
+coverImage: /images/blog/incognito-3d-cover.webp
 draft: false
 sources:
   - name: "Google Chrome Help — Browse in Incognito mode"
