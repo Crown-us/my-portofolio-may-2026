@@ -4,10 +4,9 @@ import { translate } from "@/lib/i18n";
 import { isPostType, postTypes, postTypeLabels } from "@/lib/blog-taxonomy";
 
 import { useEffect, useState } from "react";
-import BlogPostCard from "./BlogPostCard";
+import ArticleList from "./ArticleList";
 import type { Post } from "@/lib/blog-core";
 import s from "@/lib/styles";
-import b from "../blog/blog.module.css";
 import f from "./BlogLibrary.module.css";
 
 type PostMeta = Omit<Post, "content">;
@@ -62,7 +61,7 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
       (!activeType || p.type === activeType),
   );
   return (
-    <section className={s.section}>
+    <section className={`${s.section} ${f.library}`}>
       <div className={`${s.sectionHead} ${f.toolbar}`}>
         <h2>
           <T>Artikel terbaru</T>
@@ -106,11 +105,7 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
           </span>
         </div>
       </div>
-      <div className={b.postGrid}>
-        {visible.map((post) => (
-          <BlogPostCard post={post} key={post.slug} />
-        ))}
-      </div>
+      <ArticleList posts={visible} locale={locale} related />
       {visible.length === 0 && (
         <p className={f.empty} role="status">
           {locale === "id"

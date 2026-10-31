@@ -1,3 +1,6 @@
+.library {
+  max-width: 880px;
+}
 .toolbar.toolbar {
   align-items: center;
   flex-wrap: wrap;

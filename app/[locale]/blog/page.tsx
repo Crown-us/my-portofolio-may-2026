@@ -1,48 +1,30 @@
 import { T } from "@/app/components/LocaleProvider";
 import Link from "@/app/components/LocalizedLink";
 import { BookOpen, ArrowUpRight } from "lucide-react";
-import SiteShell, { PageIntro } from "@/app/components/SiteShell";
+import SiteShell from "@/app/components/SiteShell";
 import BlogLibrary from "@/app/components/BlogLibrary";
 import { getPosts } from "@/lib/blog";
 import { buildSeo, localizeSeo } from "@/lib/seo";
 import s from "@/lib/styles";
 import b from "@/app/blog/blog.module.css";
-const pageMetadata = buildSeo(
-  "Blog",
-  "/blog",
-  "Kabar AI, perbandingan tools, dan tips teknologi buat keseharian. Ditulis oleh Kevin Dwi Wijaya.",
-);
-export default function BlogPage() {
+const introFor = (locale: string) =>
+  locale === "en"
+    ? "My notes on AI, technology, and what I learn while building applications."
+    : "Catatan saya tentang AI, teknologi, dan hal yang saya pelajari saat membangun aplikasi.";
+
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const posts = getPosts();
   return (
     <SiteShell>
-      <PageIntro
-        title="Teknologi, dibikin masuk akal."
-        eyebrow="BLOG / TECH & AI"
-      />
-      <section className={b.banner}>
-        <div className={b.bannerText}>
-          <span className={b.label}>
-            <T>KENALI TEKNOLOGI, PILIH YANG COCOK</T>
-          </span>
-          <p>
-            <T>
-              Kabar AI, perbandingan tools, dan tips teknologi buat keseharian.
-            </T>
-          </p>
-        </div>
-        <div className={b.illustration} aria-hidden="true">
-          <div className={b.paper}>
-            <span>
-              <T>kevin / notes</T>
-            </span>
-            <BookOpen size={20} strokeWidth={1.5} />
-            <i />
-            <i />
-          </div>
-          <span className={b.star}>✦</span>
-        </div>
-      </section>
+      <header className={b.editorialIntro}>
+        <h1>Blog</h1>
+        <p>{introFor(locale)}</p>
+      </header>
       {posts.length ? (
         <BlogLibrary
           posts={posts.map(({ content, ...post }) => {
@@ -84,5 +66,6 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  return localizeSeo(pageMetadata, (await params).locale);
+  const { locale } = await params;
+  return localizeSeo(buildSeo("Blog", "/blog", introFor(locale)), locale);
 }
