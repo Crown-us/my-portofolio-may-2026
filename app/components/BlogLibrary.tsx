@@ -5,6 +5,7 @@ import { isPostType, postTypes, postTypeLabels } from "@/lib/blog-taxonomy";
 
 import { useEffect, useState } from "react";
 import ArticleList from "./ArticleList";
+import BlogFilter from "./BlogFilter";
 import type { Post } from "@/lib/blog-core";
 import s from "@/lib/styles";
 import f from "./BlogLibrary.module.css";
@@ -67,38 +68,36 @@ export default function BlogLibrary({ posts }: { posts: PostMeta[] }) {
           <T>Artikel terbaru</T>
         </h2>
         <div className={f.controls}>
-          <label className={f.filter}>
-            <span>{locale === "id" ? "Jenis" : "Type"}</span>
-            <select
-              value={activeType}
-              onChange={(event) => selectFilter("type", event.target.value)}
-            >
-              <option value="">
-                {locale === "id" ? "Semua jenis" : "All types"}
-              </option>
-              {postTypes.map((type) => (
-                <option key={type} value={type}>
-                  {postTypeLabels[locale][type]}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className={f.filter}>
-            <span>{locale === "id" ? "Topik" : "Topic"}</span>
-            <select
-              value={active}
-              onChange={(event) => selectFilter("tag", event.target.value)}
-            >
-              <option value="">
-                {locale === "id" ? "Semua topik" : "All topics"}
-              </option>
-              {tags.map((value) => (
-                <option key={value} value={value}>
-                  {translate(value, locale)}
-                </option>
-              ))}
-            </select>
-          </label>
+          <BlogFilter
+            label={locale === "id" ? "Jenis" : "Type"}
+            value={activeType}
+            options={[
+              {
+                value: "",
+                label: locale === "id" ? "Semua jenis" : "All types",
+              },
+              ...postTypes.map((type) => ({
+                value: type,
+                label: postTypeLabels[locale][type],
+              })),
+            ]}
+            onChange={(value) => selectFilter("type", value)}
+          />
+          <BlogFilter
+            label={locale === "id" ? "Topik" : "Topic"}
+            value={active}
+            options={[
+              {
+                value: "",
+                label: locale === "id" ? "Semua topik" : "All topics",
+              },
+              ...tags.map((value) => ({
+                value,
+                label: translate(value, locale),
+              })),
+            ]}
+            onChange={(value) => selectFilter("tag", value)}
+          />
           <span role="status" className={f.count}>
             <T>{visible.length}</T>{" "}
             <T>{visible.length === 1 ? "post" : "posts"}</T>
