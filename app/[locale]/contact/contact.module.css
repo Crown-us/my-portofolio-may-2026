@@ -1,0 +1,23 @@
+.layout {
+  max-width: 680px;
+  margin-top: 32px;
+}
+.email p {
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+.whatsapp.whatsapp {
+  background: #1967d2;
+  border-color: #1967d2;
+  color: #fff !important;
+}
+.whatsapp.whatsapp:hover {
+  background: #1558b3;
+  border-color: #1558b3;
+}
+.email a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
