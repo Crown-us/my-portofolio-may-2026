@@ -38,6 +38,53 @@
   color: #536172;
   margin-top: 14px;
 }
+.collaboration {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid #e8eaed;
+}
+.collaboration > h2 {
+  font-size: 24px;
+}
+.collaboration p {
+  max-width: 740px;
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: #536172;
+}
+.contact {
+  margin-top: 28px;
+  padding: 28px;
+  border-radius: 18px;
+  background: #eaf1fd;
+}
+.contact h3 {
+  font-size: 21px;
+}
+.primary.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 20px;
+  padding: 11px 20px;
+  border-radius: 24px;
+  color: #fff;
+  background: #1967d2;
+  font-size: 13px;
+}
+.primary.primary:hover {
+  background: #1558b3;
+}
+.contact a {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 560px) {
+  .contact {
+    padding: 22px;
+  }
+}
 .links {
   display: flex;
   flex-wrap: wrap;

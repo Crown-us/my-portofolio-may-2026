@@ -33,13 +33,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     { href: "/", label: locale === "id" ? "Beranda" : "Home" },
     { href: "/blog", label: "Blog" },
     { href: "/projects", label: "Projects" },
-    { href: "/about", label: "About me" },
-    {
-      href: "/services",
-      label: locale === "id" ? "Kolaborasi" : "Collaboration",
-    },
+    { href: "/about", label: locale === "id" ? "Tentang" : "About" },
     ...(products.length ? [{ href: "/store", label: "Store" }] : []),
-    { href: "/contact", label: "Contact" },
   ];
   return (
     <div className={s.page}>
@@ -135,7 +130,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           <a href={siteConfig.social.linkedin}>
             <T>LinkedIn ↗</T>
           </a>
-          <Link href="/contact">
+          <Link href="/about#contact">
             <T>Contact</T>
           </Link>
         </div>

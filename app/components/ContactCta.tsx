@@ -16,7 +16,11 @@ export default function ContactCta() {
           <T>Tell me what you want to build, improve, or explore.</T>
         </p>
       </div>
-      <Link className={s.button} href="/contact" data-umami-event="contact-cta">
+      <Link
+        className={s.button}
+        href="/about#contact"
+        data-umami-event="contact-cta"
+      >
         <T>Get in touch </T>
         <ArrowRight size={17} />
       </Link>

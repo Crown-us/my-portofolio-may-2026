@@ -67,8 +67,6 @@ export function sitemapPaths(
     "/",
     "/projects",
     "/about",
-    "/services",
-    "/contact",
     ...projects.map((item) => `/projects/${item.slug}`),
     ...(products.length
       ? ["/store", ...products.map((item) => `/store/${item.slug}`)]

@@ -75,7 +75,7 @@ export default async function AboutPage({ params }: Props) {
           <p>{copy.background}</p>
           <p>{copy.writing}</p>
           <div className={a.links}>
-            <Link href="/contact">{copy.contact}</Link>
+            <a href="#contact">{copy.contact}</a>
             <Link href="/blog">{copy.blog}</Link>
             <a href={siteConfig.social.github}>GitHub ↗</a>
             <a href={siteConfig.social.linkedin}>LinkedIn ↗</a>
@@ -105,6 +105,61 @@ export default async function AboutPage({ params }: Props) {
           </div>
         </section>
         <ProfileDetails />
+        <section
+          id="collaboration"
+          className={a.collaboration}
+          aria-labelledby="collaboration-title"
+        >
+          <h2 id="collaboration-title">
+            {locale === "en" ? "Work with me" : "Kerja sama"}
+          </h2>
+          <p>
+            {locale === "en"
+              ? "Need help with a web application or an Android app? I can contribute to interfaces, backend development, and API integration with React, Laravel, and Flutter."
+              : "Butuh bantuan membangun aplikasi web atau Android? Saya bisa berkontribusi pada antarmuka, backend, dan integrasi API dengan React, Laravel, serta Flutter."}
+          </p>
+          <p>
+            {locale === "en"
+              ? "Send a short description of the problem, the current project, and where you need help. We can discuss my role, the scope, and the next steps before starting."
+              : "Kirim gambaran singkat tentang masalah, kondisi proyek, dan bagian yang perlu dibantu. Kita bahas peran saya, lingkup pekerjaan, serta langkah berikutnya sebelum mulai."}
+          </p>
+          <div id="contact" className={a.contact}>
+            <h3>
+              {locale === "en" ? "Start a conversation" : "Mulai ngobrol"}
+            </h3>
+            <p>
+              {locale === "en"
+                ? "WhatsApp for a first conversation. Email for recruitment, proposals, and documents."
+                : "WhatsApp untuk obrolan awal. Email untuk rekrutmen, penawaran resmi, dan dokumen."}
+            </p>
+            <a
+              className={a.primary}
+              href={
+                "https://wa.me/" +
+                siteConfig.whatsapp +
+                "?text=" +
+                encodeURIComponent(
+                  locale === "en"
+                    ? "Hi Kevin, I'd like to discuss a project."
+                    : "Halo Kevin, saya ingin ngobrol tentang sebuah proyek.",
+                )
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              data-umami-event="contact-whatsapp"
+            >
+              {locale === "en" ? "Chat on WhatsApp ↗" : "Chat lewat WhatsApp ↗"}
+            </a>
+            <div className={a.links}>
+              <a
+                href={"mailto:" + siteConfig.email}
+                data-umami-event="contact-email"
+              >
+                {siteConfig.email}
+              </a>
+            </div>
+          </div>
+        </section>
       </div>
       <script
         type="application/ld+json"
