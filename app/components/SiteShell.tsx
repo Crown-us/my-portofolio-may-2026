@@ -56,10 +56,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
               <span className={headerStyles.wordmark}>{siteConfig.name}</span>
             </Link>
           </div>
-          {siteConfig.hasGlobalSearch && products.length > 0 && (
-            <GlobalSearch />
-          )}
           <div className={headerStyles.actions}>
+            {siteConfig.hasGlobalSearch && <GlobalSearch />}
             <div
               className={`${s.languageSwitch} ${headerStyles.languageSwitch}`}
               aria-label={locale === "id" ? "Bahasa" : "Language"}

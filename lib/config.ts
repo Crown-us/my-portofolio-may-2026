@@ -1,6 +1,6 @@
 export const siteConfig = {
   isAvailable: true,
-  hasGlobalSearch: false,
+  hasGlobalSearch: true,
   name: "Kevin Dwi Wijaya",
   title: "Full-Stack & Mobile Engineer",
   location: "Kediri, Indonesia",
