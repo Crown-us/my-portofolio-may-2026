@@ -68,9 +68,11 @@ export default function ProfileDetails() {
                       <T>{item.location}</T>
                     </p>
                   )}
-                  <p className={s.expSummary}>
-                    <T>{item.summary}</T>
-                  </p>
+                  {!item.highlights.length && (
+                    <p className={s.expSummary}>
+                      <T>{item.summary}</T>
+                    </p>
+                  )}
                   {!!item.highlights.length && (
                     <ul className={s.expHighlights}>
                       {item.highlights.map((text) => (

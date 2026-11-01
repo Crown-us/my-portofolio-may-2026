@@ -40,7 +40,6 @@ export default function SiteShell({ children }: { children: ReactNode }) {
     },
     ...(products.length ? [{ href: "/store", label: "Store" }] : []),
     { href: "/contact", label: "Contact" },
-    { href: "/resume", label: "Resume" },
   ];
   return (
     <div className={s.page}>
