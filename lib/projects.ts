@@ -381,9 +381,9 @@ export const projects: Project[] = [
     caseStudy: {
       problem:
         "RT/RW administration covers monthly dues, cash reporting, announcements, and letters of introduction. RTRW Digital needed to bring all four into one platform that could serve many neighbourhood units from a single deployment.",
-      role: "Solo build — product, Laravel backend, and the Inertia/React interface, including the multi-tenant data model and the dues and cash modules.",
+      role: "Internship project at Nusatama Jaya Sakti — designed the data structure and system flow, and built the dashboard and the resident, dues, cash, and report screens.",
       timeframe: "2 months (2026)",
-      teamSize: 1,
+      teamSize: null,
       stack: {
         frontend: [
           "React",

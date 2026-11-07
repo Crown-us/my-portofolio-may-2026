@@ -241,7 +241,7 @@
   "The same storefront is available as an Android app built with Flutter.": "Toko yang sama tersedia dalam aplikasi Android berbasis Flutter.",
   "Laravel 11 runs the backend, with MySQL holding catalog, stock, and order data. The web app is built on Inertia.js with React, TypeScript, and Tailwind CSS. The Android client was built separately in Flutter, and Midtrans Snap handles payment.": "Backend menggunakan Laravel 11 dan MySQL menyimpan katalog, stok, serta pesanan. Aplikasi web dibangun dengan Inertia.js, React, TypeScript, dan Tailwind CSS. Aplikasi Android dibuat terpisah menggunakan Flutter, sementara pembayaran ditangani Midtrans Snap.",
   "RT/RW administration covers monthly dues, cash reporting, announcements, and letters of introduction. RTRW Digital needed to bring all four into one platform that could serve many neighbourhood units from a single deployment.": "Administrasi RT/RW mencakup iuran bulanan, laporan kas, pengumuman, dan surat pengantar. RTRW Digital menyatukan keempatnya dalam satu platform yang melayani banyak lingkungan dari satu instalasi.",
-  "Solo build — product, Laravel backend, and the Inertia/React interface, including the multi-tenant data model and the dues and cash modules.": "Dikerjakan sendiri — produk, backend Laravel, dan antarmuka Inertia/React, termasuk model data multi-tenant serta modul iuran dan kas.",
+  "Internship project at Nusatama Jaya Sakti — designed the data structure and system flow, and built the dashboard and the resident, dues, cash, and report screens.": "Proyek magang di Nusatama Jaya Sakti — merancang struktur data dan alur sistem, serta membangun dashboard dan antarmuka pengelolaan warga, iuran, kas, dan laporan.",
   "Monthly dues are billed automatically and paid through the app, so the treasurer has a record of who has paid without reconciling transfers by hand.": "Iuran bulanan ditagihkan otomatis dan dibayar melalui aplikasi. Bendahara dapat melihat catatan pembayaran tanpa mencocokkan transfer secara manual.",
   "Residents can see the balance and cash flow of their RT/RW in real time instead of waiting for a monthly summary.": "Warga dapat melihat saldo dan arus kas RT/RW secara langsung tanpa menunggu laporan bulanan.",
   "Requests for letters of introduction are submitted and tracked digitally rather than by visiting the neighbourhood office.": "Permohonan surat pengantar diajukan dan dilacak secara digital tanpa harus datang ke kantor lingkungan.",
@@ -331,5 +331,7 @@
   "HRIS Lite contract list": "Daftar kontrak di HRIS Lite",
   "Contract list with periods and status": "Daftar kontrak dengan periode dan status",
   "HRIS Lite monthly attendance recap": "Rekap absensi bulanan di HRIS Lite",
-  "Monthly attendance recap with Excel and PDF export": "Rekap absensi bulanan dengan ekspor Excel dan PDF"
+  "Monthly attendance recap with Excel and PDF export": "Rekap absensi bulanan dengan ekspor Excel dan PDF",
+  "Computer Software Programming": "Pemrograman Software Komputer",
+  "TOEIC Listening & Reading, score 490": "TOEIC Listening & Reading, skor 490"
 }
