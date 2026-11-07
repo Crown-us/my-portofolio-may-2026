@@ -23,12 +23,12 @@ export const about = {
   experience: [
     {
       organization: "PT. Nusatama Jaya Sakti & BUMD Seger",
-      role: "Full Stack Engineer",
+      role: "Full Stack Developer",
       period: "Jan 2026 – Jun 2026",
       startDate: "2026-01",
       location: "Jombang, On-site",
       summary:
-        "Full Stack Engineer intern contributing to the end-to-end development of responsive, scalable web applications, building backend logic and interactive interfaces with Laravel and React.",
+        "Full Stack Developer intern contributing to the end-to-end development of responsive, scalable web applications, building backend logic and interactive interfaces with Laravel and React.",
       highlights: [
         "Built backend logic and interactive frontend interfaces using Laravel and React.",
         "Contributed to end-to-end delivery of responsive, scalable web applications.",
