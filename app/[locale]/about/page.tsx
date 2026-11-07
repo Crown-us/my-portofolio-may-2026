@@ -18,7 +18,7 @@ const copyFor = (locale: string) =>
         intro:
           "I’m Kevin. I build web applications with React and Laravel, and Android apps with Flutter. I work on both the interface and the data and application logic behind it.",
         background:
-          "My experience includes full-stack development at PT. Nusatama Jaya Sakti, frontend development at Kalamaya, and IT support at Telkom Akses through internships.",
+          "My experience includes full-stack development at PT. Nusatama Jaya Sakti and BUMD Seger, frontend development at Kalamaya, and IT support at Telkom Akses through internships.",
         writing:
           "I also write about AI, everyday technology, and what I learn from my projects. This site brings that work and those notes together.",
         projects: "A few things I’ve built",
@@ -35,7 +35,7 @@ const copyFor = (locale: string) =>
         intro:
           "Saya Kevin. Saya membangun aplikasi web dengan React dan Laravel, serta aplikasi Android dengan Flutter. Saya mengerjakan antarmuka sekaligus pengelolaan data dan logika aplikasi di baliknya.",
         background:
-          "Lewat magang, saya terlibat dalam pengembangan full-stack di PT. Nusatama Jaya Sakti, pengembangan frontend di Kalamaya, dan dukungan TI di Telkom Akses.",
+          "Lewat magang, saya terlibat dalam pengembangan full-stack di PT. Nusatama Jaya Sakti dan BUMD Seger, pengembangan frontend di Kalamaya, dan dukungan TI di Telkom Akses.",
         writing:
           "Saya juga menulis tentang AI, teknologi sehari-hari, dan hal yang saya pelajari dari proyek sendiri. Situs ini jadi tempat untuk mengumpulkan karya dan catatan tersebut.",
         projects: "Beberapa yang saya bangun",

@@ -22,7 +22,7 @@ export const about = {
     "I’m Kevin, a full-stack and mobile engineer based in Kediri, Indonesia. I work with Next.js, Flutter, and Laravel to build interfaces and the systems behind them.",
   experience: [
     {
-      organization: "PT. Nusatama Jaya Sakti",
+      organization: "PT. Nusatama Jaya Sakti & BUMD Seger",
       role: "Full Stack Engineer",
       period: "Jan 2026 – Jun 2026",
       startDate: "2026-01",
