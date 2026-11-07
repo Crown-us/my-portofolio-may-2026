@@ -2,14 +2,20 @@ import Link from "@/app/components/LocalizedLink";
 import SiteShell from "@/app/components/SiteShell";
 import Image from "@/app/components/LocalizedImage";
 import ArticleList from "@/app/components/ArticleList";
+import ProjectCard from "@/app/components/ProjectCard";
 import { getPosts } from "@/lib/blog";
+import { getFeatured } from "@/lib/domain";
+import { projects } from "@/lib/projects";
 import { buildSeo, localizeSeo } from "@/lib/seo";
+import s from "@/lib/styles";
 import h from "./discover.module.css";
 
 type Props = { params: Promise<{ locale: string }> };
 const copyFor = (locale: string) =>
   locale === "en"
     ? {
+        featured: "Selected projects",
+        allProjects: "View all projects →",
         latest: "Latest articles",
         all: "View all articles →",
 
@@ -25,6 +31,8 @@ const copyFor = (locale: string) =>
           "Kevin Dwi Wijaya, a web and mobile developer in Kediri, Indonesia. Explore React, Laravel, and Flutter projects, plus articles on AI and everyday technology.",
       }
     : {
+        featured: "Proyek pilihan",
+        allProjects: "Lihat semua proyek →",
         latest: "Artikel terbaru",
         all: "Lihat semua artikel →",
 
@@ -67,6 +75,17 @@ export default async function Home({ params }: Props) {
           </div>
         </div>
       </section>
+      <section className={h.feed} aria-labelledby="featured-projects-heading">
+        <h2 id="featured-projects-heading">{copy.featured}</h2>
+        <div className={`${s.projectGrid} ${h.featuredGrid}`}>
+          {getFeatured(projects).map((project, index) => (
+            <ProjectCard project={project} index={index} key={project.slug} />
+          ))}
+        </div>
+        <Link href="/projects" className={h.allLink}>
+          {copy.allProjects}
+        </Link>
+      </section>
       <section className={h.feed} aria-labelledby="latest-blog-heading">
         <h2 id="latest-blog-heading">{copy.latest}</h2>
         {latestPosts.length ? (
@@ -74,7 +93,7 @@ export default async function Home({ params }: Props) {
         ) : (
           <p>{copy.empty}</p>
         )}
-        <Link href="/blog" className={h.allArticles}>
+        <Link href="/blog" className={h.allLink}>
           {copy.all}
         </Link>
       </section>

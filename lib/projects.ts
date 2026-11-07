@@ -304,7 +304,6 @@ export const projects: Project[] = [
       ],
       links: {
         demo: "https://personal-host-rt-rw-nu.vercel.app",
-        repo: "https://github.com/Crown-us/personal-host-rt-rw",
       },
     },
     slug: "rtrw-community-platform",
@@ -331,7 +330,7 @@ export const projects: Project[] = [
       "MySQL",
       "Shadcn UI",
     ],
-    githubUrl: "https://github.com/Crown-us/personal-host-rt-rw",
+    githubUrl: "",
     demoUrl: "https://personal-host-rt-rw-nu.vercel.app",
   },
 ];

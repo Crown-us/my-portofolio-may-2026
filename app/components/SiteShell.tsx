@@ -31,8 +31,8 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   }, [rawPathname]);
   const links = [
     { href: "/", label: locale === "id" ? "Beranda" : "Home" },
-    { href: "/blog", label: "Blog" },
     { href: "/projects", label: "Projects" },
+    { href: "/blog", label: "Blog" },
     { href: "/about", label: locale === "id" ? "Tentang" : "About" },
     ...(products.length ? [{ href: "/store", label: "Store" }] : []),
   ];

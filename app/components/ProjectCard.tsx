@@ -3,7 +3,7 @@ import Link from "@/app/components/LocalizedLink";
 import Image from "@/app/components/LocalizedImage";
 import type { Project } from "@/lib/projects";
 import s from "@/lib/styles";
-import mobile from "./ProjectCard.module.css";
+import local from "./ProjectCard.module.css";
 export default function ProjectCard({
   project,
   index = 0,
@@ -11,9 +11,9 @@ export default function ProjectCard({
   project: Project;
   index?: number;
 }) {
-  const links = project.caseStudy.links;
+  const { links, teamSize, timeframe } = project.caseStudy;
   return (
-    <article className={`${s.card} ${mobile.card}`}>
+    <article className={`${s.card} ${local.card}`}>
       <Link
         className={s.cardImage}
         data-tone={index % 3}
@@ -36,9 +36,20 @@ export default function ProjectCard({
               </Link>
             </h3>
             <span>
-              <T>{project.category}</T> · <T>{project.year}</T>
+              {teamSize === 1 ? (
+                <T>Solo build</T>
+              ) : teamSize !== null ? (
+                <>
+                  <T>Team of</T> {teamSize} <T>people</T>
+                </>
+              ) : null}
+              {teamSize !== null && timeframe && " · "}
+              {timeframe && <T>{timeframe}</T>}
             </span>
           </div>
+          <span className={local.status} data-status={project.status}>
+            <T>{project.status}</T>
+          </span>
         </div>
         <p>
           <T>{project.summary}</T>
@@ -50,7 +61,7 @@ export default function ProjectCard({
             </span>
           ))}
         </div>
-        <div className={`${s.cardLinks} ${mobile.links}`}>
+        <div className={`${s.cardLinks} ${local.links}`}>
           <Link href={`/projects/${project.slug}`}>
             <T>Case study</T>
           </Link>

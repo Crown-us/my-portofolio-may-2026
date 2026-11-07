@@ -750,3 +750,137 @@
 .languageSwitch a:focus-visible {
   outline: 2px solid #1967d2;
 }
+
+/* 404 and error notices */
+.notice {
+  margin-top: 26px;
+  max-width: 560px;
+  border: 1px solid #e4ebf6;
+  border-radius: 20px;
+  background: #f7faff;
+  padding: 26px 28px;
+}
+.notice p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #5f718a;
+  margin: 0 0 18px;
+}
+.noticeActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+.noticeActions button {
+  cursor: pointer;
+  font: inherit;
+}
+.noticeActions button:hover {
+  background: #eaf1fd;
+}
+
+/* Route loading skeleton */
+.skeletonIntro {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.skeletonCard {
+  display: grid;
+  gap: 12px;
+  border: 1px solid #eef2f8;
+  border-radius: 16px;
+  padding: 16px;
+}
+.skeletonBlock {
+  aspect-ratio: 1.55;
+  border-radius: 10px;
+  background: #eef3fb;
+}
+.skeletonLine {
+  height: 10px;
+  border-radius: 999px;
+  background: #eef3fb;
+}
+.skeletonLine[data-size="short"] {
+  width: 18%;
+}
+.skeletonLine[data-size="medium"] {
+  width: 46%;
+}
+.skeletonLine[data-size="long"] {
+  width: 72%;
+}
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeletonBlock,
+  .skeletonLine {
+    animation: skeletonPulse 1.6s ease-in-out infinite;
+  }
+}
+@keyframes skeletonPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+@media (max-width: 700px) {
+  .skeletonGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .notice {
+    padding: 22px;
+  }
+}
+@media print {
+  .skeletonGrid,
+  .skeletonIntro {
+    display: none;
+  }
+}
+
+/* Unmatched path shell (app/global-not-found.tsx) */
+.globalNotFound {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  min-height: 100vh;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 40px 6%;
+}
+.globalNotFound h1 {
+  font-size: 27px;
+  line-height: 1.3;
+  margin: 0;
+}
+.globalNotFound h1 ~ p {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #5f718a;
+  margin: 0;
+}
+.globalNotFound .noticeActions {
+  margin-top: 8px;
+}

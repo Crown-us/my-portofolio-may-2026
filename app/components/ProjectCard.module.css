@@ -1,3 +1,36 @@
+.card.card h3 + span {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.status.status {
+  display: inline-block;
+  flex-shrink: 0;
+  align-self: start;
+  margin-left: auto;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #f1f3f4;
+  color: #5f6368;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.status::first-letter {
+  text-transform: uppercase;
+}
+
+.status.status[data-status="live"] {
+  background: #e6f4ea;
+  color: #137333;
+}
+
+.status.status[data-status="demo"] {
+  background: #eaf1fd;
+  color: #1967d2;
+}
+
 @media (max-width: 700px) {
   .card {
     min-width: 0;
@@ -7,12 +40,6 @@
     font-size: 17px;
     line-height: 1.35;
     overflow-wrap: anywhere;
-  }
-
-  .card.card h3 + span {
-    display: block;
-    margin-top: 5px;
-    font-size: 12px;
   }
 
   .card.card p {

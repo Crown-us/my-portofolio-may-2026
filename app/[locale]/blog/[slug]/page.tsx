@@ -14,6 +14,7 @@ import { canonicalUrl, jsonLd } from "@/lib/domain";
 import s from "@/lib/styles";
 import b from "@/app/blog/blog.module.css";
 type Props = { params: Promise<{ slug: string; locale: string }> };
+export const dynamicParams = false;
 export function generateStaticParams() {
   return getPosts().map(({ slug }) => ({ slug }));
 }

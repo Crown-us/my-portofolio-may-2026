@@ -10,6 +10,7 @@ import Gallery from "@/app/components/Gallery";
 import ProductDescription from "@/app/components/ProductDescription";
 import s from "@/lib/styles";
 type Props = { params: Promise<{ slug: string; locale: string }> };
+export const dynamicParams = false;
 export function generateStaticParams() {
   return products.map(({ slug }) => ({ slug }));
 }

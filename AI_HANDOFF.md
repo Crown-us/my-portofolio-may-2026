@@ -71,3 +71,8 @@ Added root `.pages.yml` for the existing Markdown blog: rich-text body, draft de
 ## Bilingual portfolio — 2026-10-29
 
 Routes now live under `app/[locale]` for `/id` and `/en`. Root layout is locale-scoped so server HTML language is correct. Legacy paths redirect to `/id`; API, assets, RSS and sitemap stay unprefixed. Shared LocaleProvider/T and LocalizedLink preserve language; translations are in `lib/translations.json`. Blog article body/title stay original Indonesian with a visible language label. Do not auto-publish the digital-file organization draft. See README language section for maintenance.
+
+
+## Portfolio visibility — 2026-11-07
+
+Home now shows `isFeatured` projects above the articles, and Projects comes before Blog in the nav. Project cards show team size, timeframe and status; the category filter is gone. The detail gallery skips a screenshot identical to the hero, so "Screenshots" stays hidden until real in-app screenshots are added to `caseStudy.screenshots`. RTRW's GitHub link was removed because the repo returned 404 to logged-out visitors; re-add it if the repo becomes public. `public/images/projects/rtrw-app.png` appears to be an AI mockup with garbled text, so do not present it as a real screenshot.

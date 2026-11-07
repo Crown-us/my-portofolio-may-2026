@@ -102,10 +102,6 @@
   .bannerArt {
     padding-left: 20px;
   }
-  .categories button {
-    padding: 12px;
-    font-size: 11px;
-  }
   .projectGrid {
     gap: 14px;
   }
@@ -190,14 +186,6 @@
   }
   .browser img {
     aspect-ratio: 1.9;
-  }
-  .categories {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .categories button {
-    padding: 13px;
-    font-size: 11px;
   }
   .section {
     margin-top: 32px;

@@ -11,6 +11,7 @@ import ContactCta from "@/app/components/ContactCta";
 import CaseSections from "@/app/components/CaseSections";
 import s from "@/lib/styles";
 type Props = { params: Promise<{ slug: string; locale: string }> };
+export const dynamicParams = false;
 export function generateStaticParams() {
   return projects.map(({ slug }) => ({ slug }));
 }
@@ -73,7 +74,9 @@ export default async function ProjectPage({ params }: Props) {
         priority
       />
       <CaseSections study={study} />
-      <Gallery images={study.screenshots} />
+      <Gallery
+        images={study.screenshots.filter(({ src }) => src !== project.image)}
+      />
       <nav
         className={s.pageNeighbours}
         aria-label={locale === "id" ? "Proyek lainnya" : "Other projects"}

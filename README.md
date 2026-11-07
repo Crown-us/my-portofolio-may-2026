@@ -33,8 +33,8 @@ Animasi lama Framer Motion, Lenis, musik latar, dan dependensi utilitas yang tid
 
 | Route                                     | Isi                                                                                  |
 | ----------------------------------------- | ------------------------------------------------------------------------------------ |
-| `/`                                       | Discover: proyek pilihan, preview layanan, CTA kontak                                |
-| `/projects`                               | Katalog proyek dengan filter kategori                                                |
+| `/`                                       | Beranda: profil, proyek pilihan, artikel terbaru                                     |
+| `/projects`                               | Katalog semua proyek                                                                 |
 | `/projects/[slug]`                        | Detail proyek, stack, screenshot dan bagian case study yang sudah terisi             |
 | `/about`, `/resume`                       | Profil, tiga pengalaman magang, dan skills dari data yang sama                       |
 | `/services`                               | Empat layanan, harga mulai, estimasi waktu, alur kerja dan FAQ                       |
