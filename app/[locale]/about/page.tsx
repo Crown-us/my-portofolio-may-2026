@@ -51,7 +51,7 @@ export default async function AboutPage({ params }: Props) {
   const { locale } = await params;
   const copy = copyFor(locale);
   const selected = projects.filter((project) =>
-    ["lms-westud", "seger-marketplace"].includes(project.slug),
+    ["hris-lite", "lms-westud", "seger-marketplace"].includes(project.slug),
   );
   return (
     <SiteShell>

@@ -21,7 +21,8 @@ export interface CaseStudy {
 export interface Project {
   isFeatured: boolean;
   summary: string;
-  status: "live" | "in-progress" | "archived" | "handed-off" | "demo";
+  status:
+    "live" | "in-progress" | "archived" | "handed-off" | "demo" | "prototype";
   caseStudy: CaseStudy;
   id: number;
   slug: string;
@@ -38,6 +39,139 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: 4,
+    isFeatured: true,
+    status: "prototype",
+    summary:
+      "An HR system for recruitment, employee records, contracts, attendance, and leave.",
+    caseStudy: {
+      problem:
+        "HR teams handle sensitive records across hiring, contracts, training, discipline, attendance, and leave. HRIS Lite brings that work into one Indonesian-language app where five roles see only what they should, and important changes leave a record. It is a portfolio prototype with fictional data: no HR team has tested it yet, and it is not on always-on hosting.",
+      role: "Solo build — product scope, Laravel backend, React interface, and automated tests.",
+      timeframe: "1 week (2026)",
+      teamSize: 1,
+      stack: {
+        frontend: [
+          "React 19",
+          "TypeScript",
+          "Inertia.js",
+          "Tailwind CSS 4",
+          "Vite",
+        ],
+        backend: ["Laravel 13", "Laravel Fortify"],
+        mobile: [],
+        database: ["MySQL 8.4"],
+        infra: [],
+      },
+      features: [
+        {
+          title: "Recruitment pipeline",
+          description:
+            "Vacancies, a public careers portal, screening, interview scheduling that rejects clashes, offers, and converting an accepted applicant into an employee.",
+        },
+        {
+          title: "Employee directory and import",
+          description:
+            "Search and filter employees, and archive with a reason instead of deleting. CSV or XLSX imports are validated row by row, then saved all at once or not at all.",
+        },
+        {
+          title: "Contracts and discipline",
+          description:
+            "PKWT and PKWTT contracts with versioned PDFs, a 30-day PKWT expiry reminder, a list of active employees without a current contract, and warning letter records.",
+        },
+        {
+          title: "Attendance and leave",
+          description:
+            "Web check-in and check-out, work schedules, correction and leave requests reviewed by the supervisor and then HR, and monthly recaps exported to Excel or PDF.",
+        },
+        {
+          title: "Audit trail",
+          description:
+            "One admin page combines the history of ten sources, showing who did what and when.",
+        },
+      ],
+      architecture:
+        "Laravel 13 runs the backend with MySQL 8.4, and Inertia.js renders the React and TypeScript interface without a separate API layer. Gates and policies enforce access on the server for five roles: Admin, HR Staff, Viewer, Employee, and Supervisor. CVs, contracts, and other PDFs stay on a private disk and download only after authorization. Times are stored in UTC and shown in WIB. Email still goes to a log, so applicant verification and password reset links do not reach real inboxes yet.",
+      diagram: "",
+      challenges: [
+        {
+          challenge: "Two people editing the same record",
+          solution:
+            "Forms carry a version and the server takes a row lock, so a stale tab is rejected instead of overwriting someone else's change. Interview and attendance scheduling are serialized with locks to prevent clashes.",
+        },
+        {
+          challenge: "Keeping contact details away from read-only users",
+          solution:
+            "Viewers still see names and job data, but work email, phone numbers, and applicant emails are never sent to their browser and are left out of their search. The rules live in server-side gates and policies, not in hidden buttons.",
+        },
+        {
+          challenge: "An audit page without one central table",
+          solution:
+            "Each module writes its own event table in the same transaction as the change. The audit page merges ten sources with UNION ALL and adds filters and pagination on top.",
+        },
+      ],
+      results: [
+        {
+          label: "Automated tests",
+          value: "185 tests, 2,785 assertions passed",
+          source: "docs/STAGING.md, 3 Nov 2026",
+        },
+      ],
+      screenshots: [
+        {
+          src: "/images/projects/hris-lite-dashboard.png",
+          alt: "HRIS Lite HR overview dashboard",
+          caption: "HR overview: upcoming interviews and contracts to review",
+        },
+        {
+          src: "/images/projects/hris-lite-employees.png",
+          alt: "HRIS Lite employee directory",
+          caption: "Employee directory with search, filters, and status",
+        },
+        {
+          src: "/images/projects/hris-lite-application.png",
+          alt: "HRIS Lite application detail",
+          caption: "Application detail with stage changes and history",
+        },
+        {
+          src: "/images/projects/hris-lite-contracts.png",
+          alt: "HRIS Lite contract list",
+          caption: "Contract list with periods and status",
+        },
+        {
+          src: "/images/projects/hris-lite-attendance-recap.png",
+          alt: "HRIS Lite monthly attendance recap",
+          caption: "Monthly attendance recap with Excel and PDF export",
+        },
+      ],
+      links: { repo: "https://github.com/Crown-us/hr-track" },
+    },
+    slug: "hris-lite",
+    title: "HRIS LITE",
+    category: "Human Resources",
+    image: "/images/projects/hris-lite-dashboard.png",
+    description:
+      "Indonesian-language HR system covering recruitment, employee records, contracts, training, discipline, attendance, leave, reports, and account management.",
+    impact: "Recruitment · Contracts · Attendance",
+    year: "2026",
+    services: [
+      "Product Scope",
+      "Laravel Backend",
+      "React Interface",
+      "Role-Based Access",
+    ],
+    tech: [
+      "Laravel 13",
+      "React 19",
+      "Inertia.js",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "MySQL 8.4",
+    ],
+    githubUrl: "https://github.com/Crown-us/hr-track",
+    demoUrl: "",
+  },
   {
     id: 1,
     isFeatured: true,
@@ -240,7 +374,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    isFeatured: true,
+    isFeatured: false,
     status: "demo",
     summary:
       "Neighborhood administration, resident dues, and community information.",

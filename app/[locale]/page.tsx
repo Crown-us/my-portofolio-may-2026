@@ -21,7 +21,7 @@ const copyFor = (locale: string) =>
 
         greeting: "Hi, I’m Kevin.",
         role: "A web and mobile developer based in Kediri, Indonesia.",
-        bio: "I build web applications with React and Laravel, and mobile apps with Flutter. My projects include a learning platform, a marketplace, and a community management app.",
+        bio: "I build web applications with React and Laravel, and mobile apps with Flutter. My projects include an HR system, a learning platform, and a marketplace.",
         writing: "This is where I share what I’m building and learning, along with notes on AI and technology for everyday use.",
         work: "Explore my work",
         about: "Get to know me",
@@ -38,7 +38,7 @@ const copyFor = (locale: string) =>
 
         greeting: "Halo, saya Kevin.",
         role: "Pengembang web dan aplikasi mobile dari Kediri.",
-        bio: "Saya membangun aplikasi web dengan React dan Laravel, serta aplikasi mobile dengan Flutter. Proyek yang saya kerjakan antara lain platform belajar, marketplace, dan aplikasi pengelolaan lingkungan RT/RW.",
+        bio: "Saya membangun aplikasi web dengan React dan Laravel, serta aplikasi mobile dengan Flutter. Proyek yang saya kerjakan antara lain sistem HR, platform belajar, dan marketplace.",
         writing: "Di sini saya berbagi apa yang sedang saya bangun dan pelajari, juga catatan tentang AI dan teknologi untuk keseharian.",
         work: "Lihat karya saya",
         about: "Kenalan dengan saya",

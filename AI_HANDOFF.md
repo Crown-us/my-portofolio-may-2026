@@ -76,3 +76,5 @@ Routes now live under `app/[locale]` for `/id` and `/en`. Root layout is locale-
 ## Portfolio visibility — 2026-11-07
 
 Home now shows `isFeatured` projects above the articles, and Projects comes before Blog in the nav. Project cards show team size, timeframe and status; the category filter is gone. The detail gallery skips a screenshot identical to the hero, so "Screenshots" stays hidden until real in-app screenshots are added to `caseStudy.screenshots`. RTRW's GitHub link was removed because the repo returned 404 to logged-out visitors; re-add it if the repo becomes public. `public/images/projects/rtrw-app.png` appears to be an AI mockup with garbled text, so do not present it as a real screenshot.
+
+HRIS Lite is now the first project, based on the `D:/HR Management` README and its fictional-data screenshots from `.local/uat/gallery`. Keep its status as prototype until an HR team has tested it and it has always-on hosting. Kevin confirmed on 2026-11-07 that he built it alone. The 185-test result is dated 3 Nov 2026, so recount before updating it. RTRW is no longer featured, which keeps the home grid at two cards.

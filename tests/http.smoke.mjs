@@ -7,9 +7,7 @@ for (const path of [
   "/id/projects",
   "/id/about",
   "/id/blog",
-  "/id/services",
-  "/id/contact",
-  "/id/resume",
+  "/id/projects/hris-lite",
   "/id/projects/lms-westud",
   "/id/projects/seger-marketplace",
   "/id/projects/rtrw-community-platform",
@@ -40,6 +38,15 @@ for (const path of [
   "/en/does-not-exist",
 ])
   assert.equal((await fetch(base + path)).status, 404, path);
+for (const [path, target] of [
+  ["/id/services", "/id/about#collaboration"],
+  ["/id/contact", "/id/about#contact"],
+  ["/id/resume", "/id/about"],
+]) {
+  const moved = await fetch(base + path, { redirect: "manual" });
+  assert.equal(moved.status, 308, path);
+  assert.equal(moved.headers.get("location"), target, path);
+}
 const legacy = await fetch(base + "/works/lms-westud", { redirect: "manual" });
 assert.equal(legacy.status, 308);
 assert.equal(legacy.headers.get("location"), "/id/projects/lms-westud");
@@ -52,10 +59,10 @@ assert.equal(
   "/en/projects/lms-westud",
 );
 const unknownLocale = await fetch(base + "/fr/blog", { redirect: "manual" });
-assert.equal(unknownLocale.status, 307);
-assert.equal(unknownLocale.headers.get("location"), "/id");
+assert.equal(unknownLocale.status, 404);
 const sitemap = await (await fetch(base + "/sitemap.xml")).text();
-assert.ok(sitemap.includes("https://kvndwi.com/projects/lms-westud"));
+assert.ok(sitemap.includes("https://kvndwi.com/id/projects/lms-westud"));
+assert.ok(sitemap.includes("https://kvndwi.com/id/projects/hris-lite"));
 assert.ok(!sitemap.includes("/store"));
 const robots = await (await fetch(base + "/robots.txt")).text();
 assert.ok(robots.includes("https://kvndwi.com/sitemap.xml"));
@@ -90,4 +97,4 @@ console.log(
 const rss = await fetch(base + "/rss.xml");
 assert.equal(rss.status, 200);
 assert.ok((await rss.text()).includes("<channel>"));
-assert.ok(sitemap.includes("https://kvndwi.com/blog"));
+assert.ok(sitemap.includes("https://kvndwi.com/id/blog"));
