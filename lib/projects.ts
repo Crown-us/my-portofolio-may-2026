@@ -294,7 +294,7 @@ export const projects: Project[] = [
     summary: "A grocery marketplace with ordering and payment integration.",
     caseStudy: {
       problem:
-        "A Kediri regional-owned enterprise (BUMD) needed an online storefront for fresh groceries — produce, spices, protein, and eggs — with per-item stock tracking and online payment.",
+        "A Jombang regional-owned enterprise (BUMD) needed an online storefront for fresh groceries — produce, spices, protein, and eggs — with per-item stock tracking and online payment.",
       role: "Built the Flutter Android app and the web app as an intern in a three-person team. Handed the project over to the senior developer with the commerce flow complete; the remaining work was promotional and supporting content.",
       timeframe: "2 months (2026)",
       teamSize: 3,
@@ -351,7 +351,7 @@ export const projects: Project[] = [
     category: "Commerce",
     image: "/images/projects/seger-marketplace.png",
     description:
-      "Modern on-demand grocery marketplace platform for Kediri BUMD, featuring grocery ordering, automated Midtrans payment gateway, interactive cart systems, and reactive UI.",
+      "Modern on-demand grocery marketplace platform for Jombang BUMD, featuring grocery ordering, automated Midtrans payment gateway, interactive cart systems, and reactive UI.",
     impact: "Grocery Ordering · Midtrans Payments",
     year: "2026",
     services: [
