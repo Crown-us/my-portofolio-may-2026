@@ -11,7 +11,8 @@ export default function ProjectCard({
   project: Project;
   index?: number;
 }) {
-  const { links, teamSize, teamLabel, timeframe } = project.caseStudy;
+  const { links, teamSize, teamLabel, timeframe, youtubeId } =
+    project.caseStudy;
   const hasTeamText = teamSize !== null || !!teamLabel;
   return (
     <article className={`${s.card} ${local.card}`}>
@@ -71,6 +72,15 @@ export default function ProjectCard({
           {links.demo && (
             <a href={links.demo} target="_blank" rel="noopener noreferrer">
               <T>Live demo ↗</T>
+            </a>
+          )}
+          {youtubeId && (
+            <a
+              href={`https://youtu.be/${youtubeId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <T>Video demo ↗</T>
             </a>
           )}
           {links.repo && (

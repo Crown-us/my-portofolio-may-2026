@@ -64,6 +64,16 @@ export default async function ProjectPage({ params }: Props) {
               <T> </T>↗
             </a>
           ))}
+        {study.youtubeId && (
+          <a
+            className={s.button}
+            href={`https://youtu.be/${study.youtubeId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <T>Video demo</T> ↗
+          </a>
+        )}
       </div>
       <Image
         className={s.detailImage}
@@ -73,6 +83,22 @@ export default async function ProjectPage({ params }: Props) {
         height={780}
         priority
       />
+      {study.youtubeId && (
+        <section className={s.section}>
+          <h2>
+            <T>Video demo</T>
+          </h2>
+          <iframe
+            className={s.detailImage}
+            style={{ aspectRatio: "16 / 9", display: "block" }}
+            src={`https://www.youtube-nocookie.com/embed/${study.youtubeId}`}
+            title={`${project.title} video demo`}
+            loading="lazy"
+            allow="encrypted-media; picture-in-picture; fullscreen"
+            allowFullScreen
+          />
+        </section>
+      )}
       <CaseSections study={study} />
       <Gallery
         images={study.screenshots.filter(({ src }) => src !== project.image)}

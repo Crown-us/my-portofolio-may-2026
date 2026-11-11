@@ -19,6 +19,8 @@ export interface CaseStudy {
   results: { label: string; value: string; source: string }[];
   screenshots: { src: string; alt: string; caption: string }[];
   links: { demo?: string; repo?: string; docs?: string };
+  /** YouTube video id of a recorded walkthrough, for projects without a live demo. */
+  youtubeId?: string;
 }
 export interface Project {
   isFeatured: boolean;
@@ -148,6 +150,7 @@ export const projects: Project[] = [
         },
       ],
       links: { repo: "https://github.com/Crown-us/hr-track" },
+      youtubeId: "MhZfk0wrCtk",
     },
     slug: "hris-lite",
     title: "HRIS LITE",
