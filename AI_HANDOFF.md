@@ -82,3 +82,7 @@ HRIS Lite is now the first project, based on the `D:/HR Management` README and i
 ## CV — 2026-11-07
 
 `public/cv-kevin-dwi-wijaya.pdf` is page 1 of Kevin's 23-page `CV_Portofolio_Kevin_Dwi_Wijaya.pdf`. Certifications come from the certificate scans in that PDF. Do not publish the full PDF without his decision: it has certificate scans, what appears to be Nusatama finance data, a private repo screenshot, and a roadmap naming PT Akui Bird Nest Indonesia. Kevin confirmed that RT/RW Digital was internship work at Nusatama, so its team size stays `null` until he provides it. Kevin also confirmed that Seger and Nusatama are in Jombang and Kalamaya is in Kediri. His titles are Full Stack Developer at Nusatama and Frontend Developer at Kalamaya. Page 1 of the published CV still says "Software Development" for Kalamaya and has no internship dates, so replace `public/cv-kevin-dwi-wijaya.pdf` once he revises it.
+
+## Job-application pass — 2026-11-11
+
+Home now lists all four projects (2×2 grid): Seger and RTRW are `isFeatured` again, and the home page filters `isFeatured` directly because `getFeatured` caps at three. RTRW's card shows "Internship project" through the new optional `caseStudy.teamLabel`, since its team size is still unknown. The toolkit gained PHP and a CMS group (WordPress, Elementor) to match Kevin's application email; no WordPress project is listed yet because he has not supplied one. Typecheck and `tests/domain.test.mjs` passed; not viewed in a browser, not committed or deployed.

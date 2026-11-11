@@ -3,6 +3,8 @@ export interface CaseStudy {
   role: string;
   timeframe: string;
   teamSize: number | null;
+  /** Shown on the card when the team size is unknown. */
+  teamLabel?: string;
   stack: {
     frontend: string[];
     backend: string[];
@@ -289,7 +291,7 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    isFeatured: false,
+    isFeatured: true,
     status: "handed-off",
     summary: "A grocery marketplace with ordering and payment integration.",
     caseStudy: {
@@ -374,7 +376,7 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    isFeatured: false,
+    isFeatured: true,
     status: "demo",
     summary:
       "Neighborhood administration, resident dues, and community information.",
@@ -384,6 +386,7 @@ export const projects: Project[] = [
       role: "Internship project at Nusatama Jaya Sakti — designed the data structure and system flow, and built the dashboard and the resident, dues, cash, and report screens.",
       timeframe: "2 months (2026)",
       teamSize: null,
+      teamLabel: "Internship project",
       stack: {
         frontend: [
           "React",

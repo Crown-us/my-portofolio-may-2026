@@ -4,7 +4,6 @@ import Image from "@/app/components/LocalizedImage";
 import ArticleList from "@/app/components/ArticleList";
 import ProjectCard from "@/app/components/ProjectCard";
 import { getPosts } from "@/lib/blog";
-import { getFeatured } from "@/lib/domain";
 import { projects } from "@/lib/projects";
 import { buildSeo, localizeSeo } from "@/lib/seo";
 import s from "@/lib/styles";
@@ -78,9 +77,11 @@ export default async function Home({ params }: Props) {
       <section className={h.feed} aria-labelledby="featured-projects-heading">
         <h2 id="featured-projects-heading">{copy.featured}</h2>
         <div className={`${s.projectGrid} ${h.featuredGrid}`}>
-          {getFeatured(projects).map((project, index) => (
-            <ProjectCard project={project} index={index} key={project.slug} />
-          ))}
+          {projects
+            .filter((project) => project.isFeatured)
+            .map((project, index) => (
+              <ProjectCard project={project} index={index} key={project.slug} />
+            ))}
         </div>
         <Link href="/projects" className={h.allLink}>
           {copy.allProjects}

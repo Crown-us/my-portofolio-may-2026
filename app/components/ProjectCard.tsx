@@ -11,7 +11,8 @@ export default function ProjectCard({
   project: Project;
   index?: number;
 }) {
-  const { links, teamSize, timeframe } = project.caseStudy;
+  const { links, teamSize, teamLabel, timeframe } = project.caseStudy;
+  const hasTeamText = teamSize !== null || !!teamLabel;
   return (
     <article className={`${s.card} ${local.card}`}>
       <Link
@@ -42,8 +43,10 @@ export default function ProjectCard({
                 <>
                   <T>Team of</T> {teamSize} <T>people</T>
                 </>
+              ) : teamLabel ? (
+                <T>{teamLabel}</T>
               ) : null}
-              {teamSize !== null && timeframe && " · "}
+              {hasTeamText && timeframe && " · "}
               {timeframe && <T>{timeframe}</T>}
             </span>
           </div>

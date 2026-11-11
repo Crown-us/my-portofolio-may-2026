@@ -79,7 +79,8 @@ export const about = {
   skills: [
     { area: "Web", items: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
     { area: "Mobile", items: ["Flutter", "Dart", "Firebase"] },
-    { area: "Backend", items: ["Laravel", "Node.js", "REST APIs"] },
+    { area: "Backend", items: ["PHP", "Laravel", "Node.js", "REST APIs"] },
+    { area: "CMS", items: ["WordPress", "Elementor"] },
     { area: "Database", items: ["PostgreSQL", "MySQL", "Supabase"] },
     { area: "Tooling", items: ["Git", "GitHub", "Figma", "Docker"] },
   ],
