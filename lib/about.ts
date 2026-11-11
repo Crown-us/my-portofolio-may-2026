@@ -70,11 +70,6 @@ export const about = {
       issuer: "BNSP, LSP Politeknik Negeri Malang",
       year: 2025,
     },
-    {
-      name: "TOEIC Listening & Reading, score 490",
-      issuer: "ETS",
-      year: 2026,
-    },
   ] as Certification[],
   skills: [
     { area: "Web", items: ["Next.js", "React", "TypeScript", "Tailwind CSS"] },
