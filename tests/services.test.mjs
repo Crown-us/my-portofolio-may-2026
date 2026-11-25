@@ -34,17 +34,18 @@ test("order message follows the language and works without a package", () => {
 test("contact number is in international format", () => {
   assert.match(siteConfig.whatsapp, /^62\d{8,13}$/);
 });
-test("three packages with unique slugs", () => {
+test("four packages with unique slugs", () => {
   assert.deepEqual(
     services.map((item) => item.slug),
-    ["landing-page", "company-profile", "web-app"],
+    ["starter", "landing-page", "company-profile", "web-app"],
   );
   assert.equal(workSteps.length, 4);
   assert.ok(serviceFaq.length >= 3 && serviceFaq.length <= 5);
 });
-test("unset price shows a visible placeholder", () => {
-  assert.equal(priceLabel(null), "Rp X.XXX.XXX");
-  assert.match(priceLabel(1500000), /1\.500\.000/);
+test("starting prices rise per package and read as Rupiah", () => {
+  const prices = services.map((item) => item.startingPrice);
+  assert.deepEqual(prices, [500000, 750000, 1750000, 3500000]);
+  assert.match(priceLabel(prices[0]), /^Rp\s500\.000$/);
 });
 test("every service text has an Indonesian translation", () => {
   const texts = [

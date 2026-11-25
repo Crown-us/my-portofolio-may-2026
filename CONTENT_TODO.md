@@ -289,15 +289,10 @@ Handoff menyebut dulu ada 3 dummy project yang sudah dihapus. Kalau ada project 
 
 # 5. SERVICES / HALAMAN JASA — P1
 
-Target file: `lib/services.ts`, `lib/translations.json`. Selama belum diisi, situs menampilkan placeholder.
+Target file: `lib/services.ts`, `lib/translations.json`. Harga, durasi, dan revisi sudah diisi (disetujui pemilik, 2026-11-26).
 
-- [ ] Harga mulai Landing Page (`startingPrice`, sekarang `null` → "Rp X.XXX.XXX"). Data lama: Rp 600.000.
-- [ ] Harga mulai Company Profile. Belum ada data lama.
-- [ ] Harga mulai Web App Custom. Data lama: Rp 2.500.000.
-- [ ] Durasi Company Profile ("X–X weeks"). Ganti juga key dan terjemahannya.
-- [ ] Konfirmasi durasi Landing Page (3–7 hari) dan Web App (2–4 minggu).
-- [ ] Kebijakan revisi (`revisionPolicy`, ganti "X"). Ganti juga key terjemahannya.
-- [ ] Cek daftar fitur tiap paket dan jawaban FAQ, termasuk soal domain dan hosting.
+- [ ] Cek isi paket Starter (Rp 500.000): fitur dan durasi 2–3 hari masih draf.
+- [ ] Cek daftar fitur paket lain dan jawaban FAQ.
 - [ ] Konfirmasi nomor WhatsApp dan email di `lib/config.ts`.
 
 ---

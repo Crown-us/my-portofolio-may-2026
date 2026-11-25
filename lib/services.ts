@@ -6,13 +6,23 @@ export interface ServicePackage {
   summary: string;
   features: string[];
   estimatedDuration: string;
-  /** Rupiah. null menampilkan PRICE_PLACEHOLDER. */
-  startingPrice: number | null;
+  /** Rupiah, belum termasuk domain dan hosting. */
+  startingPrice: number;
 }
 
-export const PRICE_PLACEHOLDER = "Rp X.XXX.XXX";
-
 export const services: ServicePackage[] = [
+  {
+    slug: "starter",
+    title: "Starter",
+    summary: "A simple page to get a small business online.",
+    features: [
+      "One page using a ready-made layout",
+      "Business info and a short product list",
+      "WhatsApp order button",
+    ],
+    estimatedDuration: "2–3 days",
+    startingPrice: 500000,
+  },
   {
     slug: "landing-page",
     title: "Landing Page",
@@ -22,8 +32,8 @@ export const services: ServicePackage[] = [
       "WhatsApp order button",
       "Basic SEO setup",
     ],
-    estimatedDuration: "3–7 days", // TODO: konfirmasi durasi
-    startingPrice: null, // TODO: isi harga mulai
+    estimatedDuration: "3–7 days",
+    startingPrice: 750000,
   },
   {
     slug: "company-profile",
@@ -36,8 +46,8 @@ export const services: ServicePackage[] = [
       "WhatsApp and email contact",
       "Basic SEO setup",
     ],
-    estimatedDuration: "X–X weeks", // TODO: isi durasi
-    startingPrice: null, // TODO: isi harga mulai
+    estimatedDuration: "1–2 weeks",
+    startingPrice: 1750000,
   },
   {
     slug: "web-app",
@@ -50,8 +60,8 @@ export const services: ServicePackage[] = [
       "Login and access rights when needed",
       "Deployment and handover",
     ],
-    estimatedDuration: "2–4 weeks", // TODO: konfirmasi durasi
-    startingPrice: null, // TODO: isi harga mulai
+    estimatedDuration: "2–4 weeks",
+    startingPrice: 3500000,
   },
 ];
 
@@ -76,9 +86,8 @@ export const workSteps = [
   },
 ];
 
-// TODO: ganti X dengan jumlah revisi yang kamu tawarkan.
 export const revisionPolicy =
-  "Includes X rounds of revisions. Changes outside the agreed scope are quoted separately.";
+  "Includes 2 rounds of revisions. Changes outside the agreed scope are quoted separately.";
 
 export const serviceFaq = [
   {
@@ -99,12 +108,11 @@ export const serviceFaq = [
   {
     question: "Do the packages include a domain and hosting?",
     answer:
-      "Domain and hosting costs are confirmed in the quote before any work starts.",
+      "No, they are not included in the package price. Their cost is confirmed in the quote before any work starts.",
   },
 ];
 
-export function priceLabel(value: number | null) {
-  if (value === null) return PRICE_PLACEHOLDER;
+export function priceLabel(value: number) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",

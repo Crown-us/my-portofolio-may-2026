@@ -70,7 +70,7 @@ Dokumen pendamping:
 - [CONTENT_TODO.md](CONTENT_TODO.md): formulir untuk melengkapi konten.
 - [AI_HANDOFF.md](AI_HANDOFF.md): konteks singkat untuk AI/developer yang melanjutkan pekerjaan.
 
-Konten pribadi dan hasil proyek harus berdasarkan data asli. Bagian yang belum terisi disembunyikan. Foto profil, CV PDF, detail BNSP, sebagian case study, produk Store dan tulisan Blog berikutnya masih perlu dilengkapi. Data magang sudah ada. Harga, durasi, dan kebijakan revisi jasa masih placeholder (lihat CONTENT_TODO.md).
+Konten pribadi dan hasil proyek harus berdasarkan data asli. Bagian yang belum terisi disembunyikan. Foto profil, CV PDF, detail BNSP, sebagian case study, produk Store dan tulisan Blog berikutnya masih perlu dilengkapi. Data magang sudah ada. Harga, durasi, dan kebijakan revisi jasa ada di `lib/services.ts`.
 
 ## Menambah artikel
 
