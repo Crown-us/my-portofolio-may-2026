@@ -3,11 +3,14 @@ import SiteShell from "@/app/components/SiteShell";
 import Image from "@/app/components/LocalizedImage";
 import ArticleList from "@/app/components/ArticleList";
 import ProjectCard from "@/app/components/ProjectCard";
+import ServiceTeaser from "@/app/components/ServiceTeaser";
+import { T } from "@/app/components/LocaleProvider";
 import { getPosts } from "@/lib/blog";
 import { projects } from "@/lib/projects";
 import { buildSeo, localizeSeo } from "@/lib/seo";
 import s from "@/lib/styles";
 import h from "./discover.module.css";
+import actions from "@/app/components/Services.module.css";
 
 type Props = { params: Promise<{ locale: string }> };
 const copyFor = (locale: string) =>
@@ -21,9 +24,9 @@ const copyFor = (locale: string) =>
         greeting: "Hi, I’m Kevin.",
         role: "A web and mobile developer based in Kediri, Indonesia.",
         bio: "I build web applications with React and Laravel, and mobile apps with Flutter. My projects include an HR system, a learning platform, and a marketplace.",
-        writing: "This is where I share what I’m building and learning, along with notes on AI and technology for everyday use.",
+        writing:
+          "This is where I share what I’m building and learning, along with notes on AI and technology for everyday use.",
         work: "Explore my work",
-        about: "Get to know me",
         empty: "Articles are on the way.",
         seoTitle: "Kevin Dwi Wijaya — Web & Mobile Developer",
         seoDescription:
@@ -38,9 +41,9 @@ const copyFor = (locale: string) =>
         greeting: "Halo, saya Kevin.",
         role: "Pengembang web dan aplikasi mobile dari Kediri.",
         bio: "Saya membangun aplikasi web dengan React dan Laravel, serta aplikasi mobile dengan Flutter. Proyek yang saya kerjakan antara lain sistem HR, platform belajar, dan marketplace.",
-        writing: "Di sini saya berbagi apa yang sedang saya bangun dan pelajari, juga catatan tentang AI dan teknologi untuk keseharian.",
+        writing:
+          "Di sini saya berbagi apa yang sedang saya bangun dan pelajari, juga catatan tentang AI dan teknologi untuk keseharian.",
         work: "Lihat karya saya",
-        about: "Kenalan dengan saya",
         empty: "Artikel sedang disiapkan.",
         seoTitle: "Kevin Dwi Wijaya — Pengembang Web & Mobile",
         seoDescription:
@@ -68,11 +71,21 @@ export default async function Home({ params }: Props) {
           <p className={h.bio}>{copy.role}</p>
           <p className={h.bio}>{copy.bio}</p>
           <p className={h.bio}>{copy.writing}</p>
-          <div className={h.links}>
-            <Link href="/projects">{copy.work} ↗</Link>
-            <Link href="/about">{copy.about} →</Link>
+          <div className={actions.actions}>
+            <Link href="/jasa" className={actions.primary}>
+              <T>Order a website</T>
+            </Link>
+            <Link href="/projects" className={actions.secondary}>
+              {copy.work}
+            </Link>
           </div>
         </div>
+      </section>
+      <section className={h.feed} aria-labelledby="services-heading">
+        <h2 id="services-heading">
+          <T>What I offer</T>
+        </h2>
+        <ServiceTeaser />
       </section>
       <section className={h.feed} aria-labelledby="featured-projects-heading">
         <h2 id="featured-projects-heading">{copy.featured}</h2>
