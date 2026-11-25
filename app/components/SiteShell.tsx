@@ -9,6 +9,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { siteConfig } from "@/lib/config";
 import { products } from "@/lib/store";
 import GlobalSearch from "./GlobalSearch";
+import WhatsAppLink from "./WhatsAppLink";
 import s from "@/lib/styles";
 import headerStyles from "./SiteShell.module.css";
 export default function SiteShell({ children }: { children: ReactNode }) {
@@ -31,6 +32,7 @@ export default function SiteShell({ children }: { children: ReactNode }) {
   }, [rawPathname]);
   const links = [
     { href: "/", label: locale === "id" ? "Beranda" : "Home" },
+    { href: "/jasa", label: "Services" },
     { href: "/projects", label: "Projects" },
     { href: "/blog", label: "Blog" },
     { href: "/about", label: locale === "id" ? "Tentang" : "About" },
@@ -122,6 +124,13 @@ export default function SiteShell({ children }: { children: ReactNode }) {
           © <T>{new Date().getFullYear()}</T> <T>{siteConfig.name}</T>
         </span>
         <div>
+          <WhatsAppLink>WhatsApp ↗</WhatsAppLink>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            data-umami-event="contact-email"
+          >
+            {siteConfig.email}
+          </a>
           <a href={siteConfig.social.github}>
             <T>GitHub ↗</T>
           </a>
