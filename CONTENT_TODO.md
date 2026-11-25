@@ -287,36 +287,18 @@ Handoff menyebut dulu ada 3 dummy project yang sudah dihapus. Kalau ada project 
 
 ---
 
-# 5. SERVICES — P2
+# 5. SERVICES / HALAMAN JASA — P1
 
-Target file: `lib/services.ts`
-Sekarang harga `null`, durasi kosong, `idealFor` kosong.
+Target file: `lib/services.ts`, `lib/translations.json`. Selama belum diisi, situs menampilkan placeholder.
 
-**5.1 Full-stack web development**
-
-- Mulai dari harga berapa? (atau `project-based`)
-- Estimasi durasi?
-- Cocok untuk siapa? (UMKM, startup, instansi?)
-
-> _(jawab di sini)_
-
-**5.2 Cross-platform mobile apps (Flutter)**
-
-> _(jawab di sini)_
-
-**5.3 Backend & API engineering**
-
-> _(jawab di sini)_
-
-**5.4 Layanan lain yang ditawarkan?**
-Misal: maintenance, optimasi performa, migrasi, konsultasi.
-
-> _(jawab di sini)_
-
-**5.5 Menerima project sekarang?**
-Kalau tidak, lebih baik service section disembunyikan sementara.
-
-> _(jawab di sini)_
+- [ ] Harga mulai Landing Page (`startingPrice`, sekarang `null` → "Rp X.XXX.XXX"). Data lama: Rp 600.000.
+- [ ] Harga mulai Company Profile. Belum ada data lama.
+- [ ] Harga mulai Web App Custom. Data lama: Rp 2.500.000.
+- [ ] Durasi Company Profile ("X–X weeks"). Ganti juga key dan terjemahannya.
+- [ ] Konfirmasi durasi Landing Page (3–7 hari) dan Web App (2–4 minggu).
+- [ ] Kebijakan revisi (`revisionPolicy`, ganti "X"). Ganti juga key terjemahannya.
+- [ ] Cek daftar fitur tiap paket dan jawaban FAQ, termasuk soal domain dan hosting.
+- [ ] Konfirmasi nomor WhatsApp dan email di `lib/config.ts`.
 
 ---
 
