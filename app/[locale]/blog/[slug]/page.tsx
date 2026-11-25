@@ -6,6 +6,7 @@ import SiteShell from "@/app/components/SiteShell";
 import ArticleAuthor from "@/app/components/ArticleAuthor";
 import ArticleSources from "@/app/components/ArticleSources";
 import ArticleList from "@/app/components/ArticleList";
+import ContactCta from "@/app/components/ContactCta";
 import { relatedPosts } from "@/lib/blog-related";
 import { getPosts } from "@/lib/blog";
 import { renderMarkdown } from "@/lib/blog-core";
@@ -100,6 +101,7 @@ export default async function PostPage({ params }: Props) {
         <ArticleSources sources={post.sources} locale={locale} />
         <ArticleAuthor locale={locale} />
       </article>
+      <ContactCta />
       {relatedPosts(posts, post).length > 0 && (
         <section
           className={s.section}

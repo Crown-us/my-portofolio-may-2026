@@ -7,21 +7,17 @@ export default function ContactCta() {
     <section className={s.contact}>
       <div>
         <p className={s.eyebrow}>
-          <T>LET’S BUILD SOMETHING GOOD</T>
+          <T>WEBSITE SERVICES</T>
         </p>
         <h2>
-          <T>Your next idea could start here.</T>
+          <T>Need a website for your business?</T>
         </h2>
         <p>
-          <T>Tell me what you want to build, improve, or explore.</T>
+          <T>See the packages, then chat about what you need.</T>
         </p>
       </div>
-      <Link
-        className={s.button}
-        href="/about#contact"
-        data-umami-event="contact-cta"
-      >
-        <T>Get in touch </T>
+      <Link className={s.button} href="/jasa" data-umami-event="services-cta">
+        <T>See services</T>
         <ArrowRight size={17} />
       </Link>
     </section>
