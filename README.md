@@ -21,7 +21,7 @@ npm run build
 npm start -- --hostname 127.0.0.1 --port 3001
 ```
 
-Build memakai webpack karena sebelumnya ada masalah cache font pada Turbopack di lingkungan lokal. `next/font` membutuhkan akses Google Fonts saat build.
+Build memakai webpack karena sebelumnya ada masalah cache font pada Turbopack di lingkungan lokal. Font disimpan di `app/fonts/` (`next/font/local`), jadi build tidak perlu akses Google Fonts.
 
 ## Stack
 
