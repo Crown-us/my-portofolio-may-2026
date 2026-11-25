@@ -65,6 +65,7 @@ export function sitemapPaths(
 ) {
   return [
     "/",
+    "/jasa",
     "/projects",
     "/about",
     ...projects.map((item) => `/projects/${item.slug}`),

@@ -4,6 +4,8 @@ if (!["127.0.0.1", "localhost"].includes(new URL(base).hostname))
   throw new Error("Smoke tests must target localhost.");
 for (const path of [
   "/id",
+  "/id/jasa",
+  "/en/jasa",
   "/id/projects",
   "/id/about",
   "/id/blog",
@@ -39,7 +41,7 @@ for (const path of [
 ])
   assert.equal((await fetch(base + path)).status, 404, path);
 for (const [path, target] of [
-  ["/id/services", "/id/about#collaboration"],
+  ["/id/services", "/id/jasa"],
   ["/id/contact", "/id/about#contact"],
   ["/id/resume", "/id/about"],
 ]) {
@@ -63,6 +65,7 @@ assert.equal(unknownLocale.status, 404);
 const sitemap = await (await fetch(base + "/sitemap.xml")).text();
 assert.ok(sitemap.includes("https://kvndwi.com/id/projects/lms-westud"));
 assert.ok(sitemap.includes("https://kvndwi.com/id/projects/hris-lite"));
+assert.ok(sitemap.includes("https://kvndwi.com/en/jasa"));
 assert.ok(!sitemap.includes("/store"));
 const cv = await fetch(base + "/cv-kevin-dwi-wijaya.pdf");
 assert.equal(cv.status, 200);
