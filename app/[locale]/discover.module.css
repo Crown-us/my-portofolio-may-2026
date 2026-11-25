@@ -24,13 +24,6 @@
   max-width: 700px;
   margin-top: 6px;
 }
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 24px;
-  margin-top: 4px;
-}
-.links.links a,
 a.allLink {
   display: inline-flex;
   align-items: center;
@@ -38,7 +31,6 @@ a.allLink {
   font-size: 13px;
   color: #1967d2;
 }
-.links a:hover,
 a.allLink:hover {
   text-decoration: underline;
 }

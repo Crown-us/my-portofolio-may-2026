@@ -47,6 +47,7 @@ test("canonical paths cannot override production origin", () => {
 test("sitemap includes real projects and excludes empty store", () => {
   const paths = sitemapPaths(projects, products);
   assert.ok(paths.includes("/projects/lms-westud"));
+  assert.ok(paths.includes("/jasa"));
   assert.equal(paths.filter((p) => p.startsWith("/store")).length, 0);
   assert.equal(new Set(paths).size, paths.length);
 });

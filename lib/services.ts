@@ -1,83 +1,121 @@
-export interface Service {
+// Data halaman /jasa. Kontak (WhatsApp dan email) ada di lib/config.ts.
+// Teks bahasa Inggris di sini adalah key terjemahan di lib/translations.json.
+export interface ServicePackage {
   slug: string;
   title: string;
   summary: string;
-  deliverables: string[];
-  idealFor: string[];
-  startingPrice: number | null;
-  priceNote: string;
+  features: string[];
   estimatedDuration: string;
-  techStack: string[];
+  /** Rupiah, belum termasuk domain dan hosting. */
+  startingPrice: number;
 }
-// Starting prices are entry points for the smallest agreed scope. Final quotes follow a scope discussion.
-export const services: Service[] = [
+
+export const services: ServicePackage[] = [
+  {
+    slug: "starter",
+    title: "Starter",
+    summary: "A simple page to get a small business online.",
+    features: [
+      "One page using a ready-made layout",
+      "Business info and a short product list",
+      "WhatsApp order button",
+    ],
+    estimatedDuration: "2–3 days",
+    startingPrice: 500000,
+  },
   {
     slug: "landing-page",
-    title: "Landing page & company profile",
-    summary:
-      "A focused single-page site for a product, personal brand, or small business.",
-    deliverables: [
-      "Single-page responsive site",
-      "Basic SEO and analytics setup",
+    title: "Landing Page",
+    summary: "One focused page to introduce a product, promo, or business.",
+    features: [
+      "Single page that works well on phones",
+      "WhatsApp order button",
+      "Basic SEO setup",
     ],
-    idealFor: ["Personal brands", "Small businesses", "Product launches"],
-    startingPrice: 600000,
-    priceNote: "Entry price covers a single page without a backend.",
     estimatedDuration: "3–7 days",
-    techStack: ["Next.js", "React", "Tailwind CSS"],
+    startingPrice: 750000,
   },
   {
-    slug: "web-development",
-    title: "Full-stack web development",
-    summary: "Web applications with connected interfaces, data, and APIs.",
-    deliverables: ["Responsive web interface", "Backend and API integration"],
-    idealFor: ["Small businesses", "Agencies", "Internal tools"],
-    startingPrice: 2500000,
-    priceNote: "Scope is agreed before a quote.",
+    slug: "company-profile",
+    title: "Company Profile",
+    summary:
+      "A few pages that explain who you are, what you sell, and how to reach you.",
+    features: [
+      "Home, about, services, and contact pages",
+      "Works well on phones and computers",
+      "WhatsApp and email contact",
+      "Basic SEO setup",
+    ],
+    estimatedDuration: "1–2 weeks",
+    startingPrice: 1750000,
+  },
+  {
+    slug: "web-app",
+    title: "Custom Web App",
+    summary:
+      "An application that follows your workflow, such as orders, records, or dashboards.",
+    features: [
+      "Features agreed from your workflow",
+      "Database and API integration",
+      "Login and access rights when needed",
+      "Deployment and handover",
+    ],
     estimatedDuration: "2–4 weeks",
-    techStack: ["Next.js", "React", "Laravel"],
-  },
-  {
-    slug: "mobile-development",
-    title: "Cross-platform mobile apps",
-    summary: "Mobile experiences built with Flutter for iOS and Android.",
-    deliverables: ["Flutter application", "API integration"],
-    idealFor: ["Customer-facing services", "Field teams"],
-    startingPrice: 3000000,
-    priceNote: "Scope is agreed before a quote.",
-    estimatedDuration: "4–6 weeks",
-    techStack: ["Flutter", "Dart"],
-  },
-  {
-    slug: "backend-api",
-    title: "Backend & API engineering",
-    summary: "Application APIs, authentication, and database integration.",
-    deliverables: ["REST API implementation", "Database integration"],
-    idealFor: ["Teams adding an API", "Dashboard integrations"],
-    startingPrice: 1500000,
-    priceNote: "Scope is agreed before a quote.",
-    estimatedDuration: "1–3 weeks",
-    techStack: ["Laravel", "Node.js", "PostgreSQL"],
+    startingPrice: 3500000,
   },
 ];
-export const serviceIntro =
-  "Have a product to build or an existing system to improve? These are the areas I work in. Tell me about your needs so we can agree on the scope.";
+
 export const workSteps = [
-  "Discuss the brief",
-  "Agree on scope and quote",
-  "Build in milestones",
-  "Review together",
-  "Deploy and hand over",
+  {
+    title: "Consultation",
+    description:
+      "Tell me about your business and what the website needs to do.",
+  },
+  {
+    title: "Design and quote",
+    description:
+      "We agree on the scope, the look, the price, and the schedule.",
+  },
+  {
+    title: "Build",
+    description: "I build the website and show you the progress to review.",
+  },
+  {
+    title: "Deploy and handover",
+    description: "The website goes online and is handed over to you.",
+  },
 ];
+
+export const revisionPolicy =
+  "Includes 2 rounds of revisions. Changes outside the agreed scope are quoted separately.";
+
 export const serviceFaq = [
   {
     question: "How is pricing determined?",
     answer:
-      "Listed prices are starting points for the smallest scope. The final quote depends on features, integrations, and timeline. Share your requirements through the contact form to get an exact figure.",
+      "Listed prices are starting points for the smallest scope. The final quote depends on features, integrations, and timeline.",
   },
   {
-    question: "Where should I start?",
+    question: "What should I prepare?",
     answer:
-      "Choose a service and describe the problem you want to solve. Include any existing links or references in your message.",
+      "A short description of your business, the goal of the website, and any logo, photos, text, or references you already have.",
+  },
+  {
+    question: "Which package fits me?",
+    answer:
+      "You do not have to know yet. Describe what you need in a chat and we choose the scope together.",
+  },
+  {
+    question: "Do the packages include a domain and hosting?",
+    answer:
+      "No, they are not included in the package price. Their cost is confirmed in the quote before any work starts.",
   },
 ];
+
+export function priceLabel(value: number) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  }).format(value);
+}

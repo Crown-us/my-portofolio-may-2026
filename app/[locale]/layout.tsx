@@ -4,24 +4,10 @@ import { LocaleProvider } from "@/app/components/LocaleProvider";
 import type { Metadata } from "next";
 import Analytics from "@/app/components/Analytics";
 import { buildSeo } from "@/lib/seo";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { jetbrainsMono, plusJakartaSans } from "@/app/fonts";
 import "@/app/globals.css";
 import { ThemeProvider } from "@/app/components/ThemeProvider";
 import { siteConfig } from "@/lib/config";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-space",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   ...buildSeo(siteConfig.seo.title, "/", siteConfig.seo.description),

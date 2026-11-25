@@ -7,11 +7,16 @@ const nextConfig: NextConfig = {
   experimental: { globalNotFound: true },
   async redirects() {
     return [
-      { source: "/en/blog/:slug", destination: "/id/blog/:slug", permanent: true },
+      {
+        source: "/en/blog/:slug",
+        destination: "/id/blog/:slug",
+        permanent: true,
+      },
       { source: "/", destination: "/id", permanent: true },
       ...[
         "about",
         "resume",
+        "jasa",
         "services",
         "contact",
         "projects",

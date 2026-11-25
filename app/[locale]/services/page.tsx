@@ -5,5 +5,5 @@ export default async function LegacyPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  permanentRedirect("/" + locale + "/about#collaboration");
+  permanentRedirect("/" + locale + "/jasa");
 }

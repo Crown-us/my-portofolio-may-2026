@@ -21,7 +21,7 @@ npm run build
 npm start -- --hostname 127.0.0.1 --port 3001
 ```
 
-Build memakai webpack karena sebelumnya ada masalah cache font pada Turbopack di lingkungan lokal. `next/font` membutuhkan akses Google Fonts saat build.
+Build memakai webpack karena sebelumnya ada masalah cache font pada Turbopack di lingkungan lokal. Font disimpan di `app/fonts/` (`next/font/local`), jadi build tidak perlu akses Google Fonts.
 
 ## Stack
 
@@ -37,8 +37,8 @@ Animasi lama Framer Motion, Lenis, musik latar, dan dependensi utilitas yang tid
 | `/projects`                               | Katalog semua proyek                                                                 |
 | `/projects/[slug]`                        | Detail proyek, stack, screenshot dan bagian case study yang sudah terisi             |
 | `/about`, `/resume`                       | Profil, tiga pengalaman magang, dan skills dari data yang sama                       |
-| `/services`                               | Empat layanan, harga mulai, estimasi waktu, alur kerja dan FAQ                       |
-| `/contact`                                | Form kontak, WhatsApp dan email langsung                                             |
+| `/jasa`                                   | Paket jasa website, proses kerja, FAQ, contoh proyek dan CTA WhatsApp               |
+| `/services`, `/contact`                   | Link lama; redirect ke `/jasa` dan `/about#contact`                                  |
 | `/blog`, `/blog/[slug]`                   | Daftar artikel dan detail Markdown; artikel edukasi pertama sudah tersedia di source          |
 | `/store`, `/store/[slug]`                 | Siap untuk produk digital; saat data kosong, route 404 dan navigasinya disembunyikan |
 | `/rss.xml`, `/sitemap.xml`, `/robots.txt` | Feed artikel dan metadata mesin pencari                                              |
@@ -60,7 +60,7 @@ tests/              Tes unit serta smoke test HTTP
 | `lib/config.ts`   | Nama, kontak, sosial, availability dan flag search            |
 | `lib/projects.ts` | Proyek, featured flag, screenshot, stack, case study dan link |
 | `lib/about.ts`    | Bio, pengalaman, foto, sertifikasi dan CV                     |
-| `lib/services.ts` | Layanan, harga, estimasi, workflow dan FAQ                    |
+| `lib/services.ts` | Paket jasa, harga, estimasi, proses kerja, revisi dan FAQ     |
 | `lib/store.ts`    | Produk asli dan checkout URL                                  |
 | `lib/seo.ts`      | Judul, deskripsi, canonical dan metadata sosial               |
 | `lib/styles.ts`   | Gabungan class CSS Modules yang dipakai bersama               |
@@ -70,7 +70,7 @@ Dokumen pendamping:
 - [CONTENT_TODO.md](CONTENT_TODO.md): formulir untuk melengkapi konten.
 - [AI_HANDOFF.md](AI_HANDOFF.md): konteks singkat untuk AI/developer yang melanjutkan pekerjaan.
 
-Konten pribadi dan hasil proyek harus berdasarkan data asli. Bagian yang belum terisi disembunyikan. Foto profil, CV PDF, detail BNSP, sebagian case study, produk Store dan tulisan Blog berikutnya masih perlu dilengkapi. Data magang serta harga/estimasi layanan sudah ada; perbarui di file data jika berubah.
+Konten pribadi dan hasil proyek harus berdasarkan data asli. Bagian yang belum terisi disembunyikan. Foto profil, CV PDF, detail BNSP, sebagian case study, produk Store dan tulisan Blog berikutnya masih perlu dilengkapi. Data magang sudah ada. Harga, durasi, dan kebijakan revisi jasa ada di `lib/services.ts`.
 
 ## Menambah artikel
 
@@ -117,7 +117,7 @@ Rate limiter berada di memori setiap proses. Jika header IP tidak diatur, limit 
 
 Canonical memakai `https://kvndwi.com`. OG default tersedia di `/opengraph-image`; proyek/produk memakai gambar masing-masing. Structured data tersedia pada profil, proyek, produk dan artikel.
 
-Umami opsional memakai `NEXT_PUBLIC_UMAMI_WEBSITE_ID` dan `NEXT_PUBLIC_UMAMI_SCRIPT_URL` (HTTPS), diisi sebelum build. Script hanya dimuat dalam production di `kvndwi.com`/`www.kvndwi.com`, bukan localhost. Tracking dibatasi ke pageview dan klik CTA kontak, beli, serta unduh CV; query/hash dan isian form tidak dilacak.
+Umami opsional memakai `NEXT_PUBLIC_UMAMI_WEBSITE_ID` dan `NEXT_PUBLIC_UMAMI_SCRIPT_URL` (HTTPS), diisi sebelum build. Script hanya dimuat dalam production di `kvndwi.com`/`www.kvndwi.com`, bukan localhost. Tracking dibatasi ke pageview dan klik CTA kontak (termasuk WhatsApp per paket), jasa, beli, serta unduh CV; query/hash dan isian form tidak dilacak.
 
 ## Pemeriksaan seperlunya
 

@@ -1,22 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { jetbrainsMono, plusJakartaSans } from "@/app/fonts";
 import "@/app/globals.css";
 import s from "@/lib/styles";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-space",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Halaman tidak ditemukan — Kevin Dwi Wijaya",

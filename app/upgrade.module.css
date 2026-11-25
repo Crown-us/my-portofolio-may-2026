@@ -14,7 +14,14 @@
 }
 .siteFooter > div {
   display: flex;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+.siteFooter > div > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  overflow-wrap: anywhere;
 }
 .cardImage {
   display: block;
